@@ -1,3 +1,8 @@
+import sys
+import os
+# Add the parent directory of 'v24' to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'v24', 'TC57CIM', 'IEC61970', 'Base', 'Core')))
+
 from cgmes_factory import CGMESParser, CGMESObjectFactory
 import logging
 

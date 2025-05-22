@@ -100,9 +100,9 @@ class CGMESObjectFactory:
         # Create an instance of the class
         try:
             obj = cls()
-            # Set the mRID if the class has that attribute
-            if hasattr(obj, 'mRID'):
-                obj.mRID = rdf_id
+            # # Set the mRID if the class has that attribute
+            # if hasattr(obj, 'mRID'):
+            #     obj.mRID = rdf_id
             
             # Process all attributes and references
             self._process_attributes(element, obj)
@@ -110,11 +110,11 @@ class CGMESObjectFactory:
             # Save the created object
             self.created_objects[rdf_id] = obj
             
-            # Process any pending references to this object
-            if rdf_id in self.pending_references:
-                for (target_obj, attr_name) in self.pending_references[rdf_id]:
-                    setattr(target_obj, attr_name, obj)
-                del self.pending_references[rdf_id]
+            # # Process any pending references to this object
+            # if rdf_id in self.pending_references:
+            #     for (target_obj, attr_name) in self.pending_references[rdf_id]:
+            #         setattr(target_obj, attr_name, obj)
+            #     del self.pending_references[rdf_id]
             
             return obj
         except Exception as e:
@@ -140,13 +140,17 @@ class CGMESObjectFactory:
                 else:
                     self.logger.debug(f"Attribute {attr_name} not found in {obj.__class__.__name__}")
                     continue
-            
+        
             # Check if this is a reference to another object
             ref = child.get(f"{{{self.namespaces['rdf']}}}resource")
             if ref:
                 # This is a reference to another object
                 if ref.startswith('#'):
                     ref_id = ref[1:]  # Remove the leading '#'
+                    
+                    # Handle specific case for Region references in Substation objects
+                    if attr_name == "Region" and hasattr(obj, "Region_ref"):
+                        attr_name = "Region_ref"  # Use the reference attribute instead
                     
                     # If the referenced object already exists, set the reference
                     if ref_id in self.created_objects:

@@ -186,7 +186,7 @@ class CGMESObjectFactory:
                 # If this is a reference attribute (ends with _ref)
                 if attr_name.endswith('_ref') and getattr(obj, attr_name) is not None:
                     # Get the referenced object
-                    ref_obj = getattr(obj, attr_name)
+                    ref_obj = getattr(obj, attr_name)#todo should be here at first? it should not be assigned?
                     
                     # Find the base attribute name without _ref
                     base_attr_name = attr_name[:-4]  # Remove _ref suffix

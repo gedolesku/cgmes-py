@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import importlib
 import re
 import sys
+import types
 from typing import Dict, Any, Optional, Set, Type
 import logging
 
@@ -19,6 +20,7 @@ class CGMESObjectFactory:
             'md': 'http://iec.ch/TC57/61970-552/ModelDescription/1#'
         }
         self.logger = logging.getLogger(__name__)
+        self.module_import_failures = set()
     
     def get_class_for_type(self, cim_type: str) -> Optional[Type]:
         """Get the Python class that corresponds to the CIM type"""
@@ -32,26 +34,60 @@ class CGMESObjectFactory:
             else:
                 class_name = cim_type
             
-            # Try to import from the v24 package structure first
-            v24_paths = [
-                f"v24.TC57CIM.IEC61970.Base.Wires.{class_name}",
-                f"v24.TC57CIM.IEC61970.Base.Core.{class_name}",
-                f"v24.TC57CIM.IEC61970.Base.Domain.{class_name}",
-                f"v24.TC57CIM.IEC61970.Base.DiagramLayout.{class_name}",
-                f"v24.TC57CIM.IEC61970.Base.Topology.{class_name}",
-                f"v24.TC57CIM.IEC61970.Base.StateVariables.{class_name}"
-            ]
+            # # Try to import from the v24 package structure first using lazy import
+            # v24_paths = [
+            #     f"v24.TC57CIM.IEC61970.Base.Wires.{class_name}",
+            #     f"v24.TC57CIM.IEC61970.Base.Core.{class_name}",
+            #     f"v24.TC57CIM.IEC61970.Base.Domain.{class_name}",
+            #     f"v24.TC57CIM.IEC61970.Base.DiagramLayout.{class_name}",
+            #     f"v24.TC57CIM.IEC61970.Base.Topology.{class_name}",
+            #     f"v24.TC57CIM.IEC61970.Base.StateVariables.{class_name}"
+            # ]
             
-            for module_path in v24_paths:
-                try:
-                    self.logger.debug(f"Trying to import {module_path}")
-                    module = importlib.import_module(module_path)
-                    class_obj = getattr(module, class_name)
-                    self.class_cache[cim_type] = class_obj
-                    return class_obj
-                except (ImportError, AttributeError) as e:
-                    self.logger.debug(f"Failed to import {module_path}: {str(e)}")
-                    continue
+            # for module_path in v24_paths:
+            #     # Skip modules we know have already failed to import
+            #     if module_path in self.module_import_failures:
+            #         continue
+                    
+            #     try:
+            #         self.logger.debug(f"Trying to import {module_path}")
+                    
+            #         # Use a more sophisticated import approach for circular dependencies
+            #         module_name = module_path.split('.')[-2] + '.' + class_name
+            #         if module_name in sys.modules:
+            #             # Use existing module if it's already in sys.modules
+            #             module = sys.modules[module_name]
+            #         else:
+            #             # First try to find the module spec
+            #             spec = importlib.util.find_spec(module_path)
+            #             if not spec:
+            #                 # If spec not found, try next path
+            #                 continue
+                            
+            #             # Create module from spec but don't execute it
+            #             module = importlib.util.module_from_spec(spec)
+            #             sys.modules[module_path] = module
+                        
+            #             try:
+            #                 # Now execute the module
+            #                 spec.loader.exec_module(module)
+            #             except ImportError as ie:
+            #                 if "circular import" in str(ie).lower():
+            #                     # For circular imports, just return the module we have so far
+            #                     self.logger.debug(f"Detected circular import for {module_path}, using partially initialized module")
+            #                     pass
+            #                 else:
+            #                     raise
+                    
+            #         # Get the class from the module
+            #         if hasattr(module, class_name):
+            #             class_obj = getattr(module, class_name)
+            #             self.class_cache[cim_type] = class_obj
+            #             return class_obj
+            #     except (ImportError, AttributeError) as e:
+            #         self.logger.debug(f"Failed to import {module_path}: {str(e)}")
+            #         self.module_import_failures.add(module_path)
+            #         continue
             
             # Fall back to the original mapping logic if v24 structure fails
             possible_modules = [
@@ -63,6 +99,9 @@ class CGMESObjectFactory:
             ]
             
             for module_path in possible_modules:
+                if module_path in self.module_import_failures:
+                    continue
+                    
                 try:
                     self.logger.debug(f"Trying to import {module_path}")
                     module = importlib.import_module(module_path)
@@ -70,10 +109,19 @@ class CGMESObjectFactory:
                     self.class_cache[cim_type] = class_obj
                     return class_obj
                 except (ImportError, AttributeError):
+                    self.module_import_failures.add(module_path)
                     continue
             
-            self.logger.warning(f"Could not find class for CIM type: {cim_type}")
-            return None
+            # Last resort: create a dynamic class
+            self.logger.warning(f"Creating dynamic class for CIM type: {class_name}")
+            dynamic_class = type(class_name, (), {
+                'mRID': None,
+                'name': None,
+                '__annotations__': {},
+                '__doc__': f"Dynamically created class for {class_name}"
+            })
+            self.class_cache[cim_type] = dynamic_class
+            return dynamic_class
         except Exception as e:
             self.logger.error(f"Error finding class for {cim_type}: {str(e)}")
             return None
@@ -106,11 +154,6 @@ class CGMESObjectFactory:
         # Create an instance of the class
         try:
             obj = cls()
-            # Set the mRID if the class has that attribute
-            if hasattr(obj, 'mRID'):
-                obj.mRID = rdf_id
-            
-            # Process all attributes and references
             self._process_attributes(element, obj)
             
             # Save the created object
@@ -135,7 +178,7 @@ class CGMESObjectFactory:
                 _, attr_name = tag.split('}')
             else:
                 attr_name = tag
-            
+            attr_name=attr_name+"_"
             # Check if attribute exists in the class
             if not hasattr(obj, attr_name):
                 # It might be in a different format (e.g., camelCase vs snake_case)

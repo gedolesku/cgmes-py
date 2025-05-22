@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Production.HydroEnergyConversionKind import HydroEnergyConversionKind     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Production.HydroPowerPlant import HydroPowerPlant     

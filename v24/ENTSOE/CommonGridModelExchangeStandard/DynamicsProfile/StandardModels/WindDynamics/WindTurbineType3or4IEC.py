@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.WindDynamics.WindTurbineType3or4Dynamics import WindTurbineType3or4Dynamics
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.WindDynamics.WindProtectionIEC import WindProtectionIEC     

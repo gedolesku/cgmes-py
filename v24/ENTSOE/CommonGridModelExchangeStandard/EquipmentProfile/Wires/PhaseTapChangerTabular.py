@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Wires.PhaseTapChanger import PhaseTapChanger
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Wires.PhaseTapChangerTable import PhaseTapChangerTable     

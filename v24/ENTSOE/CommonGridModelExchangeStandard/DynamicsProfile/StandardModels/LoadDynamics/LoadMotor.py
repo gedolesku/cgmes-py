@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Simple_Float import Simple_Float     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
@@ -42,7 +42,7 @@ class LoadMotor(IdentifiedObject):
     # (>=0.0 and <=1.0).  Typical Value = 0.3.
     pfrac_: Simple_Float  = None
  
-    # Loading factor – ratio of initial P to motor MVA base (Lfac).  Typical Value =
+    # Loading factor ï¿½ ratio of initial P to motor MVA base (Lfac).  Typical Value =
     # 0.8.
     lfac_: Simple_Float  = None
  

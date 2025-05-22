@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 
 class UnitSymbol(Enum):
@@ -28,10 +28,10 @@ class UnitSymbol(Enum):
     F = auto()
     # Inductance in henry.
     H = auto()
-    # Relative temperature in degrees Celsius. In the SI unit system the symbol is ºC.
+    # Relative temperature in degrees Celsius. In the SI unit system the symbol is ï¿½C.
     # Electric charge is measured in coulomb that has the unit symbol C. To
     # distinguish degree Celsius form coulomb the symbol used in the UML is degC.
-    # Reason for not using ºC is the special character º is difficult to manage in
+    # Reason for not using ï¿½C is the special character ï¿½ is difficult to manage in
     # software.
     degC = auto()
     # Time in seconds.

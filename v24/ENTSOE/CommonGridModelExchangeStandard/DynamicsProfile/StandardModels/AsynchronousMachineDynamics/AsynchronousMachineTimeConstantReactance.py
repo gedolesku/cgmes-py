@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Seconds import Seconds     
@@ -12,7 +12,7 @@ class AsynchronousMachineTimeConstantReactance(AsynchronousMachineDynamics):
       <ol>
       	<li>If <b>X''</b> = <b>X'</b>, a single cage (one equivalent rotor winding
     per axis) is modelled.</li>
-      	<li>The “p” in the attribute names is a substitution for a “prime” in the
+      	<li>The ï¿½pï¿½ in the attribute names is a substitution for a ï¿½primeï¿½ in the
     usual parameter notation, e.g. tpo refers to T'o.</li>
       </ol>
     

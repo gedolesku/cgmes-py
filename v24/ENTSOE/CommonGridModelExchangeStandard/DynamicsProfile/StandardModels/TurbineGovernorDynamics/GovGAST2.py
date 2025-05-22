@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.ActivePower import ActivePower     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
@@ -107,12 +107,12 @@ class GovGAST2(TurbineGovernorDynamics):
     # no output.  Typically 0.23 x K<sub>hhv</sub> (23% fuel flow).
     cf2_: PU  = None
  
-    # Rated temperature (Tr).  Unit = °C depending on parameters Af1 and Bf1.
+    # Rated temperature (Tr).  Unit = ï¿½C depending on parameters Af1 and Bf1.
     tr_: Temperature  = None
  
     # Minimum fuel flow (K6). 
     k6_: PU  = None
  
-    # Temperature control (Tc).  Unit = °F or °C depending on constants Af1 and Bf1. 
+    # Temperature control (Tc).  Unit = ï¿½F or ï¿½C depending on constants Af1 and Bf1. 
     tc_: Temperature  = None
      

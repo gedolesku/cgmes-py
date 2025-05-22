@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Simple_Float import Simple_Float     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Seconds import Seconds     
@@ -36,7 +36,7 @@ class LoadComposite(LoadDynamics):
     # Reactive load-frequency dependence index (dynamic) (Eqfd).  Typical Value = 0.
     eqfd_: Simple_Float  = None
  
-    # Loading factor – ratio of initial P to motor MVA base (Lfrac).  Typical Value =
+    # Loading factor ï¿½ ratio of initial P to motor MVA base (Lfrac).  Typical Value =
     # 0.8.
     lfrac_: Simple_Float  = None
  

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Simple_Float import Simple_Float     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.SynchronousMachineDynamics.IfdBaseKind import IfdBaseKind     
@@ -15,7 +15,7 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
       <ul>
       	<li>The number of  equivalent windings that are included</li>
       	<li>The way in which saturation is incorporated into the model.</li>
-      	<li>Whether or not “subtransient saliency” (<b>X''q</b> not = <b>X''d</b>)
+      	<li>Whether or not ï¿½subtransient saliencyï¿½ (<b>X''q</b> not = <b>X''d</b>)
     is represented.</li>
       </ul>
       <b>Note:</b> It is not necessary for each simulation tool to have separate

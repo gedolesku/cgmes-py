@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.ActivePower import ActivePower     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
@@ -37,7 +37,7 @@ class GovSteamIEEE1(TurbineGovernorDynamics):
       	<li>The division of power between the two shafts is in proportion to the
     values of MVA bases of the two generators.  The initial condition load flow
     should, therefore, have the two generators loaded to the same fraction of each
-    one’s MVA base.</li>
+    oneï¿½s MVA base.</li>
       </ol>
     """
     # Base for power values (MWbase) (> 0)<i>.</i>

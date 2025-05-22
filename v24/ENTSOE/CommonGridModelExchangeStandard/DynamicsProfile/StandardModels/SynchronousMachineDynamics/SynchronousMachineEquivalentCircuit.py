@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.SynchronousMachineDynamics.SynchronousMachineDetailed import SynchronousMachineDetailed
@@ -13,21 +13,21 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
       <b>Equations for conversion between Equivalent Circuit and Time Constant
     Reactance forms:</b>
       <b>Xd</b> = <b>Xad</b> + <b>Xl</b>
-      <b>X’d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd</b> / (<b>Xad</b> + <b>Xfd</b>)
-      <b>X”d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd </b>* <b>X1d</b> / (<b>Xad</b> *
+      <b>Xï¿½d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd</b> / (<b>Xad</b> + <b>Xfd</b>)
+      <b>Xï¿½d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd </b>* <b>X1d</b> / (<b>Xad</b> *
     <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b> * <b>X1d</b>)
       <b>Xq</b> = <b>Xaq</b> + <b>Xl</b>
-      <b>X’q</b> = <b>Xl</b> + <b>Xaq</b> * <b>X1q</b> / (<b>Xaq</b>+ <b>X1q</b>)
-      <b>X”q</b> = <b>Xl</b> + <b>Xaq</b> *<b> X1q</b>* <b>X2q</b> / (<b>Xaq</b> *
+      <b>Xï¿½q</b> = <b>Xl</b> + <b>Xaq</b> * <b>X1q</b> / (<b>Xaq</b>+ <b>X1q</b>)
+      <b>Xï¿½q</b> = <b>Xl</b> + <b>Xaq</b> *<b> X1q</b>* <b>X2q</b> / (<b>Xaq</b> *
     <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b> * <b>X2q</b>)
-      <b>T’do</b> = (<b>Xad</b> + <b>Xfd</b>) / (<b>omega</b><b><sub>0</sub></b> *
+      <b>Tï¿½do</b> = (<b>Xad</b> + <b>Xfd</b>) / (<b>omega</b><b><sub>0</sub></b> *
     <b>Rfd</b>)
-      <b>T”do</b> = (<b>Xad</b> * <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b>
+      <b>Tï¿½do</b> = (<b>Xad</b> * <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b>
     * <b>X1d</b>) / (<b>omega</b><b><sub>0</sub></b> * <b>R1d</b> * (<b>Xad</b> +
     <b>Xfd</b>)
-      <b>T’qo</b> = (<b>Xaq</b> + <b>X1q</b>) / (<b>omega</b><b><sub>0</sub></b> *
+      <b>Tï¿½qo</b> = (<b>Xaq</b> + <b>X1q</b>) / (<b>omega</b><b><sub>0</sub></b> *
     <b>R1q</b>)
-      <b>T”qo</b> = (<b>Xaq</b> * <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b>
+      <b>Tï¿½qo</b> = (<b>Xaq</b> * <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b>
     * <b>X2q</b>)/ (<b>omega</b><b><sub>0</sub></b> * <b>R2q</b> * (<b>Xaq</b> +
     <b>X1q</b>)
       <b>
@@ -68,7 +68,7 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
     # D-axis damper 1 winding leakage reactance.
     x1d_: PU  = None
  
-    # Differential mutual (“Canay”) reactance.
+    # Differential mutual (ï¿½Canayï¿½) reactance.
     xf1d_: PU  = None
  
     # Q-axis mutual reactance.

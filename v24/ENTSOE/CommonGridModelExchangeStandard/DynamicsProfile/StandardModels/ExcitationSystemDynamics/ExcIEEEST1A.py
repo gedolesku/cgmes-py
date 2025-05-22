@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Boolean import Boolean     
@@ -12,7 +12,7 @@ from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.Excit
 class ExcIEEEST1A(ExcitationSystemDynamics):
     """The class represents IEEE Std 421.5-2005 type ST1A model. This model represents
     systems in which excitation power is supplied through a transformer from the
-    generator terminals (or the unit’s auxiliary bus) and is regulated by a
+    generator terminals (or the unitï¿½s auxiliary bus) and is regulated by a
     controlled rectifier.  The maximum exciter voltage available from such systems
     is directly related to the generator terminal voltage.
     

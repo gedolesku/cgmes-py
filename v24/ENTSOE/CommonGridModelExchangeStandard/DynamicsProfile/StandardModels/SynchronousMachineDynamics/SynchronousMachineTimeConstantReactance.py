@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.SynchronousMachineDynamics.RotorKind import RotorKind     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.SynchronousMachineDynamics.SynchronousMachineModelKind import SynchronousMachineModelKind     
@@ -17,8 +17,8 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
       <b>
       </b><b>Parameter notes:</b>
       <ol>
-      	<li>The “p” in the time-related attribute names is a substitution for a
-    “prime” in the usual parameter notation, e.g. tpdo refers to <b>T'do</b>.</li>
+      	<li>The ï¿½pï¿½ in the time-related attribute names is a substitution for a
+    ï¿½primeï¿½ in the usual parameter notation, e.g. tpdo refers to <b>T'do</b>.</li>
       </ol>
       <b>
       </b>The parameters used for models expressed in time constant reactance form
@@ -102,6 +102,6 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
     # 0.03.
     tppqo_: Seconds  = None
  
-    # Damping time constant for “Canay” reactance.  Typical Value = 0.
+    # Damping time constant for ï¿½Canayï¿½ reactance.  Typical Value = 0.
     tc_: Seconds  = None
      

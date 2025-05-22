@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Seconds import Seconds     
@@ -8,7 +8,7 @@ from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.Power
 
 @dataclass
 class PssSK(PowerSystemStabilizerDynamics):
-    """PSS Slovakian type – three inputs.
+    """PSS Slovakian type ï¿½ three inputs.
     """
     # Gain P (K1).  Typical Value = -0.3.
     k1_: PU  = None

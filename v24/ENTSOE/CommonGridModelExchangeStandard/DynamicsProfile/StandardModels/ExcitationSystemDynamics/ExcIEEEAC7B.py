@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Seconds import Seconds     
@@ -17,7 +17,7 @@ class ExcIEEEAC7B(ExcitationSystemDynamics):
     
       Reference: IEEE Standard 421.5-2005 Section 6.7.
     
-      <b>Note: </b>In the IEEE Standard 421.5 – 2005, the [1 / sT<sub>E</sub>]
+      <b>Note: </b>In the IEEE Standard 421.5 ï¿½ 2005, the [1 / sT<sub>E</sub>]
     block is shown as [1 / (1 + sT<sub>E</sub>)], which is incorrect.
     """
     # Voltage regulator proportional gain (K<sub>PR</sub>).  Typical Value = 4.24.

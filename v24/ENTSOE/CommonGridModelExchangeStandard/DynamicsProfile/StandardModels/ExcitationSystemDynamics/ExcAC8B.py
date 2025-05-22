@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.Boolean import Boolean     
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
@@ -109,7 +109,7 @@ class ExcAC8B(ExcitationSystemDynamics):
     vrmin_: PU  = None
  
     # Multiply by generator's terminal voltage indicator.
-    # true =the limits Vrmax and Vrmin are multiplied by the generator’s terminal
+    # true =the limits Vrmax and Vrmin are multiplied by the generatorï¿½s terminal
     # voltage to represent a thyristor power stage fed from the generator terminals
     # false = limits are not multiplied by generator's terminal voltage.
     # Typical Value = false.

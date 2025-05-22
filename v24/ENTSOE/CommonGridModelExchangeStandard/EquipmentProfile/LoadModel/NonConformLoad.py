@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.LoadModel.NonConformLoadGroup import NonConformLoadGroup     
 from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Wires.EnergyConsumer import EnergyConsumer

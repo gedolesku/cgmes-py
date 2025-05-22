@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List, Optional, Any, TYPE_CHECKING
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum, auto
 if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainProfile.PU import PU     
 from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.UnderexcitationLimiterDynamics.UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
@@ -8,7 +8,7 @@ from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.Under
 @dataclass
 class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
     """This model can be derived from UnderexcLimIEEE2.
-      The limit characteristic (look –up table) is a single straight-line, the same
+      The limit characteristic (look ï¿½up table) is a single straight-line, the same
     as UnderexcLimIEEE2 (see Figure 10.4 (p 32), IEEE 421.5-2005 Section 10.2).
     """
     # Segment Q initial point (Q0).  Typical Value = -0.31.

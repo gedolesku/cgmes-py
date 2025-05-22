@@ -11,28 +11,7 @@ import importlib.util
 import importlib.machinery
 import types
 
-# Create a custom loader that will handle circular imports
-def patch_circular_imports():
-    orig_load_module = importlib.machinery.SourceFileLoader.load_module
-    
-    def patched_load_module(self, fullname):
-        try:
-            return orig_load_module(self, fullname)
-        except ImportError as e:
-            if "circular import" in str(e).lower():
-                # Return the partially initialized module rather than failing
-                spec = importlib.machinery.ModuleSpec(fullname, self)
-                module = importlib.util.module_from_spec(spec)
-                sys.modules[fullname] = module
-                return module
-            raise
-    
-    importlib.machinery.SourceFileLoader.load_module = patched_load_module
-
-# Patch import system to handle circular imports
-patch_circular_imports()
-
-from cgmes_factory import CGMESParser, CGMESObjectFactory
+from cgmespy.cgmes_factory import CGMESParser, CGMESObjectFactory
 import logging
 
 def main():
@@ -56,7 +35,7 @@ def main():
         for i, (obj_id, obj) in enumerate(obj_dict.items()):
             if i >= 5:
                 break
-            print(f"  - {obj_id}: {getattr(obj, 'name', 'No name')}")
+            # print(f"  - {obj_id}: {getattr(obj, 'name', 'No name')}")
     
     # Example of accessing specific object types
     substations = parser.get_objects_by_type("Substation")

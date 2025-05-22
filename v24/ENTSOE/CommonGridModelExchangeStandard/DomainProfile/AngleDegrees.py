@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class AngleDegrees:
     """Measurement of angle in degrees.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.deg
+    unit: UnitSymbol =  UnitSymbol.deg
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

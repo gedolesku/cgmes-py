@@ -12,26 +12,26 @@ class GovSteam2(TurbineGovernorDynamics):
     """Simplified governor model.
     """
     # Governor gain (reciprocal of droop) (K).  Typical Value = 20.
-    k_: Simple_Float  = None
+    k: Simple_Float  = None
  
     # Frequency dead band (DBF).  Typical Value = 0.
-    dbf_: PU  = None
+    dbf: PU  = None
  
     # Governor lag time constant (T<sub>1</sub>) (>0).  Typical Value = 0.45.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Governor lead time constant (T<sub>2</sub>) (may be 0).  Typical Value = 0.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Maximum fuel flow (P<sub>MAX</sub>).  Typical Value = 1.
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Minimum fuel flow (P<sub>MIN</sub>).  Typical Value = 0.
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Fuel flow maximum positive error value (MX<sub>EF</sub>).  Typical Value = 1.
-    mxef_: PU  = None
+    mxef: PU  = None
  
     # Fuel flow maximum negative error value (MN<sub>EF</sub>).  Typical Value = -1.
-    mnef_: PU  = None
+    mnef: PU  = None
      

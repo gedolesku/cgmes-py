@@ -11,8 +11,8 @@ class DCGround(DCConductingEquipment):
     """A ground within a DC system.
     """
     # Inductance to ground.
-    inductance_: Inductance  = None
+    inductance: Inductance  = None
  
     # Resistance to ground.
-    r_: Resistance  = None
+    r: Resistance  = None
      

@@ -23,93 +23,93 @@ class GovHydroFrancis(TurbineGovernorDynamics):
     """
     # Opening section S<sub>eff</sub> at the maximum efficiency (Am).  Typical Value
     # = 0.7.
-    am_: PU  = None
+    am: PU  = None
  
     # Area of the surge tank (A<sub>V0</sub>). Unit = m<sup>2</sup>. Typical Value =
     # 30.
-    av0_: Area  = None
+    av0: Area  = None
  
     # Area of the compensation tank (A<sub>V1</sub>). Unit = m<sup>2</sup>. Typical
     # Value = 700.
-    av1_: Area  = None
+    av1: Area  = None
  
     # Droop (Bp).  Typical Value = 0.05.
-    bp_: PU  = None
+    bp: PU  = None
  
     # Intentional dead-band width (DB1).  Unit = Hz.  Typical Value = 0.
-    db1_: Frequency  = None
+    db1: Frequency  = None
  
     # Maximum efficiency (EtaMax).  Typical Value = 1.05.
-    etamax_: PU  = None
+    etamax: PU  = None
  
     # Governor control flag (Cflag).  Typical Value =
     # mechanicHydrolicTachoAccelerator.
-    governorControl_: FrancisGovernorControlKind  = None
+    governorControl: FrancisGovernorControlKind  = None
  
     # Head of compensation chamber water level with respect to the level of penstock
     # (H<sub>1</sub>).  Unit = m. Typical Value = 4.
-    h1_: Length  = None
+    h1: Length  = None
  
     # Head of surge tank water level with respect to the level of penstock
     # (H<sub>2</sub>).  Unit = m. Typical Value = 40.
-    h2_: Length  = None
+    h2: Length  = None
  
     # Rated hydraulic head (H<sub>n</sub>).  Unit = m. Typical Value = 250.
-    hn_: Length  = None
+    hn: Length  = None
  
     # Penstock loss coefficient (due to friction) (Kc).  Typical Value = 0.025.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Water tunnel and surge chamber loss coefficient (due to friction) (Kg).
     # Typical Value = 0.025.
-    kg_: PU  = None
+    kg: PU  = None
  
     # Washout gain (Kt).  Typical Value = 0.25.
-    kt_: PU  = None
+    kt: PU  = None
  
     # No-load turbine flow at nominal head (Qc0).  Typical Value = 0.21.
-    qc0_: PU  = None
+    qc0: PU  = None
  
     # Rated flow (Q<sub>n</sub>). Unit = m<sup>3</sup>/s. Typical Value = 40.
-    qn_: VolumeFlowRate  = None
+    qn: VolumeFlowRate  = None
  
     # Derivative gain (Ta).  Typical Value = 3.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Washout time constant (Td).  Typical Value = 3.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Gate servo time constant (Ts).  Typical Value = 0.5.
-    ts_: Seconds  = None
+    ts: Seconds  = None
  
     # Water inertia time constant (Twnc).  Typical Value = 1.
-    twnc_: Seconds  = None
+    twnc: Seconds  = None
  
     # Water tunnel and surge chamber inertia time constant (Twng). Typical Value = 3.
-    twng_: Seconds  = None
+    twng: Seconds  = None
  
     # Derivative feedback gain (Tx).  Typical Value = 1.
-    tx_: Seconds  = None
+    tx: Seconds  = None
  
     # Maximum gate opening velocity (Va).  Unit = PU/sec.  Typical Value = 0.011.
-    va_: Simple_Float  = None
+    va: Simple_Float  = None
  
     # Maximum gate opening (ValvMax).  Typical Value = 1.
-    valvmax_: PU  = None
+    valvmax: PU  = None
  
     # Minimum gate opening (ValvMin).  Typical Value = 0.
-    valvmin_: PU  = None
+    valvmin: PU  = None
  
     # Maximum gate closing velocity (Vc).  Unit = PU/sec.  Typical Value = -0.011.
-    vc_: Simple_Float  = None
+    vc: Simple_Float  = None
  
     # Water tunnel and surge chamber simulation (Tflag).
     # true = enable of water tunnel and surge chamber simulation
     # false = inhibit of water tunnel and surge chamber simulation.
     # Typical Value = false.
-    waterTunnelSurgeChamberSimulation_: bool  = None
+    waterTunnelSurgeChamberSimulation: bool  = None
  
     # Head of upper water level with respect to the level of penstock (Zsfc).  Unit =
     # m.  Typical Value = 25.
-    zsfc_: Length  = None
+    zsfc: Length  = None
      

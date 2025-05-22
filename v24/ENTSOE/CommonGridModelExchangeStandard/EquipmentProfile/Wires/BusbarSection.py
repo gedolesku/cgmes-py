@@ -17,5 +17,5 @@ class BusbarSection(Connector):
     # 0).
     # Mechanical limit of the busbar in the substation itself. Used for short circuit
     # data exchange according to IEC 60909
-    ipMax_: CurrentFlow  = None
+    ipMax: CurrentFlow  = None
      

@@ -10,5 +10,6 @@ class AccumulatorReset(Control):
     """This command reset the counter value to zero.
     """
     # The accumulator value that is reset by the command.
-    AccumulatorValue_: Optional[AccumulatorValue] = None
+    AccumulatorValue_ref: Optional[AccumulatorValue] = None
+    AccumulatorValue: str = None
      

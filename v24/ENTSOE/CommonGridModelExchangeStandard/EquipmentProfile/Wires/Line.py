@@ -10,5 +10,6 @@ class Line(EquipmentContainer):
     """Contains equipment beyond a substation belonging to a power transmission line.
     """
     # The sub-geographical region of the line.
-    SubGeographicalRegion_: Optional[SubGeographicalRegion] = None
+    Region_ref: Optional[SubGeographicalRegion] = None
+    Region: str = None
      

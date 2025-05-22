@@ -15,8 +15,9 @@ class ACDCTerminal(IdentifiedObject):
     # equipment.  The sequence numbering starts with 1 and additional terminals
     # should follow in increasing order.   The first terminal is the "starting point"
     # for a two terminal branch.
-    sequenceNumber_: int  = None
+    sequenceNumber: int  = None
  
     # The bus name marker used to name the bus (topological node).
-    BusNameMarker_: Optional[BusNameMarker] = None
+    BusNameMarker_ref: Optional[BusNameMarker] = None
+    BusNameMarker: str = None
      

@@ -10,5 +10,5 @@ class ActivePowerLimit(OperationalLimit):
     """Limit on active power flow.
     """
     # Value of active power limit.
-    value_: ActivePower  = None
+    value: ActivePower  = None
      

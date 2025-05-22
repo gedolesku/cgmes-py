@@ -12,5 +12,5 @@ class Switch(ConductingEquipment):
     """
     # The attribute tells if the switch is considered open when used as input to
     # topology processing.
-    open_: bool  = None
+    open: bool  = None
      

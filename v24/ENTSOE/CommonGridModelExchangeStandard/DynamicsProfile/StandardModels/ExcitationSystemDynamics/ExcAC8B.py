@@ -17,101 +17,101 @@ class ExcAC8B(ExcitationSystemDynamics):
     # true = input limiter Vimax and Vimin is considered
     # false = input limiter Vimax and Vimin is not considered.
     # Typical Value = true.
-    inlim_: bool  = None
+    inlim: bool  = None
  
     # Voltage regulator gain (Ka).  Typical Value = 1.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (Kc). Typical
     # Value = 0.55.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Demagnetizing factor, a function of exciter alternator reactances (Kd).
     # Typical Value = 1.1.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Voltage regulator derivative gain (Kdr).  Typical Value = 10.
-    kdr_: PU  = None
+    kdr: PU  = None
  
     # Exciter constant related to self-excited field (Ke).  Typical Value = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Voltage regulator integral gain (Kir).  Typical Value = 5.
-    kir_: PU  = None
+    kir: PU  = None
  
     # Voltage regulator proportional gain (Kpr).  Typical Value = 80.
-    kpr_: PU  = None
+    kpr: PU  = None
  
     # Coefficient to allow different usage of the model-speed coefficient (Ks).
     # Typical Value = 0.
-    ks_: PU  = None
+    ks: PU  = None
  
     # PID limiter indicator.
     # true = input limiter Vpidmax and Vpidmin is considered
     # false = input limiter Vpidmax and Vpidmin is not considered.
     # Typical Value = true.
-    pidlim_: bool  = None
+    pidlim: bool  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # Ve<sub>1</sub>, back of commutating reactance (Se[Ve1]).  Typical Value = 0.3.
-    seve1_: Simple_Float  = None
+    seve1: Simple_Float  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # Ve<sub>2</sub>, back of commutating reactance (Se[Ve2]).  Typical Value = 3.
-    seve2_: Simple_Float  = None
+    seve2: Simple_Float  = None
  
     # Voltage regulator time constant (Ta).  Typical Value = 0.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Lag time constant (Tdr).  Typical Value = 0.1.
-    tdr_: Seconds  = None
+    tdr: Seconds  = None
  
     # Exciter time constant, integration rate associated with exciter control (Te).
     # Typical Value = 1.2.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Selector for the limiter on the block [1/sTe].
     # See diagram for meaning of true and false.
     # Typical Value = false.
-    telim_: bool  = None
+    telim: bool  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve<sub>1</sub>) equals V<sub>EMAX</sub> (Ve1).  Typical
     # Value = 6.5.
-    ve1_: PU  = None
+    ve1: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve<sub>2</sub>).  Typical Value = 9.
-    ve2_: PU  = None
+    ve2: PU  = None
  
     # Minimum exciter voltage output (Vemin).  Typical Value = 0.
-    vemin_: PU  = None
+    vemin: PU  = None
  
     # Exciter field current limit reference (Vfemax).  Typical Value = 6.
-    vfemax_: PU  = None
+    vfemax: PU  = None
  
     # Input signal maximum (Vimax).  Typical Value = 35.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Input signal minimum (Vimin).  Typical Value = -10.
-    vimin_: PU  = None
+    vimin: PU  = None
  
     # PID maximum controller output (Vpidmax).  Typical Value = 35.
-    vpidmax_: PU  = None
+    vpidmax: PU  = None
  
     # PID minimum controller output (Vpidmin).  Typical Value = -10.
-    vpidmin_: PU  = None
+    vpidmin: PU  = None
  
     # Maximum voltage regulator output (Vrmax). Typical Value = 35.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (Vrmin).  Typical Value = 0.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Multiply by generator's terminal voltage indicator.
-    # true =the limits Vrmax and Vrmin are multiplied by the generatorï¿½s terminal
+    # true =the limits Vrmax and Vrmin are multiplied by the generator’s terminal
     # voltage to represent a thyristor power stage fed from the generator terminals
     # false = limits are not multiplied by generator's terminal voltage.
     # Typical Value = false.
-    vtmult_: bool  = None
+    vtmult: bool  = None
      

@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Money:
     """Amount of money.
     """
-    unit_: Currency =  Currency.EUR
+    unit: Currency =  Currency.EUR
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    value_: Decimal  = None
+    value: Decimal  = None
      

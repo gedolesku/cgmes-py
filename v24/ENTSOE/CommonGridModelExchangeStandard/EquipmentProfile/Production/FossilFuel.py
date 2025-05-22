@@ -13,8 +13,9 @@ class FossilFuel(IdentifiedObject):
     unit can consume.
     """
     # The type of fossil fuel, such as coal, oil, or gas.
-    fossilFuelType_: FuelType  = None
+    fossilFuelType: FuelType  = None
  
     # A thermal generating unit may have one or more fossil fuels.
-    ThermalGeneratingUnit_: Optional[ThermalGeneratingUnit] = None
+    ThermalGeneratingUnit_ref: Optional[ThermalGeneratingUnit] = None
+    ThermalGeneratingUnit: str = None
      

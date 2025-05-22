@@ -13,8 +13,9 @@ class Substation(EquipmentContainer):
     or modifying its characteristics.
     """
     # The voltage levels within this substation.
-    VoltageLevel_: List[VoltageLevel]  = field(default_factory=list)
+    VoltageLevels: List[VoltageLevel]  = field(default_factory=list)
  
     # The SubGeographicalRegion containing the substation.
-    SubGeographicalRegion_: Optional[SubGeographicalRegion] = None
+    Region_ref: Optional[SubGeographicalRegion] = None
+    Region: str = None
      

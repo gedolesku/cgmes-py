@@ -16,8 +16,8 @@ class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics):
       Reference: IEEE Standard 421.5-2005 Section 12.4.
     """
     # Terminal undervoltage comparison level (<i>V</i><i><sub>TMIN</sub></i>). 
-    vtmin_: PU  = None
+    vtmin: PU  = None
  
     # Reset time delay (<i>T</i><i><sub>DR</sub></i>). 
-    tdr_: Seconds  = None
+    tdr: Seconds  = None
      

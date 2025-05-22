@@ -10,8 +10,8 @@ class Season(IdentifiedObject):
     """A specified time period of the year.
     """
     # Date season ends.
-    endDate_: MonthDay  = None
+    endDate: MonthDay  = None
  
     # Date season starts.
-    startDate_: MonthDay  = None
+    startDate: MonthDay  = None
      

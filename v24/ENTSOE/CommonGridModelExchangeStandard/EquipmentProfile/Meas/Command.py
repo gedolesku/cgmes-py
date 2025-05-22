@@ -12,14 +12,16 @@ class Command(Control):
     """A Command is a discrete control used for supervisory control.
     """
     # Normal value for Control.value e.g. used for percentage scaling.
-    normalValue_: int  = None
+    normalValue: int  = None
  
     # The value representing the actuator output.
-    value_: int  = None
+    value: int  = None
  
     # The Control variable associated with the MeasurementValue.
-    DiscreteValue_: Optional[DiscreteValue] = None
+    DiscreteValue_ref: Optional[DiscreteValue] = None
+    DiscreteValue: str = None
  
     # The ValueAliasSet used for translation of a Control value to a name.
-    ValueAliasSet_: Optional[ValueAliasSet] = None
+    ValueAliasSet_ref: Optional[ValueAliasSet] = None
+    ValueAliasSet: str = None
      

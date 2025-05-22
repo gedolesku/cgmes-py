@@ -12,11 +12,12 @@ class SvVoltage:
     """
     # The voltage angle of the topological node complex voltage with respect to
     # system reference.
-    angle_: AngleDegrees  = None
+    angle: AngleDegrees  = None
  
     # The voltage magnitude of the topological node.
-    v_: Voltage  = None
+    v: Voltage  = None
  
     # The state voltage associated with the topological node.
-    TopologicalNode_: Optional[TopologicalNode] = None
+    TopologicalNode_ref: Optional[TopologicalNode] = None
+    TopologicalNode: str = None
      

@@ -19,5 +19,5 @@ class ACDCTerminal(IdentifiedObject):
     # equipment can be connected in one end and open in the other. In particular for
     # an AC line segment, where the reactive line charging can be significant, this
     # is a relevant case.
-    connected_: bool  = None
+    connected: bool  = None
      

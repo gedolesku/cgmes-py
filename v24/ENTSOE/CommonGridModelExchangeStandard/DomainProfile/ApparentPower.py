@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class ApparentPower:
     """Product of the RMS value of the voltage and the RMS value of the current.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.VA
+    unit: UnitSymbol =  UnitSymbol.VA
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.M
+    multiplier: UnitMultiplier =  UnitMultiplier.M
      

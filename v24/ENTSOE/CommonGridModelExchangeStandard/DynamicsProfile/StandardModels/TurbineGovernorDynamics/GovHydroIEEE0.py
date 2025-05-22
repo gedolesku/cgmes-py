@@ -20,26 +20,26 @@ class GovHydroIEEE0(TurbineGovernorDynamics):
     Power System Studies</u></i>, Page 1904.</font>
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Governor gain (K<i>)</i>.
-    k_: PU  = None
+    k: PU  = None
  
     # Governor lag time constant (T1).  Typical Value = 0.25.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Governor lead time constant (T2<i>)</i>.  Typical Value = 0.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Gate actuator time constant (T3).  Typical Value = 0.1.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Water starting time (T4). 
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Gate maximum (Pmax). 
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Gate minimum (Pmin). 
-    pmin_: PU  = None
+    pmin: PU  = None
      

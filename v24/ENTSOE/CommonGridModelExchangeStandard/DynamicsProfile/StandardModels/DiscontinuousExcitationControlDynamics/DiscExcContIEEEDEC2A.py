@@ -15,17 +15,17 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
       Reference: IEEE Standard 421.5-2005 Section 12.3.
     """
     # Discontinuous controller input reference (<i>V</i><i><sub>K</sub></i>). 
-    vk_: PU  = None
+    vk: PU  = None
  
     # Discontinuous controller time constant (<i>T</i><i><sub>D1</sub></i>). 
-    td1_: Seconds  = None
+    td1: Seconds  = None
  
     # Discontinuous controller washout time constant (<i>T</i><i><sub>D2</sub></i>). 
-    td2_: Seconds  = None
+    td2: Seconds  = None
  
     # Limiter (<i>V</i><i><sub>DMIN</sub></i>). 
-    vdmin_: PU  = None
+    vdmin: PU  = None
  
     # Limiter (<i>V</i><i><sub>DMAX</sub></i>). 
-    vdmax_: PU  = None
+    vdmax: PU  = None
      

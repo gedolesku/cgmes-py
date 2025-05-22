@@ -15,25 +15,26 @@ class WindAeroLinearIEC(IdentifiedObject):
     """
     # Partial derivative of aerodynamic power with respect to changes in WTR speed
     # (<i>dp</i><i><sub>omega</sub></i>). It is case dependent parameter.
-    dpomega_: PU  = None
+    dpomega: PU  = None
  
     # Partial derivative of aerodynamic power with respect to changes in pitch angle
     # (<i>dp</i><i><sub>theta</sub></i>). It is case dependent parameter.
-    dptheta_: PU  = None
+    dptheta: PU  = None
  
     # Rotor speed if the wind turbine is not derated
     # (<i>omega</i><i><sub>0</sub></i>). It is case dependent parameter.
-    omegazero_: PU  = None
+    omegazero: PU  = None
  
     # Available aerodynamic power (<i>p</i><sub>avail</sub>). It is case dependent
     # parameter.
-    pavail_: PU  = None
+    pavail: PU  = None
  
     # Pitch angle if the wind turbine is not derated
     # (<i>theta</i><i><sub>0</sub></i>). It is case dependent parameter.
-    thetazero_: AngleDegrees  = None
+    thetazero: AngleDegrees  = None
  
     # Wind generator type 3 model with which this wind aerodynamic model is
     # associated.
-    WindGenTurbineType3IEC_: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC_ref: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC: str = None
      

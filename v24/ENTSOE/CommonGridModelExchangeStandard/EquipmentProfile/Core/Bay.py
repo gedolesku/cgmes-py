@@ -12,5 +12,6 @@ class Bay(EquipmentContainer):
     typically represents a physical grouping related to modularization of equipment.
     """
     # The voltage level containing this bay.
-    VoltageLevel_: Optional[VoltageLevel] = None
+    VoltageLevel_ref: Optional[VoltageLevel] = None
+    VoltageLevel: str = None
      

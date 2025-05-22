@@ -11,9 +11,9 @@ class Seconds:
     """Time, in seconds.
     """
     # Time, in seconds
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.s
+    unit: UnitSymbol =  UnitSymbol.s
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

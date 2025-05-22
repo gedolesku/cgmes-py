@@ -35,5 +35,6 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
       </ol>
     """
     # Synchronous machine to which synchronous machine dynamics model applies.
-    SynchronousMachine_: Optional[SynchronousMachine] = None
+    SynchronousMachine_ref: Optional[SynchronousMachine] = None
+    SynchronousMachine: str = None
      

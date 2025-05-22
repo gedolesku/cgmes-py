@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Area:
     """Area.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.m2
+    unit: UnitSymbol =  UnitSymbol.m2
  
-    multiplier_: UnitMultiplier  = None
+    multiplier: UnitMultiplier  = None
      

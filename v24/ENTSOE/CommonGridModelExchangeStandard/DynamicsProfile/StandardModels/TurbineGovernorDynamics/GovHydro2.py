@@ -15,89 +15,89 @@ class GovHydro2(TurbineGovernorDynamics):
     penstock configurations and hydraulic-dashpot governors.
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Gate servo time constant (Tg).  Typical Value = 0.5.
-    tg_: Seconds  = None
+    tg: Seconds  = None
  
     # Pilot servo valve time constant (Tp).  Typical Value = 0.03.
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Maximum gate opening velocity (Uo).  Unit = PU/sec.  Typical Value = 0.1.
-    uo_: Simple_Float  = None
+    uo: Simple_Float  = None
  
     # Maximum gate closing velocity (Uc) (<0).  Unit = PU/sec.   Typical Value = -0.1.
-    uc_: Simple_Float  = None
+    uc: Simple_Float  = None
  
     # Maximum gate opening (Pmax).  Typical Value = 1.
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Minimum gate opening; (<i>Pmin</i>).  Typical Value = 0.
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Permanent droop (Rperm).  Typical Value = 0.05.
-    rperm_: PU  = None
+    rperm: PU  = None
  
     # Temporary droop (Rtemp).  Typical Value = 0.5.
-    rtemp_: PU  = None
+    rtemp: PU  = None
  
     # Dashpot time constant (Tr).  Typical Value = 12.
-    tr_: Seconds  = None
+    tr: Seconds  = None
  
     # Water inertia time constant (Tw).  Typical Value = 2.
-    tw_: Seconds  = None
+    tw: Seconds  = None
  
     # Turbine gain (Kturb).  Typical Value = 1.
-    kturb_: PU  = None
+    kturb: PU  = None
  
     # Turbine numerator multiplier (Aturb).  Typical Value = -1.
-    aturb_: PU  = None
+    aturb: PU  = None
  
     # Turbine denominator multiplier (Bturb).  Typical Value = 0.5.
-    bturb_: PU  = None
+    bturb: PU  = None
  
     # Intentional deadband width (db1).  Unit = Hz.  Typical Value = 0.
-    db1_: Frequency  = None
+    db1: Frequency  = None
  
     # Intentional db hysteresis (eps).  Unit = Hz.  Typical Value = 0.
-    eps_: Frequency  = None
+    eps: Frequency  = None
  
     # Unintentional deadband (db2).  Unit = MW.  Typical Value = 0.
-    db2_: ActivePower  = None
+    db2: ActivePower  = None
  
     # Nonlinear gain point 1, PU gv (Gv1).  Typical Value = 0.
-    gv1_: PU  = None
+    gv1: PU  = None
  
     # Nonlinear gain point 1, PU power (Pgv1).  Typical Value = 0.
-    pgv1_: PU  = None
+    pgv1: PU  = None
  
     # Nonlinear gain point 2, PU gv (Gv2).  Typical Value = 0.
-    gv2_: PU  = None
+    gv2: PU  = None
  
     # Nonlinear gain point 2, PU power (Pgv2).  Typical Value = 0.
-    pgv2_: PU  = None
+    pgv2: PU  = None
  
     # Nonlinear gain point 3, PU gv (Gv3).  Typical Value = 0.
-    gv3_: PU  = None
+    gv3: PU  = None
  
     # Nonlinear gain point 3, PU power (Pgv3).  Typical Value = 0.
-    pgv3_: PU  = None
+    pgv3: PU  = None
  
     # Nonlinear gain point 4, PU gv (Gv4).  Typical Value = 0.
-    gv4_: PU  = None
+    gv4: PU  = None
  
     # Nonlinear gain point 4, PU power (Pgv4).  Typical Value = 0.
-    pgv4_: PU  = None
+    pgv4: PU  = None
  
     # Nonlinear gain point 5, PU gv (Gv5).  Typical Value = 0.
-    gv5_: PU  = None
+    gv5: PU  = None
  
     # Nonlinear gain point 5, PU power (Pgv5).  Typical Value = 0.
-    pgv5_: PU  = None
+    pgv5: PU  = None
  
     # Nonlinear gain point 6, PU gv (Gv6).  Typical Value = 0.
-    gv6_: PU  = None
+    gv6: PU  = None
  
     # Nonlinear gain point 6, PU power (Pgv6).  Typical Value = 0.
-    pgv6_: PU  = None
+    pgv6: PU  = None
      

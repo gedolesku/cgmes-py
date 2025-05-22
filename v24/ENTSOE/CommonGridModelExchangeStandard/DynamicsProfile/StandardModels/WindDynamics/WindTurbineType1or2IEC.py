@@ -15,8 +15,10 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     """
     # Wind turbune protection model associated with this wind generator type 1 or 2
     # model.
-    WindProtectionIEC_: Optional[WindProtectionIEC] = None
+    WindProtectionIEC_ref: Optional[WindProtectionIEC] = None
+    WindProtectionIEC: str = None
  
     # Wind mechanical model associated with this wind generator type 1 or 2 model.
-    WindMechIEC_: Optional[WindMechIEC] = None
+    WindMechIEC_ref: Optional[WindMechIEC] = None
+    WindMechIEC: str = None
      

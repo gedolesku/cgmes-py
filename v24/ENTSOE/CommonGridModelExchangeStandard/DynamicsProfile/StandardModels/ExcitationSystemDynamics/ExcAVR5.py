@@ -12,12 +12,12 @@ class ExcAVR5(ExcitationSystemDynamics):
     as a very simple representation of manual voltage control.
     """
     # Gain (Ka).
-    ka_: PU  = None
+    ka: PU  = None
  
     # Time constant (Ta).
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Effective Output Resistance (Rex). Rex represents the effective output
     # resistance seen by the excitation system.
-    rex_: PU  = None
+    rex: PU  = None
      

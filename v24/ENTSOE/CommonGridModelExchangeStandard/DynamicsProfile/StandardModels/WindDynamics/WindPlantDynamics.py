@@ -11,5 +11,6 @@ class WindPlantDynamics(DynamicsFunctionBlock):
     plant IEC and user defined wind plants including their control models.
     """
     # The wind plant using the remote signal.
-    RemoteInputSignal_: Optional[RemoteInputSignal] = None
+    RemoteInputSignal_ref: Optional[RemoteInputSignal] = None
+    RemoteInputSignal: str = None
      

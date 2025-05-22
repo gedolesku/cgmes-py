@@ -21,21 +21,21 @@ class StaticVarCompensator(RegulatingCondEq):
     bus is equal to the voltage setpoint, the SVC MVar output is zero.
     """
     # Maximum available capacitive reactance.
-    capacitiveRating_: Reactance  = None
+    capacitiveRating: Reactance  = None
  
     # Maximum available inductive reactance.
-    inductiveRating_: Reactance  = None
+    inductiveRating: Reactance  = None
  
     # The characteristics slope of an SVC defines how the reactive power output
     # changes in proportion to the difference between the regulated bus voltage and
     # the voltage setpoint.
-    slope_: VoltagePerReactivePower  = None
+    slope: VoltagePerReactivePower  = None
  
     # SVC control mode.
-    sVCControlMode_: SVCControlMode  = None
+    sVCControlMode: SVCControlMode  = None
  
     # The reactive power output of the SVC is proportional to the difference between
     # the voltage at the regulated bus and the voltage setpoint.  When the regulated
     # bus voltage is equal to the voltage setpoint, the reactive power output is zero.
-    voltageSetPoint_: Voltage  = None
+    voltageSetPoint: Voltage  = None
      

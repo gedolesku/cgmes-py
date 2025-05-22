@@ -14,47 +14,47 @@ class ExcAVR4(ExcitationSystemDynamics):
     regulator.
     """
     # AVR gain (K<sub>A</sub>).  Typical Value = 300.
-    ka_: Simple_Float  = None
+    ka: Simple_Float  = None
  
     # Maximum AVR output (V<sub>RMN</sub>).  Typical Value = 0.
-    vrmn_: PU  = None
+    vrmn: PU  = None
  
     # Minimum AVR output (V<sub>RMX</sub>).  Typical Value = 5.
-    vrmx_: PU  = None
+    vrmx: PU  = None
  
     # AVR time constant (T<sub>1</sub>).  Typical Value = 4.8.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # AVR time constant (T<sub>2</sub>).  Typical Value = 1.5.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # AVR time constant (T<sub>3</sub>).  Typical Value = 0.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # AVR time constant (T<sub>4</sub>).  Typical Value = 0.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Exciter gain (K<sub>E</sub>).  Typical Value = 1.
-    ke_: Simple_Float  = None
+    ke: Simple_Float  = None
  
     # Maximum exciter output (V<sub>FMX</sub>).  Typical Value = 5.
-    vfmx_: PU  = None
+    vfmx: PU  = None
  
     # Minimum exciter output (V<sub>FMN</sub>).  Typical Value = 0.
-    vfmn_: PU  = None
+    vfmn: PU  = None
  
     # Exciter internal reactance (K<sub>IF</sub>).  Typical Value = 0.
-    kif_: Simple_Float  = None
+    kif: Simple_Float  = None
  
     # Exciter current feedback time constant (T<sub>IF</sub>).  Typical Value = 0.
-    tif_: Seconds  = None
+    tif: Seconds  = None
  
     # Exciter current feedback time constant (T<sub>1IF</sub>).  Typical Value = 60.
-    t1if_: Seconds  = None
+    t1if: Seconds  = None
  
     # AVR output voltage dependency selector (Imul).
     # true = selector is connected
     # false = selector is not connected.
     # Typical Value = true.
-    imul_: bool  = None
+    imul: bool  = None
      

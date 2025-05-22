@@ -16,29 +16,29 @@ class LoadGenericNonLinear(LoadDynamics):
     static loads.
     """
     # Type of generic non-linear load model.
-    genericNonLinearLoadModelType_: GenericNonLinearLoadModelKind  = None
+    genericNonLinearLoadModelType: GenericNonLinearLoadModelKind  = None
  
     # Dynamic portion of active load (P<sub>T</sub>).
-    pt_: Simple_Float  = None
+    pt: Simple_Float  = None
  
     # Dynamic portion of reactive load (Q<sub>T</sub>).
-    qt_: Simple_Float  = None
+    qt: Simple_Float  = None
  
     # Time constant of lag function of active power (T<sub>P</sub>).
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Time constant of lag function of reactive power (T<sub>Q</sub>).
-    tq_: Seconds  = None
+    tq: Seconds  = None
  
     # Steady state voltage index for active power (LS).
-    ls_: Simple_Float  = None
+    ls: Simple_Float  = None
  
     # Transient voltage index for active power (LT).
-    lt_: Simple_Float  = None
+    lt: Simple_Float  = None
  
     # Steady state voltage index for reactive power (BS).
-    bs_: Simple_Float  = None
+    bs: Simple_Float  = None
  
     # Transient voltage index for reactive power (BT).
-    bt_: Simple_Float  = None
+    bt: Simple_Float  = None
      

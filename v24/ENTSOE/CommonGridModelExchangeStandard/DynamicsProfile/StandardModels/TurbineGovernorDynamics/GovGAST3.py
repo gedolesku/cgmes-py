@@ -13,69 +13,69 @@ class GovGAST3(TurbineGovernorDynamics):
     """Generic turbogas with acceleration and temperature controller.
     """
     # Droop (bp).  Typical Value = 0.05.
-    bp_: PU  = None
+    bp: PU  = None
  
     # Time constant of speed governor (Tg).  Typical Value = 0.05.
-    tg_: Seconds  = None
+    tg: Seconds  = None
  
     # Maximum fuel flow (RCMX).  Typical Value = 1.
-    rcmx_: PU  = None
+    rcmx: PU  = None
  
     # Minimum fuel flow (RCMN).  Typical Value = -0.1.
-    rcmn_: PU  = None
+    rcmn: PU  = None
  
     # Coefficient of transfer function of fuel valve positioner (Ky).  Typical Value
     # = 1.
-    ky_: Simple_Float  = None
+    ky: Simple_Float  = None
  
     # Time constant of fuel valve positioner (Ty).  Typical Value = 0.2.
-    ty_: Seconds  = None
+    ty: Seconds  = None
  
     # Fuel control time constant (Tac).  Typical Value = 0.1.
-    tac_: Seconds  = None
+    tac: Seconds  = None
  
     # Fuel system feedback (K<sub>AC</sub>).  Typical Value = 0.
-    kac_: Simple_Float  = None
+    kac: Simple_Float  = None
  
     # Compressor discharge volume time constant (Tc).  Typical Value = 0.2.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Acceleration limit set-point (Bca).  Unit = 1/s.  Typical Value = 0.01.
-    bca_: Simple_Float  = None
+    bca: Simple_Float  = None
  
     # Acceleration control integral gain (Kca). Unit = 1/s.  Typical Value = 100.
-    kca_: Simple_Float  = None
+    kca: Simple_Float  = None
  
     # Exhaust temperature variation due to fuel flow increasing from 0 to 1 PU
     # (deltaTc).  Typical Value = 390.
-    dtc_: Temperature  = None
+    dtc: Temperature  = None
  
     # Minimum fuel flow (Ka).  Typical Value = 0.23.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Time constant of radiation shield (Tsi).  Typical Value = 15.
-    tsi_: Seconds  = None
+    tsi: Seconds  = None
  
     # Gain of radiation shield (Ksi).  Typical Value = 0.8.
-    ksi_: Simple_Float  = None
+    ksi: Simple_Float  = None
  
     # Time constant of thermocouple (Ttc).  Typical Value = 2.5.
-    ttc_: Seconds  = None
+    ttc: Seconds  = None
  
     # Turbine rated exhaust temperature correspondent to Pm=1 PU (Tfen).  Typical
     # Value = 540.
-    tfen_: Temperature  = None
+    tfen: Temperature  = None
  
     # Temperature controller derivative gain (Td).  Typical Value = 3.3.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Temperature controller integration rate (Tt).  Typical Value = 250.
-    tt_: Temperature  = None
+    tt: Temperature  = None
  
     # Fuel flow maximum positive error value (MX<sub>EF</sub>).  Typical Value = 0.05.
-    mxef_: PU  = None
+    mxef: PU  = None
  
     # Fuel flow maximum negative error value (MN<sub>EF</sub>).  Typical Value = -0.
     # 05.
-    mnef_: PU  = None
+    mnef: PU  = None
      

@@ -11,8 +11,9 @@ class PhaseTapChangerTablePoint(TapChangerTablePoint):
     """Describes each tap step in the phase tap changer tabular curve.
     """
     # The angle difference in degrees.
-    angle_: AngleDegrees  = None
+    angle: AngleDegrees  = None
  
     # The table of this point.
-    PhaseTapChangerTable_: Optional[PhaseTapChangerTable] = None
+    PhaseTapChangerTable_ref: Optional[PhaseTapChangerTable] = None
+    PhaseTapChangerTable: str = None
      

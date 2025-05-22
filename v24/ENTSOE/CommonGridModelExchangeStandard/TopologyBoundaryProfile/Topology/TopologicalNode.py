@@ -21,10 +21,10 @@ class TopologicalNode(IdentifiedObject):
     """
     # Identifies if a node is a BoundaryPoint. If boundaryPoint=true the
     # ConnectivityNode or the TopologicalNode represents a BoundaryPoint. 
-    boundaryPoint_: bool  = None
+    boundaryPoint: bool  = None
  
     # The attribute is used for an exchange of the ISO code of the region to which
-    # the ï¿½Fromï¿½ side of the Boundary point belongs to or it is connected to.
+    # the “From” side of the Boundary point belongs to or it is connected to.
     # The ISO code is two characters country code as defined by ISO 3166 (<a
     # href="{???????????')"><font color="#0000ff"><u>http://www.iso.
     # org/iso/country_codes</u></font></a>). The length of the string is 2 characters
@@ -32,34 +32,34 @@ class TopologicalNode(IdentifiedObject):
     # The attribute is a required for the Boundary Model Authority Set where this
     # attribute is used only for the TopologicalNode in the Boundary Topology profile
     # and ConnectivityNode in the Boundary Equipment profile.
-    fromEndIsoCode_: str  = None
+    fromEndIsoCode: str  = None
  
     # The attribute is used for an exchange of a human readable name with length of
     # the string 32 characters maximum. The attribute covers two cases:
     # <ul>
     # 	<li>if the Boundary point is <b>placed on a tie-line</b> the attribute is used
     # for exchange of the geographical name of the <b>substation</b> to which the
-    # ï¿½Fromï¿½ side of the tie-line is connected to.</li>
+    # “From” side of the tie-line is connected to.</li>
     # 	<li>if the Boundary point is <b>placed in a substation</b> the attribute is
     # used for exchange of the name of the <b>element</b> (e.g. PowerTransformer,
-    # ACLineSegment, Switch, etc) to which the ï¿½Fromï¿½ side of the Boundary point is
+    # ACLineSegment, Switch, etc) to which the “From” side of the Boundary point is
     # connected to.</li>
     # </ul>
     # The attribute is required for the Boundary Model Authority Set where it is used
     # only for the TopologicalNode in the Boundary Topology profile and
     # ConnectivityNode in the Boundary Equipment profile.
-    fromEndName_: str  = None
+    fromEndName: str  = None
  
     # The attribute is used for an exchange of the name of the TSO to which the
-    # ï¿½Fromï¿½ side of the Boundary point belongs to or it is connected to. The length
+    # “From” side of the Boundary point belongs to or it is connected to. The length
     # of the string is 32 characters maximum.
     # The attribute is required for the Boundary Model Authority Set where it is used
     # only for the TopologicalNode in the Boundary Topology profile and
     # ConnectivityNode in the Boundary Equipment profile. 
-    fromEndNameTso_: str  = None
+    fromEndNameTso: str  = None
  
     # The attribute is used for an exchange of the ISO code of the region to which
-    # the ï¿½Toï¿½ side of the Boundary point belongs to or it is connected to.
+    # the “To” side of the Boundary point belongs to or it is connected to.
     # The ISO code is two characters country code as defined by ISO 3166 (<a
     # href="{???????????')"><font color="#0000ff"><u>http://www.iso.
     # org/iso/country_codes</u></font></a>). The length of the string is 2 characters
@@ -67,39 +67,41 @@ class TopologicalNode(IdentifiedObject):
     # The attribute is a required for the Boundary Model Authority Set where this
     # attribute is used only for the TopologicalNode in the Boundary Topology profile
     # and ConnectivityNode in the Boundary Equipment profile.
-    toEndIsoCode_: str  = None
+    toEndIsoCode: str  = None
  
     # The attribute is used for an exchange of a human readable name with length of
     # the string 32 characters maximum. The attribute covers two cases:
     # <ul>
     # 	<li>if the Boundary point is <b>placed on a tie-line</b> the attribute is used
     # for exchange of the geographical name of the <b>substation</b> to which the
-    # ï¿½Toï¿½ side of the tie-line is connected to.</li>
+    # “To” side of the tie-line is connected to.</li>
     # 	<li>if the Boundary point is <b>placed in a substation</b> the attribute is
     # used for exchange of the name of the <b>element</b> (e.g. PowerTransformer,
-    # ACLineSegment, Switch, etc) to which the ï¿½Toï¿½ side of the Boundary point is
+    # ACLineSegment, Switch, etc) to which the “To” side of the Boundary point is
     # connected to.</li>
     # </ul>
     # The attribute is required for the Boundary Model Authority Set where it is used
     # only for the TopologicalNode in the Boundary Topology profile and
     # ConnectivityNode in the Boundary Equipment profile.
-    toEndName_: str  = None
+    toEndName: str  = None
  
-    # The attribute is used for an exchange of the name of the TSO to which the ï¿½Toï¿½
+    # The attribute is used for an exchange of the name of the TSO to which the “To”
     # side of the Boundary point belongs to or it is connected to. The length of the
     # string is 32 characters maximum.
     # The attribute is required for the Boundary Model Authority Set where it is used
     # only for the TopologicalNode in the Boundary Topology profile and
     # ConnectivityNode in the Boundary Equipment profile. 
-    toEndNameTso_: str  = None
+    toEndNameTso: str  = None
  
     # The connectivity node container to which the toplogical node belongs.
-    ConnectivityNodeContainer_: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer_ref: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer: str = None
  
     # The connectivity nodes combine together to form this topological node.  May
     # depend on the current state of switches in the network.
-    ConnectivityNode_: List[ConnectivityNode]  = field(default_factory=list)
+    ConnectivityNodes: List[ConnectivityNode]  = field(default_factory=list)
  
     # The base voltage of the topologocial node.
-    BaseVoltage_: Optional[BaseVoltage] = None
+    BaseVoltage_ref: Optional[BaseVoltage] = None
+    BaseVoltage: str = None
      

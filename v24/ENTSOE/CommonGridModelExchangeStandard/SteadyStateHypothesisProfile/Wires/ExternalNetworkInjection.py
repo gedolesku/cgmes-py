@@ -15,15 +15,15 @@ class ExternalNetworkInjection(RegulatingCondEq):
     # Priority of unit for use as powerflow voltage phase angle reference bus
     # selection. 0 = don t care (default) 1 = highest priority. 2 is less than 1 and
     # so on.
-    referencePriority_: int  = None
+    referencePriority: int  = None
  
     # Active power injection. Load sign convention is used, i.e. positive sign means
     # flow out from a node.
     # Starting value for steady state solutions.
-    p_: ActivePower  = None
+    p: ActivePower  = None
  
     # Reactive power injection. Load sign convention is used, i.e. positive sign
     # means flow out from a node.
     # Starting value for steady state solutions.
-    q_: ReactivePower  = None
+    q: ReactivePower  = None
      

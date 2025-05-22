@@ -13,5 +13,6 @@ class ConductingEquipment(Equipment):
     # All conducting equipment with this base voltage.  Use only when there is no
     # voltage level container used and only one base voltage applies.  For example,
     # not used for transformers.
-    BaseVoltage_: Optional[BaseVoltage] = None
+    BaseVoltage_ref: Optional[BaseVoltage] = None
+    BaseVoltage: str = None
      

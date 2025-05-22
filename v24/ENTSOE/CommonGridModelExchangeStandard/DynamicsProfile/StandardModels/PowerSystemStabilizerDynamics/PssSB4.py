@@ -11,35 +11,35 @@ class PssSB4(PowerSystemStabilizerDynamics):
     """Power sensitive stabilizer model.
     """
     # Time constant (Tt).
-    tt_: Seconds  = None
+    tt: Seconds  = None
  
     # Gain (Kx).
-    kx_: PU  = None
+    kx: PU  = None
  
     # Time constant (Tx2).
-    tx2_: Seconds  = None
+    tx2: Seconds  = None
  
     # Time constant (Ta).
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Reset time constant (Tx1).
-    tx1_: Seconds  = None
+    tx1: Seconds  = None
  
     # Time constant (Tb).
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Time constant (Tc).
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Time constant (Td).
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Time constant (Te).
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Limiter (Vsmax).
-    vsmax_: PU  = None
+    vsmax: PU  = None
  
     # Limiter (Vsmin).
-    vsmin_: PU  = None
+    vsmin: PU  = None
      

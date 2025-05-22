@@ -15,13 +15,14 @@ class SvInjection:
     """
     # The active power injected into the bus in addition to injections from equipment
     # terminals.  Positive sign means injection into the TopologicalNode (bus).
-    pInjection_: ActivePower  = None
+    pInjection: ActivePower  = None
  
     # The reactive power injected into the bus in addition to injections from
     # equipment terminals. Positive sign means injection into the TopologicalNode
     # (bus).
-    qInjection_: ReactivePower  = None
+    qInjection: ReactivePower  = None
  
     # The injection flows state variables associated with the topological node.
-    TopologicalNode_: Optional[TopologicalNode] = None
+    TopologicalNode_ref: Optional[TopologicalNode] = None
+    TopologicalNode: str = None
      

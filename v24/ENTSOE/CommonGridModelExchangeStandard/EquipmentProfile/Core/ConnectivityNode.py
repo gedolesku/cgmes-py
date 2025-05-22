@@ -12,8 +12,9 @@ class ConnectivityNode(IdentifiedObject):
     connected together with zero impedance.
     """
     # The connectivity node to which this terminal connects with zero impedance.
-    Terminal_: List[Terminal]  = field(default_factory=list)
+    Terminals: List[Terminal]  = field(default_factory=list)
  
     # Container of this connectivity node.
-    ConnectivityNodeContainer_: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer_ref: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer: str = None
      

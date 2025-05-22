@@ -11,5 +11,6 @@ class EquivalentEquipment(ConductingEquipment):
     reduction. The class is the base for equivalent objects of different types.
     """
     # The associated reduced equivalents.
-    EquivalentNetwork_: Optional[EquivalentNetwork] = None
+    EquivalentNetwork_ref: Optional[EquivalentNetwork] = None
+    EquivalentNetwork: str = None
      

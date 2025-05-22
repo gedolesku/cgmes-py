@@ -11,5 +11,6 @@ class NonConformLoad(EnergyConsumer):
     and changes are not correlated with the daily load change pattern.
     """
     # Conform loads assigned to this ConformLoadGroup.
-    NonConformLoadGroup_: Optional[NonConformLoadGroup] = None
+    LoadGroup_ref: Optional[NonConformLoadGroup] = None
+    LoadGroup: str = None
      

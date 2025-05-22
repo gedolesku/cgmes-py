@@ -17,41 +17,43 @@ class WindProtectionIEC(IdentifiedObject):
     """
     # Set of wind turbine over frequency protection levels
     # (<i>f</i><i><sub>over</sub></i>). It is project dependent parameter. 
-    fover_: PU  = None
+    fover: PU  = None
  
     # Set of wind turbine under frequency protection levels
     # (<i>f</i><i><sub>under</sub></i>). It is project dependent parameter.
-    funder_: PU  = None
+    funder: PU  = None
  
     # Set of corresponding wind turbine over frequency protection disconnection times
     # (<i>T</i><i><sub>fover</sub></i>). It is project dependent parameter.
-    tfover_: Seconds  = None
+    tfover: Seconds  = None
  
     # Set of corresponding wind turbine under frequency protection disconnection
     # times (<i>T</i><i><sub>funder</sub></i>). It is project dependent parameter.
-    tfunder_: Seconds  = None
+    tfunder: Seconds  = None
  
     # Set of corresponding wind turbine over voltage protection disconnection times
     # (<i>T</i><i><sub>uover</sub></i>). It is project dependent parameter.
-    tuover_: Seconds  = None
+    tuover: Seconds  = None
  
     # Set of corresponding wind turbine under voltage protection disconnection times
     # (<i>T</i><i><sub>uunder</sub></i>). It is project dependent parameter.
-    tuunder_: Seconds  = None
+    tuunder: Seconds  = None
  
     # Set of wind turbine over voltage protection levels
     # (<i>u</i><i><sub>over</sub></i>). It is project dependent parameter.
-    uover_: PU  = None
+    uover: PU  = None
  
     # Set of wind turbine under voltage protection levels
     # (<i>u</i><i><sub>under</sub></i>). It is project dependent parameter.
-    uunder_: PU  = None
+    uunder: PU  = None
  
     # Wind generator type 3 or 4 model with which this wind turbine protection model
     # is associated.
-    WindTurbineType3or4IEC_: Optional[WindTurbineType3or4IEC] = None
+    WindTurbineType3or4IEC_ref: Optional[WindTurbineType3or4IEC] = None
+    WindTurbineType3or4IEC: str = None
  
     # Wind generator type 1 or 2 model with which this wind turbine protection model
     # is associated.
-    WindTurbineType1or2IEC_: Optional[WindTurbineType1or2IEC] = None
+    WindTurbineType1or2IEC_ref: Optional[WindTurbineType1or2IEC] = None
+    WindTurbineType1or2IEC: str = None
      

@@ -19,53 +19,53 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 7.4.
     """
     # Voltage regulator proportional gain (K<sub>PR</sub>).  Typical Value = 10.75.
-    kpr_: PU  = None
+    kpr: PU  = None
  
     # Voltage regulator integral gain (K<sub>IR</sub>).  Typical Value = 10.75.
-    kir_: PU  = None
+    kir: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.02.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 1.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -0.87.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Voltage regulator proportional gain output (K<sub>PM</sub>).  Typical Value = 1.
-    kpm_: PU  = None
+    kpm: PU  = None
  
     # Voltage regulator integral gain output (K<sub>IM</sub>).  Typical Value = 0.
-    kim_: PU  = None
+    kim: PU  = None
  
     # Maximum inner loop output (V<sub>MMax</sub>).  Typical Value = 99.
-    vmmax_: PU  = None
+    vmmax: PU  = None
  
     # Minimum inner loop output (V<sub>MMin</sub>).  Typical Value = -99.
-    vmmin_: PU  = None
+    vmmin: PU  = None
  
     # Feedback gain constant of the inner loop field regulator (K<sub>G</sub>).
     # Typical Value = 0.
-    kg_: PU  = None
+    kg: PU  = None
  
     # Potential circuit gain coefficient (K<sub>P</sub>).  Typical Value = 9.3.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Potential circuit phase angle (thetap).  Typical Value = 0.
-    thetap_: AngleDegrees  = None
+    thetap: AngleDegrees  = None
  
     # Potential circuit gain coefficient (K<sub>I</sub>).  Typical Value = 0.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 0.113.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Reactance associated with potential source (X<sub>L</sub>).  Typical Value = 0.
     # 124.
-    xl_: PU  = None
+    xl: PU  = None
  
     # Maximum excitation voltage (V<sub>BMax</sub>).  Typical Value = 11.63.
-    vbmax_: PU  = None
+    vbmax: PU  = None
      

@@ -11,9 +11,9 @@ class CurrentFlow:
     """Electrical current with sign convention: positive flow is out of the conducting
     equipment into the connectivity node. Can be both AC and DC.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.A
+    unit: UnitSymbol =  UnitSymbol.A
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

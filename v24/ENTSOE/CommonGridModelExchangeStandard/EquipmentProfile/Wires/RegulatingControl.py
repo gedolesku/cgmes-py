@@ -22,8 +22,9 @@ class RegulatingControl(PowerSystemResource):
     # The regulating control mode presently available.  This specification allows for
     # determining the kind of regulation without need for obtaining the units from a
     # schedule.
-    mode_: RegulatingControlModeKind  = None
+    mode: RegulatingControlModeKind  = None
  
     # The controls regulating this terminal.
-    Terminal_: Optional[Terminal] = None
+    Terminal_ref: Optional[Terminal] = None
+    Terminal: str = None
      

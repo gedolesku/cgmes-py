@@ -16,29 +16,29 @@ class ExcSCRX(ExcitationSystemDynamics):
     """
     # Ta/Tb - gain reduction ratio of lag-lead element (TaTb). The parameter Ta is
     # not defined explicitly.  Typical Value = 0.1.
-    tatb_: Simple_Float  = None
+    tatb: Simple_Float  = None
  
     # Denominator time constant of lag-lead block (Tb).  Typical Value = 10.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Gain (K) (>0).  Typical Value = 200.
-    k_: PU  = None
+    k: PU  = None
  
     # Time constant of gain block (Te) (>0).  Typical Value = 0.02.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Minimum field voltage output (Emin).  Typical Value = 0.
-    emin_: PU  = None
+    emin: PU  = None
  
     # Maximum field voltage output (Emax).  Typical Value = 5.
-    emax_: PU  = None
+    emax: PU  = None
  
     # Power source switch (Cswitch).
     # true = fixed voltage of 1.0 PU
     # false = generator terminal voltage.
-    cswitch_: bool  = None
+    cswitch: bool  = None
  
     # Rc/Rfd - ratio of field discharge resistance to field winding resistance
     # (RcRfd).  Typical Value = 0.
-    rcrfd_: Simple_Float  = None
+    rcrfd: Simple_Float  = None
      

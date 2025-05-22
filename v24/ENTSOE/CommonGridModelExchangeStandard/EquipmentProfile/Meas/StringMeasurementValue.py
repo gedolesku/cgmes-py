@@ -11,8 +11,9 @@ class StringMeasurementValue(MeasurementValue):
     """StringMeasurementValue represents a measurement value of type string.
     """
     # The value to supervise.
-    value_: str  = None
+    value: str  = None
  
     # Measurement to which this value is connected.
-    StringMeasurement_: Optional[StringMeasurement] = None
+    StringMeasurement_ref: Optional[StringMeasurement] = None
+    StringMeasurement: str = None
      

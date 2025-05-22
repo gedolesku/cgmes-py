@@ -14,42 +14,42 @@ class GovSteamFV2(TurbineGovernorDynamics):
     """
     # Alternate Base used instead of Machine base in equipment model if necessary
     # (MWbase) (>0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # (R).
-    r_: PU  = None
+    r: PU  = None
  
     # Governor time constant (T1).
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # (Vmax).
-    vmax_: PU  = None
+    vmax: PU  = None
  
     # (Vmin).
-    vmin_: PU  = None
+    vmin: PU  = None
  
     # Fraction of the turbine power developed by turbine sections not involved in
     # fast valving (K).
-    k_: PU  = None
+    k: PU  = None
  
     # Reheater time constant (T3).
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # (Dt).
-    dt_: PU  = None
+    dt: PU  = None
  
     # Time constant with which power falls off after intercept valve closure (Tt).
-    tt_: Seconds  = None
+    tt: Seconds  = None
  
     # Time after initial time for valve to close (Ta).
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Time after initial time for valve to begin opening (Tb).
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Time after initial time for valve to become fully open (Tc).
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Initial time to begin fast valving (Ti).
-    ti_: Seconds  = None
+    ti: Seconds  = None
      

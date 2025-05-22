@@ -14,8 +14,10 @@ class UnderexcitationLimiterDynamics(DynamicsFunctionBlock):
     """
     # Excitation system model with which this underexcitation limiter model is
     # associated.
-    ExcitationSystemDynamics_: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics_ref: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics: str = None
  
     # Remote input signal used by this underexcitation limiter model.
-    RemoteInputSignal_: Optional[RemoteInputSignal] = None
+    RemoteInputSignal_ref: Optional[RemoteInputSignal] = None
+    RemoteInputSignal: str = None
      

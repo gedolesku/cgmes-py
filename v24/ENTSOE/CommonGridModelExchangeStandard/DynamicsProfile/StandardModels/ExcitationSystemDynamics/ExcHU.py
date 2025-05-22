@@ -13,41 +13,41 @@ class ExcHU(ExcitationSystemDynamics):
     """
     # Filter time constant (Tr). If a voltage compensator is used in conjunction with
     # this excitation system model, Tr should be set to 0.  Typical Value = 0.01.
-    tr_: Seconds  = None
+    tr: Seconds  = None
  
     # Major loop PI tag integration time constant (Te).  Typical Value = 0.154.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Major loop PI tag output signal lower limit (Imin).  Typical Value = 0.1.
-    imin_: PU  = None
+    imin: PU  = None
  
     # Major loop PI tag output signal upper limit (Imax).  Typical Value = 2.19.
-    imax_: PU  = None
+    imax: PU  = None
  
     # Major loop PI tag gain factor (Ae).  Typical Value = 3.
-    ae_: PU  = None
+    ae: PU  = None
  
     # Field voltage control signal lower limit on AVR base (Emin).  Typical Value = -
     # 0.866.
-    emin_: PU  = None
+    emin: PU  = None
  
     # Field voltage control signal upper limit on AVR base (Emax).  Typical Value = 0.
     # 996.
-    emax_: PU  = None
+    emax: PU  = None
  
     # Current base conversion constant (Ki).  Typical Value = 0.21428.
-    ki_: Simple_Float  = None
+    ki: Simple_Float  = None
  
     # Minor loop PI tag gain factor (Ai).  Typical Value = 22.
-    ai_: PU  = None
+    ai: PU  = None
  
     # Minor loop PI control tag integration time constant (Ti).  Typical Value = 0.
     # 01333.
-    ti_: Seconds  = None
+    ti: Seconds  = None
  
     # AVR constant (Atr).  Typical Value = 2.19.
-    atr_: PU  = None
+    atr: PU  = None
  
     # Voltage base conversion constant (Ke).  Typical Value = 4.666.
-    ke_: Simple_Float  = None
+    ke: Simple_Float  = None
      

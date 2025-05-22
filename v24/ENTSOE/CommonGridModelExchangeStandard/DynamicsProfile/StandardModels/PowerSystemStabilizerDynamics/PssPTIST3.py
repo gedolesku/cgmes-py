@@ -13,109 +13,109 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
     """PTI Microprocessor-Based Stabilizer type 3.
     """
     # (M).  M=2*H.  Typical Value = 5.
-    m_: PU  = None
+    m: PU  = None
  
     # Time constant (Tf).  Typical Value = 0.2.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Time constant (Tp).  Typical Value = 0.2.
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Time constant (T1).  Typical Value = 0.3.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Time constant (T2).  Typical Value = 1.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Time constant (T3).  Typical Value = 0.2.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Time constant (T4).  Typical Value = 0.05.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Gain (K).  Typical Value = 9.
-    k_: PU  = None
+    k: PU  = None
  
     # Time step frequency calculation (0.03 for 50 Hz) (Dtf).  Typical Value = 0.025.
-    dtf_: Seconds  = None
+    dtf: Seconds  = None
  
     # Time step related to activation of controls (0.03 for 50 Hz) (Dtc).  Typical
     # Value = 0.025.
-    dtc_: Seconds  = None
+    dtc: Seconds  = None
  
     # Time step active power calculation (0.015 for 50 Hz) (Dtp).  Typical Value = 0.
     # 0125.
-    dtp_: Seconds  = None
+    dtp: Seconds  = None
  
     # Time constant (T5). 
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Time constant (T6). 
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Filter coefficient (A0). 
-    a0_: PU  = None
+    a0: PU  = None
  
     # Limiter (Al). 
-    a1_: PU  = None
+    a1: PU  = None
  
     # Filter coefficient (A2). 
-    a2_: PU  = None
+    a2: PU  = None
  
     # Filter coefficient (B0). 
-    b0_: PU  = None
+    b0: PU  = None
  
     # Filter coefficient (B1). 
-    b1_: PU  = None
+    b1: PU  = None
  
     # Filter coefficient (B2). 
-    b2_: PU  = None
+    b2: PU  = None
  
     # Filter coefficient (A3). 
-    a3_: PU  = None
+    a3: PU  = None
  
     # Filter coefficient (A4). 
-    a4_: PU  = None
+    a4: PU  = None
  
     # Filter coefficient (A5). 
-    a5_: PU  = None
+    a5: PU  = None
  
     # Filter coefficient (B3). 
-    b3_: PU  = None
+    b3: PU  = None
  
     # Filter coefficient (B4). 
-    b4_: PU  = None
+    b4: PU  = None
  
     # Filter coefficient (B5). 
-    b5_: PU  = None
+    b5: PU  = None
  
     # Threshold value above which output averaging will be bypassed (Athres).
     # Typical Value = 0.005.
-    athres_: PU  = None
+    athres: PU  = None
  
     # Limiter (Dl). 
-    dl_: PU  = None
+    dl: PU  = None
  
     # Limiter (Al).
-    al_: PU  = None
+    al: PU  = None
  
     # Threshold value (Lthres).
-    lthres_: PU  = None
+    lthres: PU  = None
  
     # (Pmin).
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Digital/analog output switch (Isw).
     # true = produce analog output
     # false = convert to digital output, using tap selection table. 
-    isw_: bool  = None
+    isw: bool  = None
  
     # Number of control outputs to average (Nav) (1 <= Nav <= 16).  Typical Value = 4.
-    nav_: Simple_Float  = None
+    nav: Simple_Float  = None
  
     # Number of counts at limit to active limit function (Ncl) (>0). 
-    ncl_: Simple_Float  = None
+    ncl: Simple_Float  = None
  
     # Number of counts until reset after limit function is triggered (Ncr). 
-    ncr_: Simple_Float  = None
+    ncr: Simple_Float  = None
      

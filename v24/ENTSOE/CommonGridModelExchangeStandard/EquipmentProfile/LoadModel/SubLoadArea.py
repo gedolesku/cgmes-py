@@ -12,8 +12,9 @@ class SubLoadArea(EnergyArea):
     for the purpose of load flow load scaling.
     """
     # The Loadgroups in the SubLoadArea.
-    LoadGroup_: List[LoadGroup]  = field(default_factory=list)
+    LoadGroups: List[LoadGroup]  = field(default_factory=list)
  
     # The LoadArea where the SubLoadArea belongs.
-    LoadArea_: Optional[LoadArea] = None
+    LoadArea_ref: Optional[LoadArea] = None
+    LoadArea: str = None
      

@@ -8,13 +8,13 @@ if TYPE_CHECKING:          from TC57CIM.IEC61970.Base.Domain.Float import Float
 
 @dataclass
 class ActivePowerPerCurrentFlow:
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.A
+    denominatorUnit: UnitSymbol =  UnitSymbol.A
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.M
+    multiplier: UnitMultiplier =  UnitMultiplier.M
  
-    unit_: UnitSymbol =  UnitSymbol.W
+    unit: UnitSymbol =  UnitSymbol.W
  
-    value_: float  = None
+    value: float  = None
      

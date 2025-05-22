@@ -11,20 +11,20 @@ class UnderexcLimX1(UnderexcitationLimiterDynamics):
     """<font color="#0f0f0f">Allis-Chalmers minimum excitation limiter.</font>
     """
     # Differential gain (Kf2).
-    kf2_: PU  = None
+    kf2: PU  = None
  
     # Differential time constant (Tf2) (>0).
-    tf2_: Seconds  = None
+    tf2: Seconds  = None
  
     # Minimum excitation limit gain (Km).
-    km_: PU  = None
+    km: PU  = None
  
     # Minimum excitation limit time constant (Tm).
-    tm_: Seconds  = None
+    tm: Seconds  = None
  
     # Minimum excitation limit value (MELMAX).
-    melmax_: PU  = None
+    melmax: PU  = None
  
     # Minimum excitation limit slope (K) (>0).
-    k_: PU  = None
+    k: PU  = None
      

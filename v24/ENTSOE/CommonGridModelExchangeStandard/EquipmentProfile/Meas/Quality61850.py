@@ -12,22 +12,22 @@ class Quality61850:
     estimatorReplaced, which has been included in this class for convenience.
     """
     # Measurement value may be incorrect due to a reference being out of calibration.
-    badReference_: bool  = None
+    badReference: bool  = None
  
     # Value has been replaced by State Estimator. estimatorReplaced is not an
     # IEC61850 quality bit but has been put in this class for convenience.
-    estimatorReplaced_: bool  = None
+    estimatorReplaced: bool  = None
  
     # This identifier indicates that a supervision function has detected an internal
     # or external failure, e.g. communication failure.
-    failure_: bool  = None
+    failure: bool  = None
  
     # Measurement value is old and possibly invalid, as it has not been successfully
     # updated during a specified time interval.
-    oldData_: bool  = None
+    oldData: bool  = None
  
     # Measurement value is blocked and hence unavailable for transmission. 
-    operatorBlocked_: bool  = None
+    operatorBlocked: bool  = None
  
     # To prevent some overload of the communication it is sensible to detect and
     # suppress oscillating (fast changing) binary inputs. If a signal changes in a
@@ -42,26 +42,26 @@ class Quality61850:
     # oscillating. If it is configured such that no transient changes should be
     # passed by then the validity status "invalid" is set immediately in addition to
     # the detail quality identifier "oscillatory" (used for status information only).
-    oscillatory_: bool  = None
+    oscillatory: bool  = None
  
     # Measurement value is beyond a predefined range of value.
-    outOfRange_: bool  = None
+    outOfRange: bool  = None
  
     # Measurement value is beyond the capability of being  represented properly. For
     # example, a counter value overflows from maximum count back to a value of zero. 
-    overFlow_: bool  = None
+    overFlow: bool  = None
  
     # Source gives information related to the origin of a value. The value may be
     # acquired from the process, defaulted or substituted.
-    source_: Source  = None
+    source: Source  = None
  
     # A correlation function has detected that the value is not consitent with other
     # values. Typically set by a network State Estimator.
-    suspect_: bool  = None
+    suspect: bool  = None
  
     # Measurement value is transmitted for test purposes.
-    test_: bool  = None
+    test: bool  = None
  
     # Validity of the measurement value.
-    validity_: Validity  = None
+    validity: Validity  = None
      

@@ -16,23 +16,25 @@ class WindMechIEC(IdentifiedObject):
     """
     # Drive train damping (<i>c</i><i><sub>drt</sub></i><i>)</i>. It is type
     # dependent parameter.
-    cdrt_: PU  = None
+    cdrt: PU  = None
  
     # Inertia constant of generator (<i>H</i><sub>gen</sub>). It is type dependent
     # parameter.
-    hgen_: Seconds  = None
+    hgen: Seconds  = None
  
     # Inertia constant of wind turbine rotor (<i>H</i><sub>WTR</sub>). It is type
     # dependent parameter.
-    hwtr_: Seconds  = None
+    hwtr: Seconds  = None
  
     # Drive train stiffness (<i>k</i><i><sub>drt</sub></i>). It is type dependent
     # parameter.
-    kdrt_: PU  = None
+    kdrt: PU  = None
  
     # Wind turbine type 4B model with which this wind mechanical model is associated.
-    WindTurbineType4bIEC_: Optional[WindTurbineType4bIEC] = None
+    WindTurbineType4bIEC_ref: Optional[WindTurbineType4bIEC] = None
+    WindTurbineType4bIEC: str = None
  
     # Wind turbine Type 3 model with which this wind mechanical model is associated.
-    WindGenTurbineType3IEC_: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC_ref: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC: str = None
      

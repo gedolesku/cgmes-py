@@ -15,17 +15,18 @@ class WindContPType4aIEC(IdentifiedObject):
     """
     # Maximum wind turbine power ramp rate (<i>dp</i><sub>max</sub>). It is project
     # dependent parameter.
-    dpmax_: PU  = None
+    dpmax: PU  = None
  
     # Time constant in power order lag (<i>T</i><sub>pord</sub>). It is type
     # dependent parameter.
-    tpord_: Seconds  = None
+    tpord: Seconds  = None
  
     # Voltage measurement filter time constant (<i>T</i><sub>ufilt</sub>). It is type
     # dependent parameter.
-    tufilt_: Seconds  = None
+    tufilt: Seconds  = None
  
     # Wind turbine type 4A model with which this wind control P type 4A model is
     # associated.
-    WindTurbineType4aIEC_: Optional[WindTurbineType4aIEC] = None
+    WindTurbineType4aIEC_ref: Optional[WindTurbineType4aIEC] = None
+    WindTurbineType4aIEC: str = None
      

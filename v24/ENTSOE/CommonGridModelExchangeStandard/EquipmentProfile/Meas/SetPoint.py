@@ -10,8 +10,8 @@ class SetPoint(AnalogControl):
     """An analog control that issue a set point value.
     """
     # Normal value for Control.value e.g. used for percentage scaling.
-    normalValue_: Simple_Float  = None
+    normalValue: Simple_Float  = None
  
     # The value representing the actuator output.
-    value_: Simple_Float  = None
+    value: Simple_Float  = None
      

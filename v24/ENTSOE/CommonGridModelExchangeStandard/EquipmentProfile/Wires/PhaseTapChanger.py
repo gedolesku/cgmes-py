@@ -12,5 +12,6 @@ class PhaseTapChanger(TapChanger):
     power transformer.  This phase tap model may also impact the voltage magnitude.
     """
     # Phase tap changer associated with this transformer end.
-    TransformerEnd_: Optional[TransformerEnd] = None
+    TransformerEnd_ref: Optional[TransformerEnd] = None
+    TransformerEnd: str = None
      

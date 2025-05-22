@@ -18,5 +18,5 @@ class ShuntCompensator(RegulatingCondEq):
     # study cases where no discrete shunt compensators has yet been designed, a
     # solutions where a narrow voltage band force the sections to oscillate or
     # accommodate for a continuous solution as input.
-    sections_: Simple_Float  = None
+    sections: Simple_Float  = None
      

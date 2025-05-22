@@ -18,72 +18,72 @@ class ExcIEEEDC4B(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 5.4.
     """
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 1.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.2.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Regulator proportional gain (K<sub>P</sub>).  Typical Value = 20.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Regulator integral gain (K<sub>I</sub>).  Typical Value = 20.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Regulator derivative gain (K<sub>D</sub>).  Typical Value = 20.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Regulator derivative filter time constant(T<sub>D</sub>).  Typical Value = 0.01.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 2.7.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -0.9.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 0.8.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation control system stabilizer gain (K<sub>F</sub>).  Typical Value = 0.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (T<sub>F</sub>).  Typical
     # Value = 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD1</sub>).
     # Typical Value = 1.75.
-    efd1_: PU  = None
+    efd1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD1</sub> (S<sub>E</sub>[E<sub>FD1</sub>]).  Typical Value = 0.08.
-    seefd1_: Simple_Float  = None
+    seefd1: Simple_Float  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD2</sub>).
     # Typical Value = 2.33.
-    efd2_: PU  = None
+    efd2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD2</sub> (S<sub>E</sub>[E<sub>FD2</sub>]).  Typical Value = 0.27.
-    seefd2_: Simple_Float  = None
+    seefd2: Simple_Float  = None
  
     # Minimum exciter voltage output(V<sub>EMIN</sub>).  Typical Value = 0.
-    vemin_: PU  = None
+    vemin: PU  = None
  
     # OEL input (OELin).
     # true = LV gate
     # false = subtract from error signal.
     # Typical Value = true.
-    oelin_: bool  = None
+    oelin: bool  = None
  
     # UEL input (UELin).
     # true = HV gate
     # false = add to error signal.
     # Typical Value = true.
-    uelin_: bool  = None
+    uelin: bool  = None
      

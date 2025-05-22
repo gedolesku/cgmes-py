@@ -11,32 +11,32 @@ class ExcCZ(ExcitationSystemDynamics):
     """Czech Proportion/Integral Exciter.
     """
     # Regulator proportional gain (Kp).
-    kp_: PU  = None
+    kp: PU  = None
  
     # Regulator integral time constant (Tc). 
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Voltage regulator maximum limit (Vrmax). 
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Voltage regulator minimum limit (Vrmin). 
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Regulator gain (Ka).
-    ka_: PU  = None
+    ka: PU  = None
  
     # Regulator time constant (Ta).
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Exciter constant related to self-excited field (Ke).
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control (Te).
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Exciter output maximum limit (Efdmax).
-    efdmax_: PU  = None
+    efdmax: PU  = None
  
     # Exciter output minimum limit (Efdmin). 
-    efdmin_: PU  = None
+    efdmin: PU  = None
      

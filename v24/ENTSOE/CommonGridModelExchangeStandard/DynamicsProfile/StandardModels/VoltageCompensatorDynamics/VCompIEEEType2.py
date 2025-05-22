@@ -23,5 +23,5 @@ class VCompIEEEType2(VoltageCompensatorDynamics):
     """
     # <font color="#0f0f0f">Time constant which is used for the combined voltage
     # sensing and compensation signal (Tr).</font>
-    tr_: Seconds  = None
+    tr: Seconds  = None
      

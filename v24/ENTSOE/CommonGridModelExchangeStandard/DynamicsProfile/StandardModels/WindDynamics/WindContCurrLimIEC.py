@@ -18,35 +18,36 @@ class WindContCurrLimIEC(IdentifiedObject):
     """
     # Maximum continuous current at the wind turbine terminals
     # (<i>i</i><sub>max</sub>). It is type dependent parameter.
-    imax_: PU  = None
+    imax: PU  = None
  
     # Maximum current during voltage dip at the wind turbine terminals
     # (<i>i</i><sub>max,dip</sub>). It is project dependent parameter.
-    imaxdip_: PU  = None
+    imaxdip: PU  = None
  
     # Limitation of type 3 stator current  (<i>M</i><sub>DFSLim</sub>):
     # - false=0: total current limitation,
     # - true=1: stator current limitation).
     # 
     # It is type dependent parameter.
-    mdfslim_: bool  = None
+    mdfslim: bool  = None
  
     # Prioritisation of q control during LVRT (<i>M</i><sub>qpri</sub>):
     # - true = 1: reactive power priority,
     # - false = 0: active power priority.
     # 
     # It is project dependent parameter.
-    mqpri_: bool  = None
+    mqpri: bool  = None
  
     # Voltage measurement filter time constant (<i>T</i><sub>ufilt</sub>). It is type
     # dependent parameter.
-    tufilt_: Seconds  = None
+    tufilt: Seconds  = None
  
     # Wind turbine type 3 or 4 model with which this wind control current limitation
     # model is associated.
-    WindTurbineType3or4IEC_: Optional[WindTurbineType3or4IEC] = None
+    WindTurbineType3or4IEC_ref: Optional[WindTurbineType3or4IEC] = None
+    WindTurbineType3or4IEC: str = None
  
     # The current control limitation model with which this wind dynamics lookup table
     # is associated.
-    WindDynamicsLookupTable_: List[WindDynamicsLookupTable]  = field(default_factory=list)
+    WindDynamicsLookupTable: List[WindDynamicsLookupTable]  = field(default_factory=list)
      

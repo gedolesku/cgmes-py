@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class ActivePowerPerFrequency:
     """Active power variation with frequency.
     """
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.Hz
+    denominatorUnit: UnitSymbol =  UnitSymbol.Hz
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.M
+    multiplier: UnitMultiplier =  UnitMultiplier.M
  
-    unit_: UnitSymbol =  UnitSymbol.W
+    unit: UnitSymbol =  UnitSymbol.W
  
-    value_: float  = None
+    value: float  = None
      

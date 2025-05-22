@@ -11,5 +11,6 @@ class ConnectivityNode:
     """
     # The connectivity nodes combine together to form this topological node.  May
     # depend on the current state of switches in the network.
-    TopologicalNode_: Optional[TopologicalNode] = None
+    TopologicalNode_ref: Optional[TopologicalNode] = None
+    TopologicalNode: str = None
      

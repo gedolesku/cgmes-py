@@ -12,8 +12,10 @@ class SeasonDayTypeSchedule(RegularIntervalSchedule):
     of season and day.
     """
     # Schedules that use this Season.
-    Season_: Optional[Season] = None
+    Season_ref: Optional[Season] = None
+    Season: str = None
  
     # Schedules that use this DayType.
-    DayType_: Optional[DayType] = None
+    DayType_ref: Optional[DayType] = None
+    DayType: str = None
      

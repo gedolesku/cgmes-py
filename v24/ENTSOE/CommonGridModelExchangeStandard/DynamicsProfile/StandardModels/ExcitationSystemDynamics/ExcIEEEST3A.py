@@ -26,68 +26,68 @@ class ExcIEEEST3A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 7.3.
     """
     # Maximum voltage regulator input limit (V<sub>IMAX</sub>).  Typical Value = 0.2.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Minimum voltage regulator input limit (V<sub>IMIN</sub>).  Typical Value = -0.2.
-    vimin_: PU  = None
+    vimin: PU  = None
  
     # Voltage regulator gain (K<sub>A</sub>). This is parameter K in the IEEE Std.
     # Typical Value = 200.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Voltage regulator time constant (T<sub>B</sub>).  Typical Value = 10.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator time constant (T<sub>C</sub>).  Typical Value = 1.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 10.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -10.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Forward gain constant of the inner loop field regulator (K<sub>M</sub>).
     # Typical Value = 7.93.
-    km_: PU  = None
+    km: PU  = None
  
     # Forward time constant of inner loop field regulator (T<sub>M</sub>).  Typical
     # Value = 0.4.
-    tm_: Seconds  = None
+    tm: Seconds  = None
  
     # Maximum inner loop output (V<sub>MMax</sub>).  Typical Value = 1.
-    vmmax_: PU  = None
+    vmmax: PU  = None
  
     # Minimum inner loop output (V<sub>MMin</sub>).  Typical Value = 0.
-    vmmin_: PU  = None
+    vmmin: PU  = None
  
     # Feedback gain constant of the inner loop field regulator (K<sub>G</sub>).
     # Typical Value = 1.
-    kg_: PU  = None
+    kg: PU  = None
  
     # Potential circuit gain coefficient (K<sub>P</sub>).  Typical Value = 6.15.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Potential circuit phase angle (thetap).  Typical Value = 0.
-    thetap_: AngleDegrees  = None
+    thetap: AngleDegrees  = None
  
     # Potential circuit gain coefficient (K<sub>I</sub>).  Typical Value = 0.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 0.2.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Reactance associated with potential source (X<sub>L</sub>).  Typical Value = 0.
     # 081.
-    xl_: PU  = None
+    xl: PU  = None
  
     # Maximum excitation voltage (V<sub>BMax</sub>).  Typical Value = 6.9.
-    vbmax_: PU  = None
+    vbmax: PU  = None
  
     # Maximum inner loop feedback voltage (V<sub>GMax</sub>).  Typical Value = 5.8.
-    vgmax_: PU  = None
+    vgmax: PU  = None
      

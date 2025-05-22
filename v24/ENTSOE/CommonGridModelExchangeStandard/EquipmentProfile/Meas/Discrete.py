@@ -11,5 +11,6 @@ class Discrete(Measurement):
     discrete values, e.g. a Breaker position.
     """
     # The ValueAliasSet used for translation of a MeasurementValue.value to a name.
-    ValueAliasSet_: Optional[ValueAliasSet] = None
+    ValueAliasSet_ref: Optional[ValueAliasSet] = None
+    ValueAliasSet: str = None
      

@@ -13,21 +13,21 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
       <b>Equations for conversion between Equivalent Circuit and Time Constant
     Reactance forms:</b>
       <b>Xd</b> = <b>Xad</b> + <b>Xl</b>
-      <b>Xï¿½d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd</b> / (<b>Xad</b> + <b>Xfd</b>)
-      <b>Xï¿½d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd </b>* <b>X1d</b> / (<b>Xad</b> *
+      <b>X’d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd</b> / (<b>Xad</b> + <b>Xfd</b>)
+      <b>X”d</b> = <b>Xl</b> + <b>Xad</b> * <b>Xfd </b>* <b>X1d</b> / (<b>Xad</b> *
     <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b> * <b>X1d</b>)
       <b>Xq</b> = <b>Xaq</b> + <b>Xl</b>
-      <b>Xï¿½q</b> = <b>Xl</b> + <b>Xaq</b> * <b>X1q</b> / (<b>Xaq</b>+ <b>X1q</b>)
-      <b>Xï¿½q</b> = <b>Xl</b> + <b>Xaq</b> *<b> X1q</b>* <b>X2q</b> / (<b>Xaq</b> *
+      <b>X’q</b> = <b>Xl</b> + <b>Xaq</b> * <b>X1q</b> / (<b>Xaq</b>+ <b>X1q</b>)
+      <b>X”q</b> = <b>Xl</b> + <b>Xaq</b> *<b> X1q</b>* <b>X2q</b> / (<b>Xaq</b> *
     <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b> * <b>X2q</b>)
-      <b>Tï¿½do</b> = (<b>Xad</b> + <b>Xfd</b>) / (<b>omega</b><b><sub>0</sub></b> *
+      <b>T’do</b> = (<b>Xad</b> + <b>Xfd</b>) / (<b>omega</b><b><sub>0</sub></b> *
     <b>Rfd</b>)
-      <b>Tï¿½do</b> = (<b>Xad</b> * <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b>
+      <b>T”do</b> = (<b>Xad</b> * <b>Xfd</b> + <b>Xad</b> * <b>X1d</b> + <b>Xfd</b>
     * <b>X1d</b>) / (<b>omega</b><b><sub>0</sub></b> * <b>R1d</b> * (<b>Xad</b> +
     <b>Xfd</b>)
-      <b>Tï¿½qo</b> = (<b>Xaq</b> + <b>X1q</b>) / (<b>omega</b><b><sub>0</sub></b> *
+      <b>T’qo</b> = (<b>Xaq</b> + <b>X1q</b>) / (<b>omega</b><b><sub>0</sub></b> *
     <b>R1q</b>)
-      <b>Tï¿½qo</b> = (<b>Xaq</b> * <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b>
+      <b>T”qo</b> = (<b>Xaq</b> * <b>X1q</b> + <b>Xaq</b> * <b>X2q</b> + <b>X1q</b>
     * <b>X2q</b>)/ (<b>omega</b><b><sub>0</sub></b> * <b>R2q</b> * (<b>Xaq</b> +
     <b>X1q</b>)
       <b>
@@ -54,35 +54,35 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
       Are only valid for a simplified model where "Canay" reactance is zero.
     """
     # D-axis mutual reactance.
-    xad_: PU  = None
+    xad: PU  = None
  
     # Field winding resistance.
-    rfd_: PU  = None
+    rfd: PU  = None
  
     # Field winding leakage reactance.
-    xfd_: PU  = None
+    xfd: PU  = None
  
     # D-axis damper 1 winding resistance.
-    r1d_: PU  = None
+    r1d: PU  = None
  
     # D-axis damper 1 winding leakage reactance.
-    x1d_: PU  = None
+    x1d: PU  = None
  
-    # Differential mutual (ï¿½Canayï¿½) reactance.
-    xf1d_: PU  = None
+    # Differential mutual (“Canay”) reactance.
+    xf1d: PU  = None
  
     # Q-axis mutual reactance.
-    xaq_: PU  = None
+    xaq: PU  = None
  
     # Q-axis damper 1 winding resistance.
-    r1q_: PU  = None
+    r1q: PU  = None
  
     # Q-axis damper 1 winding leakage reactance.
-    x1q_: PU  = None
+    x1q: PU  = None
  
     # Q-axis damper 2 winding resistance.
-    r2q_: PU  = None
+    r2q: PU  = None
  
     # Q-axis damper 2 winding leakage reactance.
-    x2q_: PU  = None
+    x2q: PU  = None
      

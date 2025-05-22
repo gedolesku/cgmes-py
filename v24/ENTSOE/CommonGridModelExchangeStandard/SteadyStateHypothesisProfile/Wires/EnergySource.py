@@ -14,10 +14,10 @@ class EnergySource(ConductingEquipment):
     # High voltage source active injection. Load sign convention is used, i.e.
     # positive sign means flow out from a node.
     # Starting value for steady state solutions.
-    activePower_: ActivePower  = None
+    activePower: ActivePower  = None
  
     # High voltage source reactive injection. Load sign convention is used, i.e.
     # positive sign means flow out from a node.
     # Starting value for steady state solutions.
-    reactivePower_: ReactivePower  = None
+    reactivePower: ReactivePower  = None
      

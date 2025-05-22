@@ -17,17 +17,17 @@ class ACDCConverter(ConductingEquipment):
     # positive sign means flow out from a node.
     # Starting value for a steady state solution in the case a simplified power flow
     # model is used.
-    p_: ActivePower  = None
+    p: ActivePower  = None
  
     # Reactive power at the point of common coupling. Load sign convention is used, i.
     # e. positive sign means flow out from a node.
     # Starting value for a steady state solution in the case a simplified power flow
     # model is used.
-    q_: ReactivePower  = None
+    q: ReactivePower  = None
  
     # Real power injection target in AC grid, at point of common coupling.
-    targetPpcc_: ActivePower  = None
+    targetPpcc: ActivePower  = None
  
     # Target value for DC voltage magnitude.
-    targetUdc_: Voltage  = None
+    targetUdc: Voltage  = None
      

@@ -16,70 +16,70 @@ class GovHydroPID2(TurbineGovernorDynamics):
     electronic).
     """
     # Base for power values (MWbase) (>0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Speed detector time constant (Treg).  Typical Value = 0.
-    treg_: Seconds  = None
+    treg: Seconds  = None
  
     # Permanent drop (Rperm).  Typical Value = 0.
-    rperm_: PU  = None
+    rperm: PU  = None
  
     # Proportional gain (Kp).  Typical Value = 0.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Reset gain (Ki).  Unit = PU/ sec.  Typical Value = 0.
-    ki_: Simple_Float  = None
+    ki: Simple_Float  = None
  
     # Derivative gain (Kd).  Typical Value = 0.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Controller time constant (Ta) (>0).  Typical Value = 0.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Gate servo time constant (Tb) (>0).  Typical Value = 0.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Maximum gate opening velocity (Velmax).  Unit = PU/sec.  Typical Value = 0.
-    velmax_: Simple_Float  = None
+    velmax: Simple_Float  = None
  
     # Maximum gate closing velocity (Velmin).  Unit = PU/sec.  Typical Value = 0.
-    velmin_: Simple_Float  = None
+    velmin: Simple_Float  = None
  
     # Maximum gate opening (Gmax).  Typical Value = 0.
-    gmax_: PU  = None
+    gmax: PU  = None
  
     # Minimum gate opening (Gmin).  Typical Value = 0.
-    gmin_: PU  = None
+    gmin: PU  = None
  
     # Water inertia time constant (Tw) (>0).  Typical Value = 0.
-    tw_: Seconds  = None
+    tw: Seconds  = None
  
     # Turbine damping factor (D).  Unit = delta P / delta speed.  Typical Value = 0.
-    d_: PU  = None
+    d: PU  = None
  
     # Gate opening at speed no load (G0).  Typical Value = 0.
-    g0_: PU  = None
+    g0: PU  = None
  
     # Intermediate gate opening (G1).  Typical Value = 0.
-    g1_: PU  = None
+    g1: PU  = None
  
     # Power at gate opening G1 (P1).  Typical Value = 0.
-    p1_: PU  = None
+    p1: PU  = None
  
     # Intermediate gate opening (G2).  Typical Value = 0.
-    g2_: PU  = None
+    g2: PU  = None
  
     # Power at gate opening G2 (P2).  Typical Value = 0.
-    p2_: PU  = None
+    p2: PU  = None
  
     # Power at full opened gate (P3).  Typical Value = 0.
-    p3_: PU  = None
+    p3: PU  = None
  
     # Factor multiplying Tw (Atw).  Typical Value = 0.
-    atw_: PU  = None
+    atw: PU  = None
  
     # Feedback signal type flag (Flag).
     # true = use gate position feedback signal
     # false = use Pe.
-    feedbackSignal_: bool  = None
+    feedbackSignal: bool  = None
      

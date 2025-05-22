@@ -13,8 +13,10 @@ class WindGenTurbineType2IEC(WindTurbineType1or2IEC):
       Reference: IEC Standard 61400-27-1, section 6.5.3.
     """
     # Pitch control emulator model associated with this wind turbine type 2 model.
-    WindPitchContEmulIEC_: Optional[WindPitchContEmulIEC] = None
+    WindPitchContEmulIEC_ref: Optional[WindPitchContEmulIEC] = None
+    WindPitchContEmulIEC: str = None
  
     # Wind control rotor resistance model associated with wind turbine type 2 model.
-    WindContRotorRIEC_: Optional[WindContRotorRIEC] = None
+    WindContRotorRIEC_ref: Optional[WindContRotorRIEC] = None
+    WindContRotorRIEC: str = None
      

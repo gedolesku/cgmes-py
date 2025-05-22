@@ -12,5 +12,6 @@ class ExcitationSystemDynamics(DynamicsFunctionBlock):
     </font>
     """
     # Synchronous machine model with which this excitation system model is associated.
-    SynchronousMachineDynamics_: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics_ref: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics: str = None
      

@@ -14,8 +14,9 @@ class TieFlow:
     # terminal further away from the control area. For example to represent a tie to
     # a shunt component (like a load or generator) in another area, this is the near
     # end of a branch and this attribute would be specified as false.
-    positiveFlowIn_: bool  = None
+    positiveFlowIn: bool  = None
  
     # The terminal to which this tie flow belongs.
-    Terminal_: Optional[Terminal] = None
+    Terminal_ref: Optional[Terminal] = None
+    Terminal: str = None
      

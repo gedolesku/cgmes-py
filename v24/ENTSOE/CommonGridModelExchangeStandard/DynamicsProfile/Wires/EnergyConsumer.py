@@ -10,5 +10,6 @@ class EnergyConsumer(ConductingEquipment):
     """Generic user of energy - a  point of consumption on the power system model.
     """
     # Load dynamics model used to describe dynamic behavior of this energy consumer.
-    LoadDynamics_: Optional[LoadDynamics] = None
+    LoadDynamics_ref: Optional[LoadDynamics] = None
+    LoadDynamics: str = None
      

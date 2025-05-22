@@ -25,35 +25,35 @@ class ACLineSegment(Conductor):
     """
     # Zero sequence shunt (charging) susceptance, uniformly distributed, of the
     # entire line section.
-    b0ch_: Susceptance  = None
+    b0ch: Susceptance  = None
  
     # Positive sequence shunt (charging) susceptance, uniformly distributed, of the
     # entire line section.  This value represents the full charging over the full
     # length of the line.
-    bch_: Susceptance  = None
+    bch: Susceptance  = None
  
     # Zero sequence shunt (charging) conductance, uniformly distributed, of the
     # entire line section.
-    g0ch_: Conductance  = None
+    g0ch: Conductance  = None
  
     # Positive sequence shunt (charging) conductance, uniformly distributed, of the
     # entire line section.
-    gch_: Conductance  = None
+    gch: Conductance  = None
  
     # Positive sequence series resistance of the entire line section.
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Zero sequence series resistance of the entire line section.
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Maximum permitted temperature at the end of SC for the calculation of minimum
     # short-circuit currents. Used for short circuit data exchange according to IEC
     # 60909
-    shortCircuitEndTemperature_: Temperature  = None
+    shortCircuitEndTemperature: Temperature  = None
  
     # Positive sequence series reactance of the entire line section.
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Zero sequence series reactance of the entire line section.
-    x0_: Reactance  = None
+    x0: Reactance  = None
      

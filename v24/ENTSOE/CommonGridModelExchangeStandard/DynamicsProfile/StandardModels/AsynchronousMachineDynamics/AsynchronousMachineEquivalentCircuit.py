@@ -35,17 +35,17 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
     * (xm + xlr1).
     """
     # Magnetizing reactance.
-    xm_: PU  = None
+    xm: PU  = None
  
     # Damper 1 winding resistance.
-    rr1_: PU  = None
+    rr1: PU  = None
  
     # Damper 1 winding leakage reactance.
-    xlr1_: PU  = None
+    xlr1: PU  = None
  
     # Damper 2 winding resistance.
-    rr2_: PU  = None
+    rr2: PU  = None
  
     # Damper 2 winding leakage reactance.
-    xlr2_: PU  = None
+    xlr2: PU  = None
      

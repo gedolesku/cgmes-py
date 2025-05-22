@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Susceptance:
     """Imaginary part of admittance.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.S
+    unit: UnitSymbol =  UnitSymbol.S
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

@@ -12,5 +12,5 @@ class HydroPowerPlant(PowerSystemResource):
     pumps receive their water from a lower reservoir.
     """
     # The type of hydro power plant water storage.
-    hydroPlantStorageType_: HydroPlantStorageKind  = None
+    hydroPlantStorageType: HydroPlantStorageKind  = None
      

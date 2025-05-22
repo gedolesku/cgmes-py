@@ -14,16 +14,16 @@ class CsConverter(ACDCConverter):
     """
     # Indicates whether the DC pole is operating as an inverter or as a rectifier.
     # CSC control variable used in power flow.
-    operatingMode_: CsOperatingModeKind  = None
+    operatingMode: CsOperatingModeKind  = None
  
-    pPccControl_: CsPpccControlKind  = None
+    pPccControl: CsPpccControlKind  = None
  
     # Target firing angle. CSC control variable used in power flow.
-    targetAlpha_: AngleDegrees  = None
+    targetAlpha: AngleDegrees  = None
  
     # Target extinction angle. CSC  control variable used in power flow.
-    targetGamma_: AngleDegrees  = None
+    targetGamma: AngleDegrees  = None
  
     # DC current target value. CSC control variable used in power flow.
-    targetIdc_: CurrentFlow  = None
+    targetIdc: CurrentFlow  = None
      

@@ -14,13 +14,13 @@ class Switch(ConductingEquipment):
     # The attribute is used in cases when no Measurement for the status value is
     # present. If the Switch has a status measurement the Discrete.normalValue is
     # expected to match with the Switch.normalOpen.
-    normalOpen_: bool  = None
+    normalOpen: bool  = None
  
     # The maximum continuous current carrying capacity in amps governed by the device
     # material and construction.
-    ratedCurrent_: CurrentFlow  = None
+    ratedCurrent: CurrentFlow  = None
  
     # Branch is retained in a bus branch model.  The flow through retained switches
     # will normally be calculated in power flow.
-    retained_: bool  = None
+    retained: bool  = None
      

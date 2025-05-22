@@ -10,5 +10,6 @@ class RaiseLowerCommand(AnalogControl):
     """An analog control that increase or decrease a set point value with pulses.
     """
     # The ValueAliasSet used for translation of a Control value to a name.
-    ValueAliasSet_: Optional[ValueAliasSet] = None
+    ValueAliasSet_ref: Optional[ValueAliasSet] = None
+    ValueAliasSet: str = None
      

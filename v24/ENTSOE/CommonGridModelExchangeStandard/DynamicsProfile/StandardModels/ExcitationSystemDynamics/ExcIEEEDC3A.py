@@ -25,44 +25,44 @@ class ExcIEEEDC3A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 5.3.
     """
     # Rheostat travel time (T<sub>RH</sub>).  Typical Value = 20.
-    trh_: Seconds  = None
+    trh: Seconds  = None
  
     # Fast raise/lower contact setting (K<sub>V</sub>).  Typical Value = 0.05.
-    kv_: PU  = None
+    kv: PU  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 1.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = 0.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 0.5.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 0.05.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD1</sub>).
     # Typical Value = 3.375.
-    efd1_: PU  = None
+    efd1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD1</sub> (S<sub>E</sub>[E<sub>FD1</sub>]).  Typical Value = 0.267.
-    seefd1_: Simple_Float  = None
+    seefd1: Simple_Float  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD2</sub>).
     # Typical Value = 3.15.
-    efd2_: PU  = None
+    efd2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD2</sub> (S<sub>E</sub>[E<sub>FD2</sub>]).  Typical Value = 0.068.
-    seefd2_: Simple_Float  = None
+    seefd2: Simple_Float  = None
  
     # (exclim).  IEEE standard is ambiguous about lower limit on exciter output.
     # true = a lower limit of zero is applied to integrator output
     # false = a lower limit of zero is not applied to integrator output.
     # Typical Value = true.
-    exclim_: bool  = None
+    exclim: bool  = None
      

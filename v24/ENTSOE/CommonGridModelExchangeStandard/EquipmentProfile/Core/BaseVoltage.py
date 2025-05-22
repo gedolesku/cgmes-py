@@ -10,5 +10,5 @@ class BaseVoltage(IdentifiedObject):
     """Defines a system base voltage which is referenced.
     """
     # The power system resource's base voltage.
-    nominalVoltage_: Voltage  = None
+    nominalVoltage: Voltage  = None
      

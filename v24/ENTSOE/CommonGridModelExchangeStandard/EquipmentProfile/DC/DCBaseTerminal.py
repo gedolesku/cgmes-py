@@ -12,5 +12,6 @@ class DCBaseTerminal(ACDCTerminal):
     terminals connected. A DC node is similar to an AC connectivity node. The model
     enforces that DC connections are distinct from AC connections.
     """
-    DCNode_: Optional[DCNode] = None
+    DCNode_ref: Optional[DCNode] = None
+    DCNode: str = None
      

@@ -11,65 +11,65 @@ class ExcAVR7(ExcitationSystemDynamics):
     """IVO excitation system.
     """
     # Gain (K1).  Typical Value = 1.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Lead coefficient (A1).  Typical Value = 0.5.
-    a1_: PU  = None
+    a1: PU  = None
  
     # Lag coefficient (A2).  Typical Value = 0.5.
-    a2_: PU  = None
+    a2: PU  = None
  
     # Lead time constant (T1).  Typical Value = 0.05.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Lag time constant (T2).  Typical Value = 0.1.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Lead-lag max. limit (Vmax1).  Typical Value = 5.
-    vmax1_: PU  = None
+    vmax1: PU  = None
  
     # Lead-lag min. limit (Vmin1).  Typical Value = -5.
-    vmin1_: PU  = None
+    vmin1: PU  = None
  
     # Gain (K3).  Typical Value = 3.
-    k3_: PU  = None
+    k3: PU  = None
  
     # Lead coefficient (A3).  Typical Value = 0.5.
-    a3_: PU  = None
+    a3: PU  = None
  
     # Lag coefficient (A4).  Typical Value = 0.5.
-    a4_: PU  = None
+    a4: PU  = None
  
     # Lead time constant (T3).  Typical Value = 0.1.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Lag time constant (T4).  Typical Value = 0.1.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Lead-lag max. limit (Vmax3).  Typical Value = 5.
-    vmax3_: PU  = None
+    vmax3: PU  = None
  
     # Lead-lag min. limit (Vmin3).  Typical Value = -5.
-    vmin3_: PU  = None
+    vmin3: PU  = None
  
     # Gain (K5).  Typical Value = 1.
-    k5_: PU  = None
+    k5: PU  = None
  
     # Lead coefficient (A5).  Typical Value = 0.5.
-    a5_: PU  = None
+    a5: PU  = None
  
     # Lag coefficient (A6).  Typical Value = 0.5.
-    a6_: PU  = None
+    a6: PU  = None
  
     # Lead time constant (T5).  Typical Value = 0.1.
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Lag time constant (T6).  Typical Value = 0.1.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Lead-lag max. limit (Vmax5).  Typical Value = 5.
-    vmax5_: PU  = None
+    vmax5: PU  = None
  
     # Lead-lag min. limit (Vmin5).  Typical Value = -2.
-    vmin5_: PU  = None
+    vmin5: PU  = None
      

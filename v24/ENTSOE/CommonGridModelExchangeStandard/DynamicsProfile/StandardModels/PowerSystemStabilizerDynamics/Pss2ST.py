@@ -12,56 +12,56 @@ class Pss2ST(PowerSystemStabilizerDynamics):
     """PTI Microprocessor-Based Stabilizer type 1.
     """
     # Type of input signal #1.  Typical Value = rotorAngularFrequencyDeviation.
-    inputSignal1Type_: InputSignalKind  = None
+    inputSignal1Type: InputSignalKind  = None
  
     # Type of input signal #2.  Typical Value = generatorElectricalPower.
-    inputSignal2Type_: InputSignalKind  = None
+    inputSignal2Type: InputSignalKind  = None
  
     # Gain (K1). 
-    k1_: PU  = None
+    k1: PU  = None
  
     # Gain (K2). 
-    k2_: PU  = None
+    k2: PU  = None
  
     # Time constant (T1). 
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Time constant (T2).
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Time constant (T3). 
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Time constant (T4).
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Time constant (T5). 
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Time constant (T6). 
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Time constant (T7). 
-    t7_: Seconds  = None
+    t7: Seconds  = None
  
     # Time constant (T8). 
-    t8_: Seconds  = None
+    t8: Seconds  = None
  
     # Time constant (T9). 
-    t9_: Seconds  = None
+    t9: Seconds  = None
  
     # Time constant (T10). 
-    t10_: Seconds  = None
+    t10: Seconds  = None
  
     # Limiter (Lsmax). 
-    lsmax_: PU  = None
+    lsmax: PU  = None
  
     # Limiter (Lsmin). 
-    lsmin_: PU  = None
+    lsmin: PU  = None
  
     # Cutoff limiter (Vcu). 
-    vcu_: PU  = None
+    vcu: PU  = None
  
     # Cutoff limiter (Vcl). 
-    vcl_: PU  = None
+    vcl: PU  = None
      

@@ -12,8 +12,9 @@ class HydroGeneratingUnit(GeneratingUnit):
     Pelton, Kaplan).
     """
     # Energy conversion capability for generating.
-    energyConversionCapability_: HydroEnergyConversionKind  = None
+    energyConversionCapability: HydroEnergyConversionKind  = None
  
     # The hydro generating unit belongs to a hydro power plant.
-    HydroPowerPlant_: Optional[HydroPowerPlant] = None
+    HydroPowerPlant_ref: Optional[HydroPowerPlant] = None
+    HydroPowerPlant: str = None
      

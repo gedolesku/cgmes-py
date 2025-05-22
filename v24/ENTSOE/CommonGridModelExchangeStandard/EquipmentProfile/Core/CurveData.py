@@ -12,15 +12,16 @@ class CurveData:
     axis values along with their specific data types.
     """
     # The data value of the X-axis variable,  depending on the X-axis units.
-    xvalue_: Simple_Float  = None
+    xvalue: Simple_Float  = None
  
     # The data value of the  first Y-axis variable, depending on the Y-axis units.
-    y1value_: Simple_Float  = None
+    y1value: Simple_Float  = None
  
     # The data value of the second Y-axis variable (if present), depending on the Y-
     # axis units.
-    y2value_: Simple_Float  = None
+    y2value: Simple_Float  = None
  
     # The point data values that define this curve.
-    Curve_: Optional[Curve] = None
+    Curve_ref: Optional[Curve] = None
+    Curve: str = None
      

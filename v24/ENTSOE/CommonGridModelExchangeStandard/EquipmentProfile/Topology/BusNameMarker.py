@@ -19,8 +19,9 @@ class BusNameMarker(IdentifiedObject):
     """
     # Priority of bus name marker for use as topology bus name.  Use 0 for don t care.
     #  Use 1 for highest priority.  Use 2 as priority is less than 1 and so on.
-    priority_: int  = None
+    priority: int  = None
  
     # The bus name markers that belong to this reporting group.
-    ReportingGroup_: Optional[ReportingGroup] = None
+    ReportingGroup_ref: Optional[ReportingGroup] = None
+    ReportingGroup: str = None
      

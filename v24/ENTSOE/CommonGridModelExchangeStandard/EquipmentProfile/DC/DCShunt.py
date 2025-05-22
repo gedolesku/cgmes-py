@@ -13,11 +13,11 @@ class DCShunt(DCConductingEquipment):
     transient and short circuit studies.
     """
     # Capacitance of the DC shunt.
-    capacitance_: Capacitance  = None
+    capacitance: Capacitance  = None
  
     # Resistance of the DC device.
-    resistance_: Resistance  = None
+    resistance: Resistance  = None
  
     # Rated DC device voltage. Converter configuration data used in power flow.
-    ratedUdc_: Voltage  = None
+    ratedUdc: Voltage  = None
      

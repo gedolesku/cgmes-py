@@ -15,7 +15,7 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
       <ul>
       	<li>The number of  equivalent windings that are included</li>
       	<li>The way in which saturation is incorporated into the model.</li>
-      	<li>Whether or not ï¿½subtransient saliencyï¿½ (<b>X''q</b> not = <b>X''d</b>)
+      	<li>Whether or not “subtransient saliency” (<b>X''q</b> not = <b>X''d</b>)
     is represented.</li>
       </ul>
       <b>Note:</b> It is not necessary for each simulation tool to have separate
@@ -26,20 +26,20 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
     """
     # Q-axis saturation factor at rated terminal voltage (S1q) (>= 0). Typical Value
     # = 0.02.
-    saturationFactorQAxis_: Simple_Float  = None
+    saturationFactorQAxis: Simple_Float  = None
  
     # Q-axis saturation factor at 120% of rated terminal voltage (S12q) (>=S1q).
     # Typical Value = 0.12.
-    saturationFactor120QAxis_: Simple_Float  = None
+    saturationFactor120QAxis: Simple_Float  = None
  
     # Ratio of Efd bases of exciter and generator models.  Typical Value = 1.
-    efdBaseRatio_: Simple_Float  = None
+    efdBaseRatio: Simple_Float  = None
  
     # Excitation base system mode.  Typical Value = ifag.
-    ifdBaseType_: IfdBaseKind  = None
+    ifdBaseType: IfdBaseKind  = None
  
     # Ifd base current if .ifdBaseType = other.
     # Not needed if .ifdBaseType not = other.
     # Unit = A.  Typical Value = 0.
-    ifdBaseValue_: CurrentFlow  = None
+    ifdBaseValue: CurrentFlow  = None
      

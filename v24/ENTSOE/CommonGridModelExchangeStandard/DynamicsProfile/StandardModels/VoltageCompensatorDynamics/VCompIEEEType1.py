@@ -17,13 +17,13 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
     """
     # <font color="#0f0f0f">Resistive component of compensation of a generator (Rc).
     # </font>
-    rc_: PU  = None
+    rc: PU  = None
  
     # <font color="#0f0f0f">Reactive component of compensation of a generator (Xc).
     # </font>
-    xc_: PU  = None
+    xc: PU  = None
  
     # <font color="#0f0f0f">Time constant which is used for the combined voltage
     # sensing and compensation signal (Tr).</font>
-    tr_: Seconds  = None
+    tr: Seconds  = None
      

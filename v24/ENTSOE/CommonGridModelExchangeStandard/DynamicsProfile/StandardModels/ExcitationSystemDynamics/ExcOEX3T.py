@@ -12,59 +12,59 @@ class ExcOEX3T(ExcitationSystemDynamics):
     terminal voltage limiter.
     """
     # Time constant (T<sub>1</sub>).
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Time constant (T<sub>2</sub>).
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Time constant (T<sub>3</sub>).
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Time constant (T<sub>4</sub>).
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Gain (K<sub>A</sub>).
-    ka_: PU  = None
+    ka: PU  = None
  
     # Time constant (T<sub>5</sub>).
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Time constant (T<sub>6</sub>).
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Limiter (V<sub>RMAX</sub>).
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Limiter (V<sub>RMIN</sub>). 
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Time constant (T<sub>E</sub>).
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Gain (K<sub>F</sub>).
-    kf_: PU  = None
+    kf: PU  = None
  
     # Time constant (T<sub>F</sub>).
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Gain (K<sub>C</sub>).
-    kc_: PU  = None
+    kc: PU  = None
  
     # Gain (K<sub>D</sub>).
-    kd_: PU  = None
+    kd: PU  = None
  
     # Gain (K<sub>E</sub>).
-    ke_: PU  = None
+    ke: PU  = None
  
     # Saturation parameter (E<sub>1</sub>).
-    e1_: PU  = None
+    e1: PU  = None
  
     # Saturation parameter (S<sub>E</sub>(E<sub>1</sub>)).
-    see1_: PU  = None
+    see1: PU  = None
  
     # Saturation parameter (E<sub>2</sub>).
-    e2_: PU  = None
+    e2: PU  = None
  
     # Saturation parameter (S<sub>E</sub>(E<sub>2</sub>)).
-    see2_: PU  = None
+    see2: PU  = None
      

@@ -13,74 +13,75 @@ class LoadStatic(IdentifiedObject):
     power consumed by the load to the amplitude and frequency of the bus voltage.
     """
     # Type of static load model.  Typical Value = constantZ.
-    staticLoadModelType_: StaticLoadModelKind  = None
+    staticLoadModelType: StaticLoadModelKind  = None
  
     # First term voltage coefficient for active power (Kp1).  Not used when .
     # staticLoadModelType = constantZ.
-    kp1_: Simple_Float  = None
+    kp1: Simple_Float  = None
  
     # Second term voltage coefficient for active power (Kp2).  Not used when .
     # staticLoadModelType = constantZ.
-    kp2_: Simple_Float  = None
+    kp2: Simple_Float  = None
  
     # Third term voltage coefficient for active power (Kp3).  Not used when .
     # staticLoadModelType = constantZ.
-    kp3_: Simple_Float  = None
+    kp3: Simple_Float  = None
  
     # Frequency coefficient for active power (Kp4).  Must be non-zero when .
     # staticLoadModelType = ZIP2.  Not used for all other values of .
     # staticLoadModelType.
-    kp4_: Simple_Float  = None
+    kp4: Simple_Float  = None
  
     # First term voltage exponent for active power (Ep1).  Used only when .
     # staticLoadModelType = exponential.
-    ep1_: Simple_Float  = None
+    ep1: Simple_Float  = None
  
     # Second term voltage exponent for active power (Ep2).  Used only when .
     # staticLoadModelType = exponential.
-    ep2_: Simple_Float  = None
+    ep2: Simple_Float  = None
  
     # Third term voltage exponent for active power (Ep3).  Used only when .
     # staticLoadModelType = exponential.
-    ep3_: Simple_Float  = None
+    ep3: Simple_Float  = None
  
     # Frequency deviation coefficient for active power (Kpf).  Not used when .
     # staticLoadModelType = constantZ.
-    kpf_: Simple_Float  = None
+    kpf: Simple_Float  = None
  
     # First term voltage coefficient for reactive power (Kq1).  Not used when .
     # staticLoadModelType = constantZ.
-    kq1_: Simple_Float  = None
+    kq1: Simple_Float  = None
  
     # Second term voltage coefficient for reactive power (Kq2).  Not used when .
     # staticLoadModelType = constantZ.
-    kq2_: Simple_Float  = None
+    kq2: Simple_Float  = None
  
     # Third term voltage coefficient for reactive power (Kq3).  Not used when .
     # staticLoadModelType = constantZ.
-    kq3_: Simple_Float  = None
+    kq3: Simple_Float  = None
  
     # Frequency coefficient for reactive power (Kq4).  Must be non-zero when .
     # staticLoadModelType = ZIP2.  Not used for all other values of .
     # staticLoadModelType.
-    kq4_: Simple_Float  = None
+    kq4: Simple_Float  = None
  
     # First term voltage exponent for reactive power (Eq1).  Used only when .
     # staticLoadModelType = exponential.
-    eq1_: Simple_Float  = None
+    eq1: Simple_Float  = None
  
     # Second term voltage exponent for reactive power (Eq2).  Used only when .
     # staticLoadModelType = exponential.
-    eq2_: Simple_Float  = None
+    eq2: Simple_Float  = None
  
     # Third term voltage exponent for reactive power (Eq3).  Used only when .
     # staticLoadModelType = exponential.
-    eq3_: Simple_Float  = None
+    eq3: Simple_Float  = None
  
     # Frequency deviation coefficient for reactive power (Kqf).  Not used when .
     # staticLoadModelType = constantZ.
-    kqf_: Simple_Float  = None
+    kqf: Simple_Float  = None
  
     # Aggregate load to which this aggregate static load belongs.
-    LoadAggregate_: Optional[LoadAggregate] = None
+    LoadAggregate_ref: Optional[LoadAggregate] = None
+    LoadAggregate: str = None
      

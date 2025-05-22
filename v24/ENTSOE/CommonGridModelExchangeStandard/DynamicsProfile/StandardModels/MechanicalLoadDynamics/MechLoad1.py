@@ -10,14 +10,14 @@ class MechLoad1(MechanicalLoadDynamics):
     """Mechanical load model type 1.
     """
     # Speed squared coefficient (a).
-    a_: Simple_Float  = None
+    a: Simple_Float  = None
  
     # Speed coefficient (b).
-    b_: Simple_Float  = None
+    b: Simple_Float  = None
  
     # Speed to the exponent coefficient (d).
-    d_: Simple_Float  = None
+    d: Simple_Float  = None
  
     # Exponent (e).
-    e_: Simple_Float  = None
+    e: Simple_Float  = None
      

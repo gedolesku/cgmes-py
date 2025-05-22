@@ -18,11 +18,14 @@ class TopologicalNode(IdentifiedObject):
     Topological nodes maintained this way are also called "busses".
     """
     # The topological nodes that belong to the reporting group.
-    ReportingGroup_: Optional[ReportingGroup] = None
+    ReportingGroup_ref: Optional[ReportingGroup] = None
+    ReportingGroup: str = None
  
     # The connectivity node container to which the toplogical node belongs.
-    ConnectivityNodeContainer_: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer_ref: Optional[ConnectivityNodeContainer] = None
+    ConnectivityNodeContainer: str = None
  
     # The base voltage of the topologocial node.
-    BaseVoltage_: Optional[BaseVoltage] = None
+    BaseVoltage_ref: Optional[BaseVoltage] = None
+    BaseVoltage: str = None
      

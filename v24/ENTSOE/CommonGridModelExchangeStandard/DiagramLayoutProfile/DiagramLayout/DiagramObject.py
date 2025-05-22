@@ -21,12 +21,12 @@ class DiagramObject(IdentifiedObject):
     # The drawing order of this element. The higher the number, the later the element
     # is drawn in sequence. This is used to ensure that elements that overlap are
     # rendered in the correct order.
-    drawingOrder_: int  = None
+    drawingOrder: int  = None
  
     # Defines whether or not the diagram objects points define the boundaries of a
     # polygon or the routing of a polyline. If this value is true then a receiving
     # application should consider the first and last points to be connected.
-    isPolygon_: bool  = None
+    isPolygon: bool  = None
  
     # The offset in the X direction. This is used for defining the offset from centre
     # for rendering an icon (the default is that a single point specifies the centre
@@ -35,7 +35,7 @@ class DiagramObject(IdentifiedObject):
     # The offset is in per-unit with 0 indicating there is no offset from the
     # horizontal centre of the icon.  -0.5 indicates it is offset by 50% to the left
     # and 0.5 indicates an offset of 50% to the right.
-    offsetX_: Simple_Float  = None
+    offsetX: Simple_Float  = None
  
     # The offset in the Y direction. This is used for defining the offset from centre
     # for rendering an icon (the default is that a single point specifies the centre
@@ -45,22 +45,25 @@ class DiagramObject(IdentifiedObject):
     # vertical centre of the icon.  The offset direction is dependent on the
     # orientation of the diagram, with -0.5 and 0.5 indicating an offset of +/- 50%
     # on the vertical axis.
-    offsetY_: Simple_Float  = None
+    offsetY: Simple_Float  = None
  
     # Sets the angle of rotation of the diagram object.  Zero degrees is pointing to
     # the top of the diagram.  Rotation is clockwise.
-    rotation_: AngleDegrees  = None
+    rotation: AngleDegrees  = None
  
     # The diagram objects that are associated with the domain object.
-    IdentifiedObject_: Optional[IdentifiedObject] = None
+    IdentifiedObject_ref: Optional[IdentifiedObject] = None
+    IdentifiedObject: str = None
  
     # A diagram object can be part of multiple visibility layers.
-    VisibilityLayer_: List[VisibilityLayer]  = field(default_factory=list)
+    VisibilityLayers: List[VisibilityLayer]  = field(default_factory=list)
  
     # A diagram object has a style associated that provides a reference for the style
     # used in the originating system.
-    DiagramObjectStyle_: Optional[DiagramObjectStyle] = None
+    DiagramObjectStyle_ref: Optional[DiagramObjectStyle] = None
+    DiagramObjectStyle: str = None
  
     # A diagram object is part of a diagram.
-    Diagram_: Optional[Diagram] = None
+    Diagram_ref: Optional[Diagram] = None
+    Diagram: str = None
      

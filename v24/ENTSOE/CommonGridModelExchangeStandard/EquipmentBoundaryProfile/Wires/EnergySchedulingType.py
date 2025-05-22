@@ -10,5 +10,5 @@ class EnergySchedulingType(IdentifiedObject):
     """Used to define the type of generation for scheduling purposes.
     """
     # Energy Source of a particular Energy Scheduling Type
-    EnergySource_: List[EnergySource]  = field(default_factory=list)
+    EnergySource: List[EnergySource]  = field(default_factory=list)
      

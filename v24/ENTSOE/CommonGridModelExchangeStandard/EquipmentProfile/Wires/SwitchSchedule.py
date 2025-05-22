@@ -11,5 +11,6 @@ class SwitchSchedule(SeasonDayTypeSchedule):
     open.  If 1, the switch is closed.
     """
     # A Switch can be associated with SwitchSchedules.
-    Switch_: Optional[Switch] = None
+    Switch_ref: Optional[Switch] = None
+    Switch: str = None
      

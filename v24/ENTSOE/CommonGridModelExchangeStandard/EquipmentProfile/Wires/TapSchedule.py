@@ -10,5 +10,6 @@ class TapSchedule(SeasonDayTypeSchedule):
     """A pre-established pattern over time for a tap step.
     """
     # A TapChanger can have TapSchedules.
-    TapChanger_: Optional[TapChanger] = None
+    TapChanger_ref: Optional[TapChanger] = None
+    TapChanger: str = None
      

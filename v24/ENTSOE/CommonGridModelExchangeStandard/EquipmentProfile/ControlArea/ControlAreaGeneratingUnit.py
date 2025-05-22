@@ -13,5 +13,6 @@ class ControlAreaGeneratingUnit(IdentifiedObject):
     """
     # The generating unit specified for this control area.  Note that a control area
     # should include a GeneratingUnit only once.
-    GeneratingUnit_: Optional[GeneratingUnit] = None
+    GeneratingUnit_ref: Optional[GeneratingUnit] = None
+    GeneratingUnit: str = None
      

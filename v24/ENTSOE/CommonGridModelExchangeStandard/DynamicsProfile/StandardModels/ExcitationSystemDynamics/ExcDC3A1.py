@@ -12,51 +12,51 @@ class ExcDC3A1(ExcitationSystemDynamics):
     """This is modified old IEEE type 3 excitation system.
     """
     # Voltage regulator gain (Ka).  Typical Value = 300.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (Ta).  Typical Value = 0.01.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (Vrmax).  Typical Value = 5.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (Vrmin).  Typical Value = 0.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control (Te).
     # Typical Value = 1.83.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation control system stabilizer gain (Kf).  Typical Value = 0.1.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (Tf).  Typical Value = 0.675.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Potential circuit gain coefficient (Kp).  Typical Value = 4.37.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Potential circuit gain coefficient (Ki).  Typical Value = 4.83.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Available exciter voltage limiter (Vbmax).  Typical Value = 11.63.
-    vbmax_: PU  = None
+    vbmax: PU  = None
  
     # (exclim).
     # true = lower limit of zero is applied to integrator output
     # false = lower limit of zero not applied to integrator output.
     # Typical Value = true.
-    exclim_: bool  = None
+    exclim: bool  = None
  
     # Exciter constant related to self-excited field (Ke).  Typical Value = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Available exciter voltage limiter (Vb1max).  Typical Value = 11.63.
-    vb1max_: PU  = None
+    vb1max: PU  = None
  
     # Vb limiter indicator.
     # true = exciter Vbmax limiter is active
     # false = Vb1max is active.
     # Typical Value = true.
-    vblim_: bool  = None
+    vblim: bool  = None
      

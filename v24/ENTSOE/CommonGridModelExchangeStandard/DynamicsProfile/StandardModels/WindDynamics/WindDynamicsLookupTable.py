@@ -16,30 +16,34 @@ class WindDynamicsLookupTable(IdentifiedObject):
     """The class models a look up table for the purpose of wind standard models.
     """
     # Input value (x) for the lookup table function.
-    input_: Simple_Float  = None
+    input: Simple_Float  = None
  
     # Type of the lookup table function.
-    lookupTableFunctionType_: WindLookupTableFunctionKind  = None
+    lookupTableFunctionType: WindLookupTableFunctionKind  = None
  
     # Output value (y) for the lookup table function.
-    output_: Simple_Float  = None
+    output: Simple_Float  = None
  
     # Sequence numbers of the pairs of the input (x) and the output (y) of the lookup
     # table function.
-    sequence_: int  = None
+    sequence: int  = None
  
     # The wind dynamics lookup table associated with this frequency and active power
     # wind plant model.
-    WindPlantFreqPcontrolIEC_: Optional[WindPlantFreqPcontrolIEC] = None
+    WindPlantFreqPcontrolIEC_ref: Optional[WindPlantFreqPcontrolIEC] = None
+    WindPlantFreqPcontrolIEC: str = None
  
     # The rotor resistance control model with which this wind dynamics lookup table
     # is associated.
-    WindContRotorRIEC_: Optional[WindContRotorRIEC] = None
+    WindContRotorRIEC_ref: Optional[WindContRotorRIEC] = None
+    WindContRotorRIEC: str = None
  
     # The wind dynamics lookup table associated with this P control type 3 model.
-    WindContPType3IEC_: Optional[WindContPType3IEC] = None
+    WindContPType3IEC_ref: Optional[WindContPType3IEC] = None
+    WindContPType3IEC: str = None
  
     # The wind dynamics lookup table associated with this current control limitation
     # model.
-    WindContCurrLimIEC_: Optional[WindContCurrLimIEC] = None
+    WindContCurrLimIEC_ref: Optional[WindContCurrLimIEC] = None
+    WindContCurrLimIEC: str = None
      

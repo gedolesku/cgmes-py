@@ -12,5 +12,5 @@ class DynamicsFunctionBlock(IdentifiedObject):
     # Function block used indicator.
     # true = use of function block is enabled
     # false = use of function block is disabled.
-    enabled_: bool  = None
+    enabled: bool  = None
      

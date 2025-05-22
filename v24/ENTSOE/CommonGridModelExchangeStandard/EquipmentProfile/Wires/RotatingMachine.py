@@ -14,17 +14,18 @@ class RotatingMachine(RegulatingCondEq):
     """
     # Power factor (nameplate data). It is primarily used for short circuit data
     # exchange according to IEC 60909.
-    ratedPowerFactor_: Simple_Float  = None
+    ratedPowerFactor: Simple_Float  = None
  
     # Nameplate apparent power rating for the unit.
     # The attribute shall have a positive value.
-    ratedS_: ApparentPower  = None
+    ratedS: ApparentPower  = None
  
     # Rated voltage (nameplate data, Ur in IEC 60909-0). It is primarily used for
     # short circuit data exchange according to IEC 60909.
-    ratedU_: Voltage  = None
+    ratedU: Voltage  = None
  
     # A synchronous machine may operate as a generator and as such becomes a member
     # of a generating unit.
-    GeneratingUnit_: Optional[GeneratingUnit] = None
+    GeneratingUnit_ref: Optional[GeneratingUnit] = None
+    GeneratingUnit: str = None
      

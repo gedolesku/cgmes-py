@@ -18,55 +18,55 @@ class GovCT2(TurbineGovernorDynamics):
     dependent fuel flow limit of a specific gas turbine manufacturer.
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Permanent droop (R).  Typical Value = 0.05.
-    r_: PU  = None
+    r: PU  = None
  
     # Feedback signal for droop (Rselect).  Typical Value = electricalPower.
-    rselect_: DroopSignalFeedbackKind  = None
+    rselect: DroopSignalFeedbackKind  = None
  
     # Electrical power transducer time constant (Tpelec).  Typical Value = 2.5.
-    tpelec_: Seconds  = None
+    tpelec: Seconds  = None
  
     # Maximum value for speed error signal (Maxerr).  Typical Value = 1.
-    maxerr_: PU  = None
+    maxerr: PU  = None
  
     # Minimum value for speed error signal (Minerr).  Typical Value = -1.
-    minerr_: PU  = None
+    minerr: PU  = None
  
     # Governor proportional gain (Kpgov).  Typical Value = 4.
-    kpgov_: PU  = None
+    kpgov: PU  = None
  
     # Governor integral gain (Kigov).  Typical Value = 0.45.
-    kigov_: PU  = None
+    kigov: PU  = None
  
     # Governor derivative gain (Kdgov).  Typical Value = 0.
-    kdgov_: PU  = None
+    kdgov: PU  = None
  
     # Governor derivative controller time constant (Tdgov).  Typical Value = 1.
-    tdgov_: Seconds  = None
+    tdgov: Seconds  = None
  
     # Maximum valve position limit (Vmax).  Typical Value = 1.
-    vmax_: PU  = None
+    vmax: PU  = None
  
     # Minimum valve position limit (Vmin).  Typical Value = 0.175.
-    vmin_: PU  = None
+    vmin: PU  = None
  
     # Actuator time constant (Tact).  Typical Value = 0.4.
-    tact_: Seconds  = None
+    tact: Seconds  = None
  
     # Turbine gain (Kturb).  Typical Value = 1.9168.
-    kturb_: PU  = None
+    kturb: PU  = None
  
     # No load fuel flow (Wfnl).  Typical Value = 0.187.
-    wfnl_: PU  = None
+    wfnl: PU  = None
  
     # Turbine lag time constant (Tb).  Typical Value = 0.1.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Turbine lead time constant (Tc).  Typical Value = 0.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Switch for fuel source characteristic to recognize that fuel flow, for a given
     # fuel valve stroke, can be proportional to engine speed (Wfspd).
@@ -74,26 +74,26 @@ class GovCT2(TurbineGovernorDynamics):
     # engines with positive displacement fuel injectors)
     # false = fuel control system keeps fuel flow independent of engine speed.
     # Typical Value = false.
-    wfspd_: bool  = None
+    wfspd: bool  = None
  
     # Transport time delay for diesel engine used in representing diesel engines
     # where there is a small but measurable transport delay between a change in fuel
     # flow setting and the development of torque (Teng).  Teng should be zero in all
     # but special cases where this transport delay is of particular concern.  Typical
     # Value = 0.
-    teng_: Seconds  = None
+    teng: Seconds  = None
  
     # Load Limiter time constant (Tfload).  Typical Value = 3.
-    tfload_: Seconds  = None
+    tfload: Seconds  = None
  
     # Load limiter proportional gain for PI controller (Kpload).  Typical Value = 1.
-    kpload_: PU  = None
+    kpload: PU  = None
  
     # Load limiter integral gain for PI controller (Kiload).  Typical Value = 1.
-    kiload_: PU  = None
+    kiload: PU  = None
  
     # Load limiter reference value (Ldref).  Typical Value = 1.
-    ldref_: PU  = None
+    ldref: PU  = None
  
     # Speed sensitivity coefficient (Dm).  Dm can represent either the variation of
     # the engine power with the shaft speed or the variation of maximum power
@@ -104,105 +104,105 @@ class GovCT2(TurbineGovernorDynamics):
     # unaffected by the shaft speed, but the maximum permissible fuel flow is taken
     # to fall with falling shaft speed. This is characteristic of single-shaft
     # industrial turbines due to exhaust temperature limits.  Typical Value = 0.
-    dm_: PU  = None
+    dm: PU  = None
  
     # Maximum valve opening rate (Ropen).  Unit = PU/sec.  Typical Value = 99.
-    ropen_: Simple_Float  = None
+    ropen: Simple_Float  = None
  
     # Minimum valve closing rate (Rclose).  Unit = PU/sec.  Typical Value = -99.
-    rclose_: Simple_Float  = None
+    rclose: Simple_Float  = None
  
     # Power controller (reset) gain (Kimw).  The default value of 0.01 corresponds to
     # a reset time of 100 seconds.  A value of 0.001 corresponds to a relatively slow
     # acting load controller.  Typical Value = 0.
-    kimw_: PU  = None
+    kimw: PU  = None
  
     # Acceleration limiter setpoint (Aset).  Unit = PU/sec.  Typical Value = 10.
-    aset_: Simple_Float  = None
+    aset: Simple_Float  = None
  
     # Acceleration limiter Gain (Ka).  Typical Value = 10.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Acceleration limiter time constant (Ta).  Typical Value = 1.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Speed governor dead band in per unit speed (db).  In the majority of
     # applications, it is recommended that this value be set to zero.  Typical Value
     # = 0.
-    db_: PU  = None
+    db: PU  = None
  
     # Temperature detection lead time constant (Tsa).  Typical Value = 0.
-    tsa_: Seconds  = None
+    tsa: Seconds  = None
  
     # Temperature detection lag time constant (Tsb).  Typical Value = 50.
-    tsb_: Seconds  = None
+    tsb: Seconds  = None
  
     # Maximum rate of load limit increase (Rup).  Typical Value = 99.
-    rup_: PU  = None
+    rup: PU  = None
  
     # Maximum rate of load limit decrease (Rdown).  Typical Value = -99.
-    rdown_: PU  = None
+    rdown: PU  = None
  
     # Ramp rate for frequency-dependent power limit (Prate).  Typical Value = 0.017.
-    prate_: PU  = None
+    prate: PU  = None
  
     # Frequency threshold 1 (Flim1).  Unit = Hz.  Typical Value = 59.
-    flim1_: Frequency  = None
+    flim1: Frequency  = None
  
     # Power limit 1 (Plim1).  Typical Value = 0.8325.
-    plim1_: PU  = None
+    plim1: PU  = None
  
     # Frequency threshold 2 (Flim2).  Unit = Hz.  Typical Value = 0.
-    flim2_: Frequency  = None
+    flim2: Frequency  = None
  
     # Power limit 2 (Plim2).  Typical Value = 0.
-    plim2_: PU  = None
+    plim2: PU  = None
  
     # Frequency threshold 3 (Flim3).  Unit = Hz.  Typical Value = 0.
-    flim3_: Frequency  = None
+    flim3: Frequency  = None
  
     # Power limit 3 (Plim3).  Typical Value = 0.
-    plim3_: PU  = None
+    plim3: PU  = None
  
     # Frequency threshold 4 (Flim4).  Unit = Hz.  Typical Value = 0.
-    flim4_: Frequency  = None
+    flim4: Frequency  = None
  
     # Power limit 4 (Plim4).  Typical Value = 0.
-    plim4_: PU  = None
+    plim4: PU  = None
  
     # Frequency threshold 5 (Flim5).  Unit = Hz.  Typical Value = 0.
-    flim5_: Frequency  = None
+    flim5: Frequency  = None
  
     # Power limit 5 (Plim5).  Typical Value = 0.
-    plim5_: PU  = None
+    plim5: PU  = None
  
     # Frequency threshold 6 (Flim6).  Unit = Hz.  Typical Value = 0.
-    flim6_: Frequency  = None
+    flim6: Frequency  = None
  
     # Power limit 6 (Plim6).  Typical Value = 0.
-    plim6_: PU  = None
+    plim6: PU  = None
  
     # Frequency threshold 7 (Flim7).  Unit = Hz.  Typical Value = 0.
-    flim7_: Frequency  = None
+    flim7: Frequency  = None
  
     # Power limit 7 (Plim7).  Typical Value = 0.
-    plim7_: PU  = None
+    plim7: PU  = None
  
     # Frequency threshold 8 (Flim8).  Unit = Hz.  Typical Value = 0.
-    flim8_: Frequency  = None
+    flim8: Frequency  = None
  
     # Power limit 8 (Plim8).  Typical Value = 0.
-    plim8_: PU  = None
+    plim8: PU  = None
  
     # Frequency threshold 9 (Flim9).  Unit = Hz.  Typical Value = 0.
-    flim9_: Frequency  = None
+    flim9: Frequency  = None
  
     # Power Limit 9 (Plim9).  Typical Value = 0.
-    plim9_: PU  = None
+    plim9: PU  = None
  
     # Frequency threshold 10 (Flim10).  Unit = Hz.  Typical Value = 0.
-    flim10_: Frequency  = None
+    flim10: Frequency  = None
  
     # Power limit 10 (Plim10).  Typical Value = 0.
-    plim10_: PU  = None
+    plim10: PU  = None
      

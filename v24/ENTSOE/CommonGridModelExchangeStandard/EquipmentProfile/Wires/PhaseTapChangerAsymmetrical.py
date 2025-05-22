@@ -17,5 +17,5 @@ class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear):
     # for creating phase shift. The out-of-phase winding produces what is known as
     # the difference voltage.  Setting this angle to 90 degrees is not the same as a
     # symmemtrical transformer.
-    windingConnectionAngle_: AngleDegrees  = None
+    windingConnectionAngle: AngleDegrees  = None
      

@@ -19,53 +19,53 @@ class ExcIEEEST5B(ExcitationSystemDynamics):
     ExcIEEEST5B shall consider summation point with Vref.
     """
     # Regulator gain (K<sub>R</sub>).  Typical Value = 200.
-    kr_: PU  = None
+    kr: PU  = None
  
     # Firing circuit time constant (T1).  Typical Value = 0.004.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Rectifier regulation factor (K<sub>C</sub>).  Typical Value = 0.004.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 5.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -4.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Regulator lead time constant (T<sub>C1</sub>).  Typical Value = 0.8.
-    tc1_: Seconds  = None
+    tc1: Seconds  = None
  
     # Regulator lag time constant (T<sub>B1</sub>).  Typical Value = 6.
-    tb1_: Seconds  = None
+    tb1: Seconds  = None
  
     # Regulator lead time constant (T<sub>C2</sub>).  Typical Value = 0.08.
-    tc2_: Seconds  = None
+    tc2: Seconds  = None
  
     # Regulator lag time constant (T<sub>B2</sub>).  Typical Value = 0.01.
-    tb2_: Seconds  = None
+    tb2: Seconds  = None
  
     # OEL lead time constant (T<sub>OC1</sub>).  Typical Value = 0.1.
-    toc1_: Seconds  = None
+    toc1: Seconds  = None
  
     # OEL lag time constant (T<sub>OB1</sub>).  Typical Value = 2.
-    tob1_: Seconds  = None
+    tob1: Seconds  = None
  
     # OEL lead time constant (T<sub>OC2</sub>).  Typical Value = 0.08.
-    toc2_: Seconds  = None
+    toc2: Seconds  = None
  
     # OEL lag time constant (T<sub>OB2</sub>).  Typical Value = 0.08.
-    tob2_: Seconds  = None
+    tob2: Seconds  = None
  
     # UEL lead time constant (T<sub>UC1</sub>).  Typical Value = 2.
-    tuc1_: Seconds  = None
+    tuc1: Seconds  = None
  
     # UEL lag time constant (T<sub>UB1</sub>).  Typical Value = 10.
-    tub1_: Seconds  = None
+    tub1: Seconds  = None
  
     # UEL lead time constant (T<sub>UC2</sub>).  Typical Value = 0.1.
-    tuc2_: Seconds  = None
+    tuc2: Seconds  = None
  
     # UEL lag time constant (T<sub>UB2</sub>).  Typical Value = 0.05.
-    tub2_: Seconds  = None
+    tub2: Seconds  = None
      

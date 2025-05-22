@@ -20,5 +20,5 @@ class CoordinateSystem(IdentifiedObject):
     # uom:EPSG::4236.
     # A profile should limit this code to a set of allowed URNs agreed to by all
     # sending and receiving parties.
-    crsUrn_: str  = None
+    crsUrn: str  = None
      

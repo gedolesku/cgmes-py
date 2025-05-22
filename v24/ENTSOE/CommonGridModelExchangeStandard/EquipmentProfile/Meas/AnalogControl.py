@@ -12,12 +12,13 @@ class AnalogControl(Control):
     """
     # Normal value range maximum for any of the Control.value. Used for scaling, e.g.
     # in bar graphs.
-    maxValue_: Simple_Float  = None
+    maxValue: Simple_Float  = None
  
     # Normal value range minimum for any of the Control.value. Used for scaling, e.g.
     # in bar graphs.
-    minValue_: Simple_Float  = None
+    minValue: Simple_Float  = None
  
     # The Control variable associated with the MeasurementValue.
-    AnalogValue_: Optional[AnalogValue] = None
+    AnalogValue_ref: Optional[AnalogValue] = None
+    AnalogValue: str = None
      

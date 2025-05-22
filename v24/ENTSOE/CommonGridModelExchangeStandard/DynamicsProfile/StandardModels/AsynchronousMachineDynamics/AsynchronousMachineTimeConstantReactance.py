@@ -12,7 +12,7 @@ class AsynchronousMachineTimeConstantReactance(AsynchronousMachineDynamics):
       <ol>
       	<li>If <b>X''</b> = <b>X'</b>, a single cage (one equivalent rotor winding
     per axis) is modelled.</li>
-      	<li>The ï¿½pï¿½ in the attribute names is a substitution for a ï¿½primeï¿½ in the
+      	<li>The “p” in the attribute names is a substitution for a “prime” in the
     usual parameter notation, e.g. tpo refers to T'o.</li>
       </ol>
     
@@ -34,17 +34,17 @@ class AsynchronousMachineTimeConstantReactance(AsynchronousMachineDynamics):
       </ul>
     """
     # Synchronous reactance (Xs) (>= X').  Typical Value = 1.8.
-    xs_: PU  = None
+    xs: PU  = None
  
     # Transient reactance (unsaturated) (X') (>=X'').  Typical Value = 0.5.
-    xp_: PU  = None
+    xp: PU  = None
  
     # Subtransient reactance (unsaturated) (X'') (> Xl).  Typical Value = 0.2.
-    xpp_: PU  = None
+    xpp: PU  = None
  
     # Transient rotor time constant (T'o) (> T''o).  Typical Value = 5.
-    tpo_: Seconds  = None
+    tpo: Seconds  = None
  
     # Subtransient rotor time constant (T''o) (> 0).  Typical Value = 0.03.
-    tppo_: Seconds  = None
+    tppo: Seconds  = None
      

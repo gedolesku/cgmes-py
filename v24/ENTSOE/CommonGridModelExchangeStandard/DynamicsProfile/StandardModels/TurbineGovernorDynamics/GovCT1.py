@@ -34,55 +34,55 @@ class GovCT1(TurbineGovernorDynamics):
     section 3.1.2.3 page 3-4 (GGOV1).
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Permanent droop (R).  Typical Value = 0.04.
-    r_: PU  = None
+    r: PU  = None
  
     # Feedback signal for droop (Rselect).  Typical Value = electricalPower.
-    rselect_: DroopSignalFeedbackKind  = None
+    rselect: DroopSignalFeedbackKind  = None
  
     # Electrical power transducer time constant (Tpelec) (>0).  Typical Value = 1.
-    tpelec_: Seconds  = None
+    tpelec: Seconds  = None
  
     # Maximum value for speed error signal (maxerr).  Typical Value = 0.05.
-    maxerr_: PU  = None
+    maxerr: PU  = None
  
     # Minimum value for speed error signal (minerr).  Typical Value = -0.05.
-    minerr_: PU  = None
+    minerr: PU  = None
  
     # Governor proportional gain (Kpgov).  Typical Value = 10.
-    kpgov_: PU  = None
+    kpgov: PU  = None
  
     # Governor integral gain (Kigov).  Typical Value = 2.
-    kigov_: PU  = None
+    kigov: PU  = None
  
     # Governor derivative gain (Kdgov).  Typical Value = 0.
-    kdgov_: PU  = None
+    kdgov: PU  = None
  
     # Governor derivative controller time constant (Tdgov).  Typical Value = 1.
-    tdgov_: Seconds  = None
+    tdgov: Seconds  = None
  
     # Maximum valve position limit (Vmax).  Typical Value = 1.
-    vmax_: PU  = None
+    vmax: PU  = None
  
     # Minimum valve position limit (Vmin).  Typical Value = 0.15.
-    vmin_: PU  = None
+    vmin: PU  = None
  
     # Actuator time constant (Tact).  Typical Value = 0.5.
-    tact_: Seconds  = None
+    tact: Seconds  = None
  
     # Turbine gain (Kturb) (>0).  Typical Value = 1.5.
-    kturb_: PU  = None
+    kturb: PU  = None
  
     # No load fuel flow (Wfnl).  Typical Value = 0.2.
-    wfnl_: PU  = None
+    wfnl: PU  = None
  
     # Turbine lag time constant (Tb) (>0).  Typical Value = 0.5.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Turbine lead time constant (Tc).  Typical Value = 0.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Switch for fuel source characteristic to recognize that fuel flow, for a given
     # fuel valve stroke, can be proportional to engine speed (Wfspd).
@@ -90,26 +90,26 @@ class GovCT1(TurbineGovernorDynamics):
     # engines with positive displacement fuel injectors)
     # false = fuel control system keeps fuel flow independent of engine speed.
     # Typical Value = true.
-    wfspd_: bool  = None
+    wfspd: bool  = None
  
     # Transport time delay for diesel engine used in representing diesel engines
     # where there is a small but measurable transport delay between a change in fuel
     # flow setting and the development of torque (Teng).  Teng should be zero in all
     # but special cases where this transport delay is of particular concern.  Typical
     # Value = 0.
-    teng_: Seconds  = None
+    teng: Seconds  = None
  
     # Load Limiter time constant (Tfload) (>0).  Typical Value = 3.
-    tfload_: Seconds  = None
+    tfload: Seconds  = None
  
     # Load limiter proportional gain for PI controller (Kpload).  Typical Value = 2.
-    kpload_: PU  = None
+    kpload: PU  = None
  
     # Load limiter integral gain for PI controller (Kiload).  Typical Value = 0.67.
-    kiload_: PU  = None
+    kiload: PU  = None
  
     # Load limiter reference value (Ldref).  Typical Value = 1.
-    ldref_: PU  = None
+    ldref: PU  = None
  
     # Speed sensitivity coefficient (Dm).  Dm can represent either the variation of
     # the engine power with the shaft speed or the variation of maximum power
@@ -120,42 +120,42 @@ class GovCT1(TurbineGovernorDynamics):
     # unaffected by the shaft speed, but the maximum permissible fuel flow is taken
     # to fall with falling shaft speed. This is characteristic of single-shaft
     # industrial turbines due to exhaust temperature limits.  Typical Value = 0.
-    dm_: PU  = None
+    dm: PU  = None
  
     # Maximum valve opening rate (Ropen).  Unit = PU/sec.  Typical Value = 0.10.
-    ropen_: Simple_Float  = None
+    ropen: Simple_Float  = None
  
     # Minimum valve closing rate (Rclose).  Unit = PU/sec.  Typical Value = -0.1.
-    rclose_: Simple_Float  = None
+    rclose: Simple_Float  = None
  
     # Power controller (reset) gain (Kimw).  The default value of 0.01 corresponds to
     # a reset time of 100 seconds.  A value of 0.001 corresponds to a relatively slow
     # acting load controller.  Typical Value = 0.01.
-    kimw_: PU  = None
+    kimw: PU  = None
  
     # Acceleration limiter setpoint (Aset).  Unit = PU/sec.  Typical Value = 0.01.
-    aset_: Simple_Float  = None
+    aset: Simple_Float  = None
  
     # Acceleration limiter gain (Ka).  Typical Value = 10.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Acceleration limiter time constant (Ta) (>0).  Typical Value = 0.1.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Speed governor dead band in per unit speed (db).  In the majority of
     # applications, it is recommended that this value be set to zero.  Typical Value
     # = 0.
-    db_: PU  = None
+    db: PU  = None
  
     # Temperature detection lead time constant (Tsa).  Typical Value = 4.
-    tsa_: Seconds  = None
+    tsa: Seconds  = None
  
     # Temperature detection lag time constant (Tsb).  Typical Value = 5.
-    tsb_: Seconds  = None
+    tsb: Seconds  = None
  
     # Maximum rate of load limit increase (Rup).  Typical Value = 99.
-    rup_: PU  = None
+    rup: PU  = None
  
     # Maximum rate of load limit decrease (Rdown).  Typical Value = -99.
-    rdown_: PU  = None
+    rdown: PU  = None
      

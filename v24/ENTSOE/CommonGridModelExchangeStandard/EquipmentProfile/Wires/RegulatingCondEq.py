@@ -11,5 +11,6 @@ class RegulatingCondEq(ConductingEquipment):
     flow) at a specific point in the network.
     """
     # The regulating control scheme in which this equipment participates.
-    RegulatingControl_: Optional[RegulatingControl] = None
+    RegulatingControl_ref: Optional[RegulatingControl] = None
+    RegulatingControl: str = None
      

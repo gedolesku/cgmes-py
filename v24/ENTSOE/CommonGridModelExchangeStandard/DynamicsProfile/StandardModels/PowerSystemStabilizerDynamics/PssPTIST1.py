@@ -11,35 +11,35 @@ class PssPTIST1(PowerSystemStabilizerDynamics):
     """PTI Microprocessor-Based Stabilizer type 1.
     """
     # (M).  M=2*H.  Typical Value = 5.
-    m_: PU  = None
+    m: PU  = None
  
     # Time constant (Tf).  Typical Value = 0.2.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Time constant (Tp).  Typical Value = 0.2.
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Time constant (T1).  Typical Value = 0.3.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Time constant (T2).  Typical Value = 1.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Time constant (T3).  Typical Value = 0.2.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Time constant (T4).  Typical Value = 0.05.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Gain (K).  Typical Value = 9.
-    k_: PU  = None
+    k: PU  = None
  
     # Time step frequency calculation (Dtf).  Typical Value = 0.025.
-    dtf_: Seconds  = None
+    dtf: Seconds  = None
  
     # Time step related to activation of controls (Dtc).  Typical Value = 0.025.
-    dtc_: Seconds  = None
+    dtc: Seconds  = None
  
     # Time step active power calculation (Dtp).  Typical Value = 0.0125.
-    dtp_: Seconds  = None
+    dtp: Seconds  = None
      

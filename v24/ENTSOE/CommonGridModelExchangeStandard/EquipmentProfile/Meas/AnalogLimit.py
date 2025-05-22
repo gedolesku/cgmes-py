@@ -11,8 +11,9 @@ class AnalogLimit(Limit):
     """Limit values for Analog measurements.
     """
     # The value to supervise against.
-    value_: Simple_Float  = None
+    value: Simple_Float  = None
  
     # The limit values used for supervision of Measurements.
-    AnalogLimitSet_: Optional[AnalogLimitSet] = None
+    LimitSet_ref: Optional[AnalogLimitSet] = None
+    LimitSet: str = None
      

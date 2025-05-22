@@ -11,8 +11,9 @@ class SubGeographicalRegion(IdentifiedObject):
     """A subset of a geographical region of a power system network model.
     """
     # The substations in this sub-geographical region.
-    Substation_: List[Substation]  = field(default_factory=list)
+    Substations: List[Substation]  = field(default_factory=list)
  
     # The geographical region to which this sub-geographical region is within.
-    GeographicalRegion_: Optional[GeographicalRegion] = None
+    Region_ref: Optional[GeographicalRegion] = None
+    Region: str = None
      

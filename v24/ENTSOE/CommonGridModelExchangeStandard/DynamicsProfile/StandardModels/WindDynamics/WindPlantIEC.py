@@ -13,9 +13,11 @@ class WindPlantIEC(WindPlantDynamics):
       Reference: IEC 61400-27-1, AnnexE.
     """
     # Wind plant reactive control model associated with this wind plant.
-    WindPlantReactiveControlIEC_: Optional[WindPlantReactiveControlIEC] = None
+    WindPlantReactiveControlIEC_ref: Optional[WindPlantReactiveControlIEC] = None
+    WindPlantReactiveControlIEC: str = None
  
     # Wind plant frequency and active power control model associated with this wind
     # plant.
-    WindPlantFreqPcontrolIEC_: Optional[WindPlantFreqPcontrolIEC] = None
+    WindPlantFreqPcontrolIEC_ref: Optional[WindPlantFreqPcontrolIEC] = None
+    WindPlantFreqPcontrolIEC: str = None
      

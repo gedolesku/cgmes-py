@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class CapacitancePerLength:
     """Capacitance per unit of length.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.F
+    unit: UnitSymbol =  UnitSymbol.F
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.m
+    denominatorUnit: UnitSymbol =  UnitSymbol.m
  
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
      

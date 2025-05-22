@@ -13,37 +13,37 @@ class LoadComposite(LoadDynamics):
     equations.
     """
     # Active load-voltage dependence index (static) (Epvs).  Typical Value = 0.7.
-    epvs_: Simple_Float  = None
+    epvs: Simple_Float  = None
  
     # Active load-frequency dependence index (static) (Epfs).  Typical Value = 1.5.
-    epfs_: Simple_Float  = None
+    epfs: Simple_Float  = None
  
     # Reactive load-voltage dependence index (static) (Eqvs).  Typical Value = 2.
-    eqvs_: Simple_Float  = None
+    eqvs: Simple_Float  = None
  
     # Reactive load-frequency dependence index (static) (Eqfs).  Typical Value = 0.
-    eqfs_: Simple_Float  = None
+    eqfs: Simple_Float  = None
  
     # Active load-voltage dependence index (dynamic) (Epvd).  Typical Value = 0.7.
-    epvd_: Simple_Float  = None
+    epvd: Simple_Float  = None
  
     # Active load-frequency dependence index (dynamic) (Epfd).  Typical Value = 1.5.
-    epfd_: Simple_Float  = None
+    epfd: Simple_Float  = None
  
     # Reactive load-voltage dependence index (dynamic) (Eqvd).  Typical Value = 2.
-    eqvd_: Simple_Float  = None
+    eqvd: Simple_Float  = None
  
     # Reactive load-frequency dependence index (dynamic) (Eqfd).  Typical Value = 0.
-    eqfd_: Simple_Float  = None
+    eqfd: Simple_Float  = None
  
-    # Loading factor ï¿½ ratio of initial P to motor MVA base (Lfrac).  Typical Value =
+    # Loading factor – ratio of initial P to motor MVA base (Lfrac).  Typical Value =
     # 0.8.
-    lfrac_: Simple_Float  = None
+    lfrac: Simple_Float  = None
  
     # Inertia constant (H).  Typical Value = 2.5.
-    h_: Seconds  = None
+    h: Seconds  = None
  
     # Fraction of constant-power load to be represented by this motor model (Pfrac)
     # (>=0.0 and <=1.0).  Typical Value = 0.5.
-    pfrac_: Simple_Float  = None
+    pfrac: Simple_Float  = None
      

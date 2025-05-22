@@ -11,26 +11,26 @@ class CsConverter(ACDCConverter):
     """DC side of the current source converter (CSC).
     """
     # Maximum firing angle. CSC configuration data used in power flow.
-    maxAlpha_: AngleDegrees  = None
+    maxAlpha: AngleDegrees  = None
  
     # Maximum extinction angle. CSC configuration data used in power flow.
-    maxGamma_: AngleDegrees  = None
+    maxGamma: AngleDegrees  = None
  
     # The maximum direct current (Id) on the DC side at which the converter should
     # operate. Converter configuration data use in power flow.
-    maxIdc_: CurrentFlow  = None
+    maxIdc: CurrentFlow  = None
  
     # Minimum firing angle. CSC configuration data used in power flow.
-    minAlpha_: AngleDegrees  = None
+    minAlpha: AngleDegrees  = None
  
     # Minimum extinction angle. CSC configuration data used in power flow.
-    minGamma_: AngleDegrees  = None
+    minGamma: AngleDegrees  = None
  
     # The minimum direct current (Id) on the DC side at which the converter should
     # operate. CSC configuration data used in power flow.
-    minIdc_: CurrentFlow  = None
+    minIdc: CurrentFlow  = None
  
     # Rated converter DC current, also called IdN. Converter configuration data used
     # in power flow.
-    ratedIdc_: CurrentFlow  = None
+    ratedIdc: CurrentFlow  = None
      

@@ -16,15 +16,15 @@ class WindGenTurbineType3bIEC(WindGenTurbineType3IEC):
     """
     # Crowbar duration versus voltage variation look-up table (f<sub>duCW</sub>()).
     # It is case dependent parameter.
-    fducw_: Simple_Float  = None
+    fducw: Simple_Float  = None
  
     # Current generation Time constant (<i>T</i><sub>g</sub>). It is type dependent
     # parameter.
-    tg_: Seconds  = None
+    tg: Seconds  = None
  
     # Time constant for crowbar washout filter (<i>T</i><sub>wo</sub>). It is case
     # dependent parameter.
-    two_: Seconds  = None
+    two: Seconds  = None
  
     # Crowbar control mode (<i>M</i><sub>WTcwp</sub>).
     # <ul>
@@ -32,9 +32,9 @@ class WindGenTurbineType3bIEC(WindGenTurbineType3IEC):
     # 	<li>false = 0 in the model.</li>
     # </ul>
     # The parameter is case dependent parameter.
-    mwtcwp_: bool  = None
+    mwtcwp: bool  = None
  
     # Electromagnetic transient reactance (x<sub>S</sub>). It is type dependent
     # parameter.
-    xs_: PU  = None
+    xs: PU  = None
      

@@ -11,9 +11,9 @@ class Conductance:
     """Factor by which voltage must be multiplied to give corresponding power lost
     from a circuit. Real part of admittance.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.S
+    unit: UnitSymbol =  UnitSymbol.S
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

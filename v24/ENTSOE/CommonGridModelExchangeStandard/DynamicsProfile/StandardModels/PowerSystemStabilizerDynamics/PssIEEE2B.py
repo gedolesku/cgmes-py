@@ -18,83 +18,83 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
       Reference: IEEE 2B 421.5-2005 Section 8.2.
     """
     # Type of input signal #1.  Typical Value = rotorSpeed.
-    inputSignal1Type_: InputSignalKind  = None
+    inputSignal1Type: InputSignalKind  = None
  
     # Type of input signal #2.  Typical Value = generatorElectricalPower.
-    inputSignal2Type_: InputSignalKind  = None
+    inputSignal2Type: InputSignalKind  = None
  
     # Input signal #1 max limit (Vsi1max).  Typical Value = 2.
-    vsi1max_: PU  = None
+    vsi1max: PU  = None
  
     # Input signal #1 min limit (Vsi1min).  Typical Value = -2.
-    vsi1min_: PU  = None
+    vsi1min: PU  = None
  
     # First washout on signal #1 (Tw1).  Typical Value = 2.
-    tw1_: Seconds  = None
+    tw1: Seconds  = None
  
     # Second washout on signal #1 (Tw2).  Typical Value = 2.
-    tw2_: Seconds  = None
+    tw2: Seconds  = None
  
     # Input signal #2 max limit (Vsi2max).  Typical Value = 2.
-    vsi2max_: PU  = None
+    vsi2max: PU  = None
  
     # Input signal #2 min limit (Vsi2min).  Typical Value = -2.
-    vsi2min_: PU  = None
+    vsi2min: PU  = None
  
     # First washout on signal #2 (Tw3).  Typical Value = 2.
-    tw3_: Seconds  = None
+    tw3: Seconds  = None
  
     # Second washout on signal #2 (Tw4).  Typical Value = 0.
-    tw4_: Seconds  = None
+    tw4: Seconds  = None
  
     # Lead/lag time constant (T1).  Typical Value = 0.12.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Lead/lag time constant (T2).  Typical Value = 0.02.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Lead/lag time constant (T3).  Typical Value = 0.3.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Lead/lag time constant (T4).  Typical Value = 0.02.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Time constant on signal #1 (T6).  Typical Value = 0.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Time constant on signal #2 (T7).  Typical Value = 2.
-    t7_: Seconds  = None
+    t7: Seconds  = None
  
     # Lead of ramp tracking filter (T8).  Typical Value = 0.2.
-    t8_: Seconds  = None
+    t8: Seconds  = None
  
     # Lag of ramp tracking filter (T9).  Typical Value = 0.1.
-    t9_: Seconds  = None
+    t9: Seconds  = None
  
     # Lead/lag time constant (T10).  Typical Value = 0.
-    t10_: Seconds  = None
+    t10: Seconds  = None
  
     # Lead/lag time constant (T11).  Typical Value = 0.
-    t11_: Seconds  = None
+    t11: Seconds  = None
  
     # Stabilizer gain (Ks1).  Typical Value = 12.
-    ks1_: PU  = None
+    ks1: PU  = None
  
     # Gain on signal #2 (Ks2).  Typical Value = 0.2.
-    ks2_: PU  = None
+    ks2: PU  = None
  
     # Gain on signal #2 input before ramp-tracking filter (Ks3).  Typical Value = 1.
-    ks3_: PU  = None
+    ks3: PU  = None
  
     # Order of ramp tracking filter (N).  Typical Value = 1.
-    n_: int  = None
+    n: int  = None
  
     # Denominator order of ramp tracking filter (M).  Typical Value = 5.
-    m_: int  = None
+    m: int  = None
  
     # Stabilizer output max limit (Vstmax).  Typical Value = 0.1.
-    vstmax_: PU  = None
+    vstmax: PU  = None
  
     # Stabilizer output min limit (Vstmin).  Typical Value = -0.1.
-    vstmin_: PU  = None
+    vstmin: PU  = None
      

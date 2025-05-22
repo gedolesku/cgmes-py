@@ -12,5 +12,5 @@ class Conductor(ConductingEquipment):
     the power system.
     """
     # Segment length for calculating line section capabilities
-    length_: Length  = None
+    length: Length  = None
      

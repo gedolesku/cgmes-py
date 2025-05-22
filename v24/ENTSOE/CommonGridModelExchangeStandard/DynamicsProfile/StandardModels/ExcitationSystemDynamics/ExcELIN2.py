@@ -16,88 +16,88 @@ class ExcELIN2(ExcitationSystemDynamics):
     excitation system model: PssELIN2, PssIEEE2B, Pss2B.
     """
     # Voltage regulator input gain (K1).  Typical Value = 0.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Voltage regulator input limit (K1ec).  Typical Value = 2.
-    k1ec_: PU  = None
+    k1ec: PU  = None
  
     # Voltage controller derivative gain (Kd1).  Typical Value = 34.5.
-    kd1_: PU  = None
+    kd1: PU  = None
  
     # Voltage controller derivative washout time constant (Tb1).  Typical Value = 12.
     # 45.
-    tb1_: Seconds  = None
+    tb1: Seconds  = None
  
     # Controller follow up gain (PID1max).  Typical Value = 2.
-    pid1max_: PU  = None
+    pid1max: PU  = None
  
     # Controller follow up dead band (Ti1).  Typical Value = 0.
-    ti1_: PU  = None
+    ti1: PU  = None
  
     # Minimum open circuit excitation voltage (Iefmax2).  Typical Value = -5.
-    iefmax2_: PU  = None
+    iefmax2: PU  = None
  
     # Gain (K2).  Typical Value = 5.
-    k2_: PU  = None
+    k2: PU  = None
  
     # Gain (Ketb).  Typical Value = 0.06.
-    ketb_: PU  = None
+    ketb: PU  = None
  
     # Limiter (Upmax).  Typical Value = 3.
-    upmax_: PU  = None
+    upmax: PU  = None
  
     # Limiter (Upmin).  Typical Value = 0.
-    upmin_: PU  = None
+    upmin: PU  = None
  
     # Time constant (Te).  Typical Value = 0.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation transformer effective reactance (Xp).  Typical Value = 1.
-    xp_: PU  = None
+    xp: PU  = None
  
     # Time Constant (Te2).  Typical Value = 1.
-    te2_: Seconds  = None
+    te2: Seconds  = None
  
     # Gain (Ke2).  Typical Value = 0.1.
-    ke2_: PU  = None
+    ke2: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve1).  Typical Value = 3.
-    ve1_: PU  = None
+    ve1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage, Ve1,
     # back of commutating reactance (Se[Ve1]).  Typical Value = 0.
-    seve1_: PU  = None
+    seve1: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve2).  Typical Value = 0.
-    ve2_: PU  = None
+    ve2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage, Ve2,
     # back of commutating reactance (Se[Ve2]).  Typical Value = 1.
-    seve2_: PU  = None
+    seve2: PU  = None
  
     # Time constant (Tr4).  Typical Value = 1.
-    tr4_: Seconds  = None
+    tr4: Seconds  = None
  
     # Gain (K3).  Typical Value = 0.1.
-    k3_: PU  = None
+    k3: PU  = None
  
     # Time constant (Ti3).  Typical Value = 3.
-    ti3_: Seconds  = None
+    ti3: Seconds  = None
  
     # Gain (K4).  Typical Value = 0.
-    k4_: PU  = None
+    k4: PU  = None
  
     # Time constant (Ti4).  Typical Value = 0.
-    ti4_: Seconds  = None
+    ti4: Seconds  = None
  
     # Limiter (Iefmax).  Typical Value = 1.
-    iefmax_: PU  = None
+    iefmax: PU  = None
  
     # Limiter (Iefmin).  Typical Value = 1.
-    iefmin_: PU  = None
+    iefmin: PU  = None
  
     # Gain (Efdbas).  Typical Value = 0.1.
-    efdbas_: PU  = None
+    efdbas: PU  = None
      

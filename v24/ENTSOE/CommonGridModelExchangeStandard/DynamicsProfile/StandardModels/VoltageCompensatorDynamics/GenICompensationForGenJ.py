@@ -16,16 +16,18 @@ class GenICompensationForGenJ(IdentifiedObject):
     # <font color="#0f0f0f">Resistive component of compensation of generator
     # associated with this IEEE Type 2 voltage compensator for current flow out of
     # another generator (Rcij).</font>
-    rcij_: PU  = None
+    rcij: PU  = None
  
     # <font color="#0f0f0f">Reactive component of compensation of generator
     # associated with this IEEE Type 2 voltage compensator for current flow out of
     # another generator (Xcij).</font>
-    xcij_: PU  = None
+    xcij: PU  = None
  
     # The standard IEEE Type 2 voltage compensator of this compensation.
-    VCompIEEEType2_: Optional[VCompIEEEType2] = None
+    VcompIEEEType2_ref: Optional[VCompIEEEType2] = None
+    VcompIEEEType2: str = None
  
     # Standard synchronous machine out of which current flow is being compensated for.
-    SynchronousMachineDynamics_: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics_ref: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics: str = None
      

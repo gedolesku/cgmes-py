@@ -12,5 +12,5 @@ class SynchronousMachine(RotatingMachine):
     synchronous condenser or pump.
     """
     # Current mode of operation.
-    operatingMode_: SynchronousMachineOperatingMode  = None
+    operatingMode: SynchronousMachineOperatingMode  = None
      

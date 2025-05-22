@@ -28,49 +28,49 @@ class ExcIEEEST7B(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 7.7.
     """
     # High-value gate feedback gain (K<sub>H</sub>).  Typical Value 1.
-    kh_: PU  = None
+    kh: PU  = None
  
     # Voltage regulator integral gain (K<sub>IA</sub>).  Typical Value = 1.
-    kia_: PU  = None
+    kia: PU  = None
  
     # Low-value gate feedback gain (K<sub>L</sub>).  Typical Value 1.
-    kl_: PU  = None
+    kl: PU  = None
  
     # Voltage regulator proportional gain (K<sub>PA</sub>).  Typical Value = 40.
-    kpa_: PU  = None
+    kpa: PU  = None
  
     # OEL input selector (OELin). Typical Value = noOELinput.
-    oelin_: ExcST7BOELselectorKind  = None
+    oelin: ExcST7BOELselectorKind  = None
  
     # Regulator lag time constant (T<sub>B</sub>).  Typical Value 1.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Regulator lead time constant (T<sub>C</sub>).  Typical Value 1.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Excitation control system stabilizer time constant (T<sub>F</sub>).  Typical
     # Value 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Feedback time constant of inner loop field voltage regulator (T<sub>G</sub>).
     # Typical Value 1.
-    tg_: Seconds  = None
+    tg: Seconds  = None
  
     # Feedback time constant (T<sub>IA</sub>).  Typical Value = 3.
-    tia_: Seconds  = None
+    tia: Seconds  = None
  
     # UEL input selector (UELin). Typical Value = noUELinput.
-    uelin_: ExcST7BUELselectorKind  = None
+    uelin: ExcST7BUELselectorKind  = None
  
     # Maximum voltage reference signal (V<sub>MAX</sub>).  Typical Value = 1.1.
-    vmax_: PU  = None
+    vmax: PU  = None
  
     # Minimum voltage reference signal (V<sub>MIN</sub>).  Typical Value = 0.9.
-    vmin_: PU  = None
+    vmin: PU  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 5.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -4.5.
-    vrmin_: PU  = None
+    vrmin: PU  = None
      

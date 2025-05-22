@@ -11,8 +11,9 @@ class DiscreteValue(MeasurementValue):
     """DiscreteValue represents a discrete MeasurementValue.
     """
     # The value to supervise.
-    value_: int  = None
+    value: int  = None
  
     # The values connected to this measurement.
-    Discrete_: Optional[Discrete] = None
+    Discrete_ref: Optional[Discrete] = None
+    Discrete: str = None
      

@@ -11,14 +11,14 @@ class LinearShuntCompensator(ShuntCompensator):
     """A linear shunt compensator has banks or sections with equal admittance values.
     """
     # Zero sequence shunt (charging) susceptance per section
-    b0PerSection_: Susceptance  = None
+    b0PerSection: Susceptance  = None
  
     # Positive sequence shunt (charging) susceptance per section
-    bPerSection_: Susceptance  = None
+    bPerSection: Susceptance  = None
  
     # Zero sequence shunt (charging) conductance per section
-    g0PerSection_: Conductance  = None
+    g0PerSection: Conductance  = None
  
     # Positive sequence shunt (charging) conductance per section
-    gPerSection_: Conductance  = None
+    gPerSection: Conductance  = None
      

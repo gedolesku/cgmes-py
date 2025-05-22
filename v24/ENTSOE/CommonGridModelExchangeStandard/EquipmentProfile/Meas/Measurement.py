@@ -38,7 +38,7 @@ class Measurement(IdentifiedObject):
     # Specifies the type of measurement.  For example, this specifies if the
     # measurement represents an indoor temperature, outdoor temperature, bus voltage,
     # line flow, etc.
-    measurementType_: str  = None
+    measurementType: str  = None
  
     # Indicates to which phases the measurement applies and avoids the need to use
     # 'measurementType' to also encode phase information (which would explode the
@@ -47,17 +47,19 @@ class Measurement(IdentifiedObject):
     # phase. Their meaning will not change when the computed energizing phasing is
     # changed due to jumpers or other reasons.
     # If the attribute is missing three phases (ABC) shall be assumed.
-    phases_: PhaseCode  = None
+    phases: PhaseCode  = None
  
     # The unit of measure of the measured quantity.
-    unitSymbol_: UnitSymbol  = None
+    unitSymbol: UnitSymbol  = None
  
     # The unit multiplier of the measured quantity.
-    unitMultiplier_: UnitMultiplier  = None
+    unitMultiplier: UnitMultiplier  = None
  
     # One or more measurements may be associated with a terminal in the network.
-    ACDCTerminal_: Optional[ACDCTerminal] = None
+    Terminal_ref: Optional[ACDCTerminal] = None
+    Terminal: str = None
  
     # The measurements associated with this power system resource.
-    PowerSystemResource_: Optional[PowerSystemResource] = None
+    PowerSystemResource_ref: Optional[PowerSystemResource] = None
+    PowerSystemResource: str = None
      

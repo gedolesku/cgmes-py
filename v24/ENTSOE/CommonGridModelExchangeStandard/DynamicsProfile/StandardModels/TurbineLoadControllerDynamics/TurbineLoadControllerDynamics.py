@@ -12,5 +12,6 @@ class TurbineLoadControllerDynamics(DynamicsFunctionBlock):
     model.</font>
     """
     # Turbine-governor controlled by this turbine load controller.
-    TurbineGovernorDynamics_: Optional[TurbineGovernorDynamics] = None
+    TurbineGovernorDynamics_ref: Optional[TurbineGovernorDynamics] = None
+    TurbineGovernorDynamics: str = None
      

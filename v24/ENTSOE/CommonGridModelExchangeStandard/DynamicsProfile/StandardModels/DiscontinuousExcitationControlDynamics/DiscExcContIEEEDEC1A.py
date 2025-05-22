@@ -15,62 +15,62 @@ class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
       Reference: IEEE Standard 421.5-2005 Section 12.2.
     """
     # Voltage reference (<i>V</i><i><sub>TLMT</sub></i>).  Typical Value = 1.1.
-    vtlmt_: PU  = None
+    vtlmt: PU  = None
  
     # Limiter (<i>V</i><i><sub>OMAX</sub></i>).  Typical Value = 0.3.
-    vomax_: PU  = None
+    vomax: PU  = None
  
     # Limiter (<i>V</i><i><sub>OMIN</sub></i>).  Typical Value = 0.1.
-    vomin_: PU  = None
+    vomin: PU  = None
  
     # Terminal voltage limiter gain (<i>K</i><i><sub>ETL</sub></i>).  Typical Value =
     # 47.
-    ketl_: PU  = None
+    ketl: PU  = None
  
     # Terminal voltage level reference (<i>V</i><i><sub>TC</sub></i>).  Typical Value
     # = 0.95.
-    vtc_: PU  = None
+    vtc: PU  = None
  
     # Regulator voltage reference (<i>V</i><i><sub>AL</sub></i>).  Typical Value = 5.
     # 5.
-    val_: PU  = None
+    val: PU  = None
  
     # Speed change reference (<i>E</i><i><sub>SC</sub></i>).  Typical Value = 0.0015.
-    esc_: PU  = None
+    esc: PU  = None
  
     # Discontinuous controller gain (<i>K</i><i><sub>AN</sub></i>).  Typical Value =
     # 400.
-    kan_: PU  = None
+    kan: PU  = None
  
     # Discontinuous controller time constant (<i>T</i><i><sub>AN</sub></i>).  Typical
     # Value = 0.08.
-    tan_: Seconds  = None
+    tan: Seconds  = None
  
     # DEC washout time constant (<i>T</i><i><sub>W</sub></i><sub>5</sub>).  Typical
     # Value = 5.
-    tw5_: Seconds  = None
+    tw5: Seconds  = None
  
     # Limiter (<i>V</i><i><sub>SMAX</sub></i>).  Typical Value = 0.2.
-    vsmax_: PU  = None
+    vsmax: PU  = None
  
     # Limiter (<i>V</i><i><sub>SMIN</sub></i>).  Typical Value = -0.066.
-    vsmin_: PU  = None
+    vsmin: PU  = None
  
     # Time constant (<i>T</i><i><sub>D</sub></i>).  Typical Value = 0.03.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Time constant (<i>T</i><i><sub>L</sub></i><sub>1</sub>).  Typical Value = 0.025.
-    tl1_: Seconds  = None
+    tl1: Seconds  = None
  
     # Time constant (<i>T</i><i><sub>L</sub></i><sub>2</sub>).  Typical Value = 1.25.
-    tl2_: Seconds  = None
+    tl2: Seconds  = None
  
     # Voltage limits (<i>V</i><i><sub>TM</sub></i>).  Typical Value = 1.13.
-    vtm_: PU  = None
+    vtm: PU  = None
  
     # Voltage limits (<i>V</i><i><sub>TN</sub></i>).  Typical Value = 1.12.
-    vtn_: PU  = None
+    vtn: PU  = None
  
     # Limiter for Van (<i>V</i><i><sub>ANMAX</sub></i>).
-    vanmax_: PU  = None
+    vanmax: PU  = None
      

@@ -11,9 +11,9 @@ class ActivePower:
     """Product of RMS value of the voltage and the RMS value of the in-phase component
     of the current.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.W
+    unit: UnitSymbol =  UnitSymbol.W
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.M
+    multiplier: UnitMultiplier =  UnitMultiplier.M
      

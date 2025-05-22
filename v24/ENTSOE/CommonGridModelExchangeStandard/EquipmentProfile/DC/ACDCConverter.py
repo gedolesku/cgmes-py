@@ -18,39 +18,40 @@ class ACDCConverter(ConductingEquipment):
     reactors and auxiliaries, if any, used for conversion.
     """
     # Base apparent power of the converter pole.
-    baseS_: ApparentPower  = None
+    baseS: ApparentPower  = None
  
     # Active power loss in pole at no power transfer. Converter configuration data
     # used in power flow.
-    idleLoss_: ActivePower  = None
+    idleLoss: ActivePower  = None
  
     # The maximum voltage on the DC side at which the converter should operate.
     # Converter configuration data used in power flow.
-    maxUdc_: Voltage  = None
+    maxUdc: Voltage  = None
  
     # Min allowed converter DC voltage. Converter configuration data used in power
     # flow.
-    minUdc_: Voltage  = None
+    minUdc: Voltage  = None
  
     # Number of valves in the converter. Used in loss calculations.
-    numberOfValves_: int  = None
+    numberOfValves: int  = None
  
     # Rated converter DC voltage, also called UdN. Converter configuration data used
     # in power flow.
-    ratedUdc_: Voltage  = None
+    ratedUdc: Voltage  = None
  
     # Converter configuration data used in power flow. Refer to poleLossP.
-    resistiveLoss_: Resistance  = None
+    resistiveLoss: Resistance  = None
  
     # Switching losses, relative to the base apparent power 'baseS'.
     # Refer to poleLossP.
-    switchingLoss_: ActivePowerPerCurrentFlow  = None
+    switchingLoss: ActivePowerPerCurrentFlow  = None
  
     # Valve threshold voltage. Forward voltage drop when the valve is conducting.
     # Used in loss calculations, i.e. the switchLoss depend on numberOfValves *
     # valveU0.
-    valveU0_: Voltage  = None
+    valveU0: Voltage  = None
  
     # All converters' DC sides linked to this point of common coupling terminal.
-    Terminal_: Optional[Terminal] = None
+    PccTerminal_ref: Optional[Terminal] = None
+    PccTerminal: str = None
      

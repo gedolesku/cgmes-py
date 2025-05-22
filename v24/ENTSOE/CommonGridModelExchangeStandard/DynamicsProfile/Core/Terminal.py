@@ -13,5 +13,6 @@ class Terminal(ACDCTerminal):
     # The conducting equipment of the terminal.  Conducting equipment have  terminals
     # that may be connected to other conducting equipment terminals via connectivity
     # nodes or topological nodes.
-    ConductingEquipment_: Optional[ConductingEquipment] = None
+    ConductingEquipment_ref: Optional[ConductingEquipment] = None
+    ConductingEquipment: str = None
      

@@ -16,53 +16,54 @@ class EquivalentInjection(EquivalentEquipment):
     regulation is allowed only at the point of connection.
     """
     # Maximum active power of the injection.
-    maxP_: ActivePower  = None
+    maxP: ActivePower  = None
  
     # Used for modeling of infeed for load flow exchange. Not used for short circuit
     # modeling.  If maxQ and minQ are not used ReactiveCapabilityCurve can be used.   
-    maxQ_: ReactivePower  = None
+    maxQ: ReactivePower  = None
  
     # Minimum active power of the injection.
-    minP_: ActivePower  = None
+    minP: ActivePower  = None
  
     # Used for modeling of infeed for load flow exchange. Not used for short circuit
     # modeling.  If maxQ and minQ are not used ReactiveCapabilityCurve can be used.
-    minQ_: ReactivePower  = None
+    minQ: ReactivePower  = None
  
     # Positive sequence resistance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Zero sequence resistance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Negative sequence resistance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    r2_: Resistance  = None
+    r2: Resistance  = None
  
     # Specifies whether or not the EquivalentInjection has the capability to regulate
     # the local voltage.
-    regulationCapability_: bool  = None
+    regulationCapability: bool  = None
  
     # Positive sequence reactance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Zero sequence reactance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    x0_: Reactance  = None
+    x0: Reactance  = None
  
     # Negative sequence reactance. Used to represent Extended-Ward (IEC 60909).
     # Usage : Extended-Ward is a result of network reduction prior to the data
     # exchange. 
-    x2_: Reactance  = None
+    x2: Reactance  = None
  
     # The equivalent injection using this reactive capability curve.
-    ReactiveCapabilityCurve_: Optional[ReactiveCapabilityCurve] = None
+    ReactiveCapabilityCurve_ref: Optional[ReactiveCapabilityCurve] = None
+    ReactiveCapabilityCurve: str = None
      

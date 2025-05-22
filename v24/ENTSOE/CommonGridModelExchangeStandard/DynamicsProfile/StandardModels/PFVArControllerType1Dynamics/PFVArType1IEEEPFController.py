@@ -18,30 +18,30 @@ class PFVArType1IEEEPFController(PFVArControllerType1Dynamics):
     # Overexcitation Flag (<i>OVEX</i>)
     # true = overexcited
     # false = underexcited.
-    ovex_: bool  = None
+    ovex: bool  = None
  
     # PF controller time delay (<i>T</i><i><sub>PFC</sub></i>).  Typical Value = 5.
-    tpfc_: Seconds  = None
+    tpfc: Seconds  = None
  
     # Minimum machine terminal current needed to enable pf/var controller
     # (<i>V</i><i><sub>ITMIN</sub></i>).
-    vitmin_: PU  = None
+    vitmin: PU  = None
  
     # Synchronous machine power factor (<i>V</i><i><sub>PF</sub></i>).
-    vpf_: PU  = None
+    vpf: PU  = None
  
     # PF controller dead band (<i>V</i><i><sub>PFC_BW</sub></i>).  Typical Value = 0.
     # 05.
-    vpfcbw_: Simple_Float  = None
+    vpfcbw: Simple_Float  = None
  
     # PF controller reference (<i>V</i><i><sub>PFREF</sub></i>).
-    vpfref_: PU  = None
+    vpfref: PU  = None
  
     # Maximum machine terminal voltage needed for pf/var controller to be enabled
     # (<i>V</i><i><sub>VTMAX</sub></i>).
-    vvtmax_: PU  = None
+    vvtmax: PU  = None
  
     # Minimum machine terminal voltage needed to enable pf/var controller
     # (<i>V</i><i><sub>VTMIN</sub></i>).
-    vvtmin_: PU  = None
+    vvtmin: PU  = None
      

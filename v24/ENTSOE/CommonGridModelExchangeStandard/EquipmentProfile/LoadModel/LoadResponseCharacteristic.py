@@ -39,35 +39,35 @@ class LoadResponseCharacteristic(IdentifiedObject):
     # 1.
     # The sum of qConstantImpedance, qConstantCurrent and qConstantPower shall equal
     # 1.
-    exponentModel_: bool  = None
+    exponentModel: bool  = None
  
     # Portion of active power load modeled as constant current.
-    pConstantCurrent_: Simple_Float  = None
+    pConstantCurrent: Simple_Float  = None
  
     # Portion of active power load modeled as constant impedance.
-    pConstantImpedance_: Simple_Float  = None
+    pConstantImpedance: Simple_Float  = None
  
     # Portion of active power load modeled as constant power.
-    pConstantPower_: Simple_Float  = None
+    pConstantPower: Simple_Float  = None
  
     # Exponent of per unit frequency effecting active power.
-    pFrequencyExponent_: Simple_Float  = None
+    pFrequencyExponent: Simple_Float  = None
  
     # Exponent of per unit voltage effecting real power.
-    pVoltageExponent_: Simple_Float  = None
+    pVoltageExponent: Simple_Float  = None
  
     # Portion of reactive power load modeled as constant current.
-    qConstantCurrent_: Simple_Float  = None
+    qConstantCurrent: Simple_Float  = None
  
     # Portion of reactive power load modeled as constant impedance.
-    qConstantImpedance_: Simple_Float  = None
+    qConstantImpedance: Simple_Float  = None
  
     # Portion of reactive power load modeled as constant power.
-    qConstantPower_: Simple_Float  = None
+    qConstantPower: Simple_Float  = None
  
     # Exponent of per unit frequency effecting reactive power.
-    qFrequencyExponent_: Simple_Float  = None
+    qFrequencyExponent: Simple_Float  = None
  
     # Exponent of per unit voltage effecting reactive power.
-    qVoltageExponent_: Simple_Float  = None
+    qVoltageExponent: Simple_Float  = None
      

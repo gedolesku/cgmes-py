@@ -16,8 +16,8 @@ class ControlArea(PowerSystemResource):
     """
     # The specified positive net interchange into the control area, i.e. positive
     # sign means flow in to the area.
-    netInterchange_: ActivePower  = None
+    netInterchange: ActivePower  = None
  
     # Active power net interchange tolerance
-    pTolerance_: ActivePower  = None
+    pTolerance: ActivePower  = None
      

@@ -13,5 +13,6 @@ class WindAeroConstIEC(IdentifiedObject):
       Reference: IEC Standard 61400-27-1 Section 6.6.1.1.
     """
     # Wind turbine type 1 model with which this wind aerodynamic model is associated.
-    WindGenTurbineType1IEC_: Optional[WindGenTurbineType1IEC] = None
+    WindGenTurbineType1IEC_ref: Optional[WindGenTurbineType1IEC] = None
+    WindGenTurbineType1IEC: str = None
      

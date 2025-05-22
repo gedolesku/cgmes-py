@@ -10,5 +10,6 @@ class Equipment(PowerSystemResource):
     """The parts of a power system that are physical devices, electronic or mechanical.
     """
     # Container of this equipment.
-    EquipmentContainer_: Optional[EquipmentContainer] = None
+    EquipmentContainer_ref: Optional[EquipmentContainer] = None
+    EquipmentContainer: str = None
      

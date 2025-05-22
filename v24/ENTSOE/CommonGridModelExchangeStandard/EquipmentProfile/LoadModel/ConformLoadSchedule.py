@@ -13,5 +13,6 @@ class ConformLoadSchedule(SeasonDayTypeSchedule):
     and season.
     """
     # The ConformLoadGroup where the ConformLoadSchedule belongs.
-    ConformLoadGroup_: Optional[ConformLoadGroup] = None
+    ConformLoadGroup_ref: Optional[ConformLoadGroup] = None
+    ConformLoadGroup: str = None
      

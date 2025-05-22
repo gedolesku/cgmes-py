@@ -14,12 +14,14 @@ class Location(IdentifiedObject):
     postition points (coordinates) in a given coordinate system.
     """
     # All power system resources at this location.
-    PowerSystemResource_: Optional[PowerSystemResource] = None
+    PowerSystemResources_ref: Optional[PowerSystemResource] = None
+    PowerSystemResources: str = None
  
     # Sequence of position points describing this location, expressed in coordinate
     # system 'Location.CoordinateSystem'.
-    PositionPoint_: List[PositionPoint]  = field(default_factory=list)
+    PositionPoints: List[PositionPoint]  = field(default_factory=list)
  
     # Coordinate system used to describe position points of this location.
-    CoordinateSystem_: Optional[CoordinateSystem] = None
+    CoordinateSystem_ref: Optional[CoordinateSystem] = None
+    CoordinateSystem: str = None
      

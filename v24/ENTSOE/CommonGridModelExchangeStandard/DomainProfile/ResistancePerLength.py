@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class ResistancePerLength:
     """Resistance (real part of impedance) per unit of length.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.ohm
+    unit: UnitSymbol =  UnitSymbol.ohm
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.m
+    denominatorUnit: UnitSymbol =  UnitSymbol.m
  
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
      

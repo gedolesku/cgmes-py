@@ -11,8 +11,9 @@ class AccumulatorValue(MeasurementValue):
     """AccumulatorValue represents an accumulated (counted) MeasurementValue.
     """
     # The value to supervise. The value is positive.
-    value_: int  = None
+    value: int  = None
  
     # The values connected to this measurement.
-    Accumulator_: Optional[Accumulator] = None
+    Accumulator_ref: Optional[Accumulator] = None
+    Accumulator: str = None
      

@@ -12,5 +12,5 @@ class DiagramStyle(IdentifiedObject):
     branch etc.
     """
     # A DiagramStyle can be used by many Diagrams.
-    Diagram_: List[Diagram]  = field(default_factory=list)
+    Diagram: List[Diagram]  = field(default_factory=list)
      

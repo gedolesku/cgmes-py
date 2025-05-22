@@ -37,69 +37,69 @@ class GovSteamIEEE1(TurbineGovernorDynamics):
       	<li>The division of power between the two shafts is in proportion to the
     values of MVA bases of the two generators.  The initial condition load flow
     should, therefore, have the two generators loaded to the same fraction of each
-    oneï¿½s MVA base.</li>
+    one’s MVA base.</li>
       </ol>
     """
     # Base for power values (MWbase) (> 0)<i>.</i>
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Governor gain (reciprocal of droop) (K) (> 0).  Typical Value = 25.
-    k_: PU  = None
+    k: PU  = None
  
     # Governor lag time constant (T1).  Typical Value = 0.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Governor lead time constant (T2).  Typical Value = 0.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Valve positioner time constant (T3) (> 0).  Typical Value = 0.1.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Maximum valve opening velocity (Uo) (> 0).  Unit = PU/sec.  Typical Value = 1.
-    uo_: Simple_Float  = None
+    uo: Simple_Float  = None
  
     # Maximum valve closing velocity (Uc) (< 0).  Unit = PU/sec.  Typical Value = -10.
-    uc_: Simple_Float  = None
+    uc: Simple_Float  = None
  
     # Maximum valve opening (Pmax) (> Pmin).  Typical Value = 1.
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Minimum valve opening (Pmin) (>= 0).  Typical Value = 0.
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Inlet piping/steam bowl time constant (T4).  Typical Value = 0.3.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Fraction of HP shaft power after first boiler pass (K1).  Typical Value = 0.2.
-    k1_: Simple_Float  = None
+    k1: Simple_Float  = None
  
     # Fraction of LP shaft power after first boiler pass (K2).  Typical Value = 0.
-    k2_: Simple_Float  = None
+    k2: Simple_Float  = None
  
     # Time constant of second boiler pass (T5).  Typical Value = 5.
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Fraction of HP shaft power after second boiler pass (K3).  Typical Value = 0.3.
-    k3_: Simple_Float  = None
+    k3: Simple_Float  = None
  
     # Fraction of LP shaft power after second boiler pass (K4).  Typical Value = 0.
-    k4_: Simple_Float  = None
+    k4: Simple_Float  = None
  
     # Time constant of third boiler pass (T6).  Typical Value = 0.5.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Fraction of HP shaft power after third boiler pass (K5).  Typical Value = 0.5.
-    k5_: Simple_Float  = None
+    k5: Simple_Float  = None
  
     # Fraction of LP shaft power after third boiler pass (K6).  Typical Value = 0.
-    k6_: Simple_Float  = None
+    k6: Simple_Float  = None
  
     # Time constant of fourth boiler pass (T7).  Typical Value = 0.
-    t7_: Seconds  = None
+    t7: Seconds  = None
  
     # Fraction of HP shaft power after fourth boiler pass (K7).  Typical Value = 0.
-    k7_: Simple_Float  = None
+    k7: Simple_Float  = None
  
     # Fraction of LP shaft power after fourth boiler pass (K8).  Typical Value = 0.
-    k8_: Simple_Float  = None
+    k8: Simple_Float  = None
      

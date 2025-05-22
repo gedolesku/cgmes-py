@@ -10,5 +10,5 @@ class ApparentPowerLimit(OperationalLimit):
     """Apparent power limit.
     """
     # The apparent power limit.
-    value_: ApparentPower  = None
+    value: ApparentPower  = None
      

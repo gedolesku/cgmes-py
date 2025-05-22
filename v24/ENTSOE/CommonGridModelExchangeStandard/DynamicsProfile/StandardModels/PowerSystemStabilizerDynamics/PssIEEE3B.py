@@ -17,59 +17,59 @@ class PssIEEE3B(PowerSystemStabilizerDynamics):
       Reference: IEEE 3B 421.5-2005 Section 8.3.
     """
     # Type of input signal #1.  Typical Value = generatorElectricalPower.
-    inputSignal1Type_: InputSignalKind  = None
+    inputSignal1Type: InputSignalKind  = None
  
     # Type of input signal #2.  Typical Value = rotorSpeed.
-    inputSignal2Type_: InputSignalKind  = None
+    inputSignal2Type: InputSignalKind  = None
  
     # Transducer time constant (T1).  Typical Value = 0.012.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Transducer time constant (T2).  Typical Value = 0.012.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Washout time constant (Tw1).  Typical Value = 0.3.
-    tw1_: Seconds  = None
+    tw1: Seconds  = None
  
     # Washout time constant (Tw2).  Typical Value = 0.3.
-    tw2_: Seconds  = None
+    tw2: Seconds  = None
  
     # Washout time constant (Tw3).  Typical Value = 0.6.
-    tw3_: Seconds  = None
+    tw3: Seconds  = None
  
     # Gain on signal # 1 (Ks1).  Typical Value = -0.602.
-    ks1_: PU  = None
+    ks1: PU  = None
  
     # Gain on signal # 2 (Ks2).  Typical Value = 30.12.
-    ks2_: PU  = None
+    ks2: PU  = None
  
     # Notch filter parameter (A1).  Typical Value = 0.359.
-    a1_: PU  = None
+    a1: PU  = None
  
     # Notch filter parameter (A2).  Typical Value = 0.586.
-    a2_: PU  = None
+    a2: PU  = None
  
     # Notch filter parameter (A3).  Typical Value = 0.429.
-    a3_: PU  = None
+    a3: PU  = None
  
     # Notch filter parameter (A4).  Typical Value = 0.564.
-    a4_: PU  = None
+    a4: PU  = None
  
     # Notch filter parameter (A5).  Typical Value = 0.001.
-    a5_: PU  = None
+    a5: PU  = None
  
     # Notch filter parameter (A6).  Typical Value = 0.
-    a6_: PU  = None
+    a6: PU  = None
  
     # Notch filter parameter (A7).  Typical Value = 0.031.
-    a7_: PU  = None
+    a7: PU  = None
  
     # Notch filter parameter (A8).  Typical Value = 0.
-    a8_: PU  = None
+    a8: PU  = None
  
     # Stabilizer output max limit (Vstmax).  Typical Value = 0.1.
-    vstmax_: PU  = None
+    vstmax: PU  = None
  
     # Stabilizer output min limit (Vstmin).  Typical Value = -0.1.
-    vstmin_: PU  = None
+    vstmin: PU  = None
      

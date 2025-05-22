@@ -14,8 +14,9 @@ class PowerSystemStabilizerDynamics(DynamicsFunctionBlock):
     """
     # Excitation system model with which this power system stabilizer model is
     # associated.
-    ExcitationSystemDynamics_: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics_ref: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics: str = None
  
     # Remote input signal used by this power system stabilizer model.
-    RemoteInputSignal_: List[RemoteInputSignal]  = field(default_factory=list)
+    RemoteInputSignal: List[RemoteInputSignal]  = field(default_factory=list)
      

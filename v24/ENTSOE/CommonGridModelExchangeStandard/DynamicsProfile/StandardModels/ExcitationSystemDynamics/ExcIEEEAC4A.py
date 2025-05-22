@@ -21,30 +21,30 @@ class ExcIEEEAC4A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 6.4.
     """
     # Maximum voltage regulator input limit (V<sub>IMAX</sub>).  Typical Value = 10.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Minimum voltage regulator input limit (V<sub>IMIN</sub>).  Typical Value = -10.
-    vimin_: PU  = None
+    vimin: PU  = None
  
     # Voltage regulator time constant (T<sub>C</sub>).  Typical Value = 1.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Voltage regulator time constant (T<sub>B</sub>).  Typical Value = 10.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 200.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.015.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 5.64.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -4.53.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 0.
-    kc_: PU  = None
+    kc: PU  = None
      

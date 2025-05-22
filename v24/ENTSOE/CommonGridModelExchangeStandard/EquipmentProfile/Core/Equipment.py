@@ -16,8 +16,9 @@ class Equipment(PowerSystemResource):
     # aggregate power transformer or aggregate synchronous machine.  This is not to
     # be used to indicate equipment that is part of a group of interdependent
     # equipment produced by a network production program.  
-    aggregate_: bool  = None
+    aggregate: bool  = None
  
     # Container of this equipment.
-    EquipmentContainer_: Optional[EquipmentContainer] = None
+    EquipmentContainer_ref: Optional[EquipmentContainer] = None
+    EquipmentContainer: str = None
      

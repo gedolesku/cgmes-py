@@ -16,7 +16,8 @@ class ACDCConverterDCTerminal(DCBaseTerminal):
     conducting equipment can be connected to the AC side.
     """
     # Represents the normal network polarity condition.
-    polarity_: DCPolarityKind  = None
+    polarity: DCPolarityKind  = None
  
-    ACDCConverter_: Optional[ACDCConverter] = None
+    DCConductingEquipment_ref: Optional[ACDCConverter] = None
+    DCConductingEquipment: str = None
      

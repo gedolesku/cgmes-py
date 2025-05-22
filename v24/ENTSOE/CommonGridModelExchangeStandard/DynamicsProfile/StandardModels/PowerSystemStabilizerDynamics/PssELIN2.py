@@ -12,35 +12,35 @@ class PssELIN2(PowerSystemStabilizerDynamics):
     Pss2B can also be used).
     """
     # Time constant (Ts1).  Typical Value = 0.
-    ts1_: Seconds  = None
+    ts1: Seconds  = None
  
     # Time constant (Ts2).  Typical Value = 1.
-    ts2_: Seconds  = None
+    ts2: Seconds  = None
  
     # Time constant (Ts3).  Typical Value = 1.
-    ts3_: Seconds  = None
+    ts3: Seconds  = None
  
     # Time constant (Ts4).  Typical Value = 0.1.
-    ts4_: Seconds  = None
+    ts4: Seconds  = None
  
     # Time constant (Ts5).  Typical Value = 0.
-    ts5_: Seconds  = None
+    ts5: Seconds  = None
  
     # Time constant (Ts6).  Typical Value = 1.
-    ts6_: Seconds  = None
+    ts6: Seconds  = None
  
     # Gain (Ks1).  Typical Value = 1.
-    ks1_: PU  = None
+    ks1: PU  = None
  
     # Gain (Ks2).  Typical Value = 0.1.
-    ks2_: PU  = None
+    ks2: PU  = None
  
     # Coefficient (p_PSS) (>=0 and <=4).  Typical Value = 0.1.
-    ppss_: PU  = None
+    ppss: PU  = None
  
     # Coefficient (a_PSS).  Typical Value = 0.1.
-    apss_: PU  = None
+    apss: PU  = None
  
     # PSS limiter (psslim).  Typical Value = 0.1.
-    psslim_: PU  = None
+    psslim: PU  = None
      

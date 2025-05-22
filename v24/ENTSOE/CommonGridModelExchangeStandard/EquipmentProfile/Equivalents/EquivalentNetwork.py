@@ -14,5 +14,5 @@ class EquivalentNetwork(ConnectivityNodeContainer):
     NOT contained by the equivalent.
     """
     # The equivalent where the reduced model belongs.
-    EquivalentEquipment_: List[EquivalentEquipment]  = field(default_factory=list)
+    EquivalentEquipments: List[EquivalentEquipment]  = field(default_factory=list)
      

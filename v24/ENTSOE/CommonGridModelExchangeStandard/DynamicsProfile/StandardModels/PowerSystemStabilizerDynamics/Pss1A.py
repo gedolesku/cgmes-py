@@ -14,70 +14,70 @@ class Pss1A(PowerSystemStabilizerDynamics):
     allow representation of various vendors' implementations on PSS type 1A.
     """
     # Type of input signal.
-    inputSignalType_: InputSignalKind  = None
+    inputSignalType: InputSignalKind  = None
  
     # Notch filter parameter (A1).
-    a1_: PU  = None
+    a1: PU  = None
  
     # Notch filter parameter (A2). 
-    a2_: PU  = None
+    a2: PU  = None
  
     # Lead/lag time constant (T1). 
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Lead/lag time constant (T2). 
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Lead/lag time constant (T3). 
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Lead/lag time constant (T4). 
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Washout time constant (T5). 
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Transducer time constant (T6). 
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Stabilizer gain (Ks). 
-    ks_: PU  = None
+    ks: PU  = None
  
     # Maximum stabilizer output (Vrmax). 
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum stabilizer output (Vrmin). 
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Stabilizer input cutoff threshold (Vcu). 
-    vcu_: PU  = None
+    vcu: PU  = None
  
     # Stabilizer input cutoff threshold (Vcl). 
-    vcl_: PU  = None
+    vcl: PU  = None
  
     # Notch filter parameter (A3). 
-    a3_: PU  = None
+    a3: PU  = None
  
     # Notch filter parameter (A4). 
-    a4_: PU  = None
+    a4: PU  = None
  
     # Notch filter parameter (A5). 
-    a5_: PU  = None
+    a5: PU  = None
  
     # Notch filter parameter (A6). 
-    a6_: PU  = None
+    a6: PU  = None
  
     # Notch filter parameter (A7). 
-    a7_: PU  = None
+    a7: PU  = None
  
     # Notch filter parameter (A8). 
-    a8_: PU  = None
+    a8: PU  = None
  
     # Selector (Kd).
     # true = e<sup>-sTdelay</sup> used
     # false = e<sup>-sTdelay</sup> not used.
-    kd_: bool  = None
+    kd: bool  = None
  
     # Time constant (Tdelay). 
-    tdelay_: Seconds  = None
+    tdelay: Seconds  = None
      

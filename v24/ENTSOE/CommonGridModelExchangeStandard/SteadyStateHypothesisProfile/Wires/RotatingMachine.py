@@ -13,10 +13,10 @@ class RotatingMachine(RegulatingCondEq):
     # Active power injection. Load sign convention is used, i.e. positive sign means
     # flow out from a node.
     # Starting value for a steady state solution.
-    p_: ActivePower  = None
+    p: ActivePower  = None
  
     # Reactive power injection. Load sign convention is used, i.e. positive sign
     # means flow out from a node.
     # Starting value for a steady state solution.
-    q_: ReactivePower  = None
+    q: ReactivePower  = None
      

@@ -16,41 +16,43 @@ class MutualCoupling(IdentifiedObject):
     """
     # Zero sequence mutual coupling shunt (charging) susceptance, uniformly
     # distributed, of the entire line section.
-    b0ch_: Susceptance  = None
+    b0ch: Susceptance  = None
  
     # Distance to the start of the coupled region from the first line's terminal
     # having sequence number equal to 1.
-    distance11_: Length  = None
+    distance11: Length  = None
  
     # Distance to the end of the coupled region from the first line's terminal with
     # sequence number equal to 1.
-    distance12_: Length  = None
+    distance12: Length  = None
  
     # Distance to the start of coupled region from the second line's terminal with
     # sequence number equal to 1.
-    distance21_: Length  = None
+    distance21: Length  = None
  
     # Distance to the end of coupled region from the second line's terminal with
     # sequence number equal to 1.
-    distance22_: Length  = None
+    distance22: Length  = None
  
     # Zero sequence mutual coupling shunt (charging) conductance, uniformly
     # distributed, of the entire line section.
-    g0ch_: Conductance  = None
+    g0ch: Conductance  = None
  
     # Zero sequence branch-to-branch mutual impedance coupling, resistance.
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Zero sequence branch-to-branch mutual impedance coupling, reactance.
-    x0_: Reactance  = None
+    x0: Reactance  = None
  
     # The starting terminal for the calculation of distances along the first branch
     # of the mutual coupling.  Normally MutualCoupling would only be used for
     # terminals of AC line segments.  The first and second terminals of a mutual
     # coupling should point to different AC line segments.
-    Terminal_: Optional[Terminal] = None
+    First_Terminal_ref: Optional[Terminal] = None
+    First_Terminal: str = None
  
     # The starting terminal for the calculation of distances along the second branch
     # of the mutual coupling.
-    Terminal_: Optional[Terminal] = None
+    Second_Terminal_ref: Optional[Terminal] = None
+    Second_Terminal: str = None
      

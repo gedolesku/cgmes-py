@@ -13,12 +13,15 @@ class WindTurbineType3or4Dynamics(DynamicsFunctionBlock):
     plant including their control models.
     """
     # The wind plant with which the wind turbines type 3 or 4 are associated.
-    WindPlantDynamics_: Optional[WindPlantDynamics] = None
+    WindPlantDynamics_ref: Optional[WindPlantDynamics] = None
+    WindPlantDynamics: str = None
  
     # Wind turbine Type 3 or 4 models using this remote input signal.
-    RemoteInputSignal_: Optional[RemoteInputSignal] = None
+    RemoteInputSignal_ref: Optional[RemoteInputSignal] = None
+    RemoteInputSignal: str = None
  
     # Energy Source (current source) with which this wind Type 3 or 4 dynamics model
     # is asoociated.
-    EnergySource_: Optional[EnergySource] = None
+    EnergySource_ref: Optional[EnergySource] = None
+    EnergySource: str = None
      

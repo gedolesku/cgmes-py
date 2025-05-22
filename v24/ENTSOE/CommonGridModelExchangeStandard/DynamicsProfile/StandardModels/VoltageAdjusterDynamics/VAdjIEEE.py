@@ -16,25 +16,25 @@ class VAdjIEEE(VoltageAdjusterDynamics):
     """
     # Set high to provide a continuous raise or lower
     # (<i>V</i><i><sub>ADJF</sub></i>).
-    vadjf_: Simple_Float  = None
+    vadjf: Simple_Float  = None
  
     # Rate at which output of adjuster changes (<i>ADJ_SLEW</i>).  Unit = sec./PU.
     # Typical Value = 300.
-    adjslew_: Simple_Float  = None
+    adjslew: Simple_Float  = None
  
     # Maximum output of the adjuster (<i>V</i><i><sub>ADJMAX</sub></i>).  Typical
     # Value = 1.1.
-    vadjmax_: PU  = None
+    vadjmax: PU  = None
  
     # Minimum output of the adjuster (<i>V</i><i><sub>ADJMIN</sub></i>).  Typical
     # Value = 0.9.
-    vadjmin_: PU  = None
+    vadjmin: PU  = None
  
     # Time that adjuster pulses are on (<i>T</i><i><sub>AON</sub></i>).  Typical
     # Value = 0.1.
-    taon_: Seconds  = None
+    taon: Seconds  = None
  
     # Time that adjuster pulses are off (<i>T</i><i><sub>AOFF</sub></i>).  Typical
     # Value = 0.5.
-    taoff_: Seconds  = None
+    taoff: Seconds  = None
      

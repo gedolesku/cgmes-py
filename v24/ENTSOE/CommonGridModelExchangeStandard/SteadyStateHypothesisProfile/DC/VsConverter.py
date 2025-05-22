@@ -16,23 +16,23 @@ class VsConverter(ACDCConverter):
     """DC side of the voltage source converter (VSC).
     """
     # Droop constant; pu value is obtained as D [kV^2 / MW] x Sb / Ubdc^2.
-    droop_: PU  = None
+    droop: PU  = None
  
     # Compensation (resistance) constant. Used to compensate for voltage drop when
     # controlling voltage at a distant bus.
-    droopCompensation_: Resistance  = None
+    droopCompensation: Resistance  = None
  
     # Kind of control of real power and/or DC voltage.
-    pPccControl_: VsPpccControlKind  = None
+    pPccControl: VsPpccControlKind  = None
  
-    qPccControl_: VsQpccControlKind  = None
+    qPccControl: VsQpccControlKind  = None
  
     # Reactive power sharing factor among parallel converters on Uac control.
-    qShare_: PerCent  = None
+    qShare: PerCent  = None
  
     # Reactive power injection target in AC grid, at point of common coupling.
-    targetQpcc_: ReactivePower  = None
+    targetQpcc: ReactivePower  = None
  
     # Voltage target in AC grid, at point of common coupling.
-    targetUpcc_: Voltage  = None
+    targetUpcc: Voltage  = None
      

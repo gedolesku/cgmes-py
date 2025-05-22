@@ -15,7 +15,7 @@ class ACDCConverter(ConductingEquipment):
     """
     # Converter DC current, also called Id. Converter state variable, result from
     # power flow.
-    idc_: CurrentFlow  = None
+    idc: CurrentFlow  = None
  
     # The active power loss at a DC Pole
     # = idleLoss + switchingLoss*|Idc| + resitiveLoss*Idc^2
@@ -23,13 +23,13 @@ class ACDCConverter(ConductingEquipment):
     # For rectifier operation with losses Pdc=Pac-lossP
     # For inverter operation with losses Pdc=Pac+lossP
     # Converter state variable used in power flow.
-    poleLossP_: ActivePower  = None
+    poleLossP: ActivePower  = None
  
     # Converter voltage, the voltage at the AC side of the bridge. Converter state
     # variable, result from power flow.
-    uc_: Voltage  = None
+    uc: Voltage  = None
  
     # Converter voltage at the DC side, also called Ud. Converter state variable,
     # result from power flow.
-    udc_: Voltage  = None
+    udc: Voltage  = None
      

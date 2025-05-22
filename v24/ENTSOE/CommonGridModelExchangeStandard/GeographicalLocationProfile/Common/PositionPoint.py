@@ -17,17 +17,18 @@ class PositionPoint:
     the same values).
     """
     # Zero-relative sequence number of this point within a series of points.
-    sequenceNumber_: int  = None
+    sequenceNumber: int  = None
  
     # X axis position.
-    xPosition_: str  = None
+    xPosition: str  = None
  
     # Y axis position.
-    yPosition_: str  = None
+    yPosition: str  = None
  
     # (if applicable) Z axis position.
-    zPosition_: str  = None
+    zPosition: str  = None
  
     # Location described by this position point.
-    Location_: Optional[Location] = None
+    Location_ref: Optional[Location] = None
+    Location: str = None
      

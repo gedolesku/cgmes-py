@@ -11,5 +11,5 @@ class AccumulatorLimitSet(LimitSet):
     Accumulator measurement.
     """
     # A measurement may have zero or more limit ranges defined for it.
-    Accumulator_: List[Accumulator]  = field(default_factory=list)
+    Measurements: List[Accumulator]  = field(default_factory=list)
      

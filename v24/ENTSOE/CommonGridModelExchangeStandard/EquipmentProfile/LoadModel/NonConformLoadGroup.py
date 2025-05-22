@@ -10,5 +10,5 @@ class NonConformLoadGroup(LoadGroup):
     """Loads that do not follow a daily and seasonal load variation pattern.
     """
     # The NonConformLoadSchedules in the NonConformLoadGroup.
-    NonConformLoadSchedule_: List[NonConformLoadSchedule]  = field(default_factory=list)
+    NonConformLoadSchedules: List[NonConformLoadSchedule]  = field(default_factory=list)
      

@@ -11,5 +11,5 @@ class VoltageLimit(OperationalLimit):
     """
     # Limit on voltage. High or low limit nature of the limit depends upon the
     # properties of the operational limit type.
-    value_: Voltage  = None
+    value: Voltage  = None
      

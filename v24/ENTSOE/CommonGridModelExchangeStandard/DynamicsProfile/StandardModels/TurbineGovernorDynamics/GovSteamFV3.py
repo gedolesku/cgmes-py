@@ -14,62 +14,62 @@ class GovSteamFV3(TurbineGovernorDynamics):
     valving.
     """
     # Base for power values (MWbase) (>0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Governor gain, (reciprocal of droop) (K).  Typical Value = 20.
-    k_: PU  = None
+    k: PU  = None
  
     # Governor lead time constant (T1).  Typical Value = 0.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Governor lag time constant (T2).  Typical Value = 0.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Valve positioner time constant (T3).  Typical Value = 0.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Maximum valve opening velocity (Uo).  Unit = PU/sec.  Typical Value = 0.1.
-    uo_: Simple_Float  = None
+    uo: Simple_Float  = None
  
     # Maximum valve closing velocity (Uc).  Unit = PU/sec.  Typical Value = -1.
-    uc_: Simple_Float  = None
+    uc: Simple_Float  = None
  
     # Maximum valve opening, PU of MWbase (Pmax).  Typical Value = 1.
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Minimum valve opening, PU of MWbase (Pmin).  Typical Value = 0.
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Inlet piping/steam bowl time constant (T4).  Typical Value = 0.2.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Fraction of turbine power developed after first boiler pass (K1).  Typical
     # Value = 0.2.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Time constant of second boiler pass (i.e. reheater) (T5).  Typical Value = 0.5.
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Fraction of turbine power developed after second boiler pass (K2).  Typical
     # Value = 0.2.
-    k2_: PU  = None
+    k2: PU  = None
  
     # Time constant of crossover or third boiler pass (T6).  Typical Value = 10.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Fraction of hp turbine power developed after crossover or third boiler pass
     # (K3). Typical Value = 0.6.
-    k3_: PU  = None
+    k3: PU  = None
  
     # Time to close intercept valve (IV) (Ta).  Typical Value = 0.97.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Time until IV starts to reopen (Tb).  Typical Value = 0.98.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Time until IV is fully open (Tc).  Typical Value = 0.99.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Max. pressure in reheater (Prmax).  Typical Value = 1.
-    prmax_: PU  = None
+    prmax: PU  = None
      

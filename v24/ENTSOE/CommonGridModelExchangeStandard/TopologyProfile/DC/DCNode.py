@@ -11,5 +11,6 @@ class DCNode(IdentifiedObject):
     together with zero impedance.
     """
     # See association end TopologicalNode.ConnectivityNodes.
-    DCTopologicalNode_: Optional[DCTopologicalNode] = None
+    DCTopologicalNode_ref: Optional[DCTopologicalNode] = None
+    DCTopologicalNode: str = None
      

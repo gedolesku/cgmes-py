@@ -17,7 +17,7 @@ class RotatingMachineDynamics(DynamicsFunctionBlock):
     # magnetic field (frequency), results in the damping torque.  This value is often
     # zero when the sources of damping torques (generator damper windings, load
     # damping effects, etc.) are modelled in detail.  Typical Value = 0.
-    damping_: Simple_Float  = None
+    damping: Simple_Float  = None
  
     # Inertia constant of generator or motor and mechanical load (H) (>0).  This is
     # the specification for the stored energy in the rotating mass when operating at
@@ -27,21 +27,21 @@ class RotatingMachineDynamics(DynamicsFunctionBlock):
     # per unit on the generator MVA base, usually expressed as MW*second/MVA or just
     # second.   This value is used in the accelerating power reference frame for
     # operator training simulator solutions.  Typical Value = 3.
-    inertia_: Seconds  = None
+    inertia: Seconds  = None
  
     # Saturation factor at rated terminal voltage (S1) (> or =0).  Not used by
     # simplified model.  Defined by defined by S(E1) in the
     # SynchronousMachineSaturationParameters diagram.  Typical Value = 0.02.
-    saturationFactor_: Simple_Float  = None
+    saturationFactor: Simple_Float  = None
  
     # Saturation factor at 120% of rated terminal voltage (S12) (> or =S1). Not used
     # by the simplified model, defined by S(E2) in the
     # SynchronousMachineSaturationParameters diagram.  Typical Value = 0.12.
-    saturationFactor120_: Simple_Float  = None
+    saturationFactor120: Simple_Float  = None
  
     # Stator leakage reactance (Xl) (> or =0). Typical Value = 0.15.
-    statorLeakageReactance_: PU  = None
+    statorLeakageReactance: PU  = None
  
     # Stator (armature) resistance (Rs) (> or =0). Typical Value = 0.005.
-    statorResistance_: PU  = None
+    statorResistance: PU  = None
      

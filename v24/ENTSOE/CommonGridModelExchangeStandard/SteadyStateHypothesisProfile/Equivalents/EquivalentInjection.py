@@ -15,18 +15,18 @@ class EquivalentInjection(EquivalentEquipment):
     """
     # Specifies the default regulation status of the EquivalentInjection.  True is
     # regulating.  False is not regulating.
-    regulationStatus_: bool  = None
+    regulationStatus: bool  = None
  
     # The target voltage for voltage regulation.
-    regulationTarget_: Voltage  = None
+    regulationTarget: Voltage  = None
  
     # Equivalent active power injection. Load sign convention is used, i.e. positive
     # sign means flow out from a node.
     # Starting value for steady state solutions.
-    p_: ActivePower  = None
+    p: ActivePower  = None
  
     # Equivalent reactive power injection. Load sign convention is used, i.e.
     # positive sign means flow out from a node.
     # Starting value for steady state solutions.
-    q_: ReactivePower  = None
+    q: ReactivePower  = None
      

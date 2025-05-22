@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Voltage:
     """Electrical voltage, can be both AC and DC.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.V
+    unit: UnitSymbol =  UnitSymbol.V
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.k
+    multiplier: UnitMultiplier =  UnitMultiplier.k
      

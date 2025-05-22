@@ -20,8 +20,9 @@ class ControlArea(PowerSystemResource):
     # purposes.   A control area specified with primary type of automatic generation
     # control could still be forecast and used as an interchange area in power flow
     # analysis.
-    type_: ControlAreaTypeKind  = None
+    type: ControlAreaTypeKind  = None
  
     # The energy area that is forecast from this control area specification.
-    EnergyArea_: Optional[EnergyArea] = None
+    EnergyArea_ref: Optional[EnergyArea] = None
+    EnergyArea: str = None
      

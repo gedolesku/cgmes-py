@@ -17,42 +17,43 @@ class WindContPitchAngleIEC(IdentifiedObject):
     """
     # Maximum pitch positive ramp rate (d<i>theta</i><sub>max</sub>). It is type
     # dependent parameter. Unit = degrees/sec. 
-    dthetamax_: Simple_Float  = None
+    dthetamax: Simple_Float  = None
  
     # Maximum pitch negative ramp rate (d<i>theta</i><sub>min</sub>). It is type
     # dependent parameter. Unit = degrees/sec. 
-    dthetamin_: Simple_Float  = None
+    dthetamin: Simple_Float  = None
  
     # Power PI controller integration gain (<i>K</i><sub>Ic</sub>). It is type
     # dependent parameter.
-    kic_: PU  = None
+    kic: PU  = None
  
     # Speed PI controller integration gain (<i>K</i><sub>Iomega</sub>). It is type
     # dependent parameter.
-    kiomega_: PU  = None
+    kiomega: PU  = None
  
     # Power PI controller proportional gain (<i>K</i><sub>Pc</sub>). It is type
     # dependent parameter.
-    kpc_: PU  = None
+    kpc: PU  = None
  
     # Speed PI controller proportional gain (<i>K</i><sub>Pomega</sub>). It is type
     # dependent parameter.
-    kpomega_: PU  = None
+    kpomega: PU  = None
  
     # Pitch cross coupling gain (K<sub>PX</sub>). It is type dependent parameter.
-    kpx_: PU  = None
+    kpx: PU  = None
  
     # Maximum pitch angle (<i>theta</i><sub>max</sub>). It is type dependent
     # parameter.
-    thetamax_: AngleDegrees  = None
+    thetamax: AngleDegrees  = None
  
     # Minimum pitch angle (<i>theta</i><sub>min</sub>). It is type dependent
     # parameter.
-    thetamin_: AngleDegrees  = None
+    thetamin: AngleDegrees  = None
  
     # Pitch time constant (t<i>theta</i>). It is type dependent parameter.
-    ttheta_: Seconds  = None
+    ttheta: Seconds  = None
  
     # Wind turbine type 3 model with which this pitch control model is associated.
-    WindGenTurbineType3IEC_: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC_ref: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC: str = None
      

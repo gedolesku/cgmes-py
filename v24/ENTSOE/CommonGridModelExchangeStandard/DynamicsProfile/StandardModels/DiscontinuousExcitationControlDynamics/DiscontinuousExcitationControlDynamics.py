@@ -14,8 +14,10 @@ class DiscontinuousExcitationControlDynamics(DynamicsFunctionBlock):
     """
     # Excitation system model with which this discontinuous excitation control model
     # is associated.
-    ExcitationSystemDynamics_: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics_ref: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics: str = None
  
     # Remote input signal used by this discontinuous excitation control system model.
-    RemoteInputSignal_: Optional[RemoteInputSignal] = None
+    RemoteInputSignal_ref: Optional[RemoteInputSignal] = None
+    RemoteInputSignal: str = None
      

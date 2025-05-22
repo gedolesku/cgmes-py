@@ -10,5 +10,5 @@ class GroundingImpedance(EarthFaultCompensator):
     """A fixed impedance device used for grounding.
     """
     # Reactance of device.
-    x_: Reactance  = None
+    x: Reactance  = None
      

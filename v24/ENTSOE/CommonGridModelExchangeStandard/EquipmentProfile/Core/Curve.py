@@ -13,17 +13,17 @@ class Curve(IdentifiedObject):
     variable (X-axis) and dependent (Y-axis) variables.
     """
     # The style or shape of the curve.
-    curveStyle_: CurveStyle  = None
+    curveStyle: CurveStyle  = None
  
     # The X-axis units of measure.
-    xUnit_: UnitSymbol  = None
+    xUnit: UnitSymbol  = None
  
     # The Y1-axis units of measure.
-    y1Unit_: UnitSymbol  = None
+    y1Unit: UnitSymbol  = None
  
     # The Y2-axis units of measure.
-    y2Unit_: UnitSymbol  = None
+    y2Unit: UnitSymbol  = None
  
     # The curve of  this curve data point.
-    CurveData_: List[CurveData]  = field(default_factory=list)
+    CurveDatas: List[CurveData]  = field(default_factory=list)
      

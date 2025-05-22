@@ -19,115 +19,115 @@ class GovHydro3(TurbineGovernorDynamics):
     upstream signals.
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Maximum gate opening, PU of MWbase (Pmax).  Typical Value = 1.
-    pmax_: PU  = None
+    pmax: PU  = None
  
     # Minimum gate opening, PU of MWbase (Pmin).  Typical Value = 0.
-    pmin_: PU  = None
+    pmin: PU  = None
  
     # Governor control flag (Cflag).
     # true = PID control is active
     # false = double derivative control is active.
     # Typical Value = true.
-    governorControl_: bool  = None
+    governorControl: bool  = None
  
     # Steady-state droop, PU, for governor output feedback (Rgate).  Typical Value =
     # 0.
-    rgate_: PU  = None
+    rgate: PU  = None
  
     # Steady-state droop, PU, for electrical power feedback (Relec).  Typical Value =
     # 0.05.
-    relec_: PU  = None
+    relec: PU  = None
  
     # Input filter time constant (Td).  Typical Value = 0.05.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Washout time constant (Tf).  Typical Value = 0.1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Gate servo time constant (Tp).  Typical Value = 0.05.
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Maximum gate opening velocity (Velop).  Unit = PU/sec. Typical Value = 0.2.
-    velop_: Simple_Float  = None
+    velop: Simple_Float  = None
  
     # Maximum gate closing velocity (Velcl).  Unit = PU/sec.  Typical Value = -0.2.
-    velcl_: Simple_Float  = None
+    velcl: Simple_Float  = None
  
     # Derivative gain (K1).  Typical Value = 0.01.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Double derivative gain, if Cflag = -1 (K2).  Typical Value = 2.5.
-    k2_: PU  = None
+    k2: PU  = None
  
     # Integral gain (Ki).  Typical Value = 0.5.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Gate servo gain (Kg).  Typical Value = 2.
-    kg_: PU  = None
+    kg: PU  = None
  
     # Power feedback time constant (Tt).  Typical Value = 0.2.
-    tt_: Seconds  = None
+    tt: Seconds  = None
  
     # Intentional dead-band width (db1).  Unit = Hz.  Typical Value = 0.
-    db1_: Frequency  = None
+    db1: Frequency  = None
  
     # Intentional db hysteresis (eps).  Unit = Hz.  Typical Value = 0.
-    eps_: Frequency  = None
+    eps: Frequency  = None
  
     # Unintentional dead-band (db2).  Unit = MW.  Typical Value = 0.
-    db2_: ActivePower  = None
+    db2: ActivePower  = None
  
     # Water inertia time constant (Tw).  Typical Value = 1.
-    tw_: Seconds  = None
+    tw: Seconds  = None
  
     # Turbine gain (At).  Typical Value = 1.2.
-    at_: PU  = None
+    at: PU  = None
  
     # Turbine damping factor (Dturb).  Typical Value = 0.2.
-    dturb_: PU  = None
+    dturb: PU  = None
  
     # No-load turbine flow at nominal head (Qnl).  Typical Value = 0.08.
-    qnl_: PU  = None
+    qnl: PU  = None
  
     # Turbine nominal head (H0).  Typical Value = 1.
-    h0_: PU  = None
+    h0: PU  = None
  
     # Nonlinear gain point 1, PU gv (Gv1).  Typical Value = 0.
-    gv1_: PU  = None
+    gv1: PU  = None
  
     # Nonlinear gain point 1, PU power (Pgv1).  Typical Value = 0.
-    pgv1_: PU  = None
+    pgv1: PU  = None
  
     # Nonlinear gain point 2, PU gv (Gv2).  Typical Value = 0.
-    gv2_: PU  = None
+    gv2: PU  = None
  
     # Nonlinear gain point 2, PU power (Pgv2).  Typical Value = 0.
-    pgv2_: PU  = None
+    pgv2: PU  = None
  
     # Nonlinear gain point 3, PU gv (Gv3).  Typical Value = 0.
-    gv3_: PU  = None
+    gv3: PU  = None
  
     # Nonlinear gain point 3, PU power (Pgv3).  Typical Value = 0.
-    pgv3_: PU  = None
+    pgv3: PU  = None
  
     # Nonlinear gain point 4, PU gv (Gv4).  Typical Value = 0.
-    gv4_: PU  = None
+    gv4: PU  = None
  
     # Nonlinear gain point 4, PU power (Pgv4).  Typical Value = 0.
-    pgv4_: PU  = None
+    pgv4: PU  = None
  
     # Nonlinear gain point 5, PU gv (Gv5).  Typical Value = 0.
-    gv5_: PU  = None
+    gv5: PU  = None
  
     # Nonlinear gain point 5, PU power (Pgv5).  Typical Value = 0.
-    pgv5_: PU  = None
+    pgv5: PU  = None
  
     # Nonlinear gain point 6, PU gv (Gv6).  Typical Value = 0.
-    gv6_: PU  = None
+    gv6: PU  = None
  
     # Nonlinear gain point 6, PU power (Pgv6).  Typical Value = 0.
-    pgv6_: PU  = None
+    pgv6: PU  = None
      

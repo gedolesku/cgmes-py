@@ -11,38 +11,38 @@ class OverexcLimX1(OverexcitationLimiterDynamics):
     """Field voltage over excitation limiter.
     """
     # Rated field voltage (EFD<sub>RATED</sub>).  Typical Value = 1.05.
-    efdrated_: PU  = None
+    efdrated: PU  = None
  
     # Low voltage point on the inverse time characteristic (EFD<sub>1</sub>).
     # Typical Value = 1.1.
-    efd1_: PU  = None
+    efd1: PU  = None
  
     # Time to trip the exciter at the low voltage point on the inverse time
     # characteristic (TIME<sub>1</sub>).  Typical Value = 120.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Mid voltage point on the inverse time characteristic (EFD<sub>2</sub>).
     # Typical Value = 1.2.
-    efd2_: PU  = None
+    efd2: PU  = None
  
     # Time to trip the exciter at the mid voltage point on the inverse time
     # characteristic (TIME<sub>2</sub>).  Typical Value = 40.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # High voltage point on the inverse time characteristic (EFD<sub>3</sub>).
     # Typical Value = 1.5.
-    efd3_: PU  = None
+    efd3: PU  = None
  
     # Time to trip the exciter at the high voltage point on the inverse time
     # characteristic (TIME<sub>3</sub>).  Typical Value = 15.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Desired field voltage (EFD<sub>DES</sub>).  Typical Value = 0.9.
-    efddes_: PU  = None
+    efddes: PU  = None
  
     # Gain (K<sub>MX</sub>).  Typical Value = 0.01.
-    kmx_: PU  = None
+    kmx: PU  = None
  
     # Low voltage limit (V<sub>LOW</sub>) (>0).
-    vlow_: PU  = None
+    vlow: PU  = None
      

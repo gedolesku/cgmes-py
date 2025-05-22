@@ -8,38 +8,38 @@ from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.Power
 
 @dataclass
 class PssSK(PowerSystemStabilizerDynamics):
-    """PSS Slovakian type ï¿½ three inputs.
+    """PSS Slovakian type – three inputs.
     """
     # Gain P (K1).  Typical Value = -0.3.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Gain fe (K2).  Typical Value = -0.15.
-    k2_: PU  = None
+    k2: PU  = None
  
     # Gain If (K3).  Typical Value = 10.
-    k3_: PU  = None
+    k3: PU  = None
  
     # Denominator time constant (T1).  Typical Value = 0.3.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Filter time constant (T2).  Typical Value = 0.35.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Denominator time constant (T3).  Typical Value = 0.22.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Filter time constant (T4).  Typical Value = 0.02.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Denominator time constant (T5).  Typical Value = 0.02.
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Filter time constant (T6).  Typical Value = 0.02.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Stabilizer output max limit (Vsmax).  Typical Value = 0.4.
-    vsmax_: PU  = None
+    vsmax: PU  = None
  
     # Stabilizer output min limit (Vsmin).  Typical Value = -0.4.
-    vsmin_: PU  = None
+    vsmin: PU  = None
      

@@ -19,82 +19,82 @@ class ExcIEEEAC6A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 6.6.
     """
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 536.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.086.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Voltage regulator time constant (T<sub>K</sub>).  Typical Value = 0.18.
-    tk_: Seconds  = None
+    tk: Seconds  = None
  
     # Voltage regulator time constant (T<sub>B</sub>).  Typical Value = 9.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator time constant (T<sub>C</sub>).  Typical Value = 3.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>AMAX</sub>).  Typical Value = 75.
-    vamax_: PU  = None
+    vamax: PU  = None
  
     # Minimum voltage regulator output (V<sub>AMIN</sub>).  Typical Value = -75.
-    vamin_: PU  = None
+    vamin: PU  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 44.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -36.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 1.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Exciter field current limiter gain (K<sub>H</sub>).  Typical Value = 92.
-    kh_: PU  = None
+    kh: PU  = None
  
     # Exciter field current limiter time constant (T<sub>J</sub>).  Typical Value = 0.
     # 02.
-    tj_: Seconds  = None
+    tj: Seconds  = None
  
     # Exciter field current limiter time constant (T<sub>H</sub>).  Typical Value = 0.
     # 08.
-    th_: Seconds  = None
+    th: Seconds  = None
  
     # Exciter field current limit reference (V<sub>FELIM</sub>).  Typical Value = 19.
-    vfelim_: PU  = None
+    vfelim: PU  = None
  
     # Maximum field current limiter signal reference (V<sub>HMAX</sub>).  Typical
     # Value = 75.
-    vhmax_: PU  = None
+    vhmax: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 0.173.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Demagnetizing factor, a function of exciter alternator reactances
     # (K<sub>D</sub>).  Typical Value = 1.91.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.6.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (V<sub>E1</sub>) equals V<sub>EMAX </sub>(V<sub>E1</sub>).
     #  Typical Value = 7.4.
-    ve1_: PU  = None
+    ve1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # V<sub>E1</sub>, back of commutating reactance (S<sub>E</sub>[V<sub>E1</sub>]).
     # Typical Value = 0.214.
-    seve1_: Simple_Float  = None
+    seve1: Simple_Float  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (V<sub>E2</sub>).  Typical Value = 5.55.
-    ve2_: PU  = None
+    ve2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # V<sub>E2</sub>, back of commutating reactance (S<sub>E</sub>[V<sub>E2</sub>]).
     # Typical Value = 0.044.
-    seve2_: Simple_Float  = None
+    seve2: Simple_Float  = None
      

@@ -20,9 +20,9 @@ class ENTSOEIdentifiedObject:
     # color="#0000ff"><u>https://www.entsoe.eu/index.
     # php?id=73&libCat=eic</u></font></a> .</li>
     # </ul>
-    energyIdentCodeEic_: str  = None
+    energyIdentCodeEic: str  = None
  
     # The attribute is used for an exchange of a human readable short name with
     # length of the string 12 characters maximum.
-    shortName_: str  = None
+    shortName: str  = None
      

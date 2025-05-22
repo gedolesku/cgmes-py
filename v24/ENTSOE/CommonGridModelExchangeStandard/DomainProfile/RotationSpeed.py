@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class RotationSpeed:
     """Number of revolutions per second.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.none
+    unit: UnitSymbol =  UnitSymbol.none
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.s
+    denominatorUnit: UnitSymbol =  UnitSymbol.s
  
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
      

@@ -9,5 +9,6 @@ from ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.DC.DCEquipmentConta
 class DCLine(DCEquipmentContainer):
     """Overhead lines and/or cables connecting two or more HVDC substations.
     """
-    SubGeographicalRegion_: Optional[SubGeographicalRegion] = None
+    Region_ref: Optional[SubGeographicalRegion] = None
+    Region: str = None
      

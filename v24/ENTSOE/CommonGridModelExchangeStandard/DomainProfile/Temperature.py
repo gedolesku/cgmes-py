@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Temperature:
     """Value of temperature in degrees Celsius.
     """
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    unit_: UnitSymbol =  UnitSymbol.degC
+    unit: UnitSymbol =  UnitSymbol.degC
  
-    value_: float  = None
+    value: float  = None
      

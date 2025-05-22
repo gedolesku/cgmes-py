@@ -9,5 +9,6 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.Equipment
 class DCTerminal(DCBaseTerminal):
     """An electrical connection point to generic DC conducting equipment.
     """
-    DCConductingEquipment_: Optional[DCConductingEquipment] = None
+    DCConductingEquipment_ref: Optional[DCConductingEquipment] = None
+    DCConductingEquipment: str = None
      

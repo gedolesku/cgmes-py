@@ -11,14 +11,14 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.Equipment
 class PerLengthDCLineParameter:
     # Capacitance per unit of length of the DC line segment; significant for cables
     # only.
-    capacitance_: CapacitancePerLength  = None
+    capacitance: CapacitancePerLength  = None
  
     # Inductance per unit of length of the DC line segment.
-    inductance_: InductancePerLength  = None
+    inductance: InductancePerLength  = None
  
     # Resistance per length of the DC line segment.
-    resistance_: ResistancePerLength  = None
+    resistance: ResistancePerLength  = None
  
     # All line segments described by this set of per-length parameters.
-    DCLineSegment_: List[DCLineSegment]  = field(default_factory=list)
+    DCLineSegments: List[DCLineSegment]  = field(default_factory=list)
      

@@ -15,38 +15,38 @@ class ExcBBC(ExcitationSystemDynamics):
     directly.
     """
     # Controller time constant (T1).  Typical Value = 6.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Controller time constant (T2).  Typical Value = 1.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Lead/lag time constant (T3).  Typical Value = 0.05.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Lead/lag time constant (T4).  Typical Value = 0.01.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Steady state gain (K).  Typical Value = 300.
-    k_: PU  = None
+    k: PU  = None
  
     # Minimum control element output (Vrmin).  Typical Value = -5.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Maximum control element output (Vrmax).  Typical Value = 5.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum open circuit exciter voltage (Efdmin).  Typical Value = -5.
-    efdmin_: PU  = None
+    efdmin: PU  = None
  
     # Maximum open circuit exciter voltage (Efdmax).  Typical Value = 5.
-    efdmax_: PU  = None
+    efdmax: PU  = None
  
     # Effective excitation transformer reactance (Xe).  Typical Value = 0.05.
-    xe_: PU  = None
+    xe: PU  = None
  
     # Supplementary signal routing selector (switch).
     # true = Vs connected to 3rd summing point
     # false =  Vs connected to 1st summing point (see diagram).
     # Typical Value = true.
-    switch_: bool  = None
+    switch: bool  = None
      

@@ -18,97 +18,99 @@ class WindContPType3IEC(IdentifiedObject):
     """
     # Maximum wind turbine power ramp rate (<i>dp</i><sub>max</sub>). It is project
     # dependent parameter.
-    dpmax_: PU  = None
+    dpmax: PU  = None
  
     # Limitation of torque rise rate during LVRT for S<sub>1</sub>
     # (d<i>T</i><sub>risemaxLVRT</sub>). It is project dependent parameter.
-    dtrisemaxlvrt_: PU  = None
+    dtrisemaxlvrt: PU  = None
  
     # Gain for active drive train damping (<i>K</i><sub>DTD</sub>). It is type
     # dependent parameter.
-    kdtd_: PU  = None
+    kdtd: PU  = None
  
     # PI controller integration parameter (<i>K</i><sub>Ip</sub>). It is type
     # dependent parameter.
-    kip_: PU  = None
+    kip: PU  = None
  
     # PI controller proportional gain (<i>K</i><sub>Pp</sub>). It is type dependent
     # parameter.
-    kpp_: PU  = None
+    kpp: PU  = None
  
     # Enable LVRT power control mode (M<sub>pLVRT).</sub>
     # true = 1: voltage control
     # false = 0: reactive power control.
     # 
     # It is project dependent parameter.
-    mplvrt_: bool  = None
+    mplvrt: bool  = None
  
     # Offset to reference value that limits controller action during rotor speed
     # changes (omega<sub>offset</sub>). It is case dependent parameter.
-    omegaoffset_: PU  = None
+    omegaoffset: PU  = None
  
     # Maximum active drive train damping power (<i>p</i><sub>DTDmax</sub>). It is
     # type dependent parameter.
-    pdtdmax_: PU  = None
+    pdtdmax: PU  = None
  
     # Ramp limitation of torque, required in some grid codes
     # (<i>R</i><sub>ramp</sub>). It is project dependent parameter.
-    rramp_: PU  = None
+    rramp: PU  = None
  
     # Time<sub> </sub>delay after deep voltage sags (T<sub>DVS</sub>). It is project
     # dependent parameter.
-    tdvs_: Seconds  = None
+    tdvs: Seconds  = None
  
     # Minimum electrical generator torque (<i>T</i><sub>emin</sub>). It is type
     # dependent parameter.
-    temin_: PU  = None
+    temin: PU  = None
  
     # Filter time constant for generator speed measurement
     # (<i>T</i><sub>omegafilt</sub>). It is type dependent parameter.
-    tomegafilt_: Seconds  = None
+    tomegafilt: Seconds  = None
  
     # Filter time constant for power measurement (<i>T</i><sub>pfilt</sub>). It is
     # type dependent parameter.
-    tpfilt_: Seconds  = None
+    tpfilt: Seconds  = None
  
     # Time constant in power order lag (<i>T</i><sub>pord</sub>). It is type
     # dependent parameter.
-    tpord_: PU  = None
+    tpord: PU  = None
  
     # Filter time constant for voltage measurement (<i>T</i><sub>ufilt</sub>). It is
     # type dependent parameter.
-    tufilt_: Seconds  = None
+    tufilt: Seconds  = None
  
     # Voltage scaling factor of reset-torque (T<sub>uscale</sub>). It is project
     # dependent parameter.
-    tuscale_: PU  = None
+    tuscale: PU  = None
  
     # Time constant in speed reference filter (<i>T</i><sub>omega,ref</sub>). It is
     # type dependent parameter.
-    twref_: Seconds  = None
+    twref: Seconds  = None
  
     # Voltage limit for hold LVRT status after deep voltage sags
     # (<i>u</i><i><sub>DVS</sub></i>). It is project dependent parameter.
-    udvs_: PU  = None
+    udvs: PU  = None
  
     # Voltage dip threshold for P-control (<i>u</i><sub>Pdip</sub>).  Part of turbine
     # control, often different (e.g 0.8) from converter thresholds. It is project
     # dependent parameter.
-    updip_: PU  = None
+    updip: PU  = None
  
     # Active drive train damping frequency (omega<sub>DTD</sub>). It can be
     # calculated from two mass model parameters. It is type dependent parameter.
-    wdtd_: PU  = None
+    wdtd: PU  = None
  
     # Coefficient for active drive train damping (zeta). It is type dependent
     # parameter.
-    zeta_: Simple_Float  = None
+    zeta: Simple_Float  = None
  
     # Wind turbine type 3 model with which this Wind control P type 3 model is
     # associated.
-    WindGenTurbineType3IEC_: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC_ref: Optional[WindGenTurbineType3IEC] = None
+    WindGenTurbineType3IEC: str = None
  
     # The P control type 3 model with which this wind dynamics lookup table is
     # associated.
-    WindDynamicsLookupTable_: Optional[WindDynamicsLookupTable] = None
+    WindDynamicsLookupTable_ref: Optional[WindDynamicsLookupTable] = None
+    WindDynamicsLookupTable: str = None
      

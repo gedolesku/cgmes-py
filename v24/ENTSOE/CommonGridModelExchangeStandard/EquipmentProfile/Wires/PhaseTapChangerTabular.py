@@ -8,5 +8,6 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.Equipment
 @dataclass
 class PhaseTapChangerTabular(PhaseTapChanger):
     # The phase tap changer table for this phase tap changer.
-    PhaseTapChangerTable_: Optional[PhaseTapChangerTable] = None
+    PhaseTapChangerTable_ref: Optional[PhaseTapChangerTable] = None
+    PhaseTapChangerTable: str = None
      

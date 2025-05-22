@@ -12,9 +12,9 @@ class PerCent:
     defined base.
     """
     # Normally 0 - 100 on a defined base
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.none
+    unit: UnitSymbol =  UnitSymbol.none
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

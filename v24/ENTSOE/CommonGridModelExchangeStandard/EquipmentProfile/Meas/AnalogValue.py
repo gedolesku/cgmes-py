@@ -11,8 +11,9 @@ class AnalogValue(MeasurementValue):
     """AnalogValue represents an analog MeasurementValue.
     """
     # The value to supervise.
-    value_: Simple_Float  = None
+    value: Simple_Float  = None
  
     # The values connected to this measurement.
-    Analog_: Optional[Analog] = None
+    Analog_ref: Optional[Analog] = None
+    Analog: str = None
      

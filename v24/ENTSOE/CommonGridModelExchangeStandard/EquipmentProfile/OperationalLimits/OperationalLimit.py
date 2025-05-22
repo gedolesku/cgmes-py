@@ -18,5 +18,6 @@ class OperationalLimit(IdentifiedObject):
     direction="low".
     """
     # The limit type associated with this limit.
-    OperationalLimitType_: Optional[OperationalLimitType] = None
+    OperationalLimitType_ref: Optional[OperationalLimitType] = None
+    OperationalLimitType: str = None
      

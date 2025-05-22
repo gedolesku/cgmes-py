@@ -19,64 +19,64 @@ class ExternalNetworkInjection(RegulatingCondEq):
     # Power Frequency Bias. This is the change in power injection divided by the
     # change in frequency and negated.  A positive value of the power frequency bias
     # provides additional power injection upon a drop in frequency.
-    governorSCD_: ActivePowerPerFrequency  = None
+    governorSCD: ActivePowerPerFrequency  = None
  
     # Indicates whether initial symmetrical short-circuit current and power have been
     # calculated according to IEC (Ik").
-    ikSecond_: bool  = None
+    ikSecond: bool  = None
  
     #  Maximum initial symmetrical short-circuit currents (Ik" max) in A (Ik" =
     # Sk"/(SQRT(3) Un)). Used for short circuit data exchange according to IEC 60909
-    maxInitialSymShCCurrent_: CurrentFlow  = None
+    maxInitialSymShCCurrent: CurrentFlow  = None
  
     # Maximum active power of the injection.
-    maxP_: ActivePower  = None
+    maxP: ActivePower  = None
  
     # Not for short circuit modelling; It is used for modelling of infeed for load
     # flow exchange. If maxQ and minQ are not used ReactiveCapabilityCurve can be
     # used 
-    maxQ_: ReactivePower  = None
+    maxQ: ReactivePower  = None
  
     # Maximum ratio of zero sequence resistance of Network Feeder to its zero
     # sequence reactance (R(0)/X(0) max). Used for short circuit data exchange
     # according to IEC 60909
-    maxR0ToX0Ratio_: Simple_Float  = None
+    maxR0ToX0Ratio: Simple_Float  = None
  
     # Maximum ratio of positive sequence resistance of Network Feeder to its positive
     # sequence reactance (R(1)/X(1) max). Used for short circuit data exchange
     # according to IEC 60909
-    maxR1ToX1Ratio_: Simple_Float  = None
+    maxR1ToX1Ratio: Simple_Float  = None
  
     # Maximum ratio of zero sequence impedance to its positive sequence impedance
     # (Z(0)/Z(1) max). Used for short circuit data exchange according to IEC 60909
-    maxZ0ToZ1Ratio_: Simple_Float  = None
+    maxZ0ToZ1Ratio: Simple_Float  = None
  
     # Minimum initial symmetrical short-circuit currents (Ik" min) in A (Ik" =
     # Sk"/(SQRT(3) Un)). Used for short circuit data exchange according to IEC 60909
-    minInitialSymShCCurrent_: CurrentFlow  = None
+    minInitialSymShCCurrent: CurrentFlow  = None
  
     # Minimum active power of the injection.
-    minP_: ActivePower  = None
+    minP: ActivePower  = None
  
     # Not for short circuit modelling; It is used for modelling of infeed for load
     # flow exchange. If maxQ and minQ are not used ReactiveCapabilityCurve can be used
-    minQ_: ReactivePower  = None
+    minQ: ReactivePower  = None
  
     # Indicates whether initial symmetrical short-circuit current and power have been
     # calculated according to IEC (Ik"). Used for short circuit data exchange
     # according to IEC 6090
-    minR0ToX0Ratio_: Simple_Float  = None
+    minR0ToX0Ratio: Simple_Float  = None
  
     # Minimum ratio of positive sequence resistance of Network Feeder to its positive
     # sequence reactance (R(1)/X(1) min). Used for short circuit data exchange
     # according to IEC 60909
-    minR1ToX1Ratio_: Simple_Float  = None
+    minR1ToX1Ratio: Simple_Float  = None
  
     # Minimum ratio of zero sequence impedance to its positive sequence impedance
     # (Z(0)/Z(1) min). Used for short circuit data exchange according to IEC 60909
-    minZ0ToZ1Ratio_: Simple_Float  = None
+    minZ0ToZ1Ratio: Simple_Float  = None
  
     # Voltage factor in pu, which was used to calculate short-circuit current Ik" and
     # power Sk".
-    voltageFactor_: PU  = None
+    voltageFactor: PU  = None
      

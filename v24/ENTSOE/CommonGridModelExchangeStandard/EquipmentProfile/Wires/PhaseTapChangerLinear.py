@@ -21,13 +21,13 @@ class PhaseTapChangerLinear(PhaseTapChanger):
     # The actual phase shift increment might be more accurately computed from the
     # symmetrical or asymmetrical models or a tap step table lookup if those are
     # available.
-    stepPhaseShiftIncrement_: AngleDegrees  = None
+    stepPhaseShiftIncrement: AngleDegrees  = None
  
     # The reactance depend on the tap position according to a "u" shaped curve. The
     # maximum reactance (xMax) appear at the low and high tap positions.
-    xMax_: Reactance  = None
+    xMax: Reactance  = None
  
     # The reactance depend on the tap position according to a "u" shaped curve. The
     # minimum reactance (xMin) appear at the mid tap position.
-    xMin_: Reactance  = None
+    xMin: Reactance  = None
      

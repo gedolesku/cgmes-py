@@ -12,5 +12,5 @@ class RegulatingCondEq(ConductingEquipment):
     """
     # Specifies the regulation status of the equipment.  True is regulating, false is
     # not regulating.
-    controlEnabled_: bool  = None
+    controlEnabled: bool  = None
      

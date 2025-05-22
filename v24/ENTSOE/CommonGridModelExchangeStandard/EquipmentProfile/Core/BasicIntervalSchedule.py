@@ -11,11 +11,11 @@ class BasicIntervalSchedule(IdentifiedObject):
     """Schedule of values at points in time.
     """
     # The time for the first time point.
-    startTime_: DateTime  = None
+    startTime: DateTime  = None
  
     # Value1 units of measure.
-    value1Unit_: UnitSymbol  = None
+    value1Unit: UnitSymbol  = None
  
     # Value2 units of measure.
-    value2Unit_: UnitSymbol  = None
+    value2Unit: UnitSymbol  = None
      

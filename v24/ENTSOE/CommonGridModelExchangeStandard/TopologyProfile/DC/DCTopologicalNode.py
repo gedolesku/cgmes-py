@@ -10,8 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.TopologyP
 class DCTopologicalNode(IdentifiedObject):
     """DC bus.
     """
-    DCEquipmentContainer_: Optional[DCEquipmentContainer] = None
+    DCEquipmentContainer_ref: Optional[DCEquipmentContainer] = None
+    DCEquipmentContainer: str = None
  
     # See association end Terminal.TopologicalNode.
-    DCBaseTerminal_: List[DCBaseTerminal]  = field(default_factory=list)
+    DCTerminals: List[DCBaseTerminal]  = field(default_factory=list)
      

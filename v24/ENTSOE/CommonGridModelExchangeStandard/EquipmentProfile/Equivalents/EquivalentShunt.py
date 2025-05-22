@@ -11,8 +11,8 @@ class EquivalentShunt(EquivalentEquipment):
     """The class represents equivalent shunts.
     """
     # Positive sequence shunt susceptance.
-    b_: Susceptance  = None
+    b: Susceptance  = None
  
     # Positive sequence shunt conductance.
-    g_: Conductance  = None
+    g: Conductance  = None
      

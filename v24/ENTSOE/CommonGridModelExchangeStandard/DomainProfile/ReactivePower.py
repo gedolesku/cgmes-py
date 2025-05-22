@@ -11,9 +11,9 @@ class ReactivePower:
     """Product of RMS value of the voltage and the RMS value of the quadrature
     component of the current.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.VAr
+    unit: UnitSymbol =  UnitSymbol.VAr
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.M
+    multiplier: UnitMultiplier =  UnitMultiplier.M
      

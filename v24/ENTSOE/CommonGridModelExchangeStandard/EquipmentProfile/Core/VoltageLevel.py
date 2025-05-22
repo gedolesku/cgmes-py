@@ -15,17 +15,19 @@ class VoltageLevel(EquipmentContainer):
     regulation and protection devices as well as assemblies of all these.
     """
     # The bus bar's high voltage limit
-    highVoltageLimit_: Voltage  = None
+    highVoltageLimit: Voltage  = None
  
     # The bus bar's low voltage limit
-    lowVoltageLimit_: Voltage  = None
+    lowVoltageLimit: Voltage  = None
  
     # The substation of the voltage level.
-    Substation_: Optional[Substation] = None
+    Substation_ref: Optional[Substation] = None
+    Substation: str = None
  
     # The bays within this voltage level.
-    Bay_: List[Bay]  = field(default_factory=list)
+    Bays: List[Bay]  = field(default_factory=list)
  
     # The base voltage used for all equipment within the voltage level.
-    BaseVoltage_: Optional[BaseVoltage] = None
+    BaseVoltage_ref: Optional[BaseVoltage] = None
+    BaseVoltage: str = None
      

@@ -11,8 +11,8 @@ class ConformLoadGroup(LoadGroup):
     """A group of loads conforming to an allocation pattern.
     """
     # The ConformLoadSchedules in the ConformLoadGroup.
-    ConformLoadSchedule_: List[ConformLoadSchedule]  = field(default_factory=list)
+    ConformLoadSchedules: List[ConformLoadSchedule]  = field(default_factory=list)
  
     # Conform loads assigned to this ConformLoadGroup.
-    ConformLoad_: List[ConformLoad]  = field(default_factory=list)
+    EnergyConsumers: List[ConformLoad]  = field(default_factory=list)
      

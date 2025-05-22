@@ -21,8 +21,8 @@ class VisibilityLayer(IdentifiedObject):
     """
     # The drawing order for this layer.  The higher the number, the later the layer
     # and the objects within it are rendered.
-    drawingOrder_: int  = None
+    drawingOrder: int  = None
  
     # A visibility layer can contain one or more diagram objects.
-    DiagramObject_: List[DiagramObject]  = field(default_factory=list)
+    VisibleObjects: List[DiagramObject]  = field(default_factory=list)
      

@@ -40,45 +40,46 @@ class LoadMotor(IdentifiedObject):
     """
     # Fraction of constant-power load to be represented by this motor model (Pfrac)
     # (>=0.0 and <=1.0).  Typical Value = 0.3.
-    pfrac_: Simple_Float  = None
+    pfrac: Simple_Float  = None
  
-    # Loading factor ï¿½ ratio of initial P to motor MVA base (Lfac).  Typical Value =
+    # Loading factor – ratio of initial P to motor MVA base (Lfac).  Typical Value =
     # 0.8.
-    lfac_: Simple_Float  = None
+    lfac: Simple_Float  = None
  
     # Synchronous reactance (Ls).  Typical Value = 3.2.
-    ls_: PU  = None
+    ls: PU  = None
  
     # Transient reactance (Lp).  Typical Value = 0.15.
-    lp_: PU  = None
+    lp: PU  = None
  
     # Subtransient reactance (Lpp).  Typical Value = 0.15.
-    lpp_: PU  = None
+    lpp: PU  = None
  
     # Stator resistance (Ra).  Typical Value = 0.
-    ra_: PU  = None
+    ra: PU  = None
  
     # Transient rotor time constant (Tpo) (not=0).  Typical Value = 1.
-    tpo_: Seconds  = None
+    tpo: Seconds  = None
  
     # Subtransient rotor time constant (Tppo).  Typical Value = 0.02.
-    tppo_: Seconds  = None
+    tppo: Seconds  = None
  
     # Inertia constant (H) (not=0).  Typical Value = 0.4.
-    h_: Seconds  = None
+    h: Seconds  = None
  
     # Damping factor (D).  Unit = delta P/delta speed.  Typical Value = 2.
-    d_: Simple_Float  = None
+    d: Simple_Float  = None
  
     # Voltage threshold for tripping (Vt).  Typical Value = 0.7.
-    vt_: PU  = None
+    vt: PU  = None
  
     # Voltage trip pickup time (Tv).  Typical Value = 0.1.
-    tv_: Seconds  = None
+    tv: Seconds  = None
  
     # Circuit breaker operating time (Tbkr).  Typical Value = 0.08.
-    tbkr_: Seconds  = None
+    tbkr: Seconds  = None
  
     # Aggregate load to which this aggregate motor (dynamic) load belongs.
-    LoadAggregate_: Optional[LoadAggregate] = None
+    LoadAggregate_ref: Optional[LoadAggregate] = None
+    LoadAggregate: str = None
      

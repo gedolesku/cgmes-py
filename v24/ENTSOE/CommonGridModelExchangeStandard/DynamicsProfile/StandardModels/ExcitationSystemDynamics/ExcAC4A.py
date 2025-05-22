@@ -12,30 +12,30 @@ class ExcAC4A(ExcitationSystemDynamics):
     different minimum controller output.
     """
     # Maximum voltage regulator input limit (Vimax).  Typical Value = 10.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Minimum voltage regulator input limit (Vimin).  Typical Value = -10.
-    vimin_: PU  = None
+    vimin: PU  = None
  
     # Voltage regulator time constant (Tc).  Typical Value = 1.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Voltage regulator time constant (Tb).  Typical Value = 10.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator gain (Ka).  Typical Value = 200.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (Ta).  Typical Value = 0.015.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (Vrmax).  Typical Value = 5.64.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (Vrmin).  Typical Value = -4.53.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (Kc).  Typical
     # Value = 0.
-    kc_: PU  = None
+    kc: PU  = None
      

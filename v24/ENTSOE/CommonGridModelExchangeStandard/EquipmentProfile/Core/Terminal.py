@@ -14,13 +14,15 @@ class Terminal(ACDCTerminal):
     """
     # Represents the normal network phasing condition.
     # If the attribute is missing three phases (ABC or ABCN) shall be assumed.
-    phases_: PhaseCode  = None
+    phases: PhaseCode  = None
  
     # Terminals interconnected with zero impedance at a this connectivity node. 
-    ConnectivityNode_: Optional[ConnectivityNode] = None
+    ConnectivityNode_ref: Optional[ConnectivityNode] = None
+    ConnectivityNode: str = None
  
     # The conducting equipment of the terminal.  Conducting equipment have  terminals
     # that may be connected to other conducting equipment terminals via connectivity
     # nodes or topological nodes.
-    ConductingEquipment_: Optional[ConductingEquipment] = None
+    ConductingEquipment_ref: Optional[ConductingEquipment] = None
+    ConductingEquipment: str = None
      

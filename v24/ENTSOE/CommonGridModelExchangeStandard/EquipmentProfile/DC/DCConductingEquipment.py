@@ -10,5 +10,5 @@ class DCConductingEquipment(Equipment):
     """The parts of the DC power system that are designed to carry current or that are
     conductively connected through DC terminals.
     """
-    DCTerminal_: List[DCTerminal]  = field(default_factory=list)
+    DCTerminals: List[DCTerminal]  = field(default_factory=list)
      

@@ -9,8 +9,8 @@ class MonthDayInterval:
     """Interval between two times specified as mont and date.
     """
     # End time of this interval.
-    end_: MonthDay  = None
+    end: MonthDay  = None
  
     # Start time of this interval.
-    start_: MonthDay  = None
+    start: MonthDay  = None
      

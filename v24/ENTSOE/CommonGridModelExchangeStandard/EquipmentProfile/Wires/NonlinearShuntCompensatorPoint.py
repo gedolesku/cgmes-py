@@ -11,17 +11,17 @@ class NonlinearShuntCompensatorPoint:
     """A non linear shunt compensator bank or section admittance value.
     """
     # Positive sequence shunt (charging) susceptance per section
-    b_: Susceptance  = None
+    b: Susceptance  = None
  
     # Zero sequence shunt (charging) susceptance per section
-    b0_: Susceptance  = None
+    b0: Susceptance  = None
  
     # Positive sequence shunt (charging) conductance per section
-    g_: Conductance  = None
+    g: Conductance  = None
  
     # Zero sequence shunt (charging) conductance per section
-    g0_: Conductance  = None
+    g0: Conductance  = None
  
     # The number of the section.
-    sectionNumber_: int  = None
+    sectionNumber: int  = None
      

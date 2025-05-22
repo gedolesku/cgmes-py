@@ -16,48 +16,48 @@ class ExcELIN1(ExcitationSystemDynamics):
     input is included in the model.
     """
     # Current transducer time constant (Tfi).  Typical Value = 0.
-    tfi_: Seconds  = None
+    tfi: Seconds  = None
  
     # Controller reset time constant (Tnu).  Typical Value = 2.
-    tnu_: Seconds  = None
+    tnu: Seconds  = None
  
     # Voltage controller proportional gain (Vpu).  Typical Value = 34.5.
-    vpu_: PU  = None
+    vpu: PU  = None
  
     # Current controller gain (Vpi).  Typical Value = 12.45.
-    vpi_: PU  = None
+    vpi: PU  = None
  
     # Controller follow up gain (Vpnf).  Typical Value = 2.
-    vpnf_: PU  = None
+    vpnf: PU  = None
  
     # Controller follow up dead band (Dpnf).  Typical Value = 0.
-    dpnf_: PU  = None
+    dpnf: PU  = None
  
     # Stabilizer parameters (Tsw).  Typical Value = 3.
-    tsw_: Seconds  = None
+    tsw: Seconds  = None
  
     # Minimum open circuit excitation voltage (Efmin).  Typical Value = -5.
-    efmin_: PU  = None
+    efmin: PU  = None
  
     # Maximum open circuit excitation voltage (Efmax).  Typical Value = 5.
-    efmax_: PU  = None
+    efmax: PU  = None
  
     # Excitation transformer effective reactance (Xe) (>=0).  Xe represents the
     # regulation of the transformer/rectifier unit.  Typical Value = 0.06.
-    xe_: PU  = None
+    xe: PU  = None
  
     # Stabilizer Gain 1 (Ks1).  Typical Value = 0.
-    ks1_: PU  = None
+    ks1: PU  = None
  
     # Stabilizer Gain 2 (Ks2).  Typical Value = 0.
-    ks2_: PU  = None
+    ks2: PU  = None
  
     # Stabilizer Phase Lag Time Constant (Ts1).  Typical Value = 1.
-    ts1_: Seconds  = None
+    ts1: Seconds  = None
  
     # Stabilizer Filter Time Constant (Ts2).  Typical Value = 1.
-    ts2_: Seconds  = None
+    ts2: Seconds  = None
  
     # Stabilizer Limit Output (smax).  Typical Value = 0.1.
-    smax_: PU  = None
+    smax: PU  = None
      

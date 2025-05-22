@@ -19,49 +19,49 @@ class ExcIEEEST2A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 7.2.
     """
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 120.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.15.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator outputs (V<sub>RMAX</sub>).  Typical Value = 1.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator outputs (V<sub>RMIN</sub>).  Typical Value = 0.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 0.5.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation control system stabilizer gains (K<sub>F</sub>).  Typical Value = 0.
     # 05.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (T<sub>F</sub>).  Typical
     # Value = 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Potential circuit gain coefficient (K<sub>P</sub>).  Typical Value = 4.88.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Potential circuit gain coefficient (K<sub>I</sub>).  Typical Value = 8.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 1.82.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Maximum field voltage (E<sub>FDMax</sub>).  Typical Value = 99.
-    efdmax_: PU  = None
+    efdmax: PU  = None
  
     # UEL input (UELin).
     # true = HV gate
     # false = add to error signal.
     # Typical Value = true.
-    uelin_: bool  = None
+    uelin: bool  = None
      

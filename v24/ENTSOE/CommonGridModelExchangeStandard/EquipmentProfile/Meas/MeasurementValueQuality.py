@@ -12,5 +12,6 @@ class MeasurementValueQuality(Quality61850):
     document. Bits 16-31 are reserved for EMS applications.
     """
     # A MeasurementValue has a MeasurementValueQuality associated with it.
-    MeasurementValue_: Optional[MeasurementValue] = None
+    MeasurementValue_ref: Optional[MeasurementValue] = None
+    MeasurementValue: str = None
      

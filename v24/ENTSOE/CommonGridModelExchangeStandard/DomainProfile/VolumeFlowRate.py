@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class VolumeFlowRate:
     """Volume per time.
     """
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.none
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.none
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.s
+    denominatorUnit: UnitSymbol =  UnitSymbol.s
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
  
-    unit_: UnitSymbol =  UnitSymbol.m3
+    unit: UnitSymbol =  UnitSymbol.m3
  
-    value_: float  = None
+    value: float  = None
      

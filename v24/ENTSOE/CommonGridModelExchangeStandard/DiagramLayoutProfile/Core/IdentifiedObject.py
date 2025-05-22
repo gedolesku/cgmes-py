@@ -16,9 +16,9 @@ class IdentifiedObject:
     # For CIMXML data files in RDF syntax conforming to IEC 61970-552 Edition 1, the
     # mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object
     # elements.
-    mRID_: str  = None
+    mRID: str  = None
  
     # The name is any free human readable and possibly non unique text naming the
     # object.
-    name_: str  = None
+    name: str  = None
      

@@ -11,5 +11,6 @@ class EnergySource(ConductingEquipment):
     voltage level.
     """
     # Energy Scheduling Type of an Energy Source
-    EnergySchedulingType_: Optional[EnergySchedulingType] = None
+    EnergySchedulingType_ref: Optional[EnergySchedulingType] = None
+    EnergySchedulingType: str = None
      

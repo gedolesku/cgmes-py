@@ -10,5 +10,5 @@ class CurrentLimit(OperationalLimit):
     """Operational limit on current.
     """
     # Limit on current flow.
-    value_: CurrentFlow  = None
+    value: CurrentFlow  = None
      

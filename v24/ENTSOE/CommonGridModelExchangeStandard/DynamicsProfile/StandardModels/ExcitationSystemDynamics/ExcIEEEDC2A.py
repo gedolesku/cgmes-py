@@ -24,60 +24,60 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
     """
     # Exciter voltage at which exciter saturation is defined (E<sub>FD1</sub>).
     # Typical Value = 3.05.
-    efd1_: PU  = None
+    efd1: PU  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD2</sub>).
     # Typical Value = 2.29.
-    efd2_: PU  = None
+    efd2: PU  = None
  
     # (exclim).  IEEE standard is ambiguous about lower limit on exciter output.
     # Typical Value = - 999  which means that there is no limit applied.
-    exclim_: PU  = None
+    exclim: PU  = None
  
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 300.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Excitation control system stabilizer gain (K<sub>F</sub>).  Typical Value = 0.1.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD1</sub> (S<sub>E</sub>[E<sub>FD1</sub>]).  Typical Value = 0.279.
-    seefd1_: Simple_Float  = None
+    seefd1: Simple_Float  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD2</sub> (S<sub>E</sub>[E<sub>FD2</sub>]).  Typical Value = 0.117.
-    seefd2_: Simple_Float  = None
+    seefd2: Simple_Float  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.01.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Voltage regulator time constant (T<sub>B</sub>).  Typical Value = 0.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator time constant (T<sub>C</sub>).  Typical Value = 0.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 1.33.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation control system stabilizer time constant (T<sub>F</sub>).  Typical
     # Value = 0.675.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # UEL input (uelin).
     # true = input is connected to the HV gate
     # false = input connects to the error signal.
     # Typical Value = true.
-    uelin_: bool  = None
+    uelin: bool  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 4.95.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -4.9.
-    vrmin_: PU  = None
+    vrmin: PU  = None
      

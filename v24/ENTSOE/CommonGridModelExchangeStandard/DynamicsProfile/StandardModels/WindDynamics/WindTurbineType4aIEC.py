@@ -12,5 +12,6 @@ class WindTurbineType4aIEC(WindGenType4IEC):
       Reference: IEC Standard 61400-27-1, section 6.5.5.2.
     """
     # Wind control P type 4A model associated with this wind turbine type 4A model.
-    WindContPType4aIEC_: Optional[WindContPType4aIEC] = None
+    WindContPType4aIEC_ref: Optional[WindContPType4aIEC] = None
+    WindContPType4aIEC: str = None
      

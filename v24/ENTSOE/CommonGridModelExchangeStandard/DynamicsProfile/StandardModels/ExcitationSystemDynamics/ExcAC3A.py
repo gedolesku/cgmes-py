@@ -13,94 +13,94 @@ class ExcAC3A(ExcitationSystemDynamics):
     different field current limit.
     """
     # Voltage regulator time constant (Tb).  Typical Value = 0.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator time constant (T<sub>c</sub>).  Typical Value = 0.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Voltage regulator gain (Ka).  Typical Value = 45.62.
-    ka_: Seconds  = None
+    ka: Seconds  = None
  
     # Voltage regulator time constant (Ta).  Typical Value = 0.013.
-    ta_: PU  = None
+    ta: PU  = None
  
     # Maximum voltage regulator output (V<sub>amax</sub>).  Typical Value = 1.
-    vamax_: PU  = None
+    vamax: PU  = None
  
     # Minimum voltage regulator output (V<sub>amin</sub>).  Typical Value = -0.95.
-    vamin_: PU  = None
+    vamin: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control (Te).
     # Typical Value = 1.17.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Minimum exciter voltage output (Vemin).  Typical Value = 0.1.
-    vemin_: PU  = None
+    vemin: PU  = None
  
     # Constant associated with regulator and alternator field power supply (Kr).
     # Typical Value =3.77.
-    kr_: PU  = None
+    kr: PU  = None
  
     # Excitation control system stabilizer gains (Kf).  Typical Value = 0.143.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (Tf).  Typical Value = 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Excitation control system stabilizer gain (Kn).  Typical Value =0.05.
-    kn_: PU  = None
+    kn: PU  = None
  
     # Value of <i>EFD </i>at which feedback gain changes (Efdn).  Typical Value = 2.
     # 36.
-    efdn_: PU  = None
+    efdn: PU  = None
  
     # Rectifier loading factor proportional to commutating reactance (Kc).  Typical
     # Value = 0.104.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Demagnetizing factor, a function of exciter alternator reactances (Kd).
     # Typical Value = 0.499.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Exciter constant related to self-excited field (Ke).  Typical Value = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Gain used in the minimum field voltage limiter loop (Klv).  Typical Value = 0.
     # 194.
-    klv_: PU  = None
+    klv: PU  = None
  
     # Coefficient to allow different usage of the model (Kf1).  Typical Value = 1.
-    kf1_: PU  = None
+    kf1: PU  = None
  
     # Coefficient to allow different usage of the model (Kf2).  Typical Value = 0.
-    kf2_: PU  = None
+    kf2: PU  = None
  
     # Coefficient to allow different usage of the model-speed coefficient (Ks).
     # Typical Value = 0.
-    ks_: PU  = None
+    ks: PU  = None
  
     # Exciter field current limit reference (Vfemax).  Typical Value = 16.
-    vfemax_: PU  = None
+    vfemax: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve1) equals Vemax (Ve1).  Typical Value = 6.24.
-    ve1_: PU  = None
+    ve1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # Ve<sub>1</sub>, back of commutating reactance (Se[Ve<sub>1</sub>]).  Typical
     # Value = 1.143.
-    seve1_: Simple_Float  = None
+    seve1: Simple_Float  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (Ve<sub>2</sub>).  Typical Value = 4.68.
-    ve2_: PU  = None
+    ve2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # Ve<sub>2</sub>, back of commutating reactance (Se[Ve<sub>2</sub>]).  Typical
     # Value = 0.1.
-    seve2_: Simple_Float  = None
+    seve2: Simple_Float  = None
  
     # Field voltage used in the minimum field voltage limiter loop (Vlv).  Typical
     # Value = 0.79.
-    vlv_: PU  = None
+    vlv: PU  = None
      

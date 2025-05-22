@@ -30,13 +30,13 @@ class PowerTransformerEnd(TransformerEnd):
     PowerTransformers.
     """
     # Magnetizing branch susceptance (B mag).  The value can be positive or negative.
-    b_: Susceptance  = None
+    b: Susceptance  = None
  
     # Kind of connection.
-    connectionKind_: WindingConnection  = None
+    connectionKind: WindingConnection  = None
  
     # Zero sequence magnetizing branch susceptance.
-    b0_: Susceptance  = None
+    b0: Susceptance  = None
  
     # Terminal voltage phase angle displacement where 360 degrees are represented
     # with clock hours. The valid values are 0 to 11. For example, for the secondary
@@ -45,39 +45,40 @@ class PowerTransformerEnd(TransformerEnd):
     # 11.  The clock value of the transformer end number specified as 1, is assumed
     # to be zero.  Note the transformer end number is not assumed to be the same as
     # the terminal sequence number.
-    phaseAngleClock_: int  = None
+    phaseAngleClock: int  = None
  
     # Normal apparent power rating.
     # The attribute shall be a positive value. For a two-winding transformer the
     # values for the high and low voltage sides shall be identical. 
-    ratedS_: ApparentPower  = None
+    ratedS: ApparentPower  = None
  
     # Magnetizing branch conductance.
-    g_: Conductance  = None
+    g: Conductance  = None
  
     # Rated voltage: phase-phase for three-phase windings, and either phase-phase or
     # phase-neutral for single-phase windings.
     # A high voltage side, as given by TransformerEnd.endNumber, shall have a ratedU
     # that is greater or equal than ratedU for the lower voltage sides.
-    ratedU_: Voltage  = None
+    ratedU: Voltage  = None
  
     # Zero sequence magnetizing branch conductance (star-model).
-    g0_: Conductance  = None
+    g0: Conductance  = None
  
     # Resistance (star-model) of the transformer end.
     # The attribute shall be equal or greater than zero for non-equivalent
     # transformers.
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Zero sequence series resistance (star-model) of the transformer end.
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Positive sequence series reactance (star-model) of the transformer end.
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Zero sequence series reactance of the transformer end.
-    x0_: Reactance  = None
+    x0: Reactance  = None
  
     # The ends of this power transformer.
-    PowerTransformer_: Optional[PowerTransformer] = None
+    PowerTransformer_ref: Optional[PowerTransformer] = None
+    PowerTransformer: str = None
      

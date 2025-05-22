@@ -33,71 +33,89 @@ class ProprietaryParameterDynamics:
     """
     # Sequence number of the parameter among the set of parameters associated with
     # the related proprietary user-defined model.
-    parameterNumber_: int  = None
+    parameterNumber: int  = None
  
     # Used for boolean parameter value. If this attribute is populated,
     # integerParameterValue and floatParameterValue will not be.
-    booleanParameterValue_: bool  = None
+    booleanParameterValue: bool  = None
  
     # Used for integer parameter value.  If this attribute is populated,
     # booleanParameterValue and floatParameterValue will not be.
-    integerParameterValue_: int  = None
+    integerParameterValue: int  = None
  
     # Used for floating point parameter value.  If this attribute is populated,
     # booleanParameterValue and integerParameterValue will not be.
-    floatParameterValue_: Simple_Float  = None
+    floatParameterValue: Simple_Float  = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    LoadUserDefined_: Optional[LoadUserDefined] = None
+    LoadUserDefined_ref: Optional[LoadUserDefined] = None
+    LoadUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    VoltageCompensatorUserDefined_: Optional[VoltageCompensatorUserDefined] = None
+    VoltageCompensatorUserDefined_ref: Optional[VoltageCompensatorUserDefined] = None
+    VoltageCompensatorUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    PFVArControllerType2UserDefined_: Optional[PFVArControllerType2UserDefined] = None
+    PFVArControllerType2UserDefined_ref: Optional[PFVArControllerType2UserDefined] = None
+    PFVArControllerType2UserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    VoltageAdjusterUserDefined_: Optional[VoltageAdjusterUserDefined] = None
+    VoltageAdjusterUserDefined_ref: Optional[VoltageAdjusterUserDefined] = None
+    VoltageAdjusterUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    PFVArControllerType1UserDefined_: Optional[PFVArControllerType1UserDefined] = None
+    PFVArControllerType1UserDefined_ref: Optional[PFVArControllerType1UserDefined] = None
+    PFVArControllerType1UserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    DiscontinuousExcitationControlUserDefined_: Optional[DiscontinuousExcitationControlUserDefined] = None
+    DiscontinuousExcitationControlUserDefined_ref: Optional[DiscontinuousExcitationControlUserDefined] = None
+    DiscontinuousExcitationControlUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    PowerSystemStabilizerUserDefined_: Optional[PowerSystemStabilizerUserDefined] = None
+    PowerSystemStabilizerUserDefined_ref: Optional[PowerSystemStabilizerUserDefined] = None
+    PowerSystemStabilizerUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    UnderexcitationLimiterUserDefined_: Optional[UnderexcitationLimiterUserDefined] = None
+    UnderexcitationLimiterUserDefined_ref: Optional[UnderexcitationLimiterUserDefined] = None
+    UnderexcitationLimiterUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    OverexcitationLimiterUserDefined_: Optional[OverexcitationLimiterUserDefined] = None
+    OverexcitationLimiterUserDefined_ref: Optional[OverexcitationLimiterUserDefined] = None
+    OverexcitationLimiterUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    ExcitationSystemUserDefined_: Optional[ExcitationSystemUserDefined] = None
+    ExcitationSystemUserDefined_ref: Optional[ExcitationSystemUserDefined] = None
+    ExcitationSystemUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    MechanicalLoadUserDefined_: Optional[MechanicalLoadUserDefined] = None
+    MechanicalLoadUserDefined_ref: Optional[MechanicalLoadUserDefined] = None
+    MechanicalLoadUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    TurbineLoadControllerUserDefined_: Optional[TurbineLoadControllerUserDefined] = None
+    TurbineLoadControllerUserDefined_ref: Optional[TurbineLoadControllerUserDefined] = None
+    TurbineLoadControllerUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    TurbineGovernorUserDefined_: Optional[TurbineGovernorUserDefined] = None
+    TurbineGovernorUserDefined_ref: Optional[TurbineGovernorUserDefined] = None
+    TurbineGovernorUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    AsynchronousMachineUserDefined_: Optional[AsynchronousMachineUserDefined] = None
+    AsynchronousMachineUserDefined_ref: Optional[AsynchronousMachineUserDefined] = None
+    AsynchronousMachineUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    SynchronousMachineUserDefined_: Optional[SynchronousMachineUserDefined] = None
+    SynchronousMachineUserDefined_ref: Optional[SynchronousMachineUserDefined] = None
+    SynchronousMachineUserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    WindType3or4UserDefined_: Optional[WindType3or4UserDefined] = None
+    WindType3or4UserDefined_ref: Optional[WindType3or4UserDefined] = None
+    WindType3or4UserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    WindType1or2UserDefined_: Optional[WindType1or2UserDefined] = None
+    WindType1or2UserDefined_ref: Optional[WindType1or2UserDefined] = None
+    WindType1or2UserDefined: str = None
  
     # Proprietary user-defined model with which this parameter is associated.
-    WindPlantUserDefined_: Optional[WindPlantUserDefined] = None
+    WindPlantUserDefined_ref: Optional[WindPlantUserDefined] = None
+    WindPlantUserDefined: str = None
      

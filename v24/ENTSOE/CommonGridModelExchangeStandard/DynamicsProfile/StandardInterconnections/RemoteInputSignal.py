@@ -19,29 +19,37 @@ class RemoteInputSignal(IdentifiedObject):
     input signal of a specific type is coming.
     """
     # Type of input signal.
-    remoteSignalType_: RemoteSignalKind  = None
+    remoteSignalType: RemoteSignalKind  = None
  
     # Power Factor or VAr controller Type I model using this remote input signal.
-    PFVArControllerType1Dynamics_: Optional[PFVArControllerType1Dynamics] = None
+    PFVArControllerType1Dynamics_ref: Optional[PFVArControllerType1Dynamics] = None
+    PFVArControllerType1Dynamics: str = None
  
     # Underexcitation limiter model using this remote input signal.
-    UnderexcitationLimiterDynamics_: Optional[UnderexcitationLimiterDynamics] = None
+    UnderexcitationLimiterDynamics_ref: Optional[UnderexcitationLimiterDynamics] = None
+    UnderexcitationLimiterDynamics: str = None
  
     # Voltage compensator model using this remote input signal.
-    VoltageCompensatorDynamics_: Optional[VoltageCompensatorDynamics] = None
+    VoltageCompensatorDynamics_ref: Optional[VoltageCompensatorDynamics] = None
+    VoltageCompensatorDynamics: str = None
  
     # Power system stabilizer model using this remote input signal.
-    PowerSystemStabilizerDynamics_: Optional[PowerSystemStabilizerDynamics] = None
+    PowerSystemStabilizerDynamics_ref: Optional[PowerSystemStabilizerDynamics] = None
+    PowerSystemStabilizerDynamics: str = None
  
     # Discontinuous excitation control model using this remote input signal.
-    DiscontinuousExcitationControlDynamics_: Optional[DiscontinuousExcitationControlDynamics] = None
+    DiscontinuousExcitationControlDynamics_ref: Optional[DiscontinuousExcitationControlDynamics] = None
+    DiscontinuousExcitationControlDynamics: str = None
  
     # Remote input signal used by these wind turbine Type 3 or 4 models.
-    WindTurbineType3or4Dynamics_: Optional[WindTurbineType3or4Dynamics] = None
+    WindTurbineType3or4Dynamics_ref: Optional[WindTurbineType3or4Dynamics] = None
+    WindTurbineType3or4Dynamics: str = None
  
     # The remote signal with which this power plant is associated.
-    WindPlantDynamics_: Optional[WindPlantDynamics] = None
+    WindPlantDynamics_ref: Optional[WindPlantDynamics] = None
+    WindPlantDynamics: str = None
  
     # Remote terminal with which this input signal is associated.
-    Terminal_: Optional[Terminal] = None
+    Terminal_ref: Optional[Terminal] = None
+    Terminal: str = None
      

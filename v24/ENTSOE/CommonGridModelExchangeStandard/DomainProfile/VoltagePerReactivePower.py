@@ -10,13 +10,13 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class VoltagePerReactivePower:
     """Voltage variation with reactive power.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.V
+    unit: UnitSymbol =  UnitSymbol.V
  
-    denominatorMultiplier_: UnitMultiplier =  UnitMultiplier.M
+    denominatorMultiplier: UnitMultiplier =  UnitMultiplier.M
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.k
+    multiplier: UnitMultiplier =  UnitMultiplier.k
  
-    denominatorUnit_: UnitSymbol =  UnitSymbol.VAr
+    denominatorUnit: UnitSymbol =  UnitSymbol.VAr
      

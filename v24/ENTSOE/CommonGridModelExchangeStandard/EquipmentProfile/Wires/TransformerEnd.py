@@ -20,25 +20,27 @@ class TransformerEnd(IdentifiedObject):
     """
     # (for Yn and Zn connections) Resistance part of neutral impedance where
     # 'grounded' is true.
-    rground_: Resistance  = None
+    rground: Resistance  = None
  
     # Number for this transformer end, corresponding to the end's order in the power
     # transformer vector group or phase angle clock number.  Highest voltage winding
     # should be 1.  Each end within a power transformer should have a unique
     # subsequent end number.   Note the transformer end number need not match the
     # terminal sequence number.
-    endNumber_: int  = None
+    endNumber: int  = None
  
     # (for Yn and Zn connections) True if the neutral is solidly grounded.
-    grounded_: bool  = None
+    grounded: bool  = None
  
     # (for Yn and Zn connections) Reactive part of neutral impedance where 'grounded'
     # is true.
-    xground_: Reactance  = None
+    xground: Reactance  = None
  
     # Terminal of the power transformer to which this transformer end belongs.
-    Terminal_: Optional[Terminal] = None
+    Terminal_ref: Optional[Terminal] = None
+    Terminal: str = None
  
     # Base voltage of the transformer end.  This is essential for PU calculation.
-    BaseVoltage_: Optional[BaseVoltage] = None
+    BaseVoltage_ref: Optional[BaseVoltage] = None
+    BaseVoltage: str = None
      

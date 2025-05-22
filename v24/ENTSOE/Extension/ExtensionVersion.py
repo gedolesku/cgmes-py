@@ -11,11 +11,11 @@ class ExtensionVersion:
     """
     # Profile creation date
     # Form is YYYY-MM-DD for example for January 5, 2009 it is 2009-01-05.
-    date_: str  ="2013-12-18"
+    date: str  ="2013-12-18"
  
     # ENTSO-E namespace URI. The last two elements in the URI (http://entsoe.
     # eu/CIM/SchemaExtension/yy/zzz#) indicate major and minor versions where:
     # - yy - indicates a major version;
     # - zzz - indicates a minor version. 
-    namespaceURI_: str  = "http://entsoe.eu/CIM/SchemaExtension/3/1#"
+    namespaceURI: str  = "http://entsoe.eu/CIM/SchemaExtension/3/1#"
      

@@ -11,5 +11,5 @@ class TextDiagramObject(DiagramObject):
     domain object.
     """
     # The text that is displayed by this text diagram object.
-    text_: str  = None
+    text: str  = None
      

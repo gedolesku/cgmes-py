@@ -11,8 +11,9 @@ class ValueToAlias(IdentifiedObject):
     """Describes the translation of one particular value into a name, e.g. 1 as "Open".
     """
     # The value that is mapped.
-    value_: int  = None
+    value: int  = None
  
     # The ValueToAlias mappings included in the set.
-    ValueAliasSet_: Optional[ValueAliasSet] = None
+    ValueAliasSet_ref: Optional[ValueAliasSet] = None
+    ValueAliasSet: str = None
      

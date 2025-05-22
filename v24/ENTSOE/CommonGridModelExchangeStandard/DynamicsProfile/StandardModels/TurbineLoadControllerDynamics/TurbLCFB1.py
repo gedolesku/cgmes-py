@@ -17,47 +17,47 @@ class TurbLCFB1(TurbineLoadControllerDynamics):
     managing the action of the turbine governor.
     """
     # Base for power values (MWbase) (>0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # Type of turbine governor reference (Type).
     # true = speed reference governor
     # false = load reference governor.
     # Typical Value = true.
-    speedReferenceGovernor_: bool  = None
+    speedReferenceGovernor: bool  = None
  
     # Controller dead band (db).  Typical Value = 0.
-    db_: PU  = None
+    db: PU  = None
  
     # Maximum control error (Emax) (note 4).  Typical Value = 0.02.
-    emax_: PU  = None
+    emax: PU  = None
  
     # Frequency bias gain (Fb).  Typical Value = 0.
-    fb_: PU  = None
+    fb: PU  = None
  
     # Proportional gain (Kp).  Typical Value = 0.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Integral gain (Ki).  Typical Value = 0.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Frequency bias flag (Fbf).
     # true = enable frequency bias
     # false = disable frequency bias.
     # Typical Value = false.
-    fbf_: bool  = None
+    fbf: bool  = None
  
     # Power controller flag (Pbf).
     # true = enable load controller
     # false = disable load controller.
     # Typical Value = false.
-    pbf_: bool  = None
+    pbf: bool  = None
  
     # Power transducer time constant (Tpelec).  Typical Value = 0.
-    tpelec_: Seconds  = None
+    tpelec: Seconds  = None
  
     # Maximum turbine speed/load reference bias (Irmax) (note 3).  Typical Value = 0.
-    irmax_: PU  = None
+    irmax: PU  = None
  
     # Power controller setpoint (Pmwset) (note 1).  Unit = MW. Typical Value = 0.
-    pmwset_: ActivePower  = None
+    pmwset: ActivePower  = None
      

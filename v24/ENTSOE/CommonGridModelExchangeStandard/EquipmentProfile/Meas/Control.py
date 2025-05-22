@@ -19,22 +19,23 @@ class Control(IdentifiedObject):
     # Specifies the type of Control, e.g. BreakerOn/Off, GeneratorVoltageSetPoint,
     # TieLineFlow etc. The ControlType.name shall be unique among all specified types
     # and describe the type.
-    controlType_: str  = None
+    controlType: str  = None
  
     # Indicates that a client is currently sending control commands that has not
     # completed.
-    operationInProgress_: bool  = None
+    operationInProgress: bool  = None
  
     # The last time a control output was sent.
-    timeStamp_: DateTime  = None
+    timeStamp: DateTime  = None
  
     # The unit multiplier of the controlled quantity.
-    unitMultiplier_: UnitMultiplier  = None
+    unitMultiplier: UnitMultiplier  = None
  
     # The unit of measure of the controlled quantity.
-    unitSymbol_: UnitSymbol  = None
+    unitSymbol: UnitSymbol  = None
  
     # The controller outputs used to actually govern a regulating device, e.g. the
     # magnetization of a synchronous machine or capacitor bank breaker actuator.
-    PowerSystemResource_: Optional[PowerSystemResource] = None
+    PowerSystemResource_ref: Optional[PowerSystemResource] = None
+    PowerSystemResource: str = None
      

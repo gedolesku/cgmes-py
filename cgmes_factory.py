@@ -34,61 +34,6 @@ class CGMESObjectFactory:
             else:
                 class_name = cim_type
             
-            # # Try to import from the v24 package structure first using lazy import
-            # v24_paths = [
-            #     f"v24.TC57CIM.IEC61970.Base.Wires.{class_name}",
-            #     f"v24.TC57CIM.IEC61970.Base.Core.{class_name}",
-            #     f"v24.TC57CIM.IEC61970.Base.Domain.{class_name}",
-            #     f"v24.TC57CIM.IEC61970.Base.DiagramLayout.{class_name}",
-            #     f"v24.TC57CIM.IEC61970.Base.Topology.{class_name}",
-            #     f"v24.TC57CIM.IEC61970.Base.StateVariables.{class_name}"
-            # ]
-            
-            # for module_path in v24_paths:
-            #     # Skip modules we know have already failed to import
-            #     if module_path in self.module_import_failures:
-            #         continue
-                    
-            #     try:
-            #         self.logger.debug(f"Trying to import {module_path}")
-                    
-            #         # Use a more sophisticated import approach for circular dependencies
-            #         module_name = module_path.split('.')[-2] + '.' + class_name
-            #         if module_name in sys.modules:
-            #             # Use existing module if it's already in sys.modules
-            #             module = sys.modules[module_name]
-            #         else:
-            #             # First try to find the module spec
-            #             spec = importlib.util.find_spec(module_path)
-            #             if not spec:
-            #                 # If spec not found, try next path
-            #                 continue
-                            
-            #             # Create module from spec but don't execute it
-            #             module = importlib.util.module_from_spec(spec)
-            #             sys.modules[module_path] = module
-                        
-            #             try:
-            #                 # Now execute the module
-            #                 spec.loader.exec_module(module)
-            #             except ImportError as ie:
-            #                 if "circular import" in str(ie).lower():
-            #                     # For circular imports, just return the module we have so far
-            #                     self.logger.debug(f"Detected circular import for {module_path}, using partially initialized module")
-            #                     pass
-            #                 else:
-            #                     raise
-                    
-            #         # Get the class from the module
-            #         if hasattr(module, class_name):
-            #             class_obj = getattr(module, class_name)
-            #             self.class_cache[cim_type] = class_obj
-            #             return class_obj
-            #     except (ImportError, AttributeError) as e:
-            #         self.logger.debug(f"Failed to import {module_path}: {str(e)}")
-            #         self.module_import_failures.add(module_path)
-            #         continue
-            
             # Fall back to the original mapping logic if v24 structure fails
             possible_modules = [
                 f"{self.base_package}.CoreProfile.Core.{class_name}",
@@ -178,7 +123,8 @@ class CGMESObjectFactory:
                 _, attr_name = tag.split('}')
             else:
                 attr_name = tag
-            attr_name=attr_name+"_"
+            if '.' in attr_name:
+                _, attr_name = attr_name.split('.')
             # Check if attribute exists in the class
             if not hasattr(obj, attr_name):
                 # It might be in a different format (e.g., camelCase vs snake_case)

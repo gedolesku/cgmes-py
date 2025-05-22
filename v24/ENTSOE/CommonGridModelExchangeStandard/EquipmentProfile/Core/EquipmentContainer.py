@@ -10,5 +10,5 @@ class EquipmentContainer(ConnectivityNodeContainer):
     """A modeling construct to provide a root class for containing equipment.
     """
     # Contained equipment.
-    Equipment_: List[Equipment]  = field(default_factory=list)
+    Equipments: List[Equipment]  = field(default_factory=list)
      

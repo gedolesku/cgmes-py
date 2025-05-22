@@ -16,16 +16,17 @@ class RegularTimePoint:
     # for a RegularTimePoint is computed by multiplying the associated regular
     # interval schedule's time step with the regular time point sequence number and
     # adding the associated schedules start time.
-    sequenceNumber_: int  = None
+    sequenceNumber: int  = None
  
     # The first value at the time. The meaning of the value is defined by the derived
     # type of the associated schedule.
-    value1_: Simple_Float  = None
+    value1: Simple_Float  = None
  
     # The second value at the time. The meaning of the value is defined by the
     # derived type of the associated schedule.
-    value2_: Simple_Float  = None
+    value2: Simple_Float  = None
  
     # Regular interval schedule containing this time point.
-    RegularIntervalSchedule_: Optional[RegularIntervalSchedule] = None
+    IntervalSchedule_ref: Optional[RegularIntervalSchedule] = None
+    IntervalSchedule: str = None
      

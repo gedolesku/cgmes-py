@@ -20,20 +20,20 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
     """
     # OEL timed field current limiter pickup level (I<sub>TFPU</sub>).  Typical Value
     # = 1.05.
-    itfpu_: PU  = None
+    itfpu: PU  = None
  
     # OEL instantaneous field current limit (I<sub>FDMAX</sub>).  Typical Value = 1.5.
-    ifdmax_: PU  = None
+    ifdmax: PU  = None
  
     # OEL timed field current limit (I<sub>FDLIM</sub>).  Typical Value = 1.05.
-    ifdlim_: PU  = None
+    ifdlim: PU  = None
  
     # OEL pickup/drop-out hysteresis (HYST).  Typical Value = 0.03.
-    hyst_: PU  = None
+    hyst: PU  = None
  
     # OEL cooldown gain (K<sub>CD</sub>).  Typical Value = 1.
-    kcd_: PU  = None
+    kcd: PU  = None
  
     # OEL ramped limit rate (K<sub>RAMP</sub>).  Unit = PU/sec.  Typical Value = 10.
-    kramp_: Simple_Float  = None
+    kramp: Simple_Float  = None
      

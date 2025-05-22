@@ -13,5 +13,6 @@ class OverexcitationLimiterDynamics(DynamicsFunctionBlock):
     """
     # Excitation system model with which this overexcitation limiter model is
     # associated.
-    ExcitationSystemDynamics_: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics_ref: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics: str = None
      

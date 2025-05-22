@@ -8,5 +8,5 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Simple_Float:
     """A floating point number. The range is unspecified and not limited.
     """
-    value_: float  = None
+    value: float  = None
      

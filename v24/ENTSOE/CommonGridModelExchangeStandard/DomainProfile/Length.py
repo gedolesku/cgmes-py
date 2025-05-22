@@ -10,9 +10,9 @@ if TYPE_CHECKING:          from ENTSOE.CommonGridModelExchangeStandard.DomainPro
 class Length:
     """Unit of length. Never negative.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.m
+    unit: UnitSymbol =  UnitSymbol.m
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.k
+    multiplier: UnitMultiplier =  UnitMultiplier.k
      

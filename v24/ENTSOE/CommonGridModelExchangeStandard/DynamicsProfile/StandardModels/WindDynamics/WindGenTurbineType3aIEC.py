@@ -15,13 +15,13 @@ class WindGenTurbineType3aIEC(WindGenTurbineType3IEC):
     """
     # Current PI controller proportional gain (K<sub>Pc</sub>). It is type dependent
     # parameter.
-    kpc_: Simple_Float  = None
+    kpc: Simple_Float  = None
  
     # Electromagnetic transient reactance (x<sub>S</sub>). It is type dependent
     # parameter.
-    xs_: PU  = None
+    xs: PU  = None
  
     # Current PI controller integration time constant (T<sub>Ic</sub>). It is type
     # dependent parameter.
-    tic_: Seconds  = None
+    tic: Seconds  = None
      

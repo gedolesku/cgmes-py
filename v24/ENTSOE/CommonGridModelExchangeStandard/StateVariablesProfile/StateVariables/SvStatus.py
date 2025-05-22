@@ -10,8 +10,9 @@ class SvStatus:
     """State variable for status.
     """
     # The in service status as a result of topology processing.
-    inService_: bool  = None
+    inService: bool  = None
  
     # The conducting equipment associated with the status state variable.
-    ConductingEquipment_: Optional[ConductingEquipment] = None
+    ConductingEquipment_ref: Optional[ConductingEquipment] = None
+    ConductingEquipment: str = None
      

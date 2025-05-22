@@ -13,14 +13,14 @@ class OverexcLim2(OverexcitationLimiterDynamics):
     conditions: V<sub>nom</sub>, P<sub>nom</sub>, CosPhi<sub>nom</sub>).
     """
     # Gain Over excitation limiter (K<sub>OI</sub>).  Typical Value = 0.1.
-    koi_: PU  = None
+    koi: PU  = None
  
     # Maximum error signal (V<sub>OIMAX</sub>).  Typical Value = 0.
-    voimax_: PU  = None
+    voimax: PU  = None
  
     # Minimum error signal (V<sub>OIMIN</sub>).  Typical Value = -9999.
-    voimin_: PU  = None
+    voimin: PU  = None
  
     # Limit value of rated field current (I<sub>FDLIM</sub>).  Typical Value = 1.05.
-    ifdlim_: PU  = None
+    ifdlim: PU  = None
      

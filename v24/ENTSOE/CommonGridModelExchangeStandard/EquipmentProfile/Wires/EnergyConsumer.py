@@ -14,21 +14,22 @@ class EnergyConsumer(ConductingEquipment):
     """
     # Active power of the load that is a fixed quantity. Load sign convention is used,
     # i.e. positive sign means flow out from a node.
-    pfixed_: ActivePower  = None
+    pfixed: ActivePower  = None
  
     # Fixed active power as per cent of load group fixed active power. Load sign
     # convention is used, i.e. positive sign means flow out from a node.
-    pfixedPct_: PerCent  = None
+    pfixedPct: PerCent  = None
  
     # Reactive power of the load that is a fixed quantity. Load sign convention is
     # used, i.e. positive sign means flow out from a node.
-    qfixed_: ReactivePower  = None
+    qfixed: ReactivePower  = None
  
     # Fixed reactive power as per cent of load group fixed reactive power. Load sign
     # convention is used, i.e. positive sign means flow out from a node.
-    qfixedPct_: PerCent  = None
+    qfixedPct: PerCent  = None
  
     # The load response characteristic of this load.  If missing, this load is
     # assumed to be constant power.
-    LoadResponseCharacteristic_: Optional[LoadResponseCharacteristic] = None
+    LoadResponse_ref: Optional[LoadResponseCharacteristic] = None
+    LoadResponse: str = None
      

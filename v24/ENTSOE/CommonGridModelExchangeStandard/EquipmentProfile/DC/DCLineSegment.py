@@ -16,18 +16,19 @@ class DCLineSegment(DCConductingEquipment):
     DC region of the power system.
     """
     # Capacitance of the DC line segment. Significant for cables only.
-    capacitance_: Capacitance  = None
+    capacitance: Capacitance  = None
  
     # Inductance of the DC line segment. Neglectable compared with DCSeriesDevice
     # used for smoothing.
-    inductance_: Inductance  = None
+    inductance: Inductance  = None
  
     # Resistance of the DC line segment.
-    resistance_: Resistance  = None
+    resistance: Resistance  = None
  
     # Segment length for calculating line section capabilities.
-    length_: Length  = None
+    length: Length  = None
  
     # Set of per-length parameters for this line segment.
-    PerLengthDCLineParameter_: Optional[PerLengthDCLineParameter] = None
+    PerLengthParameter_ref: Optional[PerLengthDCLineParameter] = None
+    PerLengthParameter: str = None
      

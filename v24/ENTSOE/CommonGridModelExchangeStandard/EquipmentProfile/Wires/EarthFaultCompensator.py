@@ -14,5 +14,5 @@ class EarthFaultCompensator(ConductingEquipment):
     connection rules apply.
     """
     # Nominal resistance of device.
-    r_: Resistance  = None
+    r: Resistance  = None
      

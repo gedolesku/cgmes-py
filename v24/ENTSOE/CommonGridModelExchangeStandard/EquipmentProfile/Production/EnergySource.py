@@ -15,32 +15,33 @@ class EnergySource(ConductingEquipment):
     voltage level.
     """
     # Phase-to-phase nominal voltage.
-    nominalVoltage_: Voltage  = None
+    nominalVoltage: Voltage  = None
  
     # Positive sequence Thevenin resistance.
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Zero sequence Thevenin resistance.
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Negative sequence Thevenin resistance.
-    rn_: Resistance  = None
+    rn: Resistance  = None
  
     # Phase angle of a-phase open circuit.
-    voltageAngle_: AngleRadians  = None
+    voltageAngle: AngleRadians  = None
  
     # Phase-to-phase open circuit voltage magnitude.
-    voltageMagnitude_: Voltage  = None
+    voltageMagnitude: Voltage  = None
  
     # Positive sequence Thevenin reactance.
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Zero sequence Thevenin reactance.
-    x0_: Reactance  = None
+    x0: Reactance  = None
  
     # Negative sequence Thevenin reactance.
-    xn_: Reactance  = None
+    xn: Reactance  = None
  
     # Energy Scheduling Type of an Energy Source
-    EnergySchedulingType_: Optional[EnergySchedulingType] = None
+    EnergySchedulingType_ref: Optional[EnergySchedulingType] = None
+    EnergySchedulingType: str = None
      

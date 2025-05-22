@@ -13,49 +13,49 @@ class EquivalentBranch(EquivalentEquipment):
     # Negative sequence series resistance from terminal sequence  1 to terminal
     # sequence 2. Used for short circuit data exchange according to IEC 60909
     # EquivalentBranch is a result of network reduction prior to the data exchange 
-    negativeR12_: Resistance  = None
+    negativeR12: Resistance  = None
  
     # Negative sequence series resistance from terminal sequence 2 to terminal
     # sequence 1. Used for short circuit data exchange according to IEC 60909
     # EquivalentBranch is a result of network reduction prior to the data exchange
-    negativeR21_: Resistance  = None
+    negativeR21: Resistance  = None
  
     # Negative sequence series reactance from terminal sequence  1 to terminal
     # sequence 2. Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    negativeX12_: Reactance  = None
+    negativeX12: Reactance  = None
  
     # Negative sequence series reactance from terminal sequence 2 to terminal
     # sequence 1. Used for short circuit data exchange according to IEC 60909.
     # Usage: EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    negativeX21_: Reactance  = None
+    negativeX21: Reactance  = None
  
     # Positive sequence series resistance from terminal sequence  1 to terminal
     # sequence 2 . Used for short circuit data exchange according to IEC 60909.
     # EquivalentBranch is a result of network reduction prior to the data exchange. 
-    positiveR12_: Resistance  = None
+    positiveR12: Resistance  = None
  
     # Positive sequence series resistance from terminal sequence 2 to terminal
     # sequence 1. Used for short circuit data exchange according to IEC 60909
     # EquivalentBranch is a result of network reduction prior to the data exchange
-    positiveR21_: Resistance  = None
+    positiveR21: Resistance  = None
  
     # Positive sequence series reactance from terminal sequence  1 to terminal
     # sequence 2. Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    positiveX12_: Reactance  = None
+    positiveX12: Reactance  = None
  
     # Positive sequence series reactance from terminal sequence 2 to terminal
     # sequence 1. Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    positiveX21_: Reactance  = None
+    positiveX21: Reactance  = None
  
     # Positive sequence series resistance of the reduced branch.
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Resistance from terminal sequence 2 to terminal sequence 1 .Used for steady
     # state power flow. This attribute is optional and represent unbalanced network
@@ -63,10 +63,10 @@ class EquivalentBranch(EquivalentEquipment):
     # EquivalentBranch.r21 is assumed equal to EquivalentBranch.r.
     # Usage rule : EquivalentBranch is a result of network reduction prior to the
     # data exchange.
-    r21_: Resistance  = None
+    r21: Resistance  = None
  
     # Positive sequence series reactance of the reduced branch.
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Reactance from terminal sequence 2 to terminal sequence 1 .Used for steady
     # state power flow. This attribute is optional and represent unbalanced network
@@ -74,28 +74,28 @@ class EquivalentBranch(EquivalentEquipment):
     # EquivalentBranch.x21 is assumed equal to EquivalentBranch.x.
     # Usage rule : EquivalentBranch is a result of network reduction prior to the
     # data exchange.
-    x21_: Reactance  = None
+    x21: Reactance  = None
  
     # Zero sequence series resistance from terminal sequence  1 to terminal sequence
     # 2. Used for short circuit data exchange according to IEC 60909
     # EquivalentBranch is a result of network reduction prior to the data exchange
-    zeroR12_: Resistance  = None
+    zeroR12: Resistance  = None
  
     # Zero sequence series resistance from terminal sequence  2 to terminal sequence
     # 1. Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    zeroR21_: Resistance  = None
+    zeroR21: Resistance  = None
  
     # Zero sequence series reactance from terminal sequence  1 to terminal sequence 2.
     # Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    zeroX12_: Reactance  = None
+    zeroX12: Reactance  = None
  
     # Zero sequence series reactance from terminal sequence 2 to terminal sequence 1.
     # Used for short circuit data exchange according to IEC 60909
     # Usage : EquivalentBranch is a result of network reduction prior to the data
     # exchange
-    zeroX21_: Reactance  = None
+    zeroX21: Reactance  = None
      

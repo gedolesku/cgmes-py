@@ -14,16 +14,16 @@ class WindGenType4IEC(WindTurbineType3or4IEC):
     """
     # Maximum active current ramp rate (di<sub>pmax</sub>). It is project dependent
     # parameter.
-    dipmax_: PU  = None
+    dipmax: PU  = None
  
     # Minimum reactive current ramp rate (d<i>i</i><sub>qmin</sub>). It is case
     # dependent parameter.
-    diqmin_: PU  = None
+    diqmin: PU  = None
  
     # Maximum reactive current ramp rate (di<sub>qmax</sub>). It is project dependent
     # parameter.
-    diqmax_: PU  = None
+    diqmax: PU  = None
  
     # Time constant (T<sub>g</sub>). It is type dependent parameter.
-    tg_: Seconds  = None
+    tg: Seconds  = None
      

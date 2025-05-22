@@ -16,8 +16,8 @@ class WindPlantUserDefined(WindPlantDynamics):
     # sending and receiving applications and parameters passed as general attributes
     # false = user-defined model is explicitly defined in terms of control blocks and
     # their input and output signals.
-    proprietary_: bool  = None
+    proprietary: bool  = None
  
     # Parameter of this proprietary user-defined model.
-    ProprietaryParameterDynamics_: List[ProprietaryParameterDynamics]  = field(default_factory=list)
+    ProprietaryParameterDynamics: List[ProprietaryParameterDynamics]  = field(default_factory=list)
      

@@ -14,104 +14,104 @@ class GovGASTWD(TurbineGovernorDynamics):
     """Woodward Gas turbine governor model.
     """
     # Base for power values (MWbase) (> 0).  Unit = MW.
-    mwbase_: ActivePower  = None
+    mwbase: ActivePower  = None
  
     # (Kdroop).
-    kdroop_: PU  = None
+    kdroop: PU  = None
  
     # PID Proportional gain (Kp).
-    kp_: PU  = None
+    kp: PU  = None
  
     # Isochronous Governor Gain (Ki).
-    ki_: PU  = None
+    ki: PU  = None
  
     # Drop Governor Gain (Kd).
-    kd_: PU  = None
+    kd: PU  = None
  
     # Turbine and exhaust delay (Etd).
-    etd_: Seconds  = None
+    etd: Seconds  = None
  
     # Compressor discharge time constant (Tcd).
-    tcd_: Seconds  = None
+    tcd: Seconds  = None
  
     # Turbine rating (Trate).  Unit = MW.
-    trate_: ActivePower  = None
+    trate: ActivePower  = None
  
     # Fuel Control Time Constant (T).
-    t_: Seconds  = None
+    t: Seconds  = None
  
     # Maximum Turbine limit (Tmax).
-    tmax_: PU  = None
+    tmax: PU  = None
  
     # Minimum Turbine limit (Tmin).
-    tmin_: PU  = None
+    tmin: PU  = None
  
     # Combustion reaction time delay (Ecr).
-    ecr_: Seconds  = None
+    ecr: Seconds  = None
  
     # Ratio of Fuel Adjustment (K3).
-    k3_: PU  = None
+    k3: PU  = None
  
     # Valve positioner (<i>A</i>).
-    a_: Simple_Float  = None
+    a: Simple_Float  = None
  
     # Valve positioner (<i>B</i>). 
-    b_: Simple_Float  = None
+    b: Simple_Float  = None
  
     # Valve positioner (<i>C</i>). 
-    c_: Simple_Float  = None
+    c: Simple_Float  = None
  
     # Fuel system time constant (Tf).
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Fuel system feedback (Kf).
-    kf_: PU  = None
+    kf: PU  = None
  
     # Gain of radiation shield (K5).
-    k5_: PU  = None
+    k5: PU  = None
  
     # Gain of radiation shield (K4).
-    k4_: PU  = None
+    k4: PU  = None
  
     # Radiation shield time constant (T3).
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Thermocouple time constant (T4).
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Temperature controller integration rate (Tt).
-    tt_: Seconds  = None
+    tt: Seconds  = None
  
     # Temperature control time constant (T5).
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Exhaust temperature Parameter (Af1).
-    af1_: PU  = None
+    af1: PU  = None
  
     # (Bf1).  Bf1 = E(1-w) where E (speed sensitivity coefficient) is 0.55 to 0.65 x
     # Tr.
-    bf1_: PU  = None
+    bf1: PU  = None
  
     # Coefficient equal to 0.5(1-speed) (Af2).
-    af2_: PU  = None
+    af2: PU  = None
  
     # Turbine Torque Coefficient K<sub>hhv</sub> (depends on heating value of fuel
     # stream in combustion chamber) (Bf2).
-    bf2_: PU  = None
+    bf2: PU  = None
  
     # Coefficient defining fuel flow where power output is 0% (Cf2).  Synchronous but
     # no output.  Typically 0.23 x K<sub>hhv </sub>(23% fuel flow).
-    cf2_: PU  = None
+    cf2: PU  = None
  
     # Rated temperature (Tr).
-    tr_: Temperature  = None
+    tr: Temperature  = None
  
     # Minimum fuel flow (K6). 
-    k6_: PU  = None
+    k6: PU  = None
  
     # Temperature control (Tc).
-    tc_: Temperature  = None
+    tc: Temperature  = None
  
     # Power transducer time constant (Td).
-    td_: Seconds  = None
+    td: Seconds  = None
      

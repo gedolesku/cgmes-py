@@ -13,5 +13,6 @@ class PFVArControllerType2Dynamics(DynamicsFunctionBlock):
     """
     # Excitation system model with which this Power Factor or VAr controller Type II
     # is associated.
-    ExcitationSystemDynamics_: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics_ref: Optional[ExcitationSystemDynamics] = None
+    ExcitationSystemDynamics: str = None
      

@@ -14,28 +14,29 @@ class TapChanger(PowerSystemResource):
     """
     # Highest possible tap step position, advance from neutral.
     # The attribute shall be greater than lowStep.
-    highStep_: int  = None
+    highStep: int  = None
  
     # Lowest possible tap step position, retard from neutral
-    lowStep_: int  = None
+    lowStep: int  = None
  
     # Specifies whether or not a TapChanger has load tap changing capabilities.
-    ltcFlag_: bool  = None
+    ltcFlag: bool  = None
  
     # The neutral tap step position for this winding.
     # The attribute shall be equal or greater than lowStep and equal or less than
     # highStep.
-    neutralStep_: int  = None
+    neutralStep: int  = None
  
     # Voltage at which the winding operates at the neutral tap setting.
-    neutralU_: Voltage  = None
+    neutralU: Voltage  = None
  
     # The tap step position used in "normal" network operation for this winding. For
     # a "Fixed" tap changer indicates the current physical tap setting.
     # The attribute shall be equal or greater than lowStep and equal or less than
     # highStep.
-    normalStep_: int  = None
+    normalStep: int  = None
  
     # The tap changers that participates in this regulating tap control scheme.
-    TapChangerControl_: Optional[TapChangerControl] = None
+    TapChangerControl_ref: Optional[TapChangerControl] = None
+    TapChangerControl: str = None
      

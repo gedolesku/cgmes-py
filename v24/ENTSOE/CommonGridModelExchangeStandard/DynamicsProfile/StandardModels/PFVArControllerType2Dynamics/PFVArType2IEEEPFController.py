@@ -17,30 +17,30 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
       Reference: IEEE Standard 421.5-2005 Section 11.4.
     """
     # Power factor reference (<i>P</i><i><sub>FREF</sub></i>).
-    pfref_: PU  = None
+    pfref: PU  = None
  
     # Voltage regulator reference (<i>V</i><i><sub>REF</sub></i>).
-    vref_: PU  = None
+    vref: PU  = None
  
     # Maximum output of the pf controller (<i>V</i><i><sub>CLMT</sub></i>).  Typical
     # Value = 0.1.
-    vclmt_: PU  = None
+    vclmt: PU  = None
  
     # Proportional gain of the pf controller (<i>K</i><i><sub>P</sub></i>).  Typical
     # Value = 1.
-    kp_: PU  = None
+    kp: PU  = None
  
     # Integral gain of the pf controller (<i>K</i><i><sub>I</sub></i>).  Typical
     # Value = 1.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Generator sensing voltage (<i>V</i><i><sub>S</sub></i>).
-    vs_: Simple_Float  = None
+    vs: Simple_Float  = None
  
     # Overexcitation or under excitation flag (<i>EXLON</i>)
     # true = 1 (not in the overexcitation or underexcitation state, integral action
     # is active)
     # false = 0 (in the overexcitation or underexcitation state, so integral action
     # is disabled to allow the limiter to play its role).
-    exlon_: bool  = None
+    exlon: bool  = None
      

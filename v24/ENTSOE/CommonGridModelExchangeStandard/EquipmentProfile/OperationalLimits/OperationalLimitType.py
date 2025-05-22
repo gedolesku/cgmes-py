@@ -15,11 +15,11 @@ class OperationalLimitType(IdentifiedObject):
     # terms of the a time limit for which the limit is normally acceptable.   The
     # actual acceptable duration of a specific limit may depend on other local
     # factors such as temperature or wind speed.
-    acceptableDuration_: Seconds  = None
+    acceptableDuration: Seconds  = None
  
     # Types of limits defined in the ENTSO-E Operational Handbook Policy 3.
-    limitType_: LimitTypeKind  = None
+    limitType: LimitTypeKind  = None
  
     # The direction of the limit.
-    direction_: OperationalLimitDirectionKind  = None
+    direction: OperationalLimitDirectionKind  = None
      

@@ -11,5 +11,6 @@ class ConformLoad(EnergyConsumer):
     pattern can be used to scale the load with a system load.
     """
     # Group of this ConformLoad.
-    ConformLoadGroup_: Optional[ConformLoadGroup] = None
+    LoadGroup_ref: Optional[ConformLoadGroup] = None
+    LoadGroup: str = None
      

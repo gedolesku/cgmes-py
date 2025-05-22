@@ -16,38 +16,38 @@ class PssIEEE1A(PowerSystemStabilizerDynamics):
       Reference: IEEE 1A 421.5-2005 Section 8.1.
     """
     # Type of input signal.  Typical Value = rotorAngularFrequencyDeviation.
-    inputSignalType_: InputSignalKind  = None
+    inputSignalType: InputSignalKind  = None
  
     # PSS signal conditioning frequency filter constant (A1).  Typical Value = 0.061.
-    a1_: PU  = None
+    a1: PU  = None
  
     # PSS signal conditioning frequency filter constant (A2).  Typical Value = 0.0017.
-    a2_: PU  = None
+    a2: PU  = None
  
     # Lead/lag time constant (T1).  Typical Value = 0.3.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Lead/lag time constant (T2).  Typical Value = 0.03.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Lead/lag time constant (T3).  Typical Value = 0.3.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Lead/lag time constant (T4).  Typical Value = 0.03.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Washout time constant (T5).  Typical Value = 10.
-    t5_: Seconds  = None
+    t5: Seconds  = None
  
     # Transducer time constant (T6).  Typical Value = 0.01.
-    t6_: Seconds  = None
+    t6: Seconds  = None
  
     # Stabilizer gain (Ks).  Typical Value = 5.
-    ks_: PU  = None
+    ks: PU  = None
  
     # Maximum stabilizer output (Vrmax).  Typical Value = 0.05.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum stabilizer output (Vrmin).  Typical Value = -0.05.
-    vrmin_: PU  = None
+    vrmin: PU  = None
      

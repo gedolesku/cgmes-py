@@ -15,21 +15,23 @@ class DiagramObjectPoint:
     """
     # The sequence position of the point, used for defining the order of points for
     # diagram objects acting as a polyline or polygon with more than one point.
-    sequenceNumber_: int  = None
+    sequenceNumber: int  = None
  
     # The X coordinate of this point.
-    xPosition_: Simple_Float  = None
+    xPosition: Simple_Float  = None
  
     # The Y coordinate of this point.
-    yPosition_: Simple_Float  = None
+    yPosition: Simple_Float  = None
  
     # The Z coordinate of this point.
-    zPosition_: Simple_Float  = None
+    zPosition: Simple_Float  = None
  
     # A diagram object glue point is associated with 2 or more object points that are
     # considered to be 'glued' together.
-    DiagramObjectGluePoint_: Optional[DiagramObjectGluePoint] = None
+    DiagramObjectGluePoint_ref: Optional[DiagramObjectGluePoint] = None
+    DiagramObjectGluePoint: str = None
  
     # The diagram object with which the points are associated.
-    DiagramObject_: Optional[DiagramObject] = None
+    DiagramObject_ref: Optional[DiagramObject] = None
+    DiagramObject: str = None
      

@@ -13,8 +13,10 @@ class WindTurbineType4bIEC(WindGenType4IEC):
       Reference: IEC Standard 61400-27-1, section 6.5.5.3.
     """
     # Wind mechanical model associated with this wind turbine Type 4B model.
-    WindMechIEC_: Optional[WindMechIEC] = None
+    WindMechIEC_ref: Optional[WindMechIEC] = None
+    WindMechIEC: str = None
  
     # Wind control P type 4B model associated with this wind turbine type 4B model.
-    WindContPType4bIEC_: Optional[WindContPType4bIEC] = None
+    WindContPType4bIEC_ref: Optional[WindContPType4bIEC] = None
+    WindContPType4bIEC: str = None
      

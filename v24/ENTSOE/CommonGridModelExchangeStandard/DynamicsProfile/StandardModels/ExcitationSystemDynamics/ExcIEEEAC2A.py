@@ -18,77 +18,77 @@ class ExcIEEEAC2A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 6.2.
     """
     # Voltage regulator time constant (T<sub>B</sub>).  Typical Value = 0.
-    tb_: Seconds  = None
+    tb: Seconds  = None
  
     # Voltage regulator time constant (T<sub>C</sub>).  Typical Value = 0.
-    tc_: Seconds  = None
+    tc: Seconds  = None
  
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 400.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.02.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>AMAX</sub>).  Typical Value = 8.
-    vamax_: PU  = None
+    vamax: PU  = None
  
     # Minimum voltage regulator output (V<sub>AMIN</sub>).  Typical Value = -8.
-    vamin_: PU  = None
+    vamin: PU  = None
  
     # Second stage regulator gain (K<sub>B</sub>).  Typical Value = 25.
-    kb_: PU  = None
+    kb: PU  = None
  
     # Maximum voltage regulator outputs (V<sub>RMAX</sub>).  Typical Value = 105.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator outputs (V<sub>RMIN</sub>).  Typical Value = -95.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 0.6.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Exciter field current limit reference (V<sub>FEMAX</sub>).  Typical Value = 4.4.
-    vfemax_: PU  = None
+    vfemax: PU  = None
  
     # Exciter field current feedback gain (K<sub>H</sub>).  Typical Value = 1.
-    kh_: PU  = None
+    kh: PU  = None
  
     # Excitation control system stabilizer gains (K<sub>F</sub>).  Typical Value = 0.
     # 03.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (T<sub>F</sub>).  Typical
     # Value = 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Rectifier loading factor proportional to commutating reactance (K<sub>C</sub>).
     # Typical Value = 0.28.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Demagnetizing factor, a function of exciter alternator reactances
     # (K<sub>D</sub>).  Typical Value = 0.35.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (V<sub>E1</sub>).  Typical Value = 4.4.
-    ve1_: PU  = None
+    ve1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # V<sub>E1</sub>, back of commutating reactance (S<sub>E</sub>[V<sub>E1</sub>]).
     # Typical Value = 0.037.
-    seve1_: Simple_Float  = None
+    seve1: Simple_Float  = None
  
     # Exciter alternator output voltages back of commutating reactance at which
     # saturation is defined (V<sub>E2</sub>).  Typical Value = 3.3.
-    ve2_: PU  = None
+    ve2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # V<sub>E2</sub>, back of commutating reactance (S<sub>E</sub>[V<sub>E2</sub>]).
     # Typical Value = 0.012.
-    seve2_: Simple_Float  = None
+    seve2: Simple_Float  = None
      

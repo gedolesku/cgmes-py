@@ -10,5 +10,5 @@ class ENTSOEOperationalLimitType:
     appendix to Policy 3.
     """
     # Types of limits defined in the ENTSO-E Operational Handbook Policy 3.
-    limitType_: LimitTypeKind  = None
+    limitType: LimitTypeKind  = None
      

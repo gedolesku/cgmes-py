@@ -20,5 +20,6 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics):
       </ol>
     """
     # Asynchronous machine to which this asynchronous machine dynamics model applies.
-    AsynchronousMachine_: Optional[AsynchronousMachine] = None
+    AsynchronousMachine_ref: Optional[AsynchronousMachine] = None
+    AsynchronousMachine: str = None
      

@@ -11,5 +11,5 @@ class AnalogLimitSet(LimitSet):
     measurement.
     """
     # A measurement may have zero or more limit ranges defined for it.
-    Analog_: List[Analog]  = field(default_factory=list)
+    Measurements: List[Analog]  = field(default_factory=list)
      

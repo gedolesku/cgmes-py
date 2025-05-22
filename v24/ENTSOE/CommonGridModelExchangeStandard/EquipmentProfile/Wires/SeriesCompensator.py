@@ -15,24 +15,24 @@ class SeriesCompensator(ConductingEquipment):
     line without charging susceptance.  It is a two terminal device.
     """
     # Positive sequence resistance.
-    r_: Resistance  = None
+    r: Resistance  = None
  
     # Zero sequence resistance.
-    r0_: Resistance  = None
+    r0: Resistance  = None
  
     # Positive sequence reactance.
-    x_: Reactance  = None
+    x: Reactance  = None
  
     # Zero sequence reactance.
-    x0_: Reactance  = None
+    x0: Reactance  = None
  
     # Describe if a metal oxide varistor (mov) for over voltage protection is
     # configured at the series compensator.
-    varistorPresent_: bool  = None
+    varistorPresent: bool  = None
  
     # The maximum current the varistor is designed to handle at specified duration.
-    varistorRatedCurrent_: CurrentFlow  = None
+    varistorRatedCurrent: CurrentFlow  = None
  
     # The dc voltage at which the varistor start conducting.
-    varistorVoltageThreshold_: Voltage  = None
+    varistorVoltageThreshold: Voltage  = None
      

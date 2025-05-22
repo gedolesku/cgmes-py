@@ -14,12 +14,13 @@ class MeasurementValue(IdentifiedObject):
     state values, each representing a different source for the measurement.
     """
     # The time when the value was last updated
-    timeStamp_: DateTime  = None
+    timeStamp: DateTime  = None
  
     # The limit, expressed as a percentage of the sensor maximum, that errors will
     # not exceed when the sensor is used under  reference conditions.
-    sensorAccuracy_: PerCent  = None
+    sensorAccuracy: PerCent  = None
  
     # The MeasurementValues updated by the source.
-    MeasurementValueSource_: Optional[MeasurementValueSource] = None
+    MeasurementValueSource_ref: Optional[MeasurementValueSource] = None
+    MeasurementValueSource: str = None
      

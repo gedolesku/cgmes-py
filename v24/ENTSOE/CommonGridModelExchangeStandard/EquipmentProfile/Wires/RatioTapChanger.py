@@ -15,14 +15,16 @@ class RatioTapChanger(TapChanger):
     """
     # Specifies the regulation control mode (voltage or reactive) of the
     # RatioTapChanger.
-    tculControlMode_: TransformerControlMode  = None
+    tculControlMode: TransformerControlMode  = None
  
     # Tap step increment, in per cent of nominal voltage, per step position.
-    stepVoltageIncrement_: PerCent  = None
+    stepVoltageIncrement: PerCent  = None
  
     # The ratio tap changer of this tap ratio table.
-    RatioTapChangerTable_: Optional[RatioTapChangerTable] = None
+    RatioTapChangerTable_ref: Optional[RatioTapChangerTable] = None
+    RatioTapChangerTable: str = None
  
     # Ratio tap changer associated with this transformer end.
-    TransformerEnd_: Optional[TransformerEnd] = None
+    TransformerEnd_ref: Optional[TransformerEnd] = None
+    TransformerEnd: str = None
      

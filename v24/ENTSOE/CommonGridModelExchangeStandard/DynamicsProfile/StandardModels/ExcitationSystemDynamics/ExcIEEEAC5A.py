@@ -22,54 +22,54 @@ class ExcIEEEAC5A(ExcitationSystemDynamics):
       Reference: IEEE Standard 421.5-2005 Section 6.5.
     """
     # Voltage regulator gain (K<sub>A</sub>).  Typical Value = 400.
-    ka_: PU  = None
+    ka: PU  = None
  
     # Voltage regulator time constant (T<sub>A</sub>).  Typical Value = 0.02.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Maximum voltage regulator output (V<sub>RMAX</sub>).  Typical Value = 7.3.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum voltage regulator output (V<sub>RMIN</sub>).  Typical Value = -7.3.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter constant related to self-excited field (K<sub>E</sub>).  Typical Value
     # = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Exciter time constant, integration rate associated with exciter control
     # (T<sub>E</sub>).  Typical Value = 0.8.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Excitation control system stabilizer gains (K<sub>F</sub>).  Typical Value = 0.
     # 03.
-    kf_: PU  = None
+    kf: PU  = None
  
     # Excitation control system stabilizer time constant (T<sub>F1</sub>).  Typical
     # Value = 1.
-    tf1_: Seconds  = None
+    tf1: Seconds  = None
  
     # Excitation control system stabilizer time constant (T<sub>F2</sub>).  Typical
     # Value = 1.
-    tf2_: Seconds  = None
+    tf2: Seconds  = None
  
     # Excitation control system stabilizer time constant (T<sub>F3</sub>).  Typical
     # Value = 1.
-    tf3_: Seconds  = None
+    tf3: Seconds  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD1</sub>).
     # Typical Value = 5.6.
-    efd1_: PU  = None
+    efd1: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD1</sub> (S<sub>E</sub>[E<sub>FD1</sub>]).  Typical Value = 0.86.
-    seefd1_: Simple_Float  = None
+    seefd1: Simple_Float  = None
  
     # Exciter voltage at which exciter saturation is defined (E<sub>FD2</sub>).
     # Typical Value = 4.2.
-    efd2_: PU  = None
+    efd2: PU  = None
  
     # Exciter saturation function value at the corresponding exciter voltage,
     # E<sub>FD2</sub> (S<sub>E</sub>[E<sub>FD2</sub>]).  Typical Value = 0.5.
-    seefd2_: Simple_Float  = None
+    seefd2: Simple_Float  = None
      

@@ -12,5 +12,5 @@ class AsynchronousMachine(RotatingMachine):
     windings, e.g squirrel-cage induction machine.
     """
     # Indicates the type of Asynchronous Machine (motor or generator).
-    asynchronousMachineType_: AsynchronousMachineKind  = None
+    asynchronousMachineType: AsynchronousMachineKind  = None
      

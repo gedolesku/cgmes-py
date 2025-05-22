@@ -13,12 +13,13 @@ class VsConverter(ACDCConverter):
     """
     # The max quotient between the AC converter voltage (Uc) and DC voltage (Ud). A
     # factor typically less than 1. VSC configuration data used in power flow.
-    maxModulationIndex_: Simple_Float  = None
+    maxModulationIndex: Simple_Float  = None
  
     # The maximum current through a valve. This current limit is the basis for
     # calculating the capability diagram. VSC  configuration data.
-    maxValveCurrent_: CurrentFlow  = None
+    maxValveCurrent: CurrentFlow  = None
  
     # All converters with this capability curve.
-    VsCapabilityCurve_: Optional[VsCapabilityCurve] = None
+    CapabilityCurve_ref: Optional[VsCapabilityCurve] = None
+    CapabilityCurve: str = None
      

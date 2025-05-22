@@ -16,37 +16,38 @@ class WindContRotorRIEC(IdentifiedObject):
     """
     # Integral gain in rotor resistance PI controller (<i>K</i><sub>Irr</sub>). It is
     # type dependent parameter.
-    kirr_: PU  = None
+    kirr: PU  = None
  
     # Filter gain for generator speed measurement (K<sub>omegafilt</sub>). It is type
     # dependent parameter.
-    komegafilt_: Simple_Float  = None
+    komegafilt: Simple_Float  = None
  
     # Filter gain for power measurement (<i>K</i><sub>pfilt</sub>). It is type
     # dependent parameter.
-    kpfilt_: Simple_Float  = None
+    kpfilt: Simple_Float  = None
  
     # Proportional gain in rotor resistance PI controller (<i>K</i><sub>Prr</sub>).
     # It is type dependent parameter.
-    kprr_: PU  = None
+    kprr: PU  = None
  
     # Maximum rotor resistance (<i>r</i><sub>max</sub>). It is type dependent
     # parameter.
-    rmax_: PU  = None
+    rmax: PU  = None
  
     # Minimum rotor resistance (<i>r</i><sub>min</sub>). It is type dependent
     # parameter.
-    rmin_: PU  = None
+    rmin: PU  = None
  
     # Filter time constant for generator speed measurement
     # (<i>T</i><sub>omegafilt</sub>). It is type dependent parameter.
-    tomegafilt_: Seconds  = None
+    tomegafilt: Seconds  = None
  
     # Filter time constant for power measurement (<i>T</i><sub>pfilt</sub>). It is
     # type dependent parameter.
-    tpfilt_: Seconds  = None
+    tpfilt: Seconds  = None
  
     # Wind turbine type 2 model with whitch this wind control rotor resistance model
     # is associated.
-    WindGenTurbineType2IEC_: Optional[WindGenTurbineType2IEC] = None
+    WindGenTurbineType2IEC_ref: Optional[WindGenTurbineType2IEC] = None
+    WindGenTurbineType2IEC: str = None
      

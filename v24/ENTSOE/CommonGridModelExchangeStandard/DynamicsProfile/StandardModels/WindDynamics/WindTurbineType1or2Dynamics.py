@@ -13,8 +13,10 @@ class WindTurbineType1or2Dynamics(DynamicsFunctionBlock):
     """
     # Asynchronous machine model with which this wind generator type 1 or 2 model is
     # associated.
-    AsynchronousMachineDynamics_: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics_ref: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics: str = None
  
     # Remote input signal used by this wind generator Type 1 or Type 2 model.
-    RemoteInputSignal_: Optional[RemoteInputSignal] = None
+    RemoteInputSignal_ref: Optional[RemoteInputSignal] = None
+    RemoteInputSignal: str = None
      

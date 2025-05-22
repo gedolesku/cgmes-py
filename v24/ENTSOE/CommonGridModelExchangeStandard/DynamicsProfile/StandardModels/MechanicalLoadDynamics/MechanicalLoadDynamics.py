@@ -13,8 +13,10 @@ class MechanicalLoadDynamics(DynamicsFunctionBlock):
     </font>
     """
     # Asynchronous machine model with which this mechanical load model is associated.
-    AsynchronousMachineDynamics_: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics_ref: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics: str = None
  
     # Synchronous machine model with which this mechanical load model is associated.
-    SynchronousMachineDynamics_: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics_ref: Optional[SynchronousMachineDynamics] = None
+    SynchronousMachineDynamics: str = None
      

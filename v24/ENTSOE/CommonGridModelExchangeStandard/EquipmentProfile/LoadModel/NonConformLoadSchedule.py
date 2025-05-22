@@ -12,5 +12,6 @@ class NonConformLoadSchedule(SeasonDayTypeSchedule):
     station service (where modeled).
     """
     # The NonConformLoadGroup where the NonConformLoadSchedule belongs.
-    NonConformLoadGroup_: Optional[NonConformLoadGroup] = None
+    NonConformLoadGroup_ref: Optional[NonConformLoadGroup] = None
+    NonConformLoadGroup: str = None
      

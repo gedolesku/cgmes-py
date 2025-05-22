@@ -11,5 +11,5 @@ class WindGeneratingUnit(GeneratingUnit):
     aggregation.
     """
     # The kind of wind generating unit
-    windGenUnitType_: WindGenUnitKind  = None
+    windGenUnitType: WindGenUnitKind  = None
      

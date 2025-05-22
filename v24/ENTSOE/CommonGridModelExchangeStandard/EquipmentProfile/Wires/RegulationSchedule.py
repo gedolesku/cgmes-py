@@ -11,5 +11,6 @@ class RegulationSchedule(SeasonDayTypeSchedule):
     voltage.
     """
     # Regulating controls that have this Schedule.
-    RegulatingControl_: Optional[RegulatingControl] = None
+    RegulatingControl_ref: Optional[RegulatingControl] = None
+    RegulatingControl: str = None
      

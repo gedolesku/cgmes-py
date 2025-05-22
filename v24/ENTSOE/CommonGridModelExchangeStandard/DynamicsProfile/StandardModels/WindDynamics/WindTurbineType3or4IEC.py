@@ -14,12 +14,15 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     """
     # Wind turbune protection model associated with this wind generator type 3 or 4
     # model.
-    WindProtectionIEC_: Optional[WindProtectionIEC] = None
+    WindProtectionIEC_ref: Optional[WindProtectionIEC] = None
+    WindProtectionIEC: str = None
  
     # Wind control Q model associated with this wind turbine type 3 or 4 model.
-    WindContQIEC_: Optional[WindContQIEC] = None
+    WIndContQIEC_ref: Optional[WindContQIEC] = None
+    WIndContQIEC: str = None
  
     # Wind control current limitation model associated with this wind turbine type 3
     # or 4 model.
-    WindContCurrLimIEC_: Optional[WindContCurrLimIEC] = None
+    WindContCurrLimIEC_ref: Optional[WindContCurrLimIEC] = None
+    WindContCurrLimIEC: str = None
      

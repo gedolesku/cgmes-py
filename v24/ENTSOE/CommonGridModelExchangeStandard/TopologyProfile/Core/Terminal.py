@@ -15,5 +15,6 @@ class Terminal(ACDCTerminal):
     # unneccesary to model connectivity nodes in some cases.   Note that if
     # connectivity nodes are in the model, this association would probably not be
     # used as an input specification.
-    TopologicalNode_: Optional[TopologicalNode] = None
+    TopologicalNode_ref: Optional[TopologicalNode] = None
+    TopologicalNode: str = None
      

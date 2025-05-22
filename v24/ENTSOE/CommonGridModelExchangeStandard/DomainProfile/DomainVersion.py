@@ -10,17 +10,17 @@ class DomainVersion:
     """Version details.
     """
     # Base UML provided by CIM model manager.
-    baseUML_: str  = "iec61970cim16v28_iec61968cim12v08_iec62325cim03v01a"
+    baseUML: str  = "iec61970cim16v28_iec61968cim12v08_iec62325cim03v01a"
  
     # Profile creation date
     # Form is YYYY-MM-DD for example for January 5, 2009 it is 2009-01-05.
-    date_: str  ="2014-05-28"
+    date: str  ="2014-05-28"
  
     # UML provided by ENTSO-E.
-    entsoeUML_: str  = "entsoe_v2.4.14"
+    entsoeUML: str  = "entsoe_v2.4.14"
  
     # Domain version define in the following format: yy.zzz where:
     # - yy - indicates a major version;
     # - zzz - indicates a minor version.
-    version_: str  = "2.4.14"
+    version: str  = "2.4.14"
      

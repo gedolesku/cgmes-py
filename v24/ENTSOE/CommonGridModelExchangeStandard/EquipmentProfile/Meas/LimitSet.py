@@ -15,5 +15,5 @@ class LimitSet(IdentifiedObject):
     """
     # Tells if the limit values are in percentage of normalValue or the specified
     # Unit for Measurements and Controls.
-    isPercentageLimits_: bool  = None
+    isPercentageLimits: bool  = None
      

@@ -10,5 +10,5 @@ class GeographicalRegion(IdentifiedObject):
     """A geographical region of a power system network model.
     """
     # All sub-geograhpical regions within this geographical region.
-    SubGeographicalRegion_: List[SubGeographicalRegion]  = field(default_factory=list)
+    Regions: List[SubGeographicalRegion]  = field(default_factory=list)
      

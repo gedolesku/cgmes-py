@@ -14,5 +14,5 @@ class GeneratingUnit(Equipment):
     set and an additional GeneratingUnit corresponding to the set.
     """
     # Generating unit economic participation factor.
-    normalPF_: Simple_Float  = None
+    normalPF: Simple_Float  = None
      

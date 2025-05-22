@@ -14,7 +14,7 @@ class TapChangerTablePoint:
     #  The b(nominal) is defined as the static magnetizing susceptance on the
     # associated power transformer end or ends.  This model assumes the star
     # impedance (pi model) form.
-    b_: PerCent  = None
+    b: PerCent  = None
  
     # The magnetizing branch conductance deviation in percent of nominal value. The
     # actual conductance is calculated as follows:
@@ -22,25 +22,25 @@ class TapChangerTablePoint:
     #  The g(nominal) is defined as the static magnetizing conductance on the
     # associated power transformer end or ends.  This model assumes the star
     # impedance (pi model) form.
-    g_: PerCent  = None
+    g: PerCent  = None
  
     # The resistance deviation in percent of nominal value. The actual reactance is
     # calculated as follows:
     # calculated resistance = r(nominal) * (1 + r(from this class)/100).   The
     # r(nominal) is defined as the static resistance on the associated power
     # transformer end or ends.  This model assumes the star impedance (pi model) form.
-    r_: PerCent  = None
+    r: PerCent  = None
  
     # The voltage ratio in per unit. Hence this is a value close to one.
-    ratio_: Simple_Float  = None
+    ratio: Simple_Float  = None
  
     # The tap step.
-    step_: int  = None
+    step: int  = None
  
     # The series reactance deviation in percent of nominal value. The actual
     # reactance is calculated as follows:
     # calculated reactance = x(nominal) * (1 + x(from this class)/100).   The
     # x(nominal) is defined as the static series reactance on the associated power
     # transformer end or ends.  This model assumes the star impedance (pi model) form.
-    x_: PerCent  = None
+    x: PerCent  = None
      

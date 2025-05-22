@@ -13,8 +13,9 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
     </font>
     """
     # Asynchronous machine model with which this turbine-governor model is associated.
-    AsynchronousMachineDynamics_: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics_ref: Optional[AsynchronousMachineDynamics] = None
+    AsynchronousMachineDynamics: str = None
  
     # Turbine-governor model associated with this synchronous machine model.
-    SynchronousMachineDynamics_: List[SynchronousMachineDynamics]  = field(default_factory=list)
+    SynchronousMachineDynamics: List[SynchronousMachineDynamics]  = field(default_factory=list)
      

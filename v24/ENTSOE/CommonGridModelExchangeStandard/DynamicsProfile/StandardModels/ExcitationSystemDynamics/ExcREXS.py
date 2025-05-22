@@ -15,111 +15,111 @@ class ExcREXS(ExcitationSystemDynamics):
     models.
     """
     # Field voltage value 1 (E1).  Typical Value = 3.
-    e1_: PU  = None
+    e1: PU  = None
  
     # Field voltage value 2 (E2).  Typical Value = 4.
-    e2_: PU  = None
+    e2: PU  = None
  
     # Rate feedback signal flag (Fbf). Typical Value = fieldCurrent.
-    fbf_: ExcREXSFeedbackSignalKind  = None
+    fbf: ExcREXSFeedbackSignalKind  = None
  
     # Limit type flag (Flimf).  Typical Value = 0.
-    flimf_: PU  = None
+    flimf: PU  = None
  
     # Rectifier regulation factor (Kc).  Typical Value = 0.05.
-    kc_: PU  = None
+    kc: PU  = None
  
     # Exciter regulation factor (Kd).  Typical Value = 2.
-    kd_: PU  = None
+    kd: PU  = None
  
     # Exciter field proportional constant (Ke).  Typical Value = 1.
-    ke_: PU  = None
+    ke: PU  = None
  
     # Field voltage feedback gain (Kefd).  Typical Value = 0.
-    kefd_: PU  = None
+    kefd: PU  = None
  
     # Rate feedback gain (Kf).  Typical Value = 0.05.
-    kf_: Seconds  = None
+    kf: Seconds  = None
  
     # Field voltage controller feedback gain (Kh).  Typical Value = 0.
-    kh_: PU  = None
+    kh: PU  = None
  
     # Field Current Regulator Integral Gain (Kii).  Typical Value = 0.
-    kii_: PU  = None
+    kii: PU  = None
  
     # Field Current Regulator Proportional Gain (Kip).  Typical Value = 1.
-    kip_: PU  = None
+    kip: PU  = None
  
     # Coefficient to allow different usage of the model-speed coefficient (Ks).
     # Typical Value = 0.
-    ks_: PU  = None
+    ks: PU  = None
  
     # Voltage Regulator Integral Gain (Kvi).  Typical Value = 0.
-    kvi_: PU  = None
+    kvi: PU  = None
  
     # Voltage Regulator Proportional Gain (Kvp).  Typical Value = 2800.
-    kvp_: PU  = None
+    kvp: PU  = None
  
     # V/Hz limiter gain (Kvphz).  Typical Value = 0.
-    kvphz_: PU  = None
+    kvphz: PU  = None
  
     # Pickup speed of V/Hz limiter (Nvphz).  Typical Value = 0.
-    nvphz_: PU  = None
+    nvphz: PU  = None
  
     # Saturation factor at E1 (Se1).  Typical Value = 0.0001.
-    se1_: PU  = None
+    se1: PU  = None
  
     # Saturation factor at E2 (Se2).  Typical Value = 0.001.
-    se2_: PU  = None
+    se2: PU  = None
  
     # Voltage Regulator time constant (Ta).  Typical Value = 0.01.
-    ta_: Seconds  = None
+    ta: Seconds  = None
  
     # Lag time constant (Tb1).  Typical Value = 0.
-    tb1_: Seconds  = None
+    tb1: Seconds  = None
  
     # Lag time constant (Tb2).  Typical Value = 0.
-    tb2_: Seconds  = None
+    tb2: Seconds  = None
  
     # Lead time constant (Tc1).  Typical Value = 0.
-    tc1_: Seconds  = None
+    tc1: Seconds  = None
  
     # Lead time constant (Tc2).  Typical Value = 0.
-    tc2_: Seconds  = None
+    tc2: Seconds  = None
  
     # Exciter field time constant (Te).  Typical Value = 1.2.
-    te_: Seconds  = None
+    te: Seconds  = None
  
     # Rate feedback time constant (Tf).  Typical Value = 1.
-    tf_: Seconds  = None
+    tf: Seconds  = None
  
     # Feedback lead time constant (Tf1).  Typical Value = 0.
-    tf1_: Seconds  = None
+    tf1: Seconds  = None
  
     # Feedback lag time constant (Tf2).  Typical Value = 0.
-    tf2_: Seconds  = None
+    tf2: Seconds  = None
  
     # Field current Bridge time constant (Tp).  Typical Value = 0.
-    tp_: Seconds  = None
+    tp: Seconds  = None
  
     # Maximum compounding voltage (Vcmax).  Typical Value = 0.
-    vcmax_: PU  = None
+    vcmax: PU  = None
  
     # Maximum Exciter Field Current (Vfmax).  Typical Value = 47.
-    vfmax_: PU  = None
+    vfmax: PU  = None
  
     # Minimum Exciter Field Current (Vfmin).  Typical Value = -20.
-    vfmin_: PU  = None
+    vfmin: PU  = None
  
     # Voltage Regulator Input Limit (Vimax).  Typical Value = 0.1.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Maximum controller output (Vrmax).  Typical Value = 47.
-    vrmax_: PU  = None
+    vrmax: PU  = None
  
     # Minimum controller output (Vrmin).  Typical Value = -20.
-    vrmin_: PU  = None
+    vrmin: PU  = None
  
     # Exciter compounding reactance (Xc).  Typical Value = 0.
-    xc_: PU  = None
+    xc: PU  = None
      

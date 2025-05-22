@@ -15,8 +15,9 @@ class TopologicalIsland(IdentifiedObject):
     # The angle reference for the island.   Normally there is one TopologicalNode
     # that is selected as the angle reference for each island.   Other reference
     # schemes exist, so the association is typically optional.
-    TopologicalNode_: Optional[TopologicalNode] = None
+    AngleRefTopologicalNode_ref: Optional[TopologicalNode] = None
+    AngleRefTopologicalNode: str = None
  
     # A topological node belongs to a topological island.
-    TopologicalNode_: List[TopologicalNode]  = field(default_factory=list)
+    TopologicalNodes: List[TopologicalNode]  = field(default_factory=list)
      

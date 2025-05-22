@@ -13,12 +13,13 @@ class SvPowerFlow:
     """
     # The active power flow. Load sign convention is used, i.e. positive sign means
     # flow out from a TopologicalNode (bus) into the conducting equipment.
-    p_: ActivePower  = None
+    p: ActivePower  = None
  
     # The reactive power flow. Load sign convention is used, i.e. positive sign means
     # flow out from a TopologicalNode (bus) into the conducting equipment.
-    q_: ReactivePower  = None
+    q: ReactivePower  = None
  
     # The terminal associated with the power flow state variable.
-    Terminal_: Optional[Terminal] = None
+    Terminal_ref: Optional[Terminal] = None
+    Terminal: str = None
      

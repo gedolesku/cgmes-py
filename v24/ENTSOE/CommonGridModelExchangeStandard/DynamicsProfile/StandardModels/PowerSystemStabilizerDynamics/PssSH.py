@@ -8,45 +8,45 @@ from ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.Power
 
 @dataclass
 class PssSH(PowerSystemStabilizerDynamics):
-    """Model for Siemens ï¿½H infinityï¿½ power system stabilizer with generator
+    """Model for Siemens “H infinity” power system stabilizer with generator
     electrical power input.
     """
     # Main gain (K).  Typical Value = 1.
-    k_: PU  = None
+    k: PU  = None
  
     # Gain 0 (K0).  Typical Value = 0.012.
-    k0_: PU  = None
+    k0: PU  = None
  
     # Gain 1 (K1).  Typical Value = 0.488.
-    k1_: PU  = None
+    k1: PU  = None
  
     # Gain 2 (K2).  Typical Value = 0.064.
-    k2_: PU  = None
+    k2: PU  = None
  
     # Gain 3 (K3).  Typical Value = 0.224.
-    k3_: PU  = None
+    k3: PU  = None
  
     # Gain 4 (K4).  Typical Value = 0.1.
-    k4_: PU  = None
+    k4: PU  = None
  
     # Input time constant (Td).  Typical Value = 10.
-    td_: Seconds  = None
+    td: Seconds  = None
  
     # Time constant 1 (T1).  Typical Value = 0.076.
-    t1_: Seconds  = None
+    t1: Seconds  = None
  
     # Time constant 2 (T2).  Typical Value = 0.086.
-    t2_: Seconds  = None
+    t2: Seconds  = None
  
     # Time constant 3 (T3).   Typical Value = 1.068.
-    t3_: Seconds  = None
+    t3: Seconds  = None
  
     # Time constant 4 (T4).  Typical Value = 1.913.
-    t4_: Seconds  = None
+    t4: Seconds  = None
  
     # Output maximum limit (Vsmax).  Typical Value = 0.1.
-    vsmax_: PU  = None
+    vsmax: PU  = None
  
     # Output minimum limit (Vsmin).  Typical Value = -0.1.
-    vsmin_: PU  = None
+    vsmin: PU  = None
      

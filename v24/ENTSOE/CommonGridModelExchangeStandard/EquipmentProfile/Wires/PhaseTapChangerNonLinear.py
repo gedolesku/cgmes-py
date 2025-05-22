@@ -15,13 +15,13 @@ class PhaseTapChangerNonLinear(PhaseTapChanger):
     """
     # The voltage step increment on the out of phase winding specified in percent of
     # nominal voltage of the transformer end.
-    voltageStepIncrement_: PerCent  = None
+    voltageStepIncrement: PerCent  = None
  
     # The reactance depend on the tap position according to a "u" shaped curve. The
     # maximum reactance (xMax) appear at the low and high tap positions.
-    xMax_: Reactance  = None
+    xMax: Reactance  = None
  
     # The reactance depend on the tap position according to a "u" shaped curve. The
     # minimum reactance (xMin) appear at the mid tap position.
-    xMin_: Reactance  = None
+    xMin: Reactance  = None
      

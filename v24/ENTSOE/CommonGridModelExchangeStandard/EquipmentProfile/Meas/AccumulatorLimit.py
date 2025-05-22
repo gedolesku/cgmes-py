@@ -11,8 +11,9 @@ class AccumulatorLimit(Limit):
     """Limit values for Accumulator measurements.
     """
     # The value to supervise against. The value is positive.
-    value_: int  = None
+    value: int  = None
  
     # The limit values used for supervision of Measurements.
-    AccumulatorLimitSet_: Optional[AccumulatorLimitSet] = None
+    LimitSet_ref: Optional[AccumulatorLimitSet] = None
+    LimitSet: str = None
      

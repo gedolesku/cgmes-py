@@ -11,8 +11,8 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
     """The schedule has time points where the time between them is constant.
     """
     # The time between each pair of subsequent regular time points in sequence order.
-    timeStep_: Seconds  = None
+    timeStep: Seconds  = None
  
     # The time for the last time point.
-    endTime_: DateTime  = None
+    endTime: DateTime  = None
      

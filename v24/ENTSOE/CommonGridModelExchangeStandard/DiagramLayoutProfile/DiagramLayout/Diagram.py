@@ -13,20 +13,21 @@ class Diagram(IdentifiedObject):
     coordinate system and the orientation attribute defines the orientation.
     """
     # Coordinate system orientation of the diagram.
-    orientation_: OrientationKind  = None
+    orientation: OrientationKind  = None
  
     # X coordinate of the first corner of the initial view.
-    x1InitialView_: Simple_Float  = None
+    x1InitialView: Simple_Float  = None
  
     # X coordinate of the second corner of the initial view.
-    x2InitialView_: Simple_Float  = None
+    x2InitialView: Simple_Float  = None
  
     # Y coordinate of the first corner of the initial view.
-    y1InitialView_: Simple_Float  = None
+    y1InitialView: Simple_Float  = None
  
     # Y coordinate of the second corner of the initial view.
-    y2InitialView_: Simple_Float  = None
+    y2InitialView: Simple_Float  = None
  
     # A Diagram may have a DiagramStyle.
-    DiagramStyle_: Optional[DiagramStyle] = None
+    DiagramStyle_ref: Optional[DiagramStyle] = None
+    DiagramStyle: str = None
      

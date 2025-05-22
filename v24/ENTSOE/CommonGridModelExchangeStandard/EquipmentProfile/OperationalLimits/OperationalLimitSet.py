@@ -16,7 +16,9 @@ class OperationalLimitSet(IdentifiedObject):
     together as a set.
     """
     # The equipment to which the limit set applies.
-    Equipment_: Optional[Equipment] = None
+    Equipment_ref: Optional[Equipment] = None
+    Equipment: str = None
  
-    ACDCTerminal_: Optional[ACDCTerminal] = None
+    Terminal_ref: Optional[ACDCTerminal] = None
+    Terminal: str = None
      

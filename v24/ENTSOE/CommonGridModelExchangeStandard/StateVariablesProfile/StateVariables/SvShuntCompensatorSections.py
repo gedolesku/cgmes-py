@@ -11,8 +11,9 @@ class SvShuntCompensatorSections:
     """
     # The number of sections in service as a continous variable. To get integer value
     # scale with ShuntCompensator.bPerSection.
-    sections_: Simple_Float  = None
+    sections: Simple_Float  = None
  
     # The shunt compensator for which the state applies.
-    ShuntCompensator_: Optional[ShuntCompensator] = None
+    ShuntCompensator_ref: Optional[ShuntCompensator] = None
+    ShuntCompensator: str = None
      

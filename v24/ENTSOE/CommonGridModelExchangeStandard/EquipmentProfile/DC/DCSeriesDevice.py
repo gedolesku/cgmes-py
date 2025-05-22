@@ -13,11 +13,11 @@ class DCSeriesDevice(DCConductingEquipment):
     smoothing.  Needed for transient and short circuit studies.
     """
     # Inductance of the device.
-    inductance_: Inductance  = None
+    inductance: Inductance  = None
  
     # Resistance of the DC device.
-    resistance_: Resistance  = None
+    resistance: Resistance  = None
  
     # Rated DC device voltage. Converter configuration data used in power flow.
-    ratedUdc_: Voltage  = None
+    ratedUdc: Voltage  = None
      

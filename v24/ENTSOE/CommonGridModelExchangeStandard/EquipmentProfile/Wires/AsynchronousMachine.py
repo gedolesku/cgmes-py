@@ -19,36 +19,36 @@ class AsynchronousMachine(RotatingMachine):
     """
     # Indicates whether the machine is a converter fed drive. Used for short circuit
     # data exchange according to IEC 60909
-    converterFedDrive_: bool  = None
+    converterFedDrive: bool  = None
  
     # Efficiency of the asynchronous machine at nominal operation in percent.
     # Indicator for converter drive motors. Used for short circuit data exchange
     # according to IEC 60909
-    efficiency_: PerCent  = None
+    efficiency: PerCent  = None
  
     # Ratio of locked-rotor current to the rated current of the motor (Ia/Ir). Used
     # for short circuit data exchange according to IEC 60909
-    iaIrRatio_: Simple_Float  = None
+    iaIrRatio: Simple_Float  = None
  
     # Nameplate data indicates if the machine is 50 or 60 Hz.
-    nominalFrequency_: Frequency  = None
+    nominalFrequency: Frequency  = None
  
     # Nameplate data.  Depends on the slip and number of pole pairs.
-    nominalSpeed_: RotationSpeed  = None
+    nominalSpeed: RotationSpeed  = None
  
     # Number of pole pairs of stator. Used for short circuit data exchange according
     # to IEC 60909
-    polePairNumber_: int  = None
+    polePairNumber: int  = None
  
     # Rated mechanical power (Pr in the IEC 60909-0). Used for short circuit data
     # exchange according to IEC 60909.
-    ratedMechanicalPower_: ActivePower  = None
+    ratedMechanicalPower: ActivePower  = None
  
     # Indicates for converter drive motors if the power can be reversible. Used for
     # short circuit data exchange according to IEC 60909
-    reversible_: bool  = None
+    reversible: bool  = None
  
     # Locked rotor ratio (R/X). Used for short circuit data exchange according to IEC
     # 60909
-    rxLockedRotorRatio_: Simple_Float  = None
+    rxLockedRotorRatio: Simple_Float  = None
      

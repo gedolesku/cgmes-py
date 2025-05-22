@@ -18,212 +18,212 @@ class PssIEEE4B(PowerSystemStabilizerDynamics):
       Reference: IEEE 4B 421.5-2005 Section 8.4.
     """
     # Notch filter 1 (high-frequency band): Three dB bandwidth (B<sub>wi</sub>). 
-    bwh1_: Simple_Float  = None
+    bwh1: Simple_Float  = None
  
     # Notch filter 2 (high-frequency band): Three dB bandwidth (B<sub>wi</sub>). 
-    bwh2_: Simple_Float  = None
+    bwh2: Simple_Float  = None
  
     # Notch filter 1 (low-frequency band): Three dB bandwidth (B<sub>wi</sub>). 
-    bwl1_: Simple_Float  = None
+    bwl1: Simple_Float  = None
  
     # Notch filter 2 (low-frequency band): Three dB bandwidth (B<sub>wi</sub>). 
-    bwl2_: Simple_Float  = None
+    bwl2: Simple_Float  = None
  
     # High band gain (K<sub>H</sub>).  Typical Value = 120.
-    kh_: PU  = None
+    kh: PU  = None
  
     # High band differential filter gain (K<sub>H1</sub>).  Typical Value = 66.
-    kh1_: PU  = None
+    kh1: PU  = None
  
     # High band first lead-lag blocks coefficient (K<sub>H11</sub>).  Typical Value =
     # 1.
-    kh11_: PU  = None
+    kh11: PU  = None
  
     # High band first lead-lag blocks coefficient (K<sub>H17</sub>).  Typical Value =
     # 1.
-    kh17_: PU  = None
+    kh17: PU  = None
  
     # High band differential filter gain (K<sub>H2</sub>).  Typical Value = 66.
-    kh2_: PU  = None
+    kh2: PU  = None
  
     # Intermediate band gain (K<sub>I</sub>).  Typical Value = 30.
-    ki_: PU  = None
+    ki: PU  = None
  
     # Intermediate band differential filter gain (K<sub>I1</sub>).  Typical Value =
     # 66.
-    ki1_: PU  = None
+    ki1: PU  = None
  
     # Intermediate band first lead-lag blocks coefficient (K<sub>I11</sub>).  Typical
     # Value = 1.
-    ki11_: PU  = None
+    ki11: PU  = None
  
     # Intermediate band first lead-lag blocks coefficient (K<sub>I17</sub>).  Typical
     # Value = 1.
-    ki17_: PU  = None
+    ki17: PU  = None
  
     # Intermediate band differential filter gain (K<sub>I2</sub>).  Typical Value =
     # 66.
-    ki2_: PU  = None
+    ki2: PU  = None
  
     # Low band gain (K<sub>L</sub>).  Typical Value = 7.5.
-    kl_: PU  = None
+    kl: PU  = None
  
     # Low band differential filter gain (K<sub>L1</sub>).  Typical Value = 66.
-    kl1_: PU  = None
+    kl1: PU  = None
  
     # Low band first lead-lag blocks coefficient (K<sub>L11</sub>).  Typical Value =
     # 1.
-    kl11_: PU  = None
+    kl11: PU  = None
  
     # Low band first lead-lag blocks coefficient (K<sub>L17</sub>).  Typical Value =
     # 1.
-    kl17_: PU  = None
+    kl17: PU  = None
  
     # Low band differential filter gain (K<sub>L2</sub>).  Typical Value = 66.
-    kl2_: PU  = None
+    kl2: PU  = None
  
     # Notch filter 1 (high-frequency band): filter frequency (omega<sub>ni</sub>).
-    omeganh1_: Simple_Float  = None
+    omeganh1: Simple_Float  = None
  
     # Notch filter 2 (high-frequency band): filter frequency (omega<sub>ni</sub>).
-    omeganh2_: Simple_Float  = None
+    omeganh2: Simple_Float  = None
  
     # Notch filter 1 (low-frequency band): filter frequency (omega<sub>ni</sub>).
-    omeganl1_: Simple_Float  = None
+    omeganl1: Simple_Float  = None
  
     # Notch filter 2 (low-frequency band): filter frequency (omega<sub>ni</sub>).
-    omeganl2_: Simple_Float  = None
+    omeganl2: Simple_Float  = None
  
     # High band time constant (T<sub>H1</sub>).  Typical Value = 0.01513.
-    th1_: Seconds  = None
+    th1: Seconds  = None
  
     # High band time constant (T<sub>H10</sub>).  Typical Value = 0.
-    th10_: Seconds  = None
+    th10: Seconds  = None
  
     # High band time constant (T<sub>H11</sub>).  Typical Value = 0.
-    th11_: Seconds  = None
+    th11: Seconds  = None
  
     # High band time constant (T<sub>H12</sub>).  Typical Value = 0.
-    th12_: Seconds  = None
+    th12: Seconds  = None
  
     # High band time constant (T<sub>H2</sub>).  Typical Value = 0.01816.
-    th2_: Seconds  = None
+    th2: Seconds  = None
  
     # High band time constant (T<sub>H3</sub>).  Typical Value = 0.
-    th3_: Seconds  = None
+    th3: Seconds  = None
  
     # High band time constant (T<sub>H4</sub>).  Typical Value = 0.
-    th4_: Seconds  = None
+    th4: Seconds  = None
  
     # High band time constant (T<sub>H5</sub>).  Typical Value = 0.
-    th5_: Seconds  = None
+    th5: Seconds  = None
  
     # High band time constant (T<sub>H6</sub>).  Typical Value = 0.
-    th6_: Seconds  = None
+    th6: Seconds  = None
  
     # High band time constant (T<sub>H7</sub>).  Typical Value = 0.01816.
-    th7_: Seconds  = None
+    th7: Seconds  = None
  
     # High band time constant (T<sub>H8</sub>).  Typical Value = 0.02179.
-    th8_: Seconds  = None
+    th8: Seconds  = None
  
     # High band time constant (T<sub>H9</sub>).  Typical Value = 0.
-    th9_: Seconds  = None
+    th9: Seconds  = None
  
     # Intermediate band time constant (T<sub>I1</sub>).  Typical Value = 0.173.
-    ti1_: Seconds  = None
+    ti1: Seconds  = None
  
     # Intermediate band time constant (T<sub>I11</sub>).  Typical Value = 0.
-    ti10_: Seconds  = None
+    ti10: Seconds  = None
  
     # Intermediate band time constant (T<sub>I11</sub>).  Typical Value = 0.
-    ti11_: Seconds  = None
+    ti11: Seconds  = None
  
     # Intermediate band time constant (T<sub>I2</sub>).  Typical Value = 0.
-    ti12_: Seconds  = None
+    ti12: Seconds  = None
  
     # Intermediate band time constant (T<sub>I2</sub>).  Typical Value = 0.2075.
-    ti2_: Seconds  = None
+    ti2: Seconds  = None
  
     # Intermediate band time constant (T<sub>I3</sub>).  Typical Value = 0.
-    ti3_: Seconds  = None
+    ti3: Seconds  = None
  
     # Intermediate band time constant (T<sub>I4</sub>).  Typical Value = 0.
-    ti4_: Seconds  = None
+    ti4: Seconds  = None
  
     # Intermediate band time constant (T<sub>I5</sub>).  Typical Value = 0.
-    ti5_: Seconds  = None
+    ti5: Seconds  = None
  
     # Intermediate band time constant (T<sub>I6</sub>).  Typical Value = 0.
-    ti6_: Seconds  = None
+    ti6: Seconds  = None
  
     # Intermediate band time constant (T<sub>I7</sub>).  Typical Value = 0.2075.
-    ti7_: Seconds  = None
+    ti7: Seconds  = None
  
     # Intermediate band time constant (T<sub>I8</sub>).  Typical Value = 0.2491.
-    ti8_: Seconds  = None
+    ti8: Seconds  = None
  
     # Intermediate band time constant (T<sub>I9</sub>).  Typical Value = 0.
-    ti9_: Seconds  = None
+    ti9: Seconds  = None
  
     # Low band time constant (T<sub>L1</sub>).  Typical Value = 1.73.
-    tl1_: Seconds  = None
+    tl1: Seconds  = None
  
     # Low band time constant (T<sub>L10</sub>).  Typical Value = 0.
-    tl10_: Seconds  = None
+    tl10: Seconds  = None
  
     # Low band time constant (T<sub>L11</sub>).  Typical Value = 0.
-    tl11_: Seconds  = None
+    tl11: Seconds  = None
  
     # Low band time constant (T<sub>L12</sub>).  Typical Value = 0.
-    tl12_: Seconds  = None
+    tl12: Seconds  = None
  
     # Low band time constant (T<sub>L2</sub>).  Typical Value = 2.075.
-    tl2_: Seconds  = None
+    tl2: Seconds  = None
  
     # Low band time constant (T<sub>L3</sub>).  Typical Value = 0.
-    tl3_: Seconds  = None
+    tl3: Seconds  = None
  
     # Low band time constant (T<sub>L4</sub>).  Typical Value = 0.
-    tl4_: Seconds  = None
+    tl4: Seconds  = None
  
     # Low band time constant (T<sub>L5</sub>).  Typical Value = 0.
-    tl5_: Seconds  = None
+    tl5: Seconds  = None
  
     # Low band time constant (T<sub>L6</sub>).  Typical Value = 0.
-    tl6_: Seconds  = None
+    tl6: Seconds  = None
  
     # Low band time constant (T<sub>L7</sub>).  Typical Value = 2.075.
-    tl7_: Seconds  = None
+    tl7: Seconds  = None
  
     # Low band time constant (T<sub>L8</sub>).  Typical Value = 2.491.
-    tl8_: Seconds  = None
+    tl8: Seconds  = None
  
     # Low band time constant (T<sub>L9</sub>).  Typical Value = 0.
-    tl9_: Seconds  = None
+    tl9: Seconds  = None
  
     # High band output maximum limit (V<sub>Hmax</sub>).  Typical Value = 0.6.
-    vhmax_: PU  = None
+    vhmax: PU  = None
  
     # High band output minimum limit (V<sub>Hmin</sub>).  Typical Value = -0.6.
-    vhmin_: PU  = None
+    vhmin: PU  = None
  
     # Intermediate band output maximum limit (V<sub>Imax</sub>).  Typical Value = 0.6.
-    vimax_: PU  = None
+    vimax: PU  = None
  
     # Intermediate band output minimum limit (V<sub>Imin</sub>).  Typical Value = -0.
     # 6.
-    vimin_: PU  = None
+    vimin: PU  = None
  
     # Low band output maximum limit (V<sub>Lmax</sub>).  Typical Value = 0.075.
-    vlmax_: PU  = None
+    vlmax: PU  = None
  
     # Low band output minimum limit (V<sub>Lmin</sub>).  Typical Value = -0.075.
-    vlmin_: PU  = None
+    vlmin: PU  = None
  
     # PSS output maximum limit (V<sub>STmax</sub>).  Typical Value = 0.15.
-    vstmax_: PU  = None
+    vstmax: PU  = None
  
     # PSS output minimum limit (V<sub>STmin</sub>).  Typical Value = -0.15.
-    vstmin_: PU  = None
+    vstmin: PU  = None
      

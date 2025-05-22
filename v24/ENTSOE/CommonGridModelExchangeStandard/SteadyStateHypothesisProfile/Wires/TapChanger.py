@@ -12,7 +12,7 @@ class TapChanger(PowerSystemResource):
     """
     # Specifies the regulation status of the equipment.  True is regulating, false is
     # not regulating.
-    controlEnabled_: bool  = None
+    controlEnabled: bool  = None
  
     # Tap changer position.
     # Starting step for a steady state solution. Non integer values are allowed to
@@ -22,5 +22,5 @@ class TapChanger(PowerSystemResource):
     # accommodate for a continuous solution as input.
     # The attribute shall be equal or greater than lowStep and equal or less than
     # highStep.
-    step_: Simple_Float  = None
+    step: Simple_Float  = None
      

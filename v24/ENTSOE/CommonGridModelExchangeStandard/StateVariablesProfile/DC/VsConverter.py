@@ -11,8 +11,8 @@ class VsConverter(ACDCConverter):
     """DC side of the voltage source converter (VSC).
     """
     # Angle between uf and uc. Converter state variable used in power flow.
-    delta_: AngleDegrees  = None
+    delta: AngleDegrees  = None
  
     # Filter bus voltage. Converter state variable, result from power flow.
-    uf_: Voltage  = None
+    uf: Voltage  = None
      

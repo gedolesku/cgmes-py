@@ -13,5 +13,6 @@ class DCBaseTerminal(ACDCTerminal):
     enforces that DC connections are distinct from AC connections.
     """
     # See association end TopologicalNode.Terminal.
-    DCTopologicalNode_: Optional[DCTopologicalNode] = None
+    DCTopologicalNode_ref: Optional[DCTopologicalNode] = None
+    DCTopologicalNode: str = None
      

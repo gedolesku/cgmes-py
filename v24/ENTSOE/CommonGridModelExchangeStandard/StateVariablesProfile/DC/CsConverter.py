@@ -11,8 +11,8 @@ class CsConverter(ACDCConverter):
     """
     # Firing angle, typical value between 10 and 18 degrees for a rectifier. CSC
     # state variable, result from power flow.
-    alpha_: AngleDegrees  = None
+    alpha: AngleDegrees  = None
  
     # Extinction angle. CSC state variable, result from power flow.
-    gamma_: AngleDegrees  = None
+    gamma: AngleDegrees  = None
      

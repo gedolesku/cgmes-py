@@ -11,5 +11,6 @@ class LoadGroup(IdentifiedObject):
     for the purpose of load flow load scaling.
     """
     # The SubLoadArea where the Loadgroup belongs.
-    SubLoadArea_: Optional[SubLoadArea] = None
+    SubLoadArea_ref: Optional[SubLoadArea] = None
+    SubLoadArea: str = None
      

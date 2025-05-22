@@ -10,5 +10,6 @@ class RatioTapChangerTablePoint(TapChangerTablePoint):
     """Describes each tap step in the ratio tap changer tabular curve.
     """
     # Points of this table.
-    RatioTapChangerTable_: Optional[RatioTapChangerTable] = None
+    RatioTapChangerTable_ref: Optional[RatioTapChangerTable] = None
+    RatioTapChangerTable: str = None
      

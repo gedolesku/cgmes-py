@@ -11,5 +11,6 @@ class DiagramObjectGluePoint:
     the exact same coordinates.
     """
     # The 'glue' point to which this point is associated.
-    DiagramObjectPoint_: Optional[DiagramObjectPoint] = None
+    DiagramObjectPoints_ref: Optional[DiagramObjectPoint] = None
+    DiagramObjectPoints: str = None
      

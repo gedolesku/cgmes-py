@@ -11,9 +11,9 @@ class PU:
     """Per Unit - a positive or negative value referred to a defined base. Values
     typically range from -10 to +10.
     """
-    value_: float  = None
+    value: float  = None
  
-    unit_: UnitSymbol =  UnitSymbol.none
+    unit: UnitSymbol =  UnitSymbol.none
  
-    multiplier_: UnitMultiplier =  UnitMultiplier.none
+    multiplier: UnitMultiplier =  UnitMultiplier.none
      

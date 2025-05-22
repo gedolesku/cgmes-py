@@ -15,23 +15,23 @@ class PFVArType1IEEEVArController(PFVArControllerType1Dynamics):
       Reference: IEEE Standard 421.5-2005 Section 11.3.
     """
     # Var controller time delay (<i>T</i><i><sub>VARC</sub></i>).  Typical Value = 5.
-    tvarc_: Seconds  = None
+    tvarc: Seconds  = None
  
     # Synchronous machine power factor (<i>V</i><i><sub>VAR</sub></i>).
-    vvar_: PU  = None
+    vvar: PU  = None
  
     # Var controller dead band (<i>V</i><i><sub>VARC_BW</sub></i>).  Typical Value =
     # 0.02.
-    vvarcbw_: Simple_Float  = None
+    vvarcbw: Simple_Float  = None
  
     # Var controller reference (<i>V</i><i><sub>VARREF</sub></i>).
-    vvarref_: PU  = None
+    vvarref: PU  = None
  
     # Maximum machine terminal voltage needed for pf/var controller to be enabled
     # (<i>V</i><i><sub>VTMAX</sub></i>).
-    vvtmax_: PU  = None
+    vvtmax: PU  = None
  
     # Minimum machine terminal voltage needed to enable pf/var controller
     # (<i>V</i><i><sub>VTMIN</sub></i>).
-    vvtmin_: PU  = None
+    vvtmin: PU  = None
      

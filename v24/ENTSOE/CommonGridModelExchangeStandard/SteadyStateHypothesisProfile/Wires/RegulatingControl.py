@@ -22,21 +22,21 @@ class RegulatingControl(PowerSystemResource):
     """
     # The regulation is performed in a discrete mode. This applies to equipment with
     # discrete controls, e.g. tap changers and shunt compensators.
-    discrete_: bool  = None
+    discrete: bool  = None
  
     # The flag tells if regulation is enabled.
-    enabled_: bool  = None
+    enabled: bool  = None
  
     # This is a deadband used with discrete control to avoid excessive update of
     # controls like tap changers and shunt compensator banks while regulating.
     # The units of those appropriate for the mode.
-    targetDeadband_: Simple_Float  = None
+    targetDeadband: Simple_Float  = None
  
     # The target value specified for case input.   This value can be used for the
     # target value without the use of schedules. The value has the units appropriate
     # to the mode attribute.
-    targetValue_: Simple_Float  = None
+    targetValue: Simple_Float  = None
  
     # Specify the multiplier for used for the targetValue.
-    targetValueUnitMultiplier_: UnitMultiplier  = None
+    targetValueUnitMultiplier: UnitMultiplier  = None
      

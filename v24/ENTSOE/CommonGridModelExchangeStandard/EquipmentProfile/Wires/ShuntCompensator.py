@@ -19,29 +19,29 @@ class ShuntCompensator(RegulatingCondEq):
     """
     # Time delay required for the device to be connected or disconnected by automatic
     # voltage regulation (AVR).
-    aVRDelay_: Seconds  = None
+    aVRDelay: Seconds  = None
  
     # Used for Yn and Zn connections. True if the neutral is solidly grounded.
-    grounded_: bool  = None
+    grounded: bool  = None
  
     # The maximum number of sections that may be switched in. 
-    maximumSections_: int  = None
+    maximumSections: int  = None
  
     # The voltage at which the nominal reactive power may be calculated. This should
     # normally be within 10% of the voltage at which the capacitor is connected to
     # the network.
-    nomU_: Voltage  = None
+    nomU: Voltage  = None
  
     # The normal number of sections switched in.
-    normalSections_: int  = None
+    normalSections: int  = None
  
     # The switch on count since the capacitor count was last reset or initialized.
-    switchOnCount_: int  = None
+    switchOnCount: int  = None
  
     # The date and time when the capacitor bank was last switched on.
-    switchOnDate_: DateTime  = None
+    switchOnDate: DateTime  = None
  
     # Voltage sensitivity required for the device to regulate the bus voltage, in
     # voltage/reactive power.
-    voltageSensitivity_: VoltagePerReactivePower  = None
+    voltageSensitivity: VoltagePerReactivePower  = None
      

@@ -14,5 +14,5 @@ class LoadUserDefined(LoadDynamics):
     # sending and receiving applications and parameters passed as general attributes
     # false = user-defined model is explicitly defined in terms of control blocks and
     # their input and output signals.
-    proprietary_: bool  = None
+    proprietary: bool  = None
      

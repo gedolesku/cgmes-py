@@ -13,5 +13,6 @@ class VoltageAdjusterDynamics(DynamicsFunctionBlock):
     """
     # Power Factor or VAr controller Type I model with which this voltage adjuster is
     # associated.
-    PFVArControllerType1Dynamics_: Optional[PFVArControllerType1Dynamics] = None
+    PFVArControllerType1Dynamics_ref: Optional[PFVArControllerType1Dynamics] = None
+    PFVArControllerType1Dynamics: str = None
      

@@ -15,6 +15,8 @@ class CGMESObjectFactory:
         self.class_cache: Dict[str, Type] = {}
         self.created_objects: Dict[str, Any] = {}
         self.pending_references: Dict[str, list] = {}
+        # Store reference information for connection phase
+        self.reference_data: Dict[str, List[tuple]] = {}  # {obj_id: [(attr_name, ref_id), ...]}
         self.namespaces = {
             'cim': 'http://iec.ch/TC57/CIM100#',
             'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -100,29 +102,26 @@ class CGMESObjectFactory:
         # Create an instance of the class
         try:
             obj = cls()
-            # # Set the mRID if the class has that attribute
-            # if hasattr(obj, 'mRID'):
-            #     obj.mRID = rdf_id
-            
+            # Store the mRID in the object if it has such attribute
+            if hasattr(obj, 'mRID'):
+                obj.mRID = rdf_id
+                
             # Process all attributes and references
-            self._process_attributes(element, obj)
+            self._process_attributes(element, obj, rdf_id)
             
             # Save the created object
             self.created_objects[rdf_id] = obj
-            
-            # # Process any pending references to this object
-            # if rdf_id in self.pending_references:
-            #     for (target_obj, attr_name) in self.pending_references[rdf_id]:
-            #         setattr(target_obj, attr_name, obj)
-            #     del self.pending_references[rdf_id]
             
             return obj
         except Exception as e:
             self.logger.error(f"Error creating object for {cim_type}: {str(e)}")
             return None
     
-    def _process_attributes(self, element: ET.Element, obj: Any) -> None:
+    def _process_attributes(self, element: ET.Element, obj: Any, obj_id: str) -> None:
         """Process all attributes and references for an object"""
+        # Initialize reference data for this object
+        self.reference_data[obj_id] = []
+        
         for child in element:
             tag = child.tag
             if '}' in tag:
@@ -131,44 +130,32 @@ class CGMESObjectFactory:
                 attr_name = tag
             if '.' in attr_name:
                 _, attr_name = attr_name.split('.')
+                
             # Check if attribute exists in the class
-            if not hasattr(obj, attr_name):
-                # It might be in a different format (e.g., camelCase vs snake_case)
-                snake_case = self._camel_to_snake(attr_name)
-                if hasattr(obj, snake_case):
-                    attr_name = snake_case
-                else:
-                    self.logger.debug(f"Attribute {attr_name} not found in {obj.__class__.__name__}")
-                    continue
-        
-            # Check if this is a reference to another object
-            ref = child.get(f"{{{self.namespaces['rdf']}}}resource")
-            if ref:
-                # This is a reference to another object
-                if ref.startswith('#'):
-                    ref_id = ref[1:]  # Remove the leading '#'
-                    
-                    # Handle specific case for Region references in Substation objects
-                    if attr_name == "Region" and hasattr(obj, "Region_ref"):
-                        attr_name = "Region_ref"  # Use the reference attribute instead
-                    
-                    # If the referenced object already exists, set the reference
-                    if ref_id in self.created_objects:
-                        setattr(obj, attr_name, self.created_objects[ref_id])
-                    else:
-                        # Otherwise, add to pending references
-                        if ref_id not in self.pending_references:
-                            self.pending_references[ref_id] = []
-                        self.pending_references[ref_id].append((obj, attr_name))
-            else:
-                # This is a simple attribute
+            if hasattr(obj, attr_name):
                 setattr(obj, attr_name, child.text)
-    
+            else:
+                self.logger.debug(f"Attribute {attr_name} not found in {obj.__class__.__name__}")
+
     def connect_cgmes(self) -> None:
         """Connect all reference objects after all objects have been loaded"""
         self.logger.info("Starting to connect CGMES objects...")
         
-        # Process each object to find and connect references
+        # First, establish all direct references based on the stored reference data
+        for obj_id, refs in self.reference_data.items():
+            if obj_id not in self.created_objects:
+                continue
+                
+            source_obj = self.created_objects[obj_id]
+            
+            # Process all references for this object
+            for attr_name, ref_id in refs:
+                if ref_id in self.created_objects:
+                    target_obj = self.created_objects[ref_id]
+                    # Set the reference
+                    setattr(source_obj, attr_name, target_obj)
+        
+        # Then, process bidirectional links and _ref attributes
         for obj_id, obj in self.created_objects.items():
             self._connect_object_references(obj)
         
@@ -186,12 +173,12 @@ class CGMESObjectFactory:
                 # If this is a reference attribute (ends with _ref)
                 if attr_name.endswith('_ref') and getattr(obj, attr_name) is not None:
                     # Get the referenced object
-                    ref_obj = getattr(obj, attr_name)#todo should be here at first? it should not be assigned?
+                    ref_obj = getattr(obj, attr_name)
                     
                     # Find the base attribute name without _ref
                     base_attr_name = attr_name[:-4]  # Remove _ref suffix
                     
-                    # Also set the string attribute if it exists
+                    # Set the string attribute if it exists
                     if hasattr(obj, base_attr_name):
                         try:
                             # Try to set the string attribute with the mRID of the referenced object

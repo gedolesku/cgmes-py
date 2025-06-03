@@ -19,7 +19,15 @@ class AttributeInfo:
     type_name: str
     multiplicity: str = "1"
     is_optional: bool = False
-    documentation: Optional[str] = None  # Add documentation field
+    documentation: Optional[str] = None
+
+@dataclass
+class LinkInfo:
+    link_type: str  # Association, Generalization, Dependency, etc.
+    target_id: str
+    target_name: Optional[str] = None
+    multiplicity: str = "1"
+    is_optional: bool = False
 
 @dataclass 
 class ClassInfo:
@@ -28,13 +36,16 @@ class ClassInfo:
     is_abstract: bool = False
     parent_class: Optional[str] = None
     attributes: List[AttributeInfo] = None
+    links: List[LinkInfo] = None  # Add links field
     xml_id: Optional[str] = None
     package_id: Optional[str] = None
-    documentation: Optional[str] = None  # Add class documentation
+    documentation: Optional[str] = None
     
     def __post_init__(self):
         if self.attributes is None:
             self.attributes = []
+        if self.links is None:
+            self.links = []
 
 def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
     """Parse the XMI file and extract complete class information"""
@@ -47,8 +58,9 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
     type_by_id = {}  # xmi:id -> type name (for primitives and classes)
     element_docs = {}  # xmi:id -> documentation from element sections
     attribute_docs = {}  # attribute xmi:id -> documentation
+    element_links = {}  # element xmi:id -> list of LinkInfo
     
-    # Extract documentation from element sections
+    # Extract documentation and links from element sections
     for element in root.findall(".//element[@xmi:type='uml:Class']", namespaces):
         element_id = element.get("{http://schema.omg.org/spec/XMI/2.1}idref")
         if element_id:
@@ -68,6 +80,48 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                         doc_value = doc_elem.get("value")
                         if doc_value:
                             attribute_docs[attr_id] = doc_value
+            
+            # Extract links
+            links_section = element.find("links")
+            if links_section is not None:
+                element_links[element_id] = []
+                
+                # Parse different types of links
+                for association in links_section.findall("Association"):
+                    link_id = association.get("{http://schema.omg.org/spec/XMI/2.1}id")
+                    start_id = association.get("start")
+                    end_id = association.get("end")
+                    
+                    # Determine which end is the target (not this class)
+                    target_id = end_id if start_id == element_id else start_id
+                    if target_id:
+                        element_links[element_id].append(LinkInfo(
+                            link_type="Association",
+                            target_id=target_id
+                        ))
+                
+                for generalization in links_section.findall("Generalization"):
+                    link_id = generalization.get("{http://schema.omg.org/spec/XMI/2.1}id")
+                    start_id = generalization.get("start")
+                    end_id = generalization.get("end")
+                    
+                    # For generalization, end is the parent class
+                    if start_id == element_id and end_id:
+                        element_links[element_id].append(LinkInfo(
+                            link_type="Generalization",
+                            target_id=end_id
+                        ))
+                
+                for dependency in links_section.findall("Dependency"):
+                    link_id = dependency.get("{http://schema.omg.org/spec/XMI/2.1}id")
+                    start_id = dependency.get("start")
+                    end_id = dependency.get("end")
+                    
+                    if start_id == element_id and end_id:
+                        element_links[element_id].append(LinkInfo(
+                            link_type="Dependency",
+                            target_id=end_id
+                        ))
     
     # First pass: collect all packages
     def build_package_tree(element, current_path=""):
@@ -93,13 +147,17 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
             # Get class documentation from element section
             class_doc = element_docs.get(class_id)
             
+            # Get links from element section
+            class_links = element_links.get(class_id, [])
+            
             class_info = ClassInfo(
                 name=class_name,
                 package_path=pkg_path,
                 is_abstract=is_abstract,
                 xml_id=class_id,
                 package_id=pkg_id,
-                documentation=class_doc
+                documentation=class_doc,
+                links=class_links
             )
             
             class_by_id[class_id] = class_info
@@ -121,17 +179,31 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
         if prim_name in primitive_map:
             type_by_id[prim_id] = primitive_map[prim_name]
     
-    # Third pass: handle inheritance
+    # Resolve link target names and handle inheritance from links
+    for class_info in class_by_id.values():
+        for link in class_info.links:
+            if link.target_id in class_by_id:
+                target_class = class_by_id[link.target_id]
+                link.target_name = target_class.name
+                
+                # Handle generalization links as inheritance
+                if link.link_type == "Generalization":
+                    class_info.parent_class = target_class.name
+    
+    # Third pass: handle inheritance from UML structure (fallback)
     for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
         class_id = class_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
         if class_id not in class_by_id:
             continue
             
-        # Find generalization
-        for gen in class_elem.findall(".//generalization[@xmi:type='uml:Generalization']", namespaces):
-            parent_id = gen.get("general")
-            if parent_id and parent_id in class_by_id:
-                class_by_id[class_id].parent_class = class_by_id[parent_id].name
+        # Only set parent if not already set from links
+        if not class_by_id[class_id].parent_class:
+            # Find generalization
+            for gen in class_elem.findall(".//generalization[@xmi:type='uml:Generalization']", namespaces):
+                parent_id = gen.get("general")
+                if parent_id and parent_id in class_by_id:
+                    class_by_id[class_id].parent_class = class_by_id[parent_id].name
+                    break
     
     # Fourth pass: collect attributes with proper typing, multiplicity, and documentation
     for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
@@ -227,7 +299,10 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
     imports = set()
     needs_field_import = any("List[" in attr.type_name and not attr.is_optional for attr in class_info.attributes)
     
-    if any("List[" in attr.type_name for attr in class_info.attributes):
+    # Check if we need List import from attributes or association links
+    association_links = [link for link in class_info.links if link.link_type == "Association" and link.target_name]
+    
+    if any("List[" in attr.type_name for attr in class_info.attributes) or association_links:
         imports.add("from typing import List, Optional, Protocol")
     else:
         imports.add("from typing import Optional, Protocol")
@@ -258,6 +333,14 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
         for other_class in all_classes.values():
             if other_class.name == attr_type and other_class.package_path != class_info.package_path:
                 classes_to_import.add((attr_type, other_class.package_path))
+    
+    # Add association link classes to imports
+    for link in association_links:
+        if link.target_name:
+            for other_class in all_classes.values():
+                if other_class.name == link.target_name and other_class.package_path != class_info.package_path:
+                    classes_to_import.add((link.target_name, other_class.package_path))
+                    break
     
     # Generate import statements for classes
     for class_name, other_package_path in classes_to_import:
@@ -327,38 +410,48 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
         docstring_lines.append('')
         docstring_lines.append(f'    {class_info.documentation}')
     
+    # Add attributes documentation to class docstring
+    if class_info.attributes:
+        attrs_with_docs = [attr for attr in class_info.attributes if attr.documentation]
+        if attrs_with_docs:
+            docstring_lines.append('')
+            docstring_lines.append('    Attributes:')
+            for attr in attrs_with_docs:
+                # Clean up documentation text
+                doc_text = attr.documentation.strip().replace('\n', ' ').replace('\r', '')
+                # Limit line length for docstring
+                if len(doc_text) > 60:
+                    doc_text = doc_text[:60] + "..."
+                docstring_lines.append(f'        {attr.name}: {doc_text}')
+    
     docstring_lines.append('    """')
     
     lines.extend(docstring_lines)
     
-    # Attributes with documentation
-    if not class_info.attributes:
+    # Attributes without individual comments
+    all_fields = list(class_info.attributes)
+    
+    # Add association links as attributes
+    for link in association_links:
+        if link.target_name:
+            # For associations, add as optional attributes
+            all_fields.append(AttributeInfo(
+                name=link.target_name,
+                type_name=link.target_name,
+                is_optional=True
+            ))
+    
+    if not all_fields:
         lines.append("    pass")
     else:
-        for attr in class_info.attributes:
-            # Add attribute documentation as comment if available
-            if attr.documentation:
-                # Split long documentation into multiple lines if needed
-                doc_lines = attr.documentation.split('. ')
-                lines.append(f"    # {doc_lines[0]}")
-                for doc_line in doc_lines[1:]:
-                    if doc_line.strip():
-                        lines.append(f"    # {doc_line}")
-            
-            if attr.is_optional:
-                lines.append(f"    {attr.name}: Optional[{attr.type_name}] = None")
+        for field in all_fields:
+            if field.is_optional:
+                lines.append(f"    {field.name}: Optional[{field.type_name}] = None")
             else:
-                if "List[" in attr.type_name:
-                    lines.append(f"    {attr.name}: {attr.type_name} = field(default_factory=list)")
+                if "List[" in field.type_name:
+                    lines.append(f"    {field.name}: {field.type_name} = field(default_factory=list)")
                 else:
-                    lines.append(f"    {attr.name}: {attr.type_name}")
-            
-            # Add blank line after each attribute for readability
-            lines.append("")
-        
-        # Remove the last blank line
-        if lines and lines[-1] == "":
-            lines.pop()
+                    lines.append(f"    {field.name}: {field.type_name}")
     
     return "\n".join(lines)
 

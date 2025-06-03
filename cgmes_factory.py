@@ -10,7 +10,7 @@ import inspect
 class CGMESObjectFactory:
     """Factory for creating CGMES model objects from XML data"""
     
-    def __init__(self, base_package: str = "ENTSOE.CommonGridModelExchangeStandard"):
+    def __init__(self, base_package: str = "generated"):
         self.base_package = base_package
         self.class_cache: Dict[str, Type] = {}
         self.created_objects: Dict[str, Any] = {}
@@ -37,13 +37,18 @@ class CGMESObjectFactory:
             else:
                 class_name = cim_type
             
-            # Fall back to the original mapping logic if v24 structure fails
+            # Updated module paths for the new structure
             possible_modules = [
-                f"{self.base_package}.CoreProfile.Core.{class_name}",
-                f"{self.base_package}.EquipmentProfile.Core.{class_name}",
-                f"{self.base_package}.DiagramLayoutProfile.DiagramLayout.{class_name}",
-                f"{self.base_package}.DynamicsProfile.StandardModels.ExcitationSystemDynamics.{class_name}",
-                f"{self.base_package}.DomainProfile.{class_name}"
+                f"{self.base_package}.ENTSOE.CommonGridModelExchangeStandard.CoreProfile.Core.{class_name}",
+                f"{self.base_package}.ENTSOE.CommonGridModelExchangeStandard.EquipmentProfile.Core.{class_name}",
+                f"{self.base_package}.ENTSOE.CommonGridModelExchangeStandard.DiagramLayoutProfile.DiagramLayout.{class_name}",
+                f"{self.base_package}.ENTSOE.CommonGridModelExchangeStandard.DynamicsProfile.StandardModels.ExcitationSystemDynamics.{class_name}",
+                f"{self.base_package}.ENTSOE.CommonGridModelExchangeStandard.DomainProfile.{class_name}",
+                f"{self.base_package}.TC57CIM.IEC61970.Base.Core.{class_name}",
+                f"{self.base_package}.TC57CIM.IEC61970.Base.Wires.{class_name}",
+                f"{self.base_package}.TC57CIM.IEC61968.Common.{class_name}",
+                f"{self.base_package}.Core.{class_name}",
+                f"{self.base_package}.UserDefinedModels.{class_name}"
             ]
             
             for module_path in possible_modules:

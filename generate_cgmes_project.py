@@ -167,8 +167,19 @@ def create_package_structure(classes: Dict[str, ClassInfo]) -> None:
         
         init_file = dir_path / "__init__.py"
         if not init_file.exists():
+            # Generate proper imports for __init__.py
+            package_classes = [cls for cls in classes.values() if cls.package_path == package]
+            imports = []
+            
+            for cls in package_classes:
+                # Use proper case filename
+                filename = cls.name  # Keep original case
+                imports.append(f"from .{filename} import {cls.name}")
+            
             with open(init_file, 'w') as f:
-                f.write(f'"""Package: {package}"""\n')
+                f.write(f'"""Package: {package}"""\n\n')
+                for imp in sorted(imports):
+                    f.write(f'{imp}\n')
 
 def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]) -> str:
     """Generate Python code for a single class"""
@@ -193,8 +204,35 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
         # Check if this is a class we know about
         for other_class in all_classes.values():
             if other_class.name == attr_type and other_class.package_path != class_info.package_path:
-                import_path = other_class.package_path.replace('.', '.')
-                imports.add(f"from {import_path} import {attr_type}")
+                # Calculate relative import path
+                current_parts = class_info.package_path.split('.') if class_info.package_path else []
+                other_parts = other_class.package_path.split('.') if other_class.package_path else []
+                
+                # Find common prefix
+                common_len = 0
+                for i in range(min(len(current_parts), len(other_parts))):
+                    if current_parts[i] == other_parts[i]:
+                        common_len += 1
+                    else:
+                        break
+                
+                # Build relative path
+                if common_len == len(current_parts) and common_len < len(other_parts):
+                    # Other is deeper, use relative import
+                    relative_path = '.'.join(other_parts[common_len:])
+                    imports.add(f"from .{relative_path}.{attr_type} import {attr_type}")
+                elif common_len < len(current_parts):
+                    # Need to go up
+                    up_levels = len(current_parts) - common_len
+                    dots = '.' * (up_levels + 1)
+                    if common_len < len(other_parts):
+                        relative_path = '.'.join(other_parts[common_len:])
+                        imports.add(f"from {dots}{relative_path}.{attr_type} import {attr_type}")
+                    else:
+                        imports.add(f"from {dots}{attr_type} import {attr_type}")
+                else:
+                    # Same level
+                    imports.add(f"from .{attr_type} import {attr_type}")
     
     # Write imports
     for imp in sorted(imports):
@@ -248,7 +286,8 @@ def write_classes_to_files(classes: Dict[str, ClassInfo]) -> None:
         else:
             file_dir = OUTPUT_DIR
         
-        file_path = file_dir / f"{class_info.name.lower()}.py"
+        # Use proper case for filename (same as class name)
+        file_path = file_dir / f"{class_info.name}.py"
         
         # Generate and write code
         code = generate_class_code(class_info, classes)

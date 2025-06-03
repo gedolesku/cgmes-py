@@ -1,0 +1,20 @@
+from dataclasses import dataclass, field
+from typing import Optional
+
+__NAMESPACE__ = "http://www.sparxsystems.com/profiles/EPProfile/1.0"
+
+
+@dataclass
+class Abstract:
+    class Meta:
+        name = "abstract"
+        namespace = "http://www.sparxsystems.com/profiles/EPProfile/1.0"
+
+    base_class: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "base_Class",
+            "type": "Attribute",
+            "required": True,
+        },
+    )

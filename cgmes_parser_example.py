@@ -19,7 +19,7 @@ def main():
     parser = CGMESParser(factory)
     
     # Parse a file
-    file_path = r"c:\git-code\tna\python-cgmes\cgmes-models\SmallGrid\20210112T1742Z_1D_GB_EQ_001.xml"
+    file_path = r"cgmes-models\v24\SmallGrid\20210112T1742Z_1D_GB_DL_001.xml"
     objects = parser.parse_file(file_path)
     
     # Display parsed objects

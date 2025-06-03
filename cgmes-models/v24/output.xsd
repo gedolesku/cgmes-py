@@ -1,0 +1,3327 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name = "xmi:XMI">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "uml:Model">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedComment"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedComment"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedEnd">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "specification">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedRule">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "profileApplication">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "xmi:Extension">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "element"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attributes">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "Constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "attributes">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "attribute">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "constraints">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "links">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "connectors">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "connector"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "source">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "target">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "tags">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:idref" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "primitivetypes">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "profiles">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "uml:Profile">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedComment">
+<xs:complexType>
+<xs:sequence>
+<xs:element type = " xs: string" name = "body"/>
+<xs:element type = " xs: string" name = "body"/>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packageImport">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:id" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "ownedAttribute"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name = "packagedElement">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:type"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmlns:uml" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "diagrams">
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "diagram"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType>
+<xs:sequence>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "elements">
+<xs:complexType>
+<xs:sequence>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="xmi:id" use="optional"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name = "images">
+<xs:complexType>
+<xs:sequence>
+<xs:element  name = "image"  maxOccurs="unbounded" minOccurs="0" >
+<xs:complexType >
+<xs:simpleContent>
+<xs:extension base = "xs:string">
+<xs:attribute type="xs:string" name="xmlns:dt" use="optional"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type="xs:string" name="extender"/>
+</xs:complexType>
+</xs:element>
+ </xs:sequence>
+<xs:attribute type = "xs:string" name = "xmlns:uml"/>
+</xs:complexType>
+</xs:element>
+</xs:schema>

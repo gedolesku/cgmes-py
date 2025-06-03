@@ -8,30 +8,26 @@ from typing import Optional
 OUTPUT_DIR = Path("c:/git-code/tna/python-cgmes/models")
 
 namespaces = {
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "cim": "http://iec.ch/TC57/CIM100#",
-    "md": "http://iec.ch/TC57/61970-552/ModelDescription/1#"
+    "xmi": "http://schema.omg.org/spec/XMI/2.1",
+    "uml": "http://www.omg.org/spec/UML/20090901"
 }
 
 
-def parse_xml_to_classes(xml_file: str):
-    """Parse the XML file and extract class definitions."""
+def parse_xmi_to_classes(xml_file: str):
+    """Parse the XMI file and extract class definitions."""
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
     classes = {}
-    for description in root.findall(".//rdf:Description", namespaces=namespaces):
-        class_name = description.find("rdfs:label", namespaces=namespaces).text
+    # Find UML classes
+    for uml_class in root.findall(".//uml:Class", namespaces=namespaces):
+        class_name = uml_class.get("name")
         attributes = []
-
-        for attribute in description.findall("cims:datatype", namespaces=namespaces):
-            attr_name = attribute.get("name")
-            attr_type = attribute.get("type")
+        for prop in uml_class.findall("./uml:ownedAttribute", namespaces=namespaces):
+            attr_name = prop.get("name")
+            attr_type = prop.get("type", "str")
             attributes.append((attr_name, attr_type))
-
         classes[class_name] = attributes
-
     return classes
 
 
@@ -57,8 +53,11 @@ def write_classes_to_files(classes: dict):
 
 def main():
     xml_file = r"cgmes-models\v24\ENTSOE_CGMES_v2.4.14_28May2014.xml"
-    classes = parse_xml_to_classes(xml_file)
-    write_classes_to_files(classes)
+    classes = parse_xmi_to_classes(xml_file)
+    if not classes:
+        print("No UML classes found; check XMI content/namespace.")
+    else:
+        write_classes_to_files(classes)
 
 
 if __name__ == "__main__":

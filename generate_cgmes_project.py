@@ -4,7 +4,7 @@ import os
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Optional, Dict, List, Tuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 OUTPUT_DIR = Path("c:/git-code/tna/python-cgmes/generated")
 
@@ -19,6 +19,7 @@ class AttributeInfo:
     type_name: str
     multiplicity: str = "1"
     is_optional: bool = False
+    documentation: Optional[str] = None  # Add documentation field
 
 @dataclass 
 class ClassInfo:
@@ -27,6 +28,9 @@ class ClassInfo:
     is_abstract: bool = False
     parent_class: Optional[str] = None
     attributes: List[AttributeInfo] = None
+    xml_id: Optional[str] = None
+    package_id: Optional[str] = None
+    documentation: Optional[str] = None  # Add class documentation
     
     def __post_init__(self):
         if self.attributes is None:
@@ -41,6 +45,29 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
     class_by_id = {}  # xmi:id -> ClassInfo
     package_by_id = {}  # xmi:id -> package path
     type_by_id = {}  # xmi:id -> type name (for primitives and classes)
+    element_docs = {}  # xmi:id -> documentation from element sections
+    attribute_docs = {}  # attribute xmi:id -> documentation
+    
+    # Extract documentation from element sections
+    for element in root.findall(".//element[@xmi:type='uml:Class']", namespaces):
+        element_id = element.get("{http://schema.omg.org/spec/XMI/2.1}idref")
+        if element_id:
+            # Get class documentation
+            props = element.find("properties")
+            if props is not None:
+                doc = props.get("documentation")
+                if doc:
+                    element_docs[element_id] = doc
+            
+            # Get attribute documentation
+            for attr in element.findall(".//attribute"):
+                attr_id = attr.get("{http://schema.omg.org/spec/XMI/2.1}idref")
+                if attr_id:
+                    doc_elem = attr.find("documentation")
+                    if doc_elem is not None:
+                        doc_value = doc_elem.get("value")
+                        if doc_value:
+                            attribute_docs[attr_id] = doc_value
     
     # First pass: collect all packages
     def build_package_tree(element, current_path=""):
@@ -63,10 +90,16 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
             class_name = class_elem.get("name", "UnknownClass")
             is_abstract = class_elem.get("isAbstract") == "true"
             
+            # Get class documentation from element section
+            class_doc = element_docs.get(class_id)
+            
             class_info = ClassInfo(
                 name=class_name,
                 package_path=pkg_path,
-                is_abstract=is_abstract
+                is_abstract=is_abstract,
+                xml_id=class_id,
+                package_id=pkg_id,
+                documentation=class_doc
             )
             
             class_by_id[class_id] = class_info
@@ -100,7 +133,7 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
             if parent_id and parent_id in class_by_id:
                 class_by_id[class_id].parent_class = class_by_id[parent_id].name
     
-    # Fourth pass: collect attributes with proper typing and multiplicity
+    # Fourth pass: collect attributes with proper typing, multiplicity, and documentation
     for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
         class_id = class_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
         if class_id not in class_by_id:
@@ -109,7 +142,11 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
         class_info = class_by_id[class_id]
         
         for attr in class_elem.findall(".//ownedAttribute[@xmi:type='uml:Property']", namespaces):
+            attr_id = attr.get("{http://schema.omg.org/spec/XMI/2.1}id")
             attr_name = attr.get("name", "unknown")
+            
+            # Get attribute documentation
+            attr_doc = attribute_docs.get(attr_id)
             
             # Get type
             type_elem = attr.find(".//type", namespaces)
@@ -142,7 +179,8 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                 name=attr_name,
                 type_name=attr_type,
                 multiplicity=multiplicity,
-                is_optional=is_optional
+                is_optional=is_optional,
+                documentation=attr_doc
             )
             
             class_info.attributes.append(attr_info)
@@ -187,15 +225,30 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
     
     # Imports
     imports = set()
+    needs_field_import = any("List[" in attr.type_name and not attr.is_optional for attr in class_info.attributes)
+    
     if any("List[" in attr.type_name for attr in class_info.attributes):
         imports.add("from typing import List, Optional, Protocol")
     else:
         imports.add("from typing import Optional, Protocol")
     
     if not class_info.is_abstract:
-        imports.add("from dataclasses import dataclass")
+        if needs_field_import:
+            imports.add("from dataclasses import dataclass, field")
+        else:
+            imports.add("from dataclasses import dataclass")
     
-    # Add imports for referenced classes
+    # Add imports for referenced classes AND parent class
+    classes_to_import = set()
+    
+    # Add parent class to imports
+    if class_info.parent_class:
+        for other_class in all_classes.values():
+            if other_class.name == class_info.parent_class:
+                classes_to_import.add((class_info.parent_class, other_class.package_path))
+                break
+    
+    # Add attribute type classes to imports
     for attr in class_info.attributes:
         attr_type = attr.type_name
         if "List[" in attr_type:
@@ -204,35 +257,40 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
         # Check if this is a class we know about
         for other_class in all_classes.values():
             if other_class.name == attr_type and other_class.package_path != class_info.package_path:
-                # Calculate relative import path
-                current_parts = class_info.package_path.split('.') if class_info.package_path else []
-                other_parts = other_class.package_path.split('.') if other_class.package_path else []
-                
-                # Find common prefix
-                common_len = 0
-                for i in range(min(len(current_parts), len(other_parts))):
-                    if current_parts[i] == other_parts[i]:
-                        common_len += 1
-                    else:
-                        break
-                
-                # Build relative path
-                if common_len == len(current_parts) and common_len < len(other_parts):
-                    # Other is deeper, use relative import
-                    relative_path = '.'.join(other_parts[common_len:])
-                    imports.add(f"from .{relative_path}.{attr_type} import {attr_type}")
-                elif common_len < len(current_parts):
-                    # Need to go up
-                    up_levels = len(current_parts) - common_len
-                    dots = '.' * (up_levels + 1)
-                    if common_len < len(other_parts):
-                        relative_path = '.'.join(other_parts[common_len:])
-                        imports.add(f"from {dots}{relative_path}.{attr_type} import {attr_type}")
-                    else:
-                        imports.add(f"from {dots}{attr_type} import {attr_type}")
+                classes_to_import.add((attr_type, other_class.package_path))
+    
+    # Generate import statements for classes
+    for class_name, other_package_path in classes_to_import:
+        if other_package_path != class_info.package_path:
+            # Calculate relative import path
+            current_parts = class_info.package_path.split('.') if class_info.package_path else []
+            other_parts = other_package_path.split('.') if other_package_path else []
+            
+            # Find common prefix
+            common_len = 0
+            for i in range(min(len(current_parts), len(other_parts))):
+                if current_parts[i] == other_parts[i]:
+                    common_len += 1
                 else:
-                    # Same level
-                    imports.add(f"from .{attr_type} import {attr_type}")
+                    break
+            
+            # Build relative path
+            if common_len == len(current_parts) and common_len < len(other_parts):
+                # Other is deeper, use relative import
+                relative_path = '.'.join(other_parts[common_len:])
+                imports.add(f"from .{relative_path}.{class_name} import {class_name}")
+            elif common_len < len(current_parts):
+                # Need to go up
+                up_levels = len(current_parts) - common_len
+                dots = '.' * (up_levels + 1)
+                if common_len < len(other_parts):
+                    relative_path = '.'.join(other_parts[common_len:])
+                    imports.add(f"from {dots}{relative_path}.{class_name} import {class_name}")
+                else:
+                    imports.add(f"from {dots}{class_name} import {class_name}")
+            else:
+                # Same level
+                imports.add(f"from .{class_name} import {class_name}")
     
     # Write imports
     for imp in sorted(imports):
@@ -257,44 +315,73 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
     
     lines.append(class_def)
     
-    # Add docstring
-    lines.append(f'    """CGMES class: {class_info.name}"""')
+    # Add enhanced docstring with XML IDs and documentation
+    docstring_lines = [f'    """CGMES class: {class_info.name}']
+    if class_info.xml_id:
+        docstring_lines.append(f'    XML ID: {class_info.xml_id}')
+    if class_info.package_id:
+        docstring_lines.append(f'    Package ID: {class_info.package_id}')
     
-    # Attributes
+    # Add class documentation if available
+    if class_info.documentation:
+        docstring_lines.append('')
+        docstring_lines.append(f'    {class_info.documentation}')
+    
+    docstring_lines.append('    """')
+    
+    lines.extend(docstring_lines)
+    
+    # Attributes with documentation
     if not class_info.attributes:
         lines.append("    pass")
     else:
         for attr in class_info.attributes:
+            # Add attribute documentation as comment if available
+            if attr.documentation:
+                # Split long documentation into multiple lines if needed
+                doc_lines = attr.documentation.split('. ')
+                lines.append(f"    # {doc_lines[0]}")
+                for doc_line in doc_lines[1:]:
+                    if doc_line.strip():
+                        lines.append(f"    # {doc_line}")
+            
             if attr.is_optional:
                 lines.append(f"    {attr.name}: Optional[{attr.type_name}] = None")
             else:
                 if "List[" in attr.type_name:
-                    lines.append(f"    {attr.name}: {attr.type_name} = None")
+                    lines.append(f"    {attr.name}: {attr.type_name} = field(default_factory=list)")
                 else:
                     lines.append(f"    {attr.name}: {attr.type_name}")
+            
+            # Add blank line after each attribute for readability
+            lines.append("")
+        
+        # Remove the last blank line
+        if lines and lines[-1] == "":
+            lines.pop()
     
     return "\n".join(lines)
 
 def write_classes_to_files(classes: Dict[str, ClassInfo]) -> None:
     """Write all classes to their respective files in package structure"""
-    create_package_structure(classes)
-    
     for class_info in classes.values():
+        # Generate code for the class
+        code = generate_class_code(class_info, classes)
+        
         # Determine file path
         if class_info.package_path:
             file_dir = OUTPUT_DIR / class_info.package_path.replace('.', '/')
         else:
             file_dir = OUTPUT_DIR
         
-        # Use proper case for filename (same as class name)
         file_path = file_dir / f"{class_info.name}.py"
         
-        # Generate and write code
-        code = generate_class_code(class_info, classes)
+        # Create directory if it doesn't exist
+        file_path.parent.mkdir(parents=True, exist_ok=True)
         
+        # Write code to file
         with open(file_path, 'w') as f:
             f.write(code)
-        
         print(f"Generated: {file_path}")
 
 def main():
@@ -312,6 +399,9 @@ def main():
         return
     
     print(f"Found {len(classes)} classes")
+    
+    print("Creating package structure...")
+    create_package_structure(classes)
     
     print("Generating Python files...")
     write_classes_to_files(classes)

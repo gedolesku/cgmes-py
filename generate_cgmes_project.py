@@ -59,6 +59,7 @@ class Attribute:
     type_: str
     multiplicity: str
     is_ref: bool = False
+    ref_pkg: Optional[Tuple[str, ...]] = None
 
 
 @dataclass
@@ -68,6 +69,7 @@ class ClassMeta:
     parent: Optional[str]
     pkg_parts: Tuple[str, ...]
     doc: Optional[str] = None
+    parent_pkg: Optional[Tuple[str, ...]] = None
 
 
 @dataclass
@@ -123,16 +125,19 @@ def _ptype(base: str, lower: str, upper: str) -> str:
 #  Parsiranje
 # ────────────────────────────────────────────────────────────────
 
-def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str, EnumMeta]]:
-    """Return mappings of class and enumeration names to parsed metadata."""
+def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMeta], Dict[Tuple[str, ...], EnumMeta]]:
+    """Return mappings of class and enumeration metadata keyed by package path."""
     root = tree.getroot()
     by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
 
     prim_elems = root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
     primitive_ids = {e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems}
 
-    classes: Dict[str, ClassMeta] = {}
-    enums: Dict[str, EnumMeta] = {}
+    classes: Dict[Tuple[str, ...], ClassMeta] = {}
+    enums: Dict[Tuple[str, ...], EnumMeta] = {}
+    class_by_id: Dict[str, ClassMeta] = {}
+    enum_by_id: Dict[str, EnumMeta] = {}
+    id_to_pkg: Dict[str, Tuple[str, ...]] = {}
 
     def walk(elem, pkg_path: List[str]):
         for child in elem.xpath("./packagedElement"):
@@ -145,12 +150,16 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
                 if DEBUG:
                     print("🔍 Enum", ename)
                 e_doc = child.find("ownedComment/Body")
-                enums[ename] = EnumMeta(
+                key = tuple(pkg_path + [ename])
+                meta = EnumMeta(
                     ename,
                     [l.get("name") for l in child.xpath("./ownedLiteral")],
                     tuple(pkg_path),
                     e_doc.text if e_doc is not None else None,
                 )
+                enums[key] = meta
+                enum_by_id[child.get(f"{{{XMI_NS}}}id")] = meta
+                id_to_pkg[child.get(f"{{{XMI_NS}}}id")] = tuple(pkg_path)
                 continue
             if kind != "uml:Class":
                 continue
@@ -166,7 +175,16 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
                 tuple(pkg_path),
                 c_doc.text if c_doc is not None else None,
             )
-            classes[cname] = meta
+            key = tuple(pkg_path + [cname])
+            target = classes.get(key)
+            if target is None:
+                target = meta
+                classes[key] = target
+                class_by_id[child.get(f"{{{XMI_NS}}}id")] = target
+                id_to_pkg[child.get(f"{{{XMI_NS}}}id")] = tuple(pkg_path)
+            else:
+                if not target.doc and meta.doc:
+                    target.doc = meta.doc
 
             # ownedAttribute
             for prop in child.xpath("./ownedAttribute"):
@@ -177,22 +195,34 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
                     if t_elem is not None:
                         type_ref = t_elem.get(f"{{{XMI_NS}}}idref")
                 lower, upper = _mult_from_elem(prop)
-                base_type = primitive_ids.get(type_ref) or (
-                    by_id.get(type_ref).get("name") if type_ref in by_id else "str"
-                )
+                if type_ref in primitive_ids:
+                    base_type = primitive_ids[type_ref]
+                    ref_pkg = None
+                elif type_ref in class_by_id:
+                    base_type = class_by_id[type_ref].name
+                    ref_pkg = class_by_id[type_ref].pkg_parts
+                elif type_ref in enum_by_id:
+                    base_type = enum_by_id[type_ref].name
+                    ref_pkg = enum_by_id[type_ref].pkg_parts
+                else:
+                    base_type = by_id.get(type_ref).get("name") if type_ref in by_id else "str"
+                    ref_pkg = id_to_pkg.get(type_ref)
                 is_ref = bool(prop.get("association"))
-                meta.attrs[a_name] = Attribute(
+                target.attrs[a_name] = Attribute(
                     a_name,
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
                     f"{lower}..{upper}" if lower != upper else lower,
                     is_ref,
+                    ref_pkg,
                 )
 
             # generalization
             gen = child.find("generalization")
-            if gen is not None and (gid := gen.get("general")) and gid in by_id:
-                meta.parent = by_id[gid].get("name")
+            if gen is not None and (gid := gen.get("general")) and gid in class_by_id:
+                if target.parent is None:
+                    target.parent = class_by_id[gid].name
+                    target.parent_pkg = class_by_id[gid].pkg_parts
 
     # start from each uml:Model
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
@@ -206,17 +236,19 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
         for end in ends:
             owner_id = end.get("type")
             target_id = next((e.get("type") for e in ends if e is not end and e.get("type")), None)
-            if owner_id in by_id and target_id in by_id:
-                owner, target = by_id[owner_id].get("name"), by_id[target_id].get("name")
+            if owner_id in class_by_id and target_id in class_by_id:
+                owner_meta = class_by_id[owner_id]
+                target_meta = class_by_id[target_id]
                 lower, upper = _mult_from_elem(end)
-                classes[owner].attrs.setdefault(
-                    end.get("name") or target,
+                owner_meta.attrs.setdefault(
+                    end.get("name") or target_meta.name,
                     Attribute(
-                        end.get("name") or target,
-                        f"cim:{owner}.{end.get('name') or target}",
-                        _ptype(target, lower, upper),
+                        end.get("name") or target_meta.name,
+                        f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
+                        _ptype(target_meta.name, lower, upper),
                         f"{lower}..{upper}" if lower != upper else lower,
                         True,
+                        target_meta.pkg_parts,
                     ),
                 )
 
@@ -238,30 +270,27 @@ def _rel_mod(src: Tuple[str, ...], dst: Tuple[str, ...], name: str) -> str:
     return f"{dots}{rest}"
 
 
-def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta], enums: Dict[str, EnumMeta]) -> List[str]:
+def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[str, ...], EnumMeta]) -> List[str]:
     imps = {
         "from __future__ import annotations",
         "from dataclasses import dataclass, field",
         "from typing import Optional, List",
         f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject",
     }
-    if meta.parent and meta.parent in classes:
-        parent_meta = classes[meta.parent]
-        path = _rel_mod(meta.pkg_parts, parent_meta.pkg_parts, meta.parent)
+    if meta.parent and meta.parent_pkg:
+        path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)
         imps.add(f"from {path} import {meta.parent}")
     for a in meta.attrs.values():
         base = re.sub(r"^Optional\[|\]$", "", a.type_)
         base = re.sub(r"^list\[(.*)\]$", r"\1", base)
-        if base in classes and base != meta.name:
-            path = _rel_mod(meta.pkg_parts, classes[base].pkg_parts, base)
-            imps.add(f"from {path} import {base}")
-        if base in enums:
-            path = _rel_mod(meta.pkg_parts, enums[base].pkg_parts, base)
-            imps.add(f"from {path} import {base}")
+        if a.ref_pkg:
+            if base != meta.name or a.ref_pkg != meta.pkg_parts:
+                path = _rel_mod(meta.pkg_parts, a.ref_pkg, base)
+                imps.add(f"from {path} import {base}")
     return sorted(imps)
 
 
-def _write_enums(enums: Dict[str, EnumMeta], out_dir: Path) -> int:
+def _write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
     """Write Enum classes for all UML enumerations."""
     cnt = 0
     for meta in enums.values():
@@ -282,7 +311,7 @@ def _write_enums(enums: Dict[str, EnumMeta], out_dir: Path) -> int:
     return cnt
 
 
-def _write_classes(classes: Dict[str, ClassMeta], enums: Dict[str, EnumMeta], out_dir: Path) -> int:
+def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
     """Write dataclass modules for all CGMES classes into *out_dir*.
 
     Returns the number of files written.

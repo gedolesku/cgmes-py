@@ -172,14 +172,21 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
             for prop in child.xpath("./ownedAttribute"):
                 a_name = prop.get("name")
                 type_ref = prop.get("type")
+                if type_ref is None:
+                    t_elem = prop.find("type")
+                    if t_elem is not None:
+                        type_ref = t_elem.get(f"{{{XMI_NS}}}idref")
                 lower, upper = _mult_from_elem(prop)
-                base_type = primitive_ids.get(type_ref) or (by_id.get(type_ref).get("name") if type_ref in by_id else "str")
+                base_type = primitive_ids.get(type_ref) or (
+                    by_id.get(type_ref).get("name") if type_ref in by_id else "str"
+                )
+                is_ref = bool(prop.get("association"))
                 meta.attrs[a_name] = Attribute(
                     a_name,
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
                     f"{lower}..{upper}" if lower != upper else lower,
-                    False,
+                    is_ref,
                 )
 
             # generalization
@@ -219,21 +226,38 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
 #  Code writer
 # ────────────────────────────────────────────────────────────────
 
+def _rel_mod(src: Tuple[str, ...], dst: Tuple[str, ...], name: str) -> str:
+    """Return relative module path for importing *name* located in *dst* when inside *src*."""
+    common = 0
+    for a, b in zip(src, dst):
+        if a != b:
+            break
+        common += 1
+    dots = '.' * (len(src) - common + 1)
+    rest = '.'.join(dst[common:] + (name,))
+    return f"{dots}{rest}"
+
+
 def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta], enums: Dict[str, EnumMeta]) -> List[str]:
     imps = {
         "from __future__ import annotations",
         "from dataclasses import dataclass, field",
         "from typing import Optional, List",
+        f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject",
     }
     if meta.parent and meta.parent in classes:
-        imps.add(f"from .{meta.parent} import {meta.parent}")
+        parent_meta = classes[meta.parent]
+        path = _rel_mod(meta.pkg_parts, parent_meta.pkg_parts, meta.parent)
+        imps.add(f"from {path} import {meta.parent}")
     for a in meta.attrs.values():
         base = re.sub(r"^Optional\[|\]$", "", a.type_)
         base = re.sub(r"^list\[(.*)\]$", r"\1", base)
         if base in classes and base != meta.name:
-            imps.add(f"from .{base} import {base}")
+            path = _rel_mod(meta.pkg_parts, classes[base].pkg_parts, base)
+            imps.add(f"from {path} import {base}")
         if base in enums:
-            imps.add(f"from .{base} import {base}")
+            path = _rel_mod(meta.pkg_parts, enums[base].pkg_parts, base)
+            imps.add(f"from {path} import {base}")
     return sorted(imps)
 
 

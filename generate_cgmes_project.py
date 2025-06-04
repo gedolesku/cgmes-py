@@ -88,12 +88,18 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                 
                 # Parse different types of links
                 for association in links_section.findall("Association"):
-                    link_id = association.get("{http://schema.omg.org/spec/XMI/2.1}id")
                     start_id = association.get("start")
                     end_id = association.get("end")
                     
-                    # Determine which end is the target (not this class)
-                    target_id = end_id if start_id == element_id else start_id
+                    # For associations, we need to determine the relationship
+                    # If this class is the start, then end is the target
+                    # If this class is the end, then start is the target
+                    target_id = None
+                    if start_id == element_id and end_id:
+                        target_id = end_id
+                    elif end_id == element_id and start_id:
+                        target_id = start_id
+                    
                     if target_id:
                         element_links[element_id].append(LinkInfo(
                             link_type="Association",
@@ -101,11 +107,10 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                         ))
                 
                 for generalization in links_section.findall("Generalization"):
-                    link_id = generalization.get("{http://schema.omg.org/spec/XMI/2.1}id")
                     start_id = generalization.get("start")
                     end_id = generalization.get("end")
                     
-                    # For generalization, end is the parent class
+                    # For generalization, if this class is the start, then end is the parent
                     if start_id == element_id and end_id:
                         element_links[element_id].append(LinkInfo(
                             link_type="Generalization",
@@ -113,10 +118,10 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                         ))
                 
                 for dependency in links_section.findall("Dependency"):
-                    link_id = dependency.get("{http://schema.omg.org/spec/XMI/2.1}id")
                     start_id = dependency.get("start")
                     end_id = dependency.get("end")
                     
+                    # For dependencies, if this class is the start, then end is the target
                     if start_id == element_id and end_id:
                         element_links[element_id].append(LinkInfo(
                             link_type="Dependency",
@@ -189,6 +194,10 @@ def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
                 # Handle generalization links as inheritance
                 if link.link_type == "Generalization":
                     class_info.parent_class = target_class.name
+            else:
+                # If target is not a class, it might be a primitive or external reference
+                # For now, we'll skip these associations
+                continue
     
     # Third pass: handle inheritance from UML structure (fallback)
     for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
@@ -431,15 +440,20 @@ def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]
     # Attributes without individual comments
     all_fields = list(class_info.attributes)
     
-    # Add association links as attributes
+    # Add association links as attributes (but avoid duplicates and filter out non-class targets)
+    existing_field_names = {field.name for field in all_fields}
     for link in association_links:
-        if link.target_name:
-            # For associations, add as optional attributes
-            all_fields.append(AttributeInfo(
-                name=link.target_name,
-                type_name=link.target_name,
-                is_optional=True
-            ))
+        if link.target_name and link.target_name not in existing_field_names:
+            # Check if target is actually a class we know about
+            target_exists = any(cls.name == link.target_name for cls in all_classes.values())
+            if target_exists:
+                # Create a field name from the target class name
+                field_name = link.target_name
+                all_fields.append(AttributeInfo(
+                    name=field_name,
+                    type_name=link.target_name,
+                    is_optional=True
+                ))
     
     if not all_fields:
         lines.append("    pass")

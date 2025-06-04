@@ -21,10 +21,12 @@ dataclasses imaju sve veze iz svake pojavne lokacije.  Zbog toga npr.
 u Enterprise Architect modelu prikazane samo u jednom profilu.
 
 Ako postoji UML `Dependency` link između dve klase, klasa na početku veze
-dobija dodatnog roditelja.  Tako `TopologyProfile.TopologicalNode` nasleđuje
-`StateVariablesProfile.TopologicalNode` i preko njega sve atribute definisane u
-tom paketu.  Klase označene `isAbstract="true"` nasleđuju i `ABC` kako bi bile
-apstraktne u generisanom Python kodu.
+dobija dodatnog roditelja.  Ako ciljna klasa ne postoji u XMI‑ju, pokušava
+se pronalaženje druge klase sa istim `GUIDBasedOn` identifikatorom i ona se
+koristi kao roditelj.  Tako `TopologyProfile.TopologicalNode` nasleđuje
+`StateVariablesProfile.TopologicalNode` jer dele zajednički `GUIDBasedOn`.
+Klase označene `isAbstract="true"` nasleđuju i `ABC` kako bi bile apstraktne
+u generisanom Python kodu.
 """
 
 from __future__ import annotations
@@ -90,6 +92,7 @@ class ClassMeta:
     uml_id: Optional[str] = None
     links: List["LinkData"] = field(default_factory=list)
     is_abstract: bool = False
+    guid: Optional[str] = None
 
 
 @dataclass
@@ -229,6 +232,16 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 print("🔍 Klasa", cname)
                         # pokušaj docstringa
             c_doc = child.find("ownedComment/Body")
+            guid = None
+            tag = child.find("tags/tag[@name='GUIDBasedOn']")
+            if tag is None:
+                ref_elem = root.find(f".//element[@xmi:idref='{child.get(f'{{{XMI_NS}}}id')}']", namespaces=NSMAP)
+                if ref_elem is not None:
+                    tag = ref_elem.find("tags/tag[@name='GUIDBasedOn']")
+            if tag is not None:
+                val = tag.get("value", "").strip("{}")
+                if val:
+                    guid = val.replace('_', '-')
             meta = ClassMeta(
                 cname,
                 {},
@@ -239,6 +252,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 child.get(f"{{{XMI_NS}}}id"),
                 [],
                 child.get("isAbstract") == "true",
+                guid,
             )
             key = tuple(pkg_path + [cname])
             target = classes.get(key)
@@ -323,12 +337,28 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
 
     # apply generalization and dependency links
     for lnk in links:
-        if lnk.kind in {'Generalization', 'Dependency'} and lnk.start in class_by_id and lnk.end in class_by_id:
+        if lnk.kind not in {'Generalization', 'Dependency'}:
+            continue
+        if lnk.start not in class_by_id:
+            continue
+        if lnk.end in class_by_id:
             parent = class_by_id[lnk.end][0]
-            for child in class_by_id[lnk.start]:
-                if parent.name not in child.bases:
-                    child.bases.append(parent.name)
-                    child.base_pkgs.append(parent.pkg_parts)
+        else:
+            guid = lnk.end.removeprefix('EAID_').replace('_', '-')
+            candidates = [m for m in classes.values() if m.guid == guid]
+            parent = None
+            for cand in candidates:
+                if 'StateVariablesProfile' in cand.pkg_parts:
+                    parent = cand
+                    break
+            if parent is None and candidates:
+                parent = candidates[0]
+        if parent is None:
+            continue
+        for child in class_by_id[lnk.start]:
+            if parent.name not in child.bases:
+                child.bases.append(parent.name)
+                child.base_pkgs.append(parent.pkg_parts)
 
     # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
@@ -386,6 +416,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         bases: List[str] = []
         base_pkgs: List[Tuple[str, ...]] = []
         doc = None
+        guid = None
         for m in metas:
             combined_attrs.update(m.attrs)
             for b, p in zip(m.bases, m.base_pkgs):
@@ -394,6 +425,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_pkgs.append(p)
             if m.doc and not doc:
                 doc = m.doc
+            if not guid and m.guid:
+                guid = m.guid
         for m in metas:
             for a_name, attr in combined_attrs.items():
                 m.attrs.setdefault(a_name, attr)
@@ -403,6 +436,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     m.base_pkgs.append(p)
             if doc and not m.doc:
                 m.doc = doc
+            if guid and not m.guid:
+                m.guid = guid
 
     # merge classes that share the same package path and name
     path_groups: Dict[Tuple[str, ...], List[ClassMeta]] = {}
@@ -416,6 +451,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         bases: List[str] = []
         base_pkgs: List[Tuple[str, ...]] = []
         doc = None
+        guid = None
         for m in metas:
             combined_attrs.update(m.attrs)
             for b, p in zip(m.bases, m.base_pkgs):
@@ -424,6 +460,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_pkgs.append(p)
             if m.doc and not doc:
                 doc = m.doc
+            if not guid and m.guid:
+                guid = m.guid
         for m in metas:
             for a_name, attr in combined_attrs.items():
                 m.attrs.setdefault(a_name, attr)
@@ -433,6 +471,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     m.base_pkgs.append(p)
             if doc and not m.doc:
                 m.doc = doc
+            if guid and not m.guid:
+                m.guid = guid
 
     print(
         "✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums)
@@ -635,7 +675,8 @@ def _cli():
         "Generate CGMES dataclasses from XMI. Definitions sharing an XMI id "
         "or identical package path are merged, so classes like TopologicalNode "
         "may accumulate associations from multiple profiles. Dependency links "
-        "add extra base classes."
+        "add extra base classes. If a dependency target is missing, the script "
+        "searches for a class with the same GUIDBasedOn value."
     )
     ap.add_argument("xmi")
     ap.add_argument("-o", "--output", required=True)

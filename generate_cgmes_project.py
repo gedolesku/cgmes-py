@@ -114,7 +114,7 @@ def _ptype(base: str, lower: str, upper: str) -> str:
 # ────────────────────────────────────────────────────────────────
 
 def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
-    """Parse a UML XMI file tree and build metadata for each CGMES class."""
+    """Return a mapping of class names to parsed metadata from the given XMI tree."""
     root = tree.getroot()
     by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
 
@@ -213,7 +213,7 @@ def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta]) -> List[str]:
 
 
 def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
-    """Write Python dataclass modules for all parsed CGMES classes.
+    """Write dataclass modules for all CGMES classes into *out_dir*.
 
     Returns the number of files written.
     """
@@ -260,10 +260,9 @@ def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
 # ────────────────────────────────────────────────────────────────
 
 def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
-    """Generate Python dataclasses from a CGMES UML XMI file.
+    """Parse *xmi* and write dataclass modules into *output_dir*.
 
-    The created dataclass modules are written into *output_dir* and the
-    number of generated classes is returned.
+    Returns the number of generated classes.
     """
     tree = _load_xmi(Path(xmi))
     classes = _parse_xmi(tree)
@@ -326,7 +325,7 @@ def _add(s: URIRef, p: URIRef, v, g: Graph):
 # ────────────────────────────────────────────────────────────────
 
 def _cli():
-    """Entry point for the command line interface."""
+    """Parse command line arguments and trigger dataclass generation."""
     ap = argparse.ArgumentParser(description="Generate CGMES dataclasses from XMI")
     ap.add_argument("xmi")
     ap.add_argument("-o", "--output", required=True)

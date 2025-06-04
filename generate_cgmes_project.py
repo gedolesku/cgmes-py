@@ -11,6 +11,14 @@
 * Multipliciteti se čitaju iz atributa `<lowerValue>` / `<upperValue>` bez
   prefiksa.
 * Dodati debug print‑ovi koje možeš isključiti `DEBUG = False`.
+
+UML klase se ponekad ponavljaju u različitim paketima.  Skripta spaja sve
+definicije koje imaju isti XMI ID, a zatim spaja i klase sa istim imenom
+bez obzira na paket.  Atributi i roditelji se objedinjuju tako da konačna
+dataclass uključuje uniju svega što je pronađeno.  Zbog toga npr.
+`TopologicalNode` u generisanom kodu sadrži veze ka `Terminal`,
+`ConnectivityNodeContainer` i drugim klasama, iako nisu sve vidljive u
+jednoj EA perspektivi.
 """
 
 from __future__ import annotations
@@ -571,7 +579,11 @@ def _add(s: URIRef, p: URIRef, v, g: Graph):
 
 def _cli():
     """Parse command line arguments and trigger dataclass generation."""
-    ap = argparse.ArgumentParser(description="Generate CGMES dataclasses from XMI")
+    ap = argparse.ArgumentParser(
+        description=
+        "Generate CGMES dataclasses from XMI. Classes with the same name or "
+        "XMI id are merged so attributes may come from multiple packages."
+    )
     ap.add_argument("xmi")
     ap.add_argument("-o", "--output", required=True)
     args = ap.parse_args()

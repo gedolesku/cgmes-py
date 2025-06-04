@@ -28,6 +28,6 @@ The output directory (`generated/` in the example) is ignored by Git via `.gitig
 
 ## Testing
 Run all tests with `pytest`. The suite includes `tests/test_generated_lint.py`,
-which runs the generator and lints the output with `ruff`. This test should pass
-to ensure the generated code is clean.
+which runs the generator and lints the output using `pylint`. The test fails if
+`pylint` reports any errors, ensuring the generated code is clean.
 

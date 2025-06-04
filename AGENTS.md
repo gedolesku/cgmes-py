@@ -26,3 +26,8 @@ The output directory (`generated/` in the example) is ignored by Git via `.gitig
 - Do not commit generated code or large XML model files.
 - Keep docstrings and CLI help messages up to date when modifying `generate_cgmes_project.py`.
 
+## Testing
+Run all tests with `pytest`. The suite includes `tests/test_generated_lint.py`,
+which runs the generator and lints the output with `ruff`. This test should pass
+to ensure the generated code is clean.
+

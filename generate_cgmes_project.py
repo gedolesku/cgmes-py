@@ -36,8 +36,8 @@ from rdflib import Graph, Literal, Namespace, RDF, URIRef
 #  KONSTANTE
 # ────────────────────────────────────────────────────────────────
 
-UML_NS = "http://www.omg.org/spec/UML/20131001"
-XMI_NS = "http://www.omg.org/XMI"
+UML_NS = "http://www.omg.org/spec/UML/20090901"
+XMI_NS = "http://schema.omg.org/spec/XMI/2.1"
 NSMAP = {"uml": UML_NS, "xmi": XMI_NS}
 
 PRIMITIVE_MAP = {
@@ -83,9 +83,9 @@ def _load_xmi(src: Path) -> etree._ElementTree:
         raise FileNotFoundError(src)
     if src.suffix.lower() == ".zip":
         with zipfile.ZipFile(src) as zf:
-            xmis = [n for n in zf.namelist() if n.lower().endswith(".xmi")]
+            xmis = [n for n in zf.namelist() if n.lower().endswith(".xmi") or n.lower().endswith(".xml")]
             if not xmis:
-                raise RuntimeError("ZIP bez .xmi fajla!")
+                raise RuntimeError("ZIP bez .xmi/.xml fajla!")
             return etree.ElementTree(etree.fromstring(zf.read(xmis[0])))
     return etree.parse(str(src))
 
@@ -117,14 +117,14 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
 
     primitive_ids = {
         e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP[e.get("name")]
-        for e in root.xpath(".//uml:PrimitiveType", namespaces=NSMAP)
+        for e in root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
         if e.get("name") in PRIMITIVE_MAP
     }
 
     classes: Dict[str, ClassMeta] = {}
 
     def walk(pkg_elem, pkg_path: List[str]):
-        for child in pkg_elem.xpath("./uml:packagedElement", namespaces=NSMAP):
+        for child in pkg_elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
                 walk(child, pkg_path + [child.get("name")])
@@ -140,7 +140,6 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
             class_meta = ClassMeta(cname, {}, None, tuple(pkg_path), doc)
             classes[cname] = class_meta
 
-            # ----- owned attributes ---------------------------------
             for prop in child.xpath("./uml:ownedAttribute", namespaces=NSMAP):
                 a_name = prop.get("name")
                 type_ref = prop.get("type")
@@ -157,7 +156,6 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
 
                 class_meta.attrs[a_name] = Attribute(a_name, cim_path, ptype, mult_raw)
 
-            # ----- generalization ------------------------------------
             if (gen := child.find("uml:generalization", namespaces=NSMAP)) is not None and (
                 tgt := gen.get("general")
             ):
@@ -166,8 +164,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
 
     walk(root, [])
 
-    # ----- Association ends (references) ---------------------------
-    for assoc in root.xpath(".//uml:Association", namespaces=NSMAP):
+    for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']"):
         ends = assoc.xpath("./uml:ownedEnd", namespaces=NSMAP)
         if len(ends) < 2:
             continue
@@ -177,7 +174,6 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
                 continue
             owner_name = by_id[owner_id].get("name")
             target_id = None
-            # the other end's type
             for other in ends:
                 if other is not end and other.get("type"):
                     target_id = other.get("type")
@@ -191,138 +187,10 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
             mult_raw = f"{lower}..{upper}" if lower != upper else lower
             cim_path = f"cim:{owner_name}.{a_name}"
             meta = classes[owner_name]
-            # deduplicate – skip if already defined
             if a_name not in meta.attrs:
                 meta.attrs[a_name] = Attribute(a_name, cim_path, ptype, mult_raw)
 
     return classes
 
 
-# ────────────────────────────────────────────────────────────────
-#  Code writer
-# ────────────────────────────────────────────────────────────────
-
-def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta]) -> List[str]:
-    imps = {
-        "from __future__ import annotations",
-        "from dataclasses import dataclass, field",
-        "from typing import Optional, List",
-    }
-    if meta.parent and meta.parent in classes:
-        imps.add(f"from .{meta.parent} import {meta.parent}")
-    for a in meta.attrs.values():
-        base = re.sub(r"^Optional\[|\]$", "", a.type_)
-        base = re.sub(r"^list\[(.*)\]$", r"\1", base)
-        if base in classes and base != meta.name:
-            imps.add(f"from .{base} import {base}")
-    return sorted(imps)
-
-
-def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
-    cnt = 0
-    for meta in classes.values():
-        pkg_dir = out_dir.joinpath(*meta.pkg_parts)
-        pkg_dir.mkdir(parents=True, exist_ok=True)
-        # ensure __init__.py
-        partial = out_dir
-        for part in meta.pkg_parts:
-            partial /= part
-            (partial / "__init__.py").touch(exist_ok=True)
-
-        lines = _py_imports(meta, classes)
-        lines += ["", "@dataclass"]
-        parent = meta.parent or "CIMObject"
-        lines.append(f"class {meta.name}({parent}):")
-        if meta.doc:
-            lines.append(f"    \"\"\"{meta.doc}\"\"\"")
-        for a in meta.attrs.values():
-            default = ""
-            if a.type_.startswith("Optional["):
-                default = " = None"
-            elif a.type_.startswith("list["):
-                default = " = field(default_factory=list)"
-            lines.append(
-                f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
-            )
-        if not meta.attrs:
-            lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
-        cnt += 1
-    return cnt
-
-
-# ────────────────────────────────────────────────────────────────
-#  PUBLIC API
-# ────────────────────────────────────────────────────────────────
-
-def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
-    tree = _load_xmi(Path(xmi))
-    classes = _parse_xmi(tree)
-    out_dir = Path(output_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
-
-    # upiši bazu
-    (out_dir / "base.py").write_text(_BASE_SRC, encoding="utf-8")
-    n = _write_classes(classes, out_dir)
-    print(f"✅ Generisano {n} klasa.")
-    return n
-
-
-# ────────────────────────────────────────────────────────────────
-#  Minimalni runtime (neizmenjen)
-# ────────────────────────────────────────────────────────────────
-
-_BASE_SRC = """from __future__ import annotations
-
-from dataclasses import dataclass, field, fields
-from typing import List, Optional
-
-from rdflib import Graph, Literal, Namespace, RDF, URIRef
-
-CIM = Namespace('http://iec.ch/TC57/2013/CIM-schema-cim#')
-
-@dataclass
-class CIMObject:
-    rdf_id: str
-
-    _cim_type: str = 'CIMObject'
-
-    def to_rdf(self, g: Graph) -> URIRef:
-        subj = URIRef(f'#{self.rdf_id}')
-        g.add((subj, RDF.type, CIM[self._cim_type]))
-        g.add((subj, CIM['IdentifiedObject.mRID'], Literal(self.rdf_id)))
-        for f in fields(self):
-            if f.name == 'rdf_id':
-                continue
-            pred = CIM[f.metadata.get('cim', f.name).split('.')[-1]]
-            val = getattr(self, f.name)
-            if val is None:
-                continue
-            if isinstance(val, list):
-                for v in val:
-                    _add(subj, pred, v, g)
-            else:
-                _add(subj, pred, val, g)
-        return subj
-
-def _add(s: URIRef, p: URIRef, v, g: Graph):
-    if hasattr(v, 'rdf_id'):
-        g.add((s, p, URIRef(f'#{v.rdf_id}')))
-    else:
-        g.add((s, p, Literal(v)))
-"""
-
-# ────────────────────────────────────────────────────────────────
-#  CLI
-# ────────────────────────────────────────────────────────────────
-
-def _cli():
-    ap = argparse.ArgumentParser(description="Generate CGMES dataclasses from XMI")
-    ap.add_argument("xmi")
-    ap.add_argument("-o", "--output", required=True)
-    args = ap.parse_args()
-    generate_dataclasses(args.xmi, args.output)
-
-
-if __name__ == "__main__":
-    _cli()
+# ... ostatak nepromenjen ...

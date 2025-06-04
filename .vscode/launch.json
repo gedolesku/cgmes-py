@@ -20,6 +20,14 @@
             "console": "integratedTerminal",
             "args": "cgmes-models/v24/ENTSOE_CGMES_v2.4.14_28May2014.xml --output generated"
         },
+                {
+            "name": "generate_cgmes_project.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "generate_cgmes_project.py",
+            "console": "integratedTerminal",
+            "args": "cgmes-models/v24/ENTSOE_CGMES_v2.4.14_28May2014.xml --output generated"
+        },
         
     ]
 }

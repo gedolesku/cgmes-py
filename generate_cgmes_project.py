@@ -30,6 +30,7 @@ import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+import keyword
 
 from lxml import etree
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
@@ -136,6 +137,18 @@ def _mult_from_elem(elem: etree._Element) -> Tuple[str, str]:
     return lower, upper
 
 
+def _sanitize(name: str) -> str:
+    """Return *name* converted to a valid Python identifier."""
+    if not name:
+        name = "_"
+    name = re.sub(r"\W", "_", name.strip())
+    if not name or name[0].isdigit():
+        name = f"_{name}"
+    if keyword.iskeyword(name) or name in {"None", "True", "False"}:
+        name = f"_{name}"
+    return name
+
+
 def _ptype(base: str, lower: str, upper: str) -> str:
     if upper == "*" or (upper.isdigit() and int(upper) > 1):
         return f"list[{base}]"
@@ -183,17 +196,18 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         for child in elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
-                walk(child, pkg_path + [child.get("name")])
+                walk(child, pkg_path + [_sanitize(child.get("name"))])
                 continue
             if kind == "uml:Enumeration":
-                ename = child.get("name")
+                ename = _sanitize(child.get("name"))
                 if DEBUG:
                     print("🔍 Enum", ename)
                 e_doc = child.find("ownedComment/Body")
                 key = tuple(pkg_path + [ename])
+                literals = [_sanitize(l.get("name")) for l in child.xpath("./ownedLiteral")]
                 meta = EnumMeta(
                     ename,
-                    [l.get("name") for l in child.xpath("./ownedLiteral")],
+                    literals,
                     tuple(pkg_path),
                     e_doc.text if e_doc is not None else None,
                 )
@@ -203,7 +217,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 continue
             if kind != "uml:Class":
                 continue
-            cname = child.get("name")
+            cname = _sanitize(child.get("name"))
             if DEBUG:
                 print("🔍 Klasa", cname)
                         # pokušaj docstringa
@@ -230,7 +244,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
 
             # ownedAttribute
             for prop in child.xpath("./ownedAttribute"):
-                a_name = prop.get("name")
+                a_name = _sanitize(prop.get("name"))
                 type_ref = prop.get("type")
                 if type_ref is None:
                     t_elem = prop.find("type")
@@ -337,11 +351,12 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 target_meta = class_by_id[target_id][0]
                 lower, upper = _mult_from_elem(end)
                 for owner_meta in class_by_id[owner_class_id]:
+                    aname = _sanitize(end.get("name") or target_meta.name)
                     owner_meta.attrs.setdefault(
-                        end.get("name") or target_meta.name,
+                        aname,
                         Attribute(
-                            end.get("name") or target_meta.name,
-                            f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
+                            aname,
+                            f"cim:{owner_meta.name}.{aname}",
                             _ptype(target_meta.name, lower, upper),
                             f"{lower}..{upper}" if lower != upper else lower,
                             True,
@@ -433,14 +448,18 @@ def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enum
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)
         imps.add(f"from {path} import {meta.parent}")
     for a in meta.attrs.values():
-        base = re.sub(r"^Optional\[(.*)\]$", r"\1", a.type_)
-        base = re.sub(r"^list\[(.*)\]$", r"\1", base)
-        if a.ref_pkg:
-            if base != meta.name or a.ref_pkg != meta.pkg_parts:
-                path = _rel_mod(meta.pkg_parts, a.ref_pkg, base)
+        base = a.type_
+        if base.startswith("Optional[") and base.endswith("]"):
+            base = base[len("Optional["):-1]
+        if base.startswith("list[") and base.endswith("]"):
+            base = base[len("list["):-1]
+        if base not in {"str", "int", "float", "bool"}:
+            pkg = a.ref_pkg or meta.pkg_parts
+            if base != meta.name or pkg != meta.pkg_parts:
+                path = _rel_mod(meta.pkg_parts, pkg, base)
                 imps.add(f"from {path} import {base}")
-    return sorted(imps)
 
+    return sorted(imps)
 
 def _write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
     """Write Enum classes for all UML enumerations."""
@@ -490,7 +509,7 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
                 default = " = None"
             elif a.type_.startswith("list["):
                 default = " = field(default_factory=list)"
-            if a.is_ref:
+            if a.is_ref and not a.type_.startswith("list["):
                 lines.append(
                     f"    {a.name}_ref: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
                 )
@@ -504,7 +523,6 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
         (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
         cnt += 1
     return cnt
-
 
 # ────────────────────────────────────────────────────────────────
 #  PUBLIC API
@@ -593,5 +611,4 @@ def _cli():
 if __name__ == "__main__":
     # _cli()
     generate_dataclasses("cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml", "generated")
-
 

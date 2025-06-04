@@ -58,6 +58,7 @@ class Attribute:
     cim_path: str
     type_: str
     multiplicity: str
+    is_ref: bool = False
 
 
 @dataclass
@@ -154,6 +155,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
                     f"{lower}..{upper}" if lower != upper else lower,
+                    False,
                 )
 
             # generalization
@@ -183,6 +185,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
                         f"cim:{owner}.{end.get('name') or target}",
                         _ptype(target, lower, upper),
                         f"{lower}..{upper}" if lower != upper else lower,
+                        True,
                     ),
                 )
 
@@ -231,9 +234,15 @@ def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
                 default = " = None"
             elif a.type_.startswith("list["):
                 default = " = field(default_factory=list)"
-            lines.append(
-                f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
-            )
+            if a.is_ref:
+                lines.append(
+                    f"    {a.name}_ref: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                )
+                lines.append(f"    {a.name}_id: str = None")
+            else:
+                lines.append(
+                    f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                )
         if not meta.attrs:
             lines.append("    pass")
         (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")

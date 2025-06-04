@@ -172,14 +172,21 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str
             for prop in child.xpath("./ownedAttribute"):
                 a_name = prop.get("name")
                 type_ref = prop.get("type")
+                if type_ref is None:
+                    t_elem = prop.find("type")
+                    if t_elem is not None:
+                        type_ref = t_elem.get(f"{{{XMI_NS}}}idref")
                 lower, upper = _mult_from_elem(prop)
-                base_type = primitive_ids.get(type_ref) or (by_id.get(type_ref).get("name") if type_ref in by_id else "str")
+                base_type = primitive_ids.get(type_ref) or (
+                    by_id.get(type_ref).get("name") if type_ref in by_id else "str"
+                )
+                is_ref = bool(prop.get("association"))
                 meta.attrs[a_name] = Attribute(
                     a_name,
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
                     f"{lower}..{upper}" if lower != upper else lower,
-                    False,
+                    is_ref,
                 )
 
             # generalization

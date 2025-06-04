@@ -60,6 +60,7 @@ class Attribute:
     multiplicity: str
     is_ref: bool = False
     ref_pkg: Optional[Tuple[str, ...]] = None
+    uml_id: Optional[str] = None  # XMI id, for tracking links
 
 
 @dataclass
@@ -133,11 +134,23 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
     prim_elems = root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
     primitive_ids = {e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems}
 
+    # pre-pass to determine package path for all elements
+    def collect_pkgs(elem, pkg_path, out):
+        for child in elem.xpath("./packagedElement"):
+            kind = child.get(f"{{{XMI_NS}}}type")
+            if kind == "uml:Package":
+                collect_pkgs(child, pkg_path + [child.get("name")], out)
+            else:
+                out[child.get(f"{{{XMI_NS}}}id")] = tuple(pkg_path)
+
+    id_to_pkg: Dict[str, Tuple[str, ...]] = {}
+    for model in root.xpath(".//uml:Model", namespaces=NSMAP):
+        collect_pkgs(model, [], id_to_pkg)
+
     classes: Dict[Tuple[str, ...], ClassMeta] = {}
     enums: Dict[Tuple[str, ...], EnumMeta] = {}
     class_by_id: Dict[str, ClassMeta] = {}
     enum_by_id: Dict[str, EnumMeta] = {}
-    id_to_pkg: Dict[str, Tuple[str, ...]] = {}
 
     def walk(elem, pkg_path: List[str]):
         for child in elem.xpath("./packagedElement"):
@@ -215,14 +228,19 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
                     f"{lower}..{upper}" if lower != upper else lower,
                     is_ref,
                     ref_pkg,
+                    prop.get(f"{{{XMI_NS}}}id"),
                 )
 
             # generalization
             gen = child.find("generalization")
-            if gen is not None and (gid := gen.get("general")) and gid in class_by_id:
+            if gen is not None and (gid := gen.get("general")):
                 if target.parent is None:
-                    target.parent = class_by_id[gid].name
-                    target.parent_pkg = class_by_id[gid].pkg_parts
+                    if gid in class_by_id:
+                        target.parent = class_by_id[gid].name
+                        target.parent_pkg = class_by_id[gid].pkg_parts
+                    else:
+                        target.parent = by_id.get(gid).get("name") if gid in by_id else None
+                        target.parent_pkg = id_to_pkg.get(gid)
 
     # start from each uml:Model
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
@@ -249,6 +267,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
                         f"{lower}..{upper}" if lower != upper else lower,
                         True,
                         target_meta.pkg_parts,
+                        end.get(f"{{{XMI_NS}}}id"),
                     ),
                 )
 

@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
-"""generate_dataclasses.py  ◀  CGMES 2.4+ **code‑gen & round‑trip toolkit**
-================================================================================
+"""generate_dataclasses.py  –  CGMES 2.4 UML‑XMI → dataclasses
+================================================================
 
-### Šta je novo?  (2025‑06‑04)
-* **Podržani su i atributi iz `uml:Association` krajeva** (`ownedEnd`) – pa
-  reference poput `DiagramObjectPoint.DiagramObject` više NE izostaju.
-* Multiplicitete se čitaju i kada su definisani kao pod‑elementi
-  `<uml:lowerValue value="0"/>`, `<uml:upperValue value="*"/>`.
-* Fiksirano mapiranje `*` → `list[T]`, a `0|0..1` → `Optional[T]`.
-* Generator sada sprečava duplikate atributa (npr. ako postoji i *ownedAttr*
-  i *association end* istog imena).
+‼️ Verzija 2025‑06‑04b – ispravka XPath‑a za **EA XMI export** bez prefiksa.
 
----
-Minimalni primer:
-```bash
-python generate_dataclasses.py ENTSOE_CGMES_v2.4.15_7Aug2014_XMI.zip -o cgmes_py
-```
-Na izlazu dobijaš hijerarhiju paketa + `base.py` (sa `CIMObject`).
+* `walk()` sada počinje od `<uml:Model>` čvora (ne od korena `<xmi:XMI>`).
+* Svi XPath izrazi (`packagedElement`, `ownedAttribute`, `generalization`,
+  `ownedEnd`) više **ne koriste prefiks** jer EA export ima elemente bez
+  `uml:` prefiksa.
+* Multipliciteti se čitaju iz atributa `<lowerValue>` / `<upperValue>` bez
+  prefiksa.
+* Dodati debug print‑ovi koje možeš isključiti `DEBUG = False`.
 """
 
 from __future__ import annotations
@@ -32,8 +26,10 @@ from typing import Dict, List, Optional, Tuple
 from lxml import etree
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
 
+DEBUG = False  # postavi True za obilne poruke
+
 # ────────────────────────────────────────────────────────────────
-#  KONSTANTE
+#  Namespaces iz EA XMI
 # ────────────────────────────────────────────────────────────────
 
 UML_NS = "http://www.omg.org/spec/UML/20090901"
@@ -53,7 +49,7 @@ PRIMITIVE_MAP = {
 CIM = Namespace("http://iec.ch/TC57/2013/CIM-schema-cim#")
 
 # ────────────────────────────────────────────────────────────────
-#  METAPODACI
+#  Metapodaci
 # ────────────────────────────────────────────────────────────────
 
 @dataclass
@@ -62,20 +58,17 @@ class Attribute:
     cim_path: str
     type_: str
     multiplicity: str
-    doc: Optional[str] = None
 
 
 @dataclass
 class ClassMeta:
     name: str
-    attrs: Dict[str, Attribute]  # key = attribute name (dedup)
+    attrs: Dict[str, Attribute]
     parent: Optional[str]
     pkg_parts: Tuple[str, ...]
-    doc: Optional[str] = None
-
 
 # ────────────────────────────────────────────────────────────────
-#  XMI parsiranje
+#  Učitavanje XMI
 # ────────────────────────────────────────────────────────────────
 
 def _load_xmi(src: Path) -> etree._ElementTree:
@@ -83,121 +76,110 @@ def _load_xmi(src: Path) -> etree._ElementTree:
         raise FileNotFoundError(src)
     if src.suffix.lower() == ".zip":
         with zipfile.ZipFile(src) as zf:
-            xmis = [n for n in zf.namelist() if n.lower().endswith(".xmi") or n.lower().endswith(".xml")]
-            if not xmis:
-                raise RuntimeError("ZIP bez .xmi/.xml fajla!")
-            return etree.ElementTree(etree.fromstring(zf.read(xmis[0])))
+            name = next((n for n in zf.namelist() if n.lower().endswith((".xmi", ".xml"))), None)
+            if not name:
+                raise RuntimeError("ZIP ne sadrži .xmi/.xml")
+            return etree.ElementTree(etree.fromstring(zf.read(name)))
     return etree.parse(str(src))
 
+# ────────────────────────────────────────────────────────────────
+#  Pomoćne
+# ────────────────────────────────────────────────────────────────
 
 def _mult_from_elem(elem: etree._Element) -> Tuple[str, str]:
-    """Vrati (lower, upper) kao stringove."""
-    lower = elem.get("lower") or elem.get("lowerValue")
-    upper = elem.get("upper") or elem.get("upperValue")
-    if lower is None:
-        if (lv := elem.find("uml:lowerValue", namespaces=NSMAP)) is not None:
-            lower = lv.get("value") or "1"
-    if upper is None:
-        if (uv := elem.find("uml:upperValue", namespaces=NSMAP)) is not None:
-            upper = uv.get("value") or "1"
-    return (lower or "1", upper or "1")
+    lower = elem.get("lower") or elem.get("lowerValue") or "1"
+    upper = elem.get("upper") or elem.get("upperValue") or "1"
+    if lower == "":
+        lower = "1"
+    if upper == "":
+        upper = "1"
+    if (lv := elem.find("lowerValue")) is not None:
+        lower = lv.get("value") or lower
+    if (uv := elem.find("upperValue")) is not None:
+        upper = uv.get("value") or upper
+    return lower, upper
 
 
-def _ptype_from_multiplicity(base: str, lower: str, upper: str) -> str:
-    if upper == "*" or ".." in f"{lower}..{upper}" and (upper == "*" or int(upper) > 1):
+def _ptype(base: str, lower: str, upper: str) -> str:
+    if upper == "*" or (upper.isdigit() and int(upper) > 1):
         return f"list[{base}]"
     if lower == "0":
         return f"Optional[{base}]"
     return base
 
+# ────────────────────────────────────────────────────────────────
+#  Parsiranje
+# ────────────────────────────────────────────────────────────────
 
 def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
     root = tree.getroot()
     by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
 
-    primitive_ids = {
-        e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP[e.get("name")]
-        for e in root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
-        if e.get("name") in PRIMITIVE_MAP
-    }
+    prim_elems = root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
+    primitive_ids = {e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems}
 
     classes: Dict[str, ClassMeta] = {}
 
-    def walk(pkg_elem, pkg_path: List[str]):
-        for child in pkg_elem.xpath("./packagedElement"):
-            print(f"📦 Paket: {'/'.join(pkg_path)} — Nađeno {len(pkg_elem.xpath('./packagedElement'))} elemenata")
+    def walk(elem, pkg_path: List[str]):
+        for child in elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
                 walk(child, pkg_path + [child.get("name")])
                 continue
             if kind != "uml:Class":
                 continue
-
             cname = child.get("name")
-            print(f"🔍 Klasa: {cname} u paketu {'/'.join(pkg_path)}")
-            doc = None
-            if (c_doc := child.find("uml:ownedComment/uml:Body", namespaces=NSMAP)) is not None:
-                doc = c_doc.text
+            if DEBUG:
+                print("🔍 Klasa", cname)
+            meta = ClassMeta(cname, {}, None, tuple(pkg_path))
+            classes[cname] = meta
 
-            class_meta = ClassMeta(cname, {}, None, tuple(pkg_path), doc)
-            classes[cname] = class_meta
-
-            for prop in child.xpath("./uml:ownedAttribute", namespaces=NSMAP):
+            # ownedAttribute
+            for prop in child.xpath("./ownedAttribute"):
                 a_name = prop.get("name")
                 type_ref = prop.get("type")
                 lower, upper = _mult_from_elem(prop)
+                base_type = primitive_ids.get(type_ref) or (by_id.get(type_ref).get("name") if type_ref in by_id else "str")
+                meta.attrs[a_name] = Attribute(
+                    a_name,
+                    f"cim:{cname}.{a_name}",
+                    _ptype(base_type, lower, upper),
+                    f"{lower}..{upper}" if lower != upper else lower,
+                )
 
-                base_type = "str"
-                if type_ref:
-                    base_type = primitive_ids.get(type_ref) or by_id.get(type_ref).get("name")
+            # generalization
+            gen = child.find("generalization")
+            if gen is not None and (gid := gen.get("general")) and gid in by_id:
+                meta.parent = by_id[gid].get("name")
 
-                ptype = _ptype_from_multiplicity(base_type, lower, upper)
-                mult_raw = f"{lower}..{upper}" if lower != upper else lower
-                tag_cim = prop.get("{http://www.omg.org/spec/XMI/20110701}idref") or a_name
-                cim_path = f"cim:{cname}.{tag_cim}"
+    # start from each uml:Model
+    for model in root.xpath(".//uml:Model", namespaces=NSMAP):
+        walk(model, [])
 
-                class_meta.attrs[a_name] = Attribute(a_name, cim_path, ptype, mult_raw)
-
-            if (gen := child.find("uml:generalization", namespaces=NSMAP)) is not None and (
-                tgt := gen.get("general")
-            ):
-                if (t_el := by_id.get(tgt)) is not None:
-                    class_meta.parent = t_el.get("name")
-
-    walk(root, [])
-
+    # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
-        ends = assoc.xpath("./uml:ownedEnd", namespaces=NSMAP)
+        ends = assoc.xpath("./ownedEnd")
         if len(ends) < 2:
             continue
         for end in ends:
             owner_id = end.get("type")
-            if owner_id not in by_id:
-                continue
-            owner_name = by_id[owner_id].get("name")
-            target_id = None
-            for other in ends:
-                if other is not end and other.get("type"):
-                    target_id = other.get("type")
-                    break
-            if not target_id or target_id not in by_id:
-                continue
-            target_name = by_id[target_id].get("name")
-            a_name = end.get("name") or target_name
-            lower, upper = _mult_from_elem(end)
-            ptype = _ptype_from_multiplicity(target_name, lower, upper)
-            mult_raw = f"{lower}..{upper}" if lower != upper else lower
-            cim_path = f"cim:{owner_name}.{a_name}"
-            meta = classes[owner_name]
-            if a_name not in meta.attrs:
-                meta.attrs[a_name] = Attribute(a_name, cim_path, ptype, mult_raw)
+            target_id = next((e.get("type") for e in ends if e is not end and e.get("type")), None)
+            if owner_id in by_id and target_id in by_id:
+                owner, target = by_id[owner_id].get("name"), by_id[target_id].get("name")
+                lower, upper = _mult_from_elem(end)
+                classes[owner].attrs.setdefault(
+                    end.get("name") or target,
+                    Attribute(
+                        end.get("name") or target,
+                        f"cim:{owner}.{end.get('name') or target}",
+                        _ptype(target, lower, upper),
+                        f"{lower}..{upper}" if lower != upper else lower,
+                    ),
+                )
 
-    print(f"✅ Ukupno pronađeno klasa: {len(classes)}")
-    print(f"✅ Ukupno pronađenih primitivnih tipova: {len(primitive_ids)}")
-
+    if DEBUG:
+        print("✅ klase:", len(classes), "– prim:", len(primitive_ids))
     return classes
-
-
 # ────────────────────────────────────────────────────────────────
 #  Code writer
 # ────────────────────────────────────────────────────────────────

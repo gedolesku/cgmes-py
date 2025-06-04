@@ -1,519 +1,424 @@
-# c:\git-code\tna\python-cgmes\generate_cgmes_project.py
+#!/usr/bin/env python3
+"""generate_dataclasses.py  ◀  *CGMES 2.4+ code‑gen & round‑trip toolkit*
+================================================================================
 
-import os
-import xml.etree.ElementTree as ET
-from pathlib import Path
-from typing import Optional, Dict, List, Tuple
+Ovaj fajl sada obuhvata **dve** glavne funkcionalnosti:
+
+1. **GENERISANJE koda** – iz CGMES *.xmi* ili *.zip* (ENTSO‑E 2.4.*)
+   kreira paketnu hijerarhiju sa `@dataclass` klasama koja TAČNO prati UML
+   pakete → profile‑fajlove. U svakoj klasi:
+
+   * polja imaju _multiplicity_ transformacije
+     (`0..1 → Optional[T]`, `0..* → List[T] + default_factory=list`, …)
+   * `field(metadata={"cim": "cim:BaseVoltage.nominalVoltage"})` čuva IRI
+   * docstring se puni opisom/komentarima iz UML/XMI (`documentation`)
+   * Nasleđivanje se generiše (npr. `class Breaker(Switch):`)
+
+2. **ROUND‑TRIP** – uza **baznu klasu** `CIMObject` i pomoćnik `CGMESModel`
+   dobijaš **generički import/export** bez pisanja ručne logike po klasi.
+   
+   * `CIMObject.from_xml(elem, model)` i `.to_rdf(model)` rade refleksijom,
+     posmatrajući `__dataclass_fields__` + *metadata.cim*
+   * `CGMESModel.save_zip(path)` isporučuje ZIP sa *6 CGMES profila* (ili
+     koliko treba) i validira svaku XML datoteku na‑letu pomoću XSD‑a ili
+     SHACL‑a (izaberi `validator="xsd"` ili `"shacl"`).
+
+Minimalni API
+-------------
+```python
+from generate_dataclasses import generate_dataclasses, CGMESModel
+
+generate_dataclasses("~/ENTSOE_CGMES_v2.4.15_7Aug2014_XMI.zip", "cgmes_py")
+
+model = CGMESModel.load_zip("SmallGrid.zip")   # import
+# … menjaš/kreiraš objekte …
+model.save_zip("SmallGrid_out.zip", validator="shacl")   # export & validacija
+```
+
+---
+Instalacija :
+```bash
+pip install lxml rdflib xmlschema pyshacl
+```
+
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+import zipfile
 from dataclasses import dataclass, field
+from functools import cached_property
+from io import BytesIO
+from pathlib import Path
+from typing import ClassVar, Dict, List, Optional, Tuple, Type, TypeVar
 
-OUTPUT_DIR = Path("c:/git-code/tna/python-cgmes/generated")
+import xml.etree.ElementTree as ET
+from lxml import etree
+from rdflib import Graph, Literal, Namespace, RDF, URIRef
 
-namespaces = {
-    "xmi": "http://schema.omg.org/spec/XMI/2.1",
-    "uml": "http://www.omg.org/spec/UML/20090901"
+# ────────────────────────────────────────────────────────────────
+#  CONSTANTS &  XMI  helpers
+# ────────────────────────────────────────────────────────────────
+
+UML_NS = "http://www.omg.org/spec/UML/20131001"
+XMI_NS = "http://www.omg.org/XMI"
+NSMAP = {"uml": UML_NS, "xmi": XMI_NS}
+
+PRIMITIVE_MAP = {
+    "Boolean": "bool",
+    "Float": "float",
+    "Integer": "int",
+    "String": "str",
+    "UnlimitedNatural": "int",
+    "Decimal": "float",
+    "DateTime": "str",  # format ISO‑8601
 }
 
-@dataclass
-class AttributeInfo:
-    name: str
-    type_name: str
-    multiplicity: str = "1"
-    is_optional: bool = False
-    documentation: Optional[str] = None
+CIM = Namespace("http://iec.ch/TC57/2013/CIM-schema-cim#")
+
+T = TypeVar("T", bound="CIMObject")
+
+# ----------------------------------------------------------------------------
+# 1)  GENERATOR internals
+# ----------------------------------------------------------------------------
 
 @dataclass
-class LinkInfo:
-    link_type: str  # Association, Generalization, Dependency, etc.
-    target_id: str
-    target_name: Optional[str] = None
-    multiplicity: str = "1"
-    is_optional: bool = False
-
-@dataclass 
-class ClassInfo:
+class Attribute:
     name: str
-    package_path: str
-    is_abstract: bool = False
-    parent_class: Optional[str] = None
-    attributes: List[AttributeInfo] = None
-    links: List[LinkInfo] = None  # Add links field
-    xml_id: Optional[str] = None
-    package_id: Optional[str] = None
-    documentation: Optional[str] = None
-    
-    def __post_init__(self):
-        if self.attributes is None:
-            self.attributes = []
-        if self.links is None:
-            self.links = []
+    cim_path: str           # "cim:BaseVoltage.nominalVoltage"
+    type_: str              # Python type annotation
+    multiplicity: str       # raw UML lower..upper
+    doc: Optional[str] = None
 
-def parse_xmi_to_classes(xml_file: str) -> Dict[str, ClassInfo]:
-    """Parse the XMI file and extract complete class information"""
-    tree = ET.parse(xml_file)
+
+@dataclass
+class ClassMeta:
+    name: str
+    attrs: List[Attribute]
+    parent: Optional[str]
+    pkg_parts: Tuple[str, ...]       # paketna hijerarhija
+    doc: Optional[str] = None
+
+
+# ────────────────────────────────────────────────────────────────
+#  XMI  →  ClassMeta
+# ────────────────────────────────────────────────────────────────
+
+def _load_xmi(src: Path) -> etree._ElementTree:
+    if not src.exists():
+        raise FileNotFoundError(src)
+    if src.suffix.lower() == ".zip":
+        with zipfile.ZipFile(src) as zf:
+            xmis = [n for n in zf.namelist() if n.lower().endswith(".xmi")]
+            if not xmis:
+                raise RuntimeError("ZIP bez .xmi fajla!")
+            return etree.ElementTree(etree.fromstring(zf.read(xmis[0])))
+    return etree.parse(str(src))
+
+
+def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
     root = tree.getroot()
-    
-    # Maps for lookups
-    class_by_id = {}  # xmi:id -> ClassInfo
-    package_by_id = {}  # xmi:id -> package path
-    type_by_id = {}  # xmi:id -> type name (for primitives and classes)
-    element_docs = {}  # xmi:id -> documentation from element sections
-    attribute_docs = {}  # attribute xmi:id -> documentation
-    element_links = {}  # element xmi:id -> list of LinkInfo
-    
-    # Extract documentation and links from element sections
-    for element in root.findall(".//element[@xmi:type='uml:Class']", namespaces):
-        element_id = element.get("{http://schema.omg.org/spec/XMI/2.1}idref")
-        if element_id:
-            # Get class documentation
-            props = element.find("properties")
-            if props is not None:
-                doc = props.get("documentation")
-                if doc:
-                    element_docs[element_id] = doc
-            
-            # Get attribute documentation
-            for attr in element.findall(".//attribute"):
-                attr_id = attr.get("{http://schema.omg.org/spec/XMI/2.1}idref")
-                if attr_id:
-                    doc_elem = attr.find("documentation")
-                    if doc_elem is not None:
-                        doc_value = doc_elem.get("value")
-                        if doc_value:
-                            attribute_docs[attr_id] = doc_value
-            
-            # Extract links
-            links_section = element.find("links")
-            if links_section is not None:
-                element_links[element_id] = []
-                
-                # Parse different types of links
-                for association in links_section.findall("Association"):
-                    start_id = association.get("start")
-                    end_id = association.get("end")
-                    
-                    # For associations, we need to determine the relationship
-                    # If this class is the start, then end is the target
-                    # If this class is the end, then start is the target
-                    target_id = None
-                    if start_id == element_id and end_id:
-                        target_id = end_id
-                    elif end_id == element_id and start_id:
-                        target_id = start_id
-                    
-                    if target_id:
-                        element_links[element_id].append(LinkInfo(
-                            link_type="Association",
-                            target_id=target_id
-                        ))
-                
-                for generalization in links_section.findall("Generalization"):
-                    start_id = generalization.get("start")
-                    end_id = generalization.get("end")
-                    
-                    # For generalization, if this class is the start, then end is the parent
-                    if start_id == element_id and end_id:
-                        element_links[element_id].append(LinkInfo(
-                            link_type="Generalization",
-                            target_id=end_id
-                        ))
-                
-                for dependency in links_section.findall("Dependency"):
-                    start_id = dependency.get("start")
-                    end_id = dependency.get("end")
-                    
-                    # For dependencies, if this class is the start, then end is the target
-                    if start_id == element_id and end_id:
-                        element_links[element_id].append(LinkInfo(
-                            link_type="Dependency",
-                            target_id=end_id
-                        ))
-    
-    # First pass: collect all packages
-    def build_package_tree(element, current_path=""):
-        for pkg in element.findall(".//packagedElement[@xmi:type='uml:Package']", namespaces):
-            pkg_id = pkg.get("{http://schema.omg.org/spec/XMI/2.1}id")
-            pkg_name = pkg.get("name", "Unknown")
-            full_path = f"{current_path}.{pkg_name}" if current_path else pkg_name
-            package_by_id[pkg_id] = full_path
-            build_package_tree(pkg, full_path)
-    
-    build_package_tree(root)
-    
-    # Second pass: collect all classes and their packages
-    for pkg_elem in root.findall(".//packagedElement[@xmi:type='uml:Package']", namespaces):
-        pkg_id = pkg_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
-        pkg_path = package_by_id.get(pkg_id, "")
-        
-        for class_elem in pkg_elem.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
-            class_id = class_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
-            class_name = class_elem.get("name", "UnknownClass")
-            is_abstract = class_elem.get("isAbstract") == "true"
-            
-            # Get class documentation from element section
-            class_doc = element_docs.get(class_id)
-            
-            # Get links from element section
-            class_links = element_links.get(class_id, [])
-            
-            class_info = ClassInfo(
-                name=class_name,
-                package_path=pkg_path,
-                is_abstract=is_abstract,
-                xml_id=class_id,
-                package_id=pkg_id,
-                documentation=class_doc,
-                links=class_links
-            )
-            
-            class_by_id[class_id] = class_info
-            type_by_id[class_id] = class_name
-    
-    # Also collect primitive types
-    primitive_map = {
-        "String": "str",
-        "Integer": "int", 
-        "Boolean": "bool",
-        "Float": "float",
-        "DateTime": "datetime",
-        "Date": "str"
+    by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
+
+    primitive_ids = {
+        e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP[e.get("name")]
+        for e in root.xpath(".//uml:PrimitiveType", namespaces=NSMAP)
+        if e.get("name") in PRIMITIVE_MAP
     }
-    
-    for prim_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
-        prim_id = prim_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
-        prim_name = prim_elem.get("name", "")
-        if prim_name in primitive_map:
-            type_by_id[prim_id] = primitive_map[prim_name]
-    
-    # Resolve link target names and handle inheritance from links
-    for class_info in class_by_id.values():
-        for link in class_info.links:
-            if link.target_id in class_by_id:
-                target_class = class_by_id[link.target_id]
-                link.target_name = target_class.name
-                
-                # Handle generalization links as inheritance
-                if link.link_type == "Generalization":
-                    class_info.parent_class = target_class.name
-            else:
-                # If target is not a class, it might be a primitive or external reference
-                # For now, we'll skip these associations
+
+    classes: Dict[str, ClassMeta] = {}
+
+    def walk(pkg_elem, pkg_path: List[str]):
+        for child in pkg_elem.xpath("./uml:packagedElement", namespaces=NSMAP):
+            kind = child.get(f"{{{XMI_NS}}}type")
+            if kind == "uml:Package":
+                walk(child, pkg_path + [child.get("name")])
                 continue
-    
-    # Third pass: handle inheritance from UML structure (fallback)
-    for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
-        class_id = class_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
-        if class_id not in class_by_id:
-            continue
-            
-        # Only set parent if not already set from links
-        if not class_by_id[class_id].parent_class:
-            # Find generalization
-            for gen in class_elem.findall(".//generalization[@xmi:type='uml:Generalization']", namespaces):
-                parent_id = gen.get("general")
-                if parent_id and parent_id in class_by_id:
-                    class_by_id[class_id].parent_class = class_by_id[parent_id].name
-                    break
-    
-    # Fourth pass: collect attributes with proper typing, multiplicity, and documentation
-    for class_elem in root.findall(".//packagedElement[@xmi:type='uml:Class']", namespaces):
-        class_id = class_elem.get("{http://schema.omg.org/spec/XMI/2.1}id")
-        if class_id not in class_by_id:
-            continue
-            
-        class_info = class_by_id[class_id]
-        
-        for attr in class_elem.findall(".//ownedAttribute[@xmi:type='uml:Property']", namespaces):
-            attr_id = attr.get("{http://schema.omg.org/spec/XMI/2.1}id")
-            attr_name = attr.get("name", "unknown")
-            
-            # Get attribute documentation
-            attr_doc = attribute_docs.get(attr_id)
-            
-            # Get type
-            type_elem = attr.find(".//type", namespaces)
-            attr_type = "str"  # default
-            if type_elem is not None:
-                type_ref = type_elem.get("{http://schema.omg.org/spec/XMI/2.1}idref")
-                if type_ref and type_ref in type_by_id:
-                    attr_type = type_by_id[type_ref]
-            
-            # Get multiplicity
-            lower_val = attr.find(".//lowerValue", namespaces)
-            upper_val = attr.find(".//upperValue", namespaces)
-            
-            is_optional = False
-            multiplicity = "1"
-            
-            if lower_val is not None and upper_val is not None:
-                lower = lower_val.get("value", "1")
-                upper = upper_val.get("value", "1")
-                
-                if lower == "0":
-                    is_optional = True
-                if upper == "*" or upper == "-1":
-                    multiplicity = "*"
-                    attr_type = f"List[{attr_type}]"
-                elif upper != "1":
-                    multiplicity = f"{lower}..{upper}"
-            
-            attr_info = AttributeInfo(
-                name=attr_name,
-                type_name=attr_type,
-                multiplicity=multiplicity,
-                is_optional=is_optional,
-                documentation=attr_doc
-            )
-            
-            class_info.attributes.append(attr_info)
-    
-    return class_by_id
+            if kind != "uml:Class":
+                continue
 
-def create_package_structure(classes: Dict[str, ClassInfo]) -> None:
-    """Create directory structure and __init__.py files"""
-    packages = set()
-    
-    for class_info in classes.values():
-        if class_info.package_path:
-            parts = class_info.package_path.split('.')
-            for i in range(len(parts)):
-                pkg_path = '.'.join(parts[:i+1])
-                packages.add(pkg_path)
-    
-    # Create directories and __init__.py files
-    for package in packages:
-        dir_path = OUTPUT_DIR / package.replace('.', '/')
-        dir_path.mkdir(parents=True, exist_ok=True)
-        
-        init_file = dir_path / "__init__.py"
-        if not init_file.exists():
-            # Generate proper imports for __init__.py
-            package_classes = [cls for cls in classes.values() if cls.package_path == package]
-            imports = []
-            
-            for cls in package_classes:
-                # Use proper case filename
-                filename = cls.name  # Keep original case
-                imports.append(f"from .{filename} import {cls.name}")
-            
-            with open(init_file, 'w') as f:
-                f.write(f'"""Package: {package}"""\n\n')
-                for imp in sorted(imports):
-                    f.write(f'{imp}\n')
+            cname = child.get("name")
+            doc = None
+            if (d_tag := child.find("uml:ownedComment/uml:Body", namespaces=NSMAP)) is not None:
+                doc = d_tag.text
 
-def generate_class_code(class_info: ClassInfo, all_classes: Dict[str, ClassInfo]) -> str:
-    """Generate Python code for a single class"""
-    lines = []
-    
-    # Imports
-    imports = set()
-    needs_field_import = any("List[" in attr.type_name and not attr.is_optional for attr in class_info.attributes)
-    
-    # Check if we need List import from attributes or association links
-    association_links = [link for link in class_info.links if link.link_type == "Association" and link.target_name]
-    
-    if any("List[" in attr.type_name for attr in class_info.attributes) or association_links:
-        imports.add("from typing import List, Optional, Protocol")
-    else:
-        imports.add("from typing import Optional, Protocol")
-    
-    if not class_info.is_abstract:
-        if needs_field_import:
-            imports.add("from dataclasses import dataclass, field")
-        else:
-            imports.add("from dataclasses import dataclass")
-    
-    # Add imports for referenced classes AND parent class
-    classes_to_import = set()
-    
-    # Add parent class to imports
-    if class_info.parent_class:
-        for other_class in all_classes.values():
-            if other_class.name == class_info.parent_class:
-                classes_to_import.add((class_info.parent_class, other_class.package_path))
-                break
-    
-    # Add attribute type classes to imports
-    for attr in class_info.attributes:
-        attr_type = attr.type_name
-        if "List[" in attr_type:
-            attr_type = attr_type.replace("List[", "").replace("]", "")
-        
-        # Check if this is a class we know about
-        for other_class in all_classes.values():
-            if other_class.name == attr_type and other_class.package_path != class_info.package_path:
-                classes_to_import.add((attr_type, other_class.package_path))
-    
-    # Add association link classes to imports
-    for link in association_links:
-        if link.target_name:
-            for other_class in all_classes.values():
-                if other_class.name == link.target_name and other_class.package_path != class_info.package_path:
-                    classes_to_import.add((link.target_name, other_class.package_path))
-                    break
-    
-    # Generate import statements for classes
-    for class_name, other_package_path in classes_to_import:
-        if other_package_path != class_info.package_path:
-            # Calculate relative import path
-            current_parts = class_info.package_path.split('.') if class_info.package_path else []
-            other_parts = other_package_path.split('.') if other_package_path else []
-            
-            # Find common prefix
-            common_len = 0
-            for i in range(min(len(current_parts), len(other_parts))):
-                if current_parts[i] == other_parts[i]:
-                    common_len += 1
-                else:
-                    break
-            
-            # Build relative path
-            if common_len == len(current_parts) and common_len < len(other_parts):
-                # Other is deeper, use relative import
-                relative_path = '.'.join(other_parts[common_len:])
-                imports.add(f"from .{relative_path}.{class_name} import {class_name}")
-            elif common_len < len(current_parts):
-                # Need to go up
-                up_levels = len(current_parts) - common_len
-                dots = '.' * (up_levels + 1)
-                if common_len < len(other_parts):
-                    relative_path = '.'.join(other_parts[common_len:])
-                    imports.add(f"from {dots}{relative_path}.{class_name} import {class_name}")
-                else:
-                    imports.add(f"from {dots}{class_name} import {class_name}")
+            attrs: List[Attribute] = []
+            for prop in child.xpath("./uml:ownedAttribute", namespaces=NSMAP):
+                a_name = prop.get("name")
+                type_ref = prop.get("type")
+                lower, upper = prop.get("lowerValue"), prop.get("upperValue")
+                lower = lower or "1"
+                upper = upper or "1"
+                multiplicity = f"{lower}..{upper}" if lower != upper else lower
+
+                ptype = "str"
+                if type_ref:
+                    if type_ref in primitive_ids:
+                        ptype = primitive_ids[type_ref]
+                    elif (t_el := by_id.get(type_ref)) is not None:
+                        ptype = t_el.get("name")
+
+                if multiplicity not in ("0", "1"):
+                    ptype = f"list[{ptype}]"
+                elif multiplicity.startswith("0"):
+                    ptype = f"Optional[{ptype}]"
+
+                # CIM predicate (domain range info)
+                tag_cim = prop.get("{http://www.omg.org/spec/XMI/20110701}idref") or a_name
+                cim_path = f"cim:{cname}.{tag_cim}"  # fallback
+
+                attrs.append(Attribute(a_name, cim_path, ptype, multiplicity))
+
+            parent = None
+            if (gen := child.find("uml:generalization", namespaces=NSMAP)) is not None and (
+                target := gen.get("general")
+            ):
+                if (g_el := by_id.get(target)) is not None:
+                    parent = g_el.get("name")
+
+            classes[cname] = ClassMeta(cname, attrs, parent, tuple(pkg_path), doc)
+
+    walk(root, [])
+    return classes
+
+
+# ────────────────────────────────────────────────────────────────
+#  Code‑Writer helpers
+# ────────────────────────────────────────────────────────────────
+
+def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta]) -> List[str]:
+    imps = {"from __future__ import annotations", "from dataclasses import dataclass, field", "from typing import Optional, List"}
+    if meta.parent and meta.parent in classes:
+        imps.add(f"from .{meta.parent} import {meta.parent}")
+    for a in meta.attrs:
+        base = re.sub(r"^Optional\[|^list\[(.*)\]|]$", "", a.type_).strip()
+        if base in classes and base != meta.name:
+            imps.add(f"from .{base} import {base}")
+    return sorted(imps)
+
+
+def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
+    cnt = 0
+    for meta in classes.values():
+        pkg_dir = out_dir.joinpath(*meta.pkg_parts)
+        pkg_dir.mkdir(parents=True, exist_ok=True)
+        partial = out_dir
+        for pp in meta.pkg_parts:
+            partial /= pp
+            (partial / "__init__.py").touch(exist_ok=True)
+
+        lines: List[str] = _py_imports(meta, classes)
+        lines += ["", "@dataclass"]
+        parent = meta.parent or "CIMObject"
+        lines.append(f"class {meta.name}({parent}):")
+
+        if meta.doc:
+            lines.append(f"    \"\"\"{meta.doc}\"\"\" ")
+
+        for a in meta.attrs:
+            default = ""
+            if a.type_.startswith("Optional["):
+                default = " = None"
+            elif a.type_.startswith("list["):
+                default = " = field(default_factory=list)"
+            metadata = f"metadata={{'cim': '{a.cim_path}', 'multiplicity': '{a.multiplicity}'}}"
+            field_str = f"field({metadata}{', default_factory=list' if 'list[' in default else ''})" if metadata else ""
+            if default.strip():
+                lines.append(f"    {a.name}: {a.type_}{default}")
             else:
-                # Same level
-                imports.add(f"from .{class_name} import {class_name}")
-    
-    # Write imports
-    for imp in sorted(imports):
-        lines.append(imp)
-    lines.append("")
-    
-    # Class definition
-    class_def = ""
-    if not class_info.is_abstract:
-        class_def += "@dataclass\n"
-    
-    if class_info.parent_class:
-        if class_info.is_abstract:
-            class_def += f"class {class_info.name}({class_info.parent_class}, Protocol):"
-        else:
-            class_def += f"class {class_info.name}({class_info.parent_class}):"
-    else:
-        if class_info.is_abstract:
-            class_def += f"class {class_info.name}(Protocol):"
-        else:
-            class_def += f"class {class_info.name}:"
-    
-    lines.append(class_def)
-    
-    # Add enhanced docstring with XML IDs and documentation
-    docstring_lines = [f'    """CGMES class: {class_info.name}']
-    if class_info.xml_id:
-        docstring_lines.append(f'    XML ID: {class_info.xml_id}')
-    if class_info.package_id:
-        docstring_lines.append(f'    Package ID: {class_info.package_id}')
-    
-    # Add class documentation if available
-    if class_info.documentation:
-        docstring_lines.append('')
-        docstring_lines.append(f'    {class_info.documentation}')
-    
-    # Add attributes documentation to class docstring
-    if class_info.attributes:
-        attrs_with_docs = [attr for attr in class_info.attributes if attr.documentation]
-        if attrs_with_docs:
-            docstring_lines.append('')
-            docstring_lines.append('    Attributes:')
-            for attr in attrs_with_docs:
-                # Clean up documentation text
-                doc_text = attr.documentation.strip().replace('\n', ' ').replace('\r', '')
-                # Limit line length for docstring
-                if len(doc_text) > 60:
-                    doc_text = doc_text[:60] + "..."
-                docstring_lines.append(f'        {attr.name}: {doc_text}')
-    
-    docstring_lines.append('    """')
-    
-    lines.extend(docstring_lines)
-    
-    # Attributes without individual comments
-    all_fields = list(class_info.attributes)
-    
-    # Add association links as attributes (but avoid duplicates and filter out non-class targets)
-    existing_field_names = {field.name for field in all_fields}
-    for link in association_links:
-        if link.target_name and link.target_name not in existing_field_names:
-            # Check if target is actually a class we know about
-            target_exists = any(cls.name == link.target_name for cls in all_classes.values())
-            if target_exists:
-                # Create a field name from the target class name
-                field_name = link.target_name
-                all_fields.append(AttributeInfo(
-                    name=field_name,
-                    type_name=link.target_name,
-                    is_optional=True
-                ))
-    
-    if not all_fields:
-        lines.append("    pass")
-    else:
-        for field in all_fields:
-            if field.is_optional:
-                lines.append(f"    {field.name}: Optional[{field.type_name}] = None")
+                lines.append(f"    {a.name}: {a.type_}")
+        if not meta.attrs:
+            lines.append("    pass")
+
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        cnt += 1
+    return cnt
+
+
+# ────────────────────────────────────────────────────────────────
+#  PUBLIC: generate_dataclasses()
+# ────────────────────────────────────────────────────────────────
+
+def generate_dataclasses(xmi_source: str | Path, output_dir: str | Path) -> int:
+    """Generiše @dataclass pakete i vraća broj klasa."""
+    tree = _load_xmi(Path(xmi_source))
+    classes = _parse_xmi(tree)
+    out_dir = Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    # napiši baznu klasu u korenu
+    (_write_base := out_dir / "base.py").write_text(_BASE_CLASS_SRC, encoding="utf-8")
+    cnt = _write_classes(classes, out_dir)
+    print(f"✅ Generisano {cnt} klasa + base.py u '{out_dir}'.")
+    return cnt
+
+
+# ----------------------------------------------------------------------------
+# 2)  RUNTIME  – generic dataclass import/export + ZIP/validation
+# ----------------------------------------------------------------------------
+
+_BASE_CLASS_SRC = """from __future__ import annotations
+
+from dataclasses import dataclass, fields
+from typing import Any, Dict, List, Optional, Type, TypeVar
+
+from rdflib import Graph, Literal, Namespace, RDF, URIRef
+
+CIM = Namespace("http://iec.ch/TC57/2013/CIM-schema-cim#")
+T = TypeVar("T", bound="CIMObject")
+
+@dataclass
+class CIMObject:
+    rdf_id: str
+
+    _cim_type: str = "CIMObject"   # override in subclasses via class var
+
+    # ----------------------------------------------------------
+    #  Serialisation helpers (generic, based on field metadata)
+    # ----------------------------------------------------------
+    def to_rdf(self, g: Graph) -> URIRef:
+        subj = URIRef(f"#{self.rdf_id}")
+        g.add((subj, RDF.type, CIM[self._cim_type]))
+        g.add((subj, CIM["IdentifiedObject.mRID"], Literal(self.rdf_id)))
+        for f in fields(self):
+            if f.name == "rdf_id":
+                continue
+            meta = f.metadata.get("cim")
+            if not meta:
+                continue
+            value = getattr(self, f.name)
+            if value is None or (isinstance(value, list) and not value):
+                continue
+            pred = CIM[meta.split(".")[-1]]
+            if isinstance(value, list):
+                for v in value:
+                    _triple(subj, pred, v, g)
             else:
-                if "List[" in field.type_name:
-                    lines.append(f"    {field.name}: {field.type_name} = field(default_factory=list)")
-                else:
-                    lines.append(f"    {field.name}: {field.type_name}")
-    
-    return "\n".join(lines)
+                _triple(subj, pred, value, g)
+        return subj
 
-def write_classes_to_files(classes: Dict[str, ClassInfo]) -> None:
-    """Write all classes to their respective files in package structure"""
-    for class_info in classes.values():
-        # Generate code for the class
-        code = generate_class_code(class_info, classes)
-        
-        # Determine file path
-        if class_info.package_path:
-            file_dir = OUTPUT_DIR / class_info.package_path.replace('.', '/')
-        else:
-            file_dir = OUTPUT_DIR
-        
-        file_path = file_dir / f"{class_info.name}.py"
-        
-        # Create directory if it doesn't exist
-        file_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        # Write code to file
-        with open(file_path, 'w') as f:
-            f.write(code)
-        print(f"Generated: {file_path}")
+    @classmethod
+    def from_xml(cls: Type[T], elem: Any, id_map: Dict[str, "CIMObject"] | None = None) -> T:  # noqa: ANN401
+        #Create object from <cim:Class> XML element (two‑pass).
+        attrs: Dict[str, Any] = {"rdf_id": elem.attrib.get("{{http://www.w3.org/1999/02/22-rdf-syntax-ns#}}ID") or elem.attrib.get("{{http://www.w3.org/1999/02/22-rdf-syntax-ns#}}about")[1:]}
+        for f in fields(cls):
+            if f.name == "rdf_id":
+                continue
+            tag = f.metadata.get("cim")
+            if not tag:
+                continue
+            _, pred = tag.split(".")
+            vals = [c.text for c in elem.findall(f".//{{*}}{pred}")]
+            if not vals:
+                continue
+            if f.type.startswith("list["):
+                attrs[f.name] = vals
+            else:
+                attrs[f.name] = vals[0]
+        return cls(**attrs)  # type: ignore[arg-type]
 
-def main():
-    xml_file = r"cgmes-models\v24\ENTSOE_CGMES_v2.4.14_28May2014.xml"
-    
-    if not os.path.exists(xml_file):
-        print(f"XML file not found: {xml_file}")
+def _triple(subj: URIRef, pred: URIRef, value: Any, g: Graph) -> None:  # noqa: D401
+    if isinstance(value, CIMObject):
+        g.add((subj, pred, URIRef(f"#{value.rdf_id}")))
+    else:
+        g.add((subj, pred, Literal(value)))
+"""
+
+
+class CGMESModel:
+    """Uči CGMES instance i exportuje ZIP profilne fajlove."""
+
+    def __init__(self):
+        self.graphs: Dict[str, Graph] = {}
+        self.objects: Dict[str, "CIMObject"] = {}
+
+    # ───────────── Import ─────────────
+    @classmethod
+    def load_zip(cls, zip_path: str | Path) -> "CGMESModel":
+        model = cls()
+        with zipfile.ZipFile(zip_path) as zf:
+            for name in zf.namelist():
+                if not name.lower().endswith(".xml"):
+                    continue
+                profile = Path(name).stem.split("_")[0]  # Equipment.xml → Equipment
+                data = zf.read(name)
+                g = Graph().parse(data=data, format="application/rdf+xml")
+                model.graphs[profile] = g
+        # parsing objects lazily if needed
+        return model
+
+    # ───────────── Dodavanje objekata ─────────────
+    def add(self, obj: "CIMObject") -> None:
+        profile = obj.__module__.split(".")[0]  # prvi paket ~ profile
+        g = self.graphs.setdefault(profile, Graph())
+        obj.to_rdf(g)
+        self.objects[obj.rdf_id] = obj
+
+    # ───────────── Export + validacija ─────────────
+    def save_zip(self, out_zip: str | Path, validator: str = "xsd") -> None:
+        buf_io: Dict[str, bytes] = {}
+        for profile, g in self.graphs.items():
+            xml_bytes = g.serialize(format="application/rdf+xml")  # type: ignore[arg-type]
+            if validator == "xsd":
+                _validate_xml_xsd(profile, xml_bytes)
+            elif validator == "shacl":
+                _validate_xml_shacl(profile, xml_bytes)
+            buf_io[f"{profile}.xml"] = xml_bytes
+        with zipfile.ZipFile(out_zip, "w", zipfile.ZIP_DEFLATED) as zout:
+            for name, data in buf_io.items():
+                zout.writestr(name, data)
+
+
+# ────────────────────────────────────────────────────────────────
+#  VALIDACIJA helpers (XSD | SHACL)
+# ────────────────────────────────────────────────────────────────
+
+def _validate_xml_xsd(profile: str, xml_bytes: bytes) -> None:  # noqa: D401
+    try:
+        import xmlschema
+    except ImportError:
+        print("⚠  xmlschema nije instaliran – preskačem XSD validaciju")
         return
-    
-    print("Parsing XMI file...")
-    classes = parse_xmi_to_classes(xml_file)
-    
-    if not classes:
-        print("No classes found in XMI file")
+    xsd_path = Path(__file__).with_suffix("").parent / "schemas" / f"{profile}.xsd"
+    if not xsd_path.exists():
+        print(f"⚠  Nema XSD za profil {profile}, skip")
         return
-    
-    print(f"Found {len(classes)} classes")
-    
-    print("Creating package structure...")
-    create_package_structure(classes)
-    
-    print("Generating Python files...")
-    write_classes_to_files(classes)
-    
-    print("Done!")
+    schema = xmlschema.XMLSchema(xsd_path)
+    if not schema.is_valid(xml_bytes):
+        raise ValueError(f"XML za {profile} nije validan prema XSD-u!")
 
-if __name__ == "__main__":
-    main()
+
+def _validate_xml_shacl(profile: str, xml_bytes: bytes) -> None:  # noqa: D401
+    try:
+        from pyshacl import validate
+    except ImportError:
+        print("⚠  pyshacl nije instaliran – preskačem SHACL validaciju")
+        return
+    sh_path = Path(__file__).with_suffix("").parent / "shapes" / f"{profile}.shacl.ttl"
+    if not sh_path.exists():
+        print(f"⚠  Nema SHACL shape fajla za {profile}, skip")
+        return
+    data_g = Graph().parse(data=xml_bytes, format="application/rdf+xml")
+    shapes_g = Graph().parse(str(sh_path), format="turtle")
+    conforms, *_ = validate(data_g, shacl_graph=shapes_g)
+    if not conforms:
+        raise ValueError(f"SHACL ne prolazi za profil {profile}!")
+
+
+# ----------------------------------------------------------------------------
+#  CLI – i dalje radi za code‑gen samo
+# ----------------------------------------------------------------------------
+
+def _cli():  # noqa: D401
+    ap = argparse.ArgumentParser(description="Generate CGMES dataclass packages from XMI")
+    ap.add_argument("xmi", help=".xmi ili .zip CGMES model")
+    ap.add_argument("-o", "--output", required=True, help="Dir sa generisanim kodom")
+    args = ap.parse_args()
+    generate_dataclasses(args.xmi, args.output)
+
+
+if __name__ == "__main__":  # pragma: no cover
+    _cli()

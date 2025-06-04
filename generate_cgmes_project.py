@@ -15,8 +15,8 @@
 UML klase se često pojavljuju u više paketa.  Najpre se objedine sve
 definicije sa istim XMI identifikatorom.  Zatim se dodatno spajaju
 definicije koje imaju istu putanju paketa (npr. `Core::Topology`) i
-isto ime klase.  Time se sabiraju i atributi i roditelji, pa rezultujuća
-dataclasses imaju sve veze iz svake pojavne lokacije.  Zbog toga npr.
+isto ime klase.  Atributi i baze svih kopija se objedine, pa rezultujuća
+dataclasses imaju veze iz svake pojavne lokacije.  Zbog toga npr.
 `TopologicalNode` može sadržati asocijacije iz više paketa, čak i ako su
 u Enterprise Architect modelu prikazane samo u jednom profilu.
 
@@ -356,6 +356,17 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         if parent is None:
             continue
         for child in class_by_id[lnk.start]:
+            if (
+                lnk.kind == 'Dependency'
+                and child.guid
+                and parent.guid
+                and child.guid == parent.guid
+                and 'StateVariablesProfile' in child.pkg_parts
+                and 'StateVariablesProfile' not in parent.pkg_parts
+            ):
+                # ignore reverse dependency: the StateVariablesProfile class
+                # should not inherit from its counterparts in other packages
+                continue
             if parent.name not in child.bases:
                 child.bases.append(parent.name)
                 child.base_pkgs.append(parent.pkg_parts)

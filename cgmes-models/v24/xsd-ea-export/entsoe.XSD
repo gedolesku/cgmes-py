@@ -1,6 +1,0 @@
-<?xml  version='1.0' encoding='utf-8' ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:annotation>
-		<xs:documentation>This package contains ENTSO-E set of profiles related to power system model exchange as well as the European style market profiles.</xs:documentation>
-	</xs:annotation>
-</xs:schema>

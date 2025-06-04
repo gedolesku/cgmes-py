@@ -13,13 +13,12 @@
 * Dodati debug print‑ovi koje možeš isključiti `DEBUG = False`.
 
 UML klase se često pojavljuju u više paketa.  Najpre se objedine sve
-definicije sa istim XMI identifikatorom.  Nakon toga se dodatno spajaju
-definicije koje imaju identičnu putanju paketa (npr. `Core::Topology`)
-i isto ime klase.  Spajanje **ne** zavisi samo od imena, pa različiti
-paketi mogu imati klase sa istim nazivom bez mešanja atributa.  Ipak, ako
-je klasa raspodeljena u više paketa sa istim import‑putem, svi atributi i
-roditelji biće objedinjeni.  Zbog toga npr. `TopologicalNode` može sadržati
-linkove koji potiču iz nekoliko različitih paketa.
+definicije sa istim XMI identifikatorom.  Zatim se dodatno spajaju
+definicije koje imaju istu putanju paketa (npr. `Core::Topology`) i
+isto ime klase.  Time se sabiraju i atributi i roditelji, pa rezultujuća
+dataclasses imaju sve veze iz svake pojavne lokacije.  Zbog toga npr.
+`TopologicalNode` može sadržati asocijacije iz više paketa, čak i ako su
+u Enterprise Architect modelu prikazane samo u jednom profilu.
 
 Ako postoji UML `Dependency` link između dve klase, klasa na početku veze
 dobija dodatnog roditelja.  Tako `TopologyProfile.TopologicalNode` nasleđuje
@@ -634,8 +633,9 @@ def _cli():
     ap = argparse.ArgumentParser(
         description=
         "Generate CGMES dataclasses from XMI. Definitions sharing an XMI id "
-        "or the same package path are merged, so attributes may come from "
-        "several packages. Dependency links add extra base classes."
+        "or identical package path are merged, so classes like TopologicalNode "
+        "may accumulate associations from multiple profiles. Dependency links "
+        "add extra base classes."
     )
     ap.add_argument("xmi")
     ap.add_argument("-o", "--output", required=True)

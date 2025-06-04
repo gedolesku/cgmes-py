@@ -315,8 +315,35 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                         ),
                     )
 
-    # merge attributes and parents across duplicate class definitions
+    # merge attributes and parents across duplicate class definitions by XMI id
     for metas in class_by_id.values():
+        if len(metas) < 2:
+            continue
+        combined_attrs: Dict[str, Attribute] = {}
+        parent_name = None
+        parent_pkg = None
+        doc = None
+        for m in metas:
+            combined_attrs.update(m.attrs)
+            if m.parent and not parent_name:
+                parent_name = m.parent
+                parent_pkg = m.parent_pkg
+            if m.doc and not doc:
+                doc = m.doc
+        for m in metas:
+            for a_name, attr in combined_attrs.items():
+                m.attrs.setdefault(a_name, attr)
+            if parent_name and not m.parent:
+                m.parent = parent_name
+                m.parent_pkg = parent_pkg
+            if doc and not m.doc:
+                m.doc = doc
+
+    # merge classes that share the same name across packages
+    name_groups: Dict[str, List[ClassMeta]] = {}
+    for meta in classes.values():
+        name_groups.setdefault(meta.name, []).append(meta)
+    for metas in name_groups.values():
         if len(metas) < 2:
             continue
         combined_attrs: Dict[str, Attribute] = {}
@@ -395,7 +422,7 @@ def _write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
             lines.append(f"    {lit} = '{lit}'")
         if not meta.literals:
             lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
         cnt += 1
     return cnt
 
@@ -438,7 +465,7 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
                 )
         if not meta.attrs:
             lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
         cnt += 1
     return cnt
 

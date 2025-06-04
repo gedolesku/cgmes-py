@@ -537,6 +537,101 @@ head:
 					<Association xmi:id="EAID_4549D0C4_3243_4314_900C_1DF99F8F8CEA" start="EAID_05B1DE58_5F2D_4e1a_946C_B60BDCB3147B" end="EAID_6B555DBD_D6CC_4eef_BB08_C4FA090797CD"/>
 				</links>
 			</element>
+...
+AngleDegrees packaged element
+					<packagedElement xmi:type="uml:Class" xmi:id="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1" name="AngleDegrees">
+						<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_4BE393A6_4CEE_484e_BB24_F51C507C4512" name="multiplier" isStatic="true" isReadOnly="true">
+							<type xmi:idref="EAID_187CAE57_A83B_4353_A002_AF61EACCB844"/>
+							<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000123_4CEE_484e_BB24_F51C507C4512" value="0"/>
+							<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000124_4CEE_484e_BB24_F51C507C4512" value="1"/>
+							<defaultValue xmi:type="uml:LiteralString" xmi:id="EAID_LI000125_4CEE_484e_BB24_F51C507C4512" value="none"/>
+						</ownedAttribute>
+						<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_FA6CE578_5D15_4633_80B7_875A32848102" name="unit" isStatic="true" isReadOnly="true">
+							<type xmi:idref="EAID_66DA823A_B6D8_4aea_8084_9DBADF8F8219"/>
+							<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000125_5D15_4633_80B7_875A32848102" value="0"/>
+							<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000126_5D15_4633_80B7_875A32848102" value="1"/>
+							<defaultValue xmi:type="uml:LiteralString" xmi:id="EAID_LI000127_5D15_4633_80B7_875A32848102" value="deg"/>
+						</ownedAttribute>
+						<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_4D963797_11CB_4138_B706_562B6F011FAB" name="value">
+							<type xmi:idref="EAID_CE061B0C_E2E4_44e3_B93D_C87DE4DBD69F"/>
+							<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000127_11CB_4138_B706_562B6F011FAB" value="0"/>
+							<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000128_11CB_4138_B706_562B6F011FAB" value="1"/>
+						</ownedAttribute>
+					</packagedElement>
+element found by xmi:id="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1". It has attributes named value with properties type="Float". 
+<element xmi:idref="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1" xmi:type="uml:Class" name="AngleDegrees" scope="public">
+				<model package="EAPK_3A93D24C_824F_4ee9_8EAC_F78B5E55A655" tpos="9" ea_localid="25619" ea_eleType="element"/>
+				<properties documentation="Measurement of angle in degrees.&#xA;" isSpecification="false" sType="Class" nType="0" scope="public" stereotype="CIMDatatype" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="andre" phase="1.0" created="2011-02-24 15:04:07" modified="2014-05-25 09:30:08" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags>
+					<tag xmi:id="EAID_49C18B6B_FDCF_45ed_A609_68C8B0707B96" name="GUIDBasedOn" value="{A633BDC9-A238-4f69-AF1B-FF8A5C2FFCC8}" modelElement="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1"/>
+				</tags>
+				<xrefs value="$XREFPROP=$XID={F0A95D97-2E9E-4ea2-BC22-76503B5CAA20}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=CIMDatatype;GUID={5B7B1546-3C70-4477-A3FD-945D062AFD27};@ENDSTEREO;$DES;$CLT={2C503787-F407-4afc-AB13-D0AFD33066C1}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={C9C8C076-42F3-47f4-8528-CF36DD020072}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={2C503787-F407-4afc-AB13-D0AFD33066C1}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="DomainProfile" ea_attsclassified="{66B9C119-CD49-48b5-A175-1FE132FBC199},{CD510A65-FB40-4db2-B58C-132D4644BC3A},{C7BA3688-1046-420f-B9E4-68BD549B8AD1},{E7154060-0744-4333-8363-B2C220B0C3E2},{F368F121-AAC4-4659-9605-2601FDD2BE6A},{D969A90F-768C-46f9-8DED-F7992A312A67},{4E85DC88-7660-4407-A63B-9EB9F70190A7},{DE7D2402-C1BB-4972-8EB2-37A0A250E487},{41EADBB8-98CD-4e40-86E1-82D1BAA84F32},{30E676E7-AEF4-48b9-ABFC-CEA19F022656},{4F54F252-5AFE-445c-B9AC-DB0D79CCD171},{8E3424D5-2632-4894-88CD-B9A1C381598B},{A724C15E-B42D-44d3-BE77-072BE36E6D3C},{92CF7D5A-7EF2-4fb0-9866-F27471664347},{2AFAF8E9-7E18-4b8a-AC7F-C6DD4542990A},{AB94A1E6-25EF-4880-A191-7CB62C64B943},{6A90FF9D-4864-4cfa-A3D3-AA215FFA7F0C},{9C454474-2BC2-4618-8708-11D232B0D484},{D2AF86AB-578A-4561-9E84-C8BCE70763C3},{34863009-1D0F-44e2-99B9-B5347D8EAAF5},{7E028ADA-F539-45bd-8EB0-FF041309EEA2},{426F5893-D55D-4bc9-8287-599CFF38E48C}"/>
+				<attributes>
+					<attribute xmi:idref="EAID_4BE393A6_4CEE_484e_BB24_F51C507C4512" name="multiplier" scope="Public">
+						<initial body="none"/>
+						<documentation/>
+						<model ea_localid="94343" ea_guid="{4BE393A6-4CEE-484e-BB24-F51C507C4512}"/>
+						<properties type="UnitMultiplier" derived="0" precision="0" collection="false" length="0" static="1" duplicates="0" changeability="frozen"/>
+						<coords ordered="0" scale="0"/>
+						<containment containment="Not Specified" position="2"/>
+						<stereotype/>
+						<bounds lower="0" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags>
+							<tag xmi:id="EAID_A2E838D4_10AF_48e5_A7CA_E15A9EC4838F" name="GUIDBasedOn" value="{8FDF9698-E454-4c56-B58E-BFEBE384F311}"/>
+						</tags>
+						<xrefs value="$XREFPROP=$XID={D58A070D-27D5-4909-9EBE-48CEB886EC75}$XID;$NAM=CustomProperties$NAM;$TYP=attribute property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isID@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=0@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={4BE393A6-4CEE-484e-BB24-F51C507C4512}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+					</attribute>
+					<attribute xmi:idref="EAID_FA6CE578_5D15_4633_80B7_875A32848102" name="unit" scope="Public">
+						<initial body="deg"/>
+						<documentation/>
+						<model ea_localid="94344" ea_guid="{FA6CE578-5D15-4633-80B7-875A32848102}"/>
+						<properties type="UnitSymbol" derived="0" precision="0" collection="false" length="0" static="1" duplicates="0" changeability="frozen"/>
+						<coords ordered="0" scale="0"/>
+						<containment containment="Not Specified" position="1"/>
+						<stereotype/>
+						<bounds lower="0" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags>
+							<tag xmi:id="EAID_59C347B6_9961_4e1f_A701_7733C0435804" name="GUIDBasedOn" value="{58D1D28E-ADAB-4417-A5F4-D089FF60AE02}"/>
+						</tags>
+						<xrefs value="$XREFPROP=$XID={E799FF95-3CC1-4d3e-9FF1-7CE0FA1A7F06}$XID;$NAM=CustomProperties$NAM;$TYP=attribute property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isID@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=0@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={FA6CE578-5D15-4633-80B7-875A32848102}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+					</attribute>
+					<attribute xmi:idref="EAID_4D963797_11CB_4138_B706_562B6F011FAB" name="value" scope="Public">
+						<initial/>
+						<documentation/>
+						<model ea_localid="94345" ea_guid="{4D963797-11CB-4138-B706-562B6F011FAB}"/>
+						<properties type="Float" derived="0" precision="0" collection="false" length="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0" scale="0"/>
+						<containment containment="Not Specified" position="0"/>
+						<stereotype/>
+						<bounds lower="0" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags>
+							<tag xmi:id="EAID_EA8EBFA8_6603_49c2_9118_455E9F2C02A0" name="GUIDBasedOn" value="{8C467CE2-6EA5-4aed-810B-32597261DB61}"/>
+						</tags>
+						<Constraints>
+							<Constraint name="precision" type="INV" notes="choice=simple"/>
+						</Constraints>
+						<xrefs value="$XREFPROP=$XID={34405DDD-A205-47ec-8B06-F76B34BF5238}$XID;$NAM=CustomProperties$NAM;$TYP=attribute property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isID@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=0@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={4D963797-11CB-4138-B706-562B6F011FAB}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+					</attribute>
+				</attributes>
+				<links>
+					<Dependency xmi:id="EAID_21195042_17BA_4d81_BB65_E1973CB708F0" start="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1" end="EAID_A633BDC9_A238_4f69_AF1B_FF8A5C2FFCC8"/>
+					<NoteLink xmi:id="EAID_637D3BCD_2965_40ab_9ABD_155D0BE79AB2" start="EAID_12D15E73_24CE_45fe_81FC_821DB71E6C1D" end="EAID_2C503787_F407_4afc_AB13_D0AFD33066C1"/>
+				</links>
+			</element>
+
 
 SmallGridTestConfiguration_BC_EQ_v3.0.0.xml file chunks
 <?xml version="1.0" encoding="utf-8"?>
@@ -577,6 +672,8 @@ SmallGridTestConfiguration_BC_EQ_v3.0.0.xml file chunks
     <cim:ACDCTerminal.connected>true</cim:ACDCTerminal.connected>
   </cim:Terminal>
 
+  
+  
 
 
 """

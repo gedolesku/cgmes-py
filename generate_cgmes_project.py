@@ -69,6 +69,16 @@ class ClassMeta:
     pkg_parts: Tuple[str, ...]
     doc: Optional[str] = None
 
+
+@dataclass
+class EnumMeta:
+    """Metadata for UML enumerations."""
+
+    name: str
+    literals: List[str]
+    pkg_parts: Tuple[str, ...]
+    doc: Optional[str] = None
+
 # ────────────────────────────────────────────────────────────────
 #  Učitavanje XMI
 # ────────────────────────────────────────────────────────────────
@@ -113,8 +123,8 @@ def _ptype(base: str, lower: str, upper: str) -> str:
 #  Parsiranje
 # ────────────────────────────────────────────────────────────────
 
-def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
-    """Return a mapping of class names to parsed metadata from the given XMI tree."""
+def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[str, ClassMeta], Dict[str, EnumMeta]]:
+    """Return mappings of class and enumeration names to parsed metadata."""
     root = tree.getroot()
     by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
 
@@ -122,12 +132,25 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
     primitive_ids = {e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems}
 
     classes: Dict[str, ClassMeta] = {}
+    enums: Dict[str, EnumMeta] = {}
 
     def walk(elem, pkg_path: List[str]):
         for child in elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
                 walk(child, pkg_path + [child.get("name")])
+                continue
+            if kind == "uml:Enumeration":
+                ename = child.get("name")
+                if DEBUG:
+                    print("🔍 Enum", ename)
+                e_doc = child.find("ownedComment/Body")
+                enums[ename] = EnumMeta(
+                    ename,
+                    [l.get("name") for l in child.xpath("./ownedLiteral")],
+                    tuple(pkg_path),
+                    e_doc.text if e_doc is not None else None,
+                )
                 continue
             if kind != "uml:Class":
                 continue
@@ -190,13 +213,13 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
                     ),
                 )
 
-    print("✅ klase:", len(classes), "– prim:", len(primitive_ids))
-    return classes
+    print("✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums))
+    return classes, enums
 # ────────────────────────────────────────────────────────────────
 #  Code writer
 # ────────────────────────────────────────────────────────────────
 
-def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta]) -> List[str]:
+def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta], enums: Dict[str, EnumMeta]) -> List[str]:
     imps = {
         "from __future__ import annotations",
         "from dataclasses import dataclass, field",
@@ -209,10 +232,33 @@ def _py_imports(meta: ClassMeta, classes: Dict[str, ClassMeta]) -> List[str]:
         base = re.sub(r"^list\[(.*)\]$", r"\1", base)
         if base in classes and base != meta.name:
             imps.add(f"from .{base} import {base}")
+        if base in enums:
+            imps.add(f"from .{base} import {base}")
     return sorted(imps)
 
 
-def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
+def _write_enums(enums: Dict[str, EnumMeta], out_dir: Path) -> int:
+    """Write Enum classes for all UML enumerations."""
+    cnt = 0
+    for meta in enums.values():
+        pkg_dir = out_dir.joinpath(*meta.pkg_parts)
+        pkg_dir.mkdir(parents=True, exist_ok=True)
+        partial = out_dir
+        for part in meta.pkg_parts:
+            partial /= part
+            (partial / "__init__.py").touch(exist_ok=True)
+
+        lines = ["from enum import Enum", "", f"class {meta.name}(Enum):"]
+        for lit in meta.literals:
+            lines.append(f"    {lit} = '{lit}'")
+        if not meta.literals:
+            lines.append("    pass")
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        cnt += 1
+    return cnt
+
+
+def _write_classes(classes: Dict[str, ClassMeta], enums: Dict[str, EnumMeta], out_dir: Path) -> int:
     """Write dataclass modules for all CGMES classes into *out_dir*.
 
     Returns the number of files written.
@@ -227,7 +273,7 @@ def _write_classes(classes: Dict[str, ClassMeta], out_dir: Path) -> int:
             partial /= part
             (partial / "__init__.py").touch(exist_ok=True)
 
-        lines = _py_imports(meta, classes)
+        lines = _py_imports(meta, classes, enums)
         lines += ["", "@dataclass"]
         parent = meta.parent or "CIMObject"
         lines.append(f"class {meta.name}({parent}):")
@@ -265,15 +311,16 @@ def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
     Returns the number of generated classes.
     """
     tree = _load_xmi(Path(xmi))
-    classes = _parse_xmi(tree)
+    classes, enums = _parse_xmi(tree)
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # upiši bazu
     (out_dir / "base.py").write_text(_BASE_SRC, encoding="utf-8")
-    n = _write_classes(classes, out_dir)
-    print(f"✅ Generisano {n} klasa.")
-    return n
+    n_enum = _write_enums(enums, out_dir)
+    n_cls = _write_classes(classes, enums, out_dir)
+    print(f"✅ Generisano {n_enum} enumeracija i {n_cls} klasa.")
+    return n_enum + n_cls
 
 
 # ────────────────────────────────────────────────────────────────

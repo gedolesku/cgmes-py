@@ -82,6 +82,16 @@ class EnumMeta:
     pkg_parts: Tuple[str, ...]
     doc: Optional[str] = None
 
+
+@dataclass
+class LinkData:
+    """Minimal info about XMI links for later tooling."""
+
+    uml_id: str
+    kind: str
+    start: str
+    end: str
+
 # ────────────────────────────────────────────────────────────────
 #  Učitavanje XMI
 # ────────────────────────────────────────────────────────────────
@@ -126,8 +136,12 @@ def _ptype(base: str, lower: str, upper: str) -> str:
 #  Parsiranje
 # ────────────────────────────────────────────────────────────────
 
-def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMeta], Dict[Tuple[str, ...], EnumMeta]]:
-    """Return mappings of class and enumeration metadata keyed by package path."""
+def _parse_xmi(tree: etree._ElementTree) -> Tuple[
+    Dict[Tuple[str, ...], ClassMeta],
+    Dict[Tuple[str, ...], EnumMeta],
+    List[LinkData],
+]:
+    """Return class/enumeration metadata and parsed link info."""
     root = tree.getroot()
     by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
 
@@ -151,6 +165,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
     enums: Dict[Tuple[str, ...], EnumMeta] = {}
     class_by_id: Dict[str, ClassMeta] = {}
     enum_by_id: Dict[str, EnumMeta] = {}
+    links: List[LinkData] = []
 
     def walk(elem, pkg_path: List[str]):
         for child in elem.xpath("./packagedElement"):
@@ -246,6 +261,24 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
         walk(model, [])
 
+    # parse link information (Generalization, Association, ...)
+    for link in root.xpath('.//element/links/*'):
+        lid = link.get(f'{{{XMI_NS}}}id')
+        start = link.get('start')
+        end = link.get('end')
+        kind = etree.QName(link).localname
+        if lid and start and end:
+            links.append(LinkData(lid, kind, start, end))
+
+    # apply generalization links if not already captured
+    for lnk in links:
+        if lnk.kind == 'Generalization' and lnk.start in class_by_id and lnk.end in class_by_id:
+            child = class_by_id[lnk.start]
+            parent = class_by_id[lnk.end]
+            if child.parent is None:
+                child.parent = parent.name
+                child.parent_pkg = parent.pkg_parts
+
     # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
         ends = assoc.xpath("./ownedEnd")
@@ -271,8 +304,10 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[Dict[Tuple[str, ...], ClassMet
                     ),
                 )
 
-    print("✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums))
-    return classes, enums
+    print(
+        "✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums)
+    )
+    return classes, enums, links
 # ────────────────────────────────────────────────────────────────
 #  Code writer
 # ────────────────────────────────────────────────────────────────
@@ -383,7 +418,7 @@ def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
     Returns the number of generated classes.
     """
     tree = _load_xmi(Path(xmi))
-    classes, enums = _parse_xmi(tree)
+    classes, enums, _ = _parse_xmi(tree)
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 

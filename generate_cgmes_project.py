@@ -66,6 +66,7 @@ class ClassMeta:
     attrs: Dict[str, Attribute]
     parent: Optional[str]
     pkg_parts: Tuple[str, ...]
+    doc: Optional[str] = None
 
 # ────────────────────────────────────────────────────────────────
 #  Učitavanje XMI
@@ -131,7 +132,15 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
             cname = child.get("name")
             if DEBUG:
                 print("🔍 Klasa", cname)
-            meta = ClassMeta(cname, {}, None, tuple(pkg_path))
+                        # pokušaj docstringa
+            c_doc = child.find("ownedComment/Body")
+            meta = ClassMeta(
+                cname,
+                {},
+                None,
+                tuple(pkg_path),
+                c_doc.text if c_doc is not None else None,
+            )
             classes[cname] = meta
 
             # ownedAttribute
@@ -177,8 +186,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
                     ),
                 )
 
-    if DEBUG:
-        print("✅ klase:", len(classes), "– prim:", len(primitive_ids))
+    print("✅ klase:", len(classes), "– prim:", len(primitive_ids))
     return classes
 # ────────────────────────────────────────────────────────────────
 #  Code writer

@@ -338,6 +338,7 @@ def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
     classes, enums = _parse_xmi(tree)
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "__init__.py").touch(exist_ok=True)
 
     # upiši bazu
     (out_dir / "base.py").write_text(_BASE_SRC, encoding="utf-8")

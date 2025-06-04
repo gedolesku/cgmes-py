@@ -71,6 +71,7 @@ class ClassMeta:
     pkg_parts: Tuple[str, ...]
     doc: Optional[str] = None
     parent_pkg: Optional[Tuple[str, ...]] = None
+    uml_id: Optional[str] = None
 
 
 @dataclass
@@ -163,7 +164,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
 
     classes: Dict[Tuple[str, ...], ClassMeta] = {}
     enums: Dict[Tuple[str, ...], EnumMeta] = {}
-    class_by_id: Dict[str, ClassMeta] = {}
+    class_by_id: Dict[str, List[ClassMeta]] = {}
     enum_by_id: Dict[str, EnumMeta] = {}
     links: List[LinkData] = []
 
@@ -202,13 +203,15 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 None,
                 tuple(pkg_path),
                 c_doc.text if c_doc is not None else None,
+                None,
+                child.get(f"{{{XMI_NS}}}id"),
             )
             key = tuple(pkg_path + [cname])
             target = classes.get(key)
             if target is None:
                 target = meta
                 classes[key] = target
-                class_by_id[child.get(f"{{{XMI_NS}}}id")] = target
+                class_by_id.setdefault(child.get(f"{{{XMI_NS}}}id"), []).append(target)
                 id_to_pkg[child.get(f"{{{XMI_NS}}}id")] = tuple(pkg_path)
             else:
                 if not target.doc and meta.doc:
@@ -227,8 +230,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_type = primitive_ids[type_ref]
                     ref_pkg = None
                 elif type_ref in class_by_id:
-                    base_type = class_by_id[type_ref].name
-                    ref_pkg = class_by_id[type_ref].pkg_parts
+                    base_type = class_by_id[type_ref][0].name
+                    ref_pkg = class_by_id[type_ref][0].pkg_parts
                 elif type_ref in enum_by_id:
                     base_type = enum_by_id[type_ref].name
                     ref_pkg = enum_by_id[type_ref].pkg_parts
@@ -251,8 +254,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
             if gen is not None and (gid := gen.get("general")):
                 if target.parent is None:
                     if gid in class_by_id:
-                        target.parent = class_by_id[gid].name
-                        target.parent_pkg = class_by_id[gid].pkg_parts
+                        target.parent = class_by_id[gid][0].name
+                        target.parent_pkg = class_by_id[gid][0].pkg_parts
                     else:
                         target.parent = by_id.get(gid).get("name") if gid in by_id else None
                         target.parent_pkg = id_to_pkg.get(gid)
@@ -273,11 +276,11 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
     # apply generalization links if not already captured
     for lnk in links:
         if lnk.kind == 'Generalization' and lnk.start in class_by_id and lnk.end in class_by_id:
-            child = class_by_id[lnk.start]
-            parent = class_by_id[lnk.end]
-            if child.parent is None:
-                child.parent = parent.name
-                child.parent_pkg = parent.pkg_parts
+            parent = class_by_id[lnk.end][0]
+            for child in class_by_id[lnk.start]:
+                if child.parent is None:
+                    child.parent = parent.name
+                    child.parent_pkg = parent.pkg_parts
 
     # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
@@ -288,21 +291,21 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
             owner_id = end.get("type")
             target_id = next((e.get("type") for e in ends if e is not end and e.get("type")), None)
             if owner_id in class_by_id and target_id in class_by_id:
-                owner_meta = class_by_id[owner_id]
-                target_meta = class_by_id[target_id]
+                target_meta = class_by_id[target_id][0]
                 lower, upper = _mult_from_elem(end)
-                owner_meta.attrs.setdefault(
-                    end.get("name") or target_meta.name,
-                    Attribute(
+                for owner_meta in class_by_id[owner_id]:
+                    owner_meta.attrs.setdefault(
                         end.get("name") or target_meta.name,
-                        f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
-                        _ptype(target_meta.name, lower, upper),
-                        f"{lower}..{upper}" if lower != upper else lower,
-                        True,
-                        target_meta.pkg_parts,
-                        end.get(f"{{{XMI_NS}}}id"),
-                    ),
-                )
+                        Attribute(
+                            end.get("name") or target_meta.name,
+                            f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
+                            _ptype(target_meta.name, lower, upper),
+                            f"{lower}..{upper}" if lower != upper else lower,
+                            True,
+                            target_meta.pkg_parts,
+                            end.get(f"{{{XMI_NS}}}id"),
+                        ),
+                    )
 
     print(
         "✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums)

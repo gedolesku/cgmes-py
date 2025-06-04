@@ -61,6 +61,7 @@ class Attribute:
     is_ref: bool = False
     ref_pkg: Optional[Tuple[str, ...]] = None
     uml_id: Optional[str] = None  # XMI id, for tracking links
+    target_id: Optional[str] = None  # referenced class XMI id
 
 
 @dataclass
@@ -167,6 +168,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
     enums: Dict[Tuple[str, ...], EnumMeta] = {}
     class_by_id: Dict[str, List[ClassMeta]] = {}
     enum_by_id: Dict[str, EnumMeta] = {}
+    attr_by_id: Dict[str, Tuple[ClassMeta, Attribute]] = {}
     links: List[LinkData] = []
 
     def walk(elem, pkg_path: List[str]):
@@ -240,7 +242,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_type = by_id.get(type_ref).get("name") if type_ref in by_id else "str"
                     ref_pkg = id_to_pkg.get(type_ref)
                 is_ref = bool(prop.get("association"))
-                target.attrs[a_name] = Attribute(
+                attr = Attribute(
                     a_name,
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
@@ -248,7 +250,11 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     is_ref,
                     ref_pkg,
                     prop.get(f"{{{XMI_NS}}}id"),
+                    type_ref,
                 )
+                target.attrs[a_name] = attr
+                if attr.uml_id:
+                    attr_by_id[attr.uml_id] = (target, attr)
 
             # generalization
             gen = child.find("generalization")
@@ -292,16 +298,37 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
 
     # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
-        ends = assoc.xpath("./ownedEnd")
-        if len(ends) < 2:
+        member_ids = [m.get(f"{{{XMI_NS}}}idref") for m in assoc.xpath("./memberEnd")]
+        owned_map = {e.get(f"{{{XMI_NS}}}id"): e for e in assoc.xpath("./ownedEnd")}
+        if len(member_ids) != 2:
             continue
-        for end in ends:
-            owner_id = end.get("type")
-            target_id = next((e.get("type") for e in ends if e is not end and e.get("type")), None)
-            if owner_id in class_by_id and target_id in class_by_id:
+        for idx, end_id in enumerate(member_ids):
+            other_id = member_ids[1 - idx]
+            if end_id in attr_by_id:
+                # attribute already created when walking class
+                continue
+            if end_id not in owned_map:
+                continue
+            end = owned_map[end_id]
+            target_id = end.get("type")
+            if target_id is None:
+                t_elem = end.find("type")
+                if t_elem is not None:
+                    target_id = t_elem.get(f"{{{XMI_NS}}}idref")
+            if other_id in attr_by_id:
+                owner_class_id = attr_by_id[other_id][1].target_id
+            elif other_id in owned_map:
+                owner_class_id = owned_map[other_id].get("type")
+                if owner_class_id is None:
+                    t_elem = owned_map[other_id].find("type")
+                    if t_elem is not None:
+                        owner_class_id = t_elem.get(f"{{{XMI_NS}}}idref")
+            else:
+                owner_class_id = None
+            if owner_class_id in class_by_id and target_id in class_by_id:
                 target_meta = class_by_id[target_id][0]
                 lower, upper = _mult_from_elem(end)
-                for owner_meta in class_by_id[owner_id]:
+                for owner_meta in class_by_id[owner_class_id]:
                     owner_meta.attrs.setdefault(
                         end.get("name") or target_meta.name,
                         Attribute(
@@ -312,6 +339,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                             True,
                             target_meta.pkg_parts,
                             end.get(f"{{{XMI_NS}}}id"),
+                            target_id,
                         ),
                     )
 
@@ -397,7 +425,7 @@ def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enum
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)
         imps.add(f"from {path} import {meta.parent}")
     for a in meta.attrs.values():
-        base = re.sub(r"^Optional\[|\]$", "", a.type_)
+        base = re.sub(r"^Optional\[(.*)\]$", r"\1", a.type_)
         base = re.sub(r"^list\[(.*)\]$", r"\1", base)
         if a.ref_pkg:
             if base != meta.name or a.ref_pkg != meta.pkg_parts:

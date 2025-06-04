@@ -11,9 +11,9 @@ This repository contains utilities for working with the Common Grid Model Exchan
 ## Running the Generator
 Use the CLI to generate dataclasses:
 ```bash
-python generate_cgmes_project.py cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml -o generated
+python generate_cgmes_project.py
 ```
-The output directory (`generated/` in the example) is ignored by Git via `.gitignore` and should not be committed.
+The output directory (`generated/` in the example) is ignored by Git via `.gitignore` and should not be committed. But it should be used to check the auto-generated code output.
 
 ## Notes about the Script
 - The script traverses each `uml:Model` element and writes a dataclass for every UML class it finds.

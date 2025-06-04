@@ -1,0 +1,4 @@
+xmlschema==4.0.1
+xsdata==25.4
+lxml==5.4.0
+rdflib==7.1.4

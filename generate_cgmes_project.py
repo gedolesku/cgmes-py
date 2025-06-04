@@ -334,6 +334,7 @@ def _cli():
 
 
 if __name__ == "__main__":
-    _cli()
+    # _cli()
+    generate_dataclasses("cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml", "generated")
 
 

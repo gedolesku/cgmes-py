@@ -72,6 +72,7 @@ class ClassMeta:
     doc: Optional[str] = None
     parent_pkg: Optional[Tuple[str, ...]] = None
     uml_id: Optional[str] = None
+    links: List["LinkData"] = field(default_factory=list)
 
 
 @dataclass
@@ -271,7 +272,14 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         end = link.get('end')
         kind = etree.QName(link).localname
         if lid and start and end:
-            links.append(LinkData(lid, kind, start, end))
+            ldata = LinkData(lid, kind, start, end)
+            links.append(ldata)
+            if start in class_by_id:
+                for meta in class_by_id[start]:
+                    meta.links.append(ldata)
+            if end in class_by_id:
+                for meta in class_by_id[end]:
+                    meta.links.append(ldata)
 
     # apply generalization links if not already captured
     for lnk in links:
@@ -306,6 +314,30 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                             end.get(f"{{{XMI_NS}}}id"),
                         ),
                     )
+
+    # merge attributes and parents across duplicate class definitions
+    for metas in class_by_id.values():
+        if len(metas) < 2:
+            continue
+        combined_attrs: Dict[str, Attribute] = {}
+        parent_name = None
+        parent_pkg = None
+        doc = None
+        for m in metas:
+            combined_attrs.update(m.attrs)
+            if m.parent and not parent_name:
+                parent_name = m.parent
+                parent_pkg = m.parent_pkg
+            if m.doc and not doc:
+                doc = m.doc
+        for m in metas:
+            for a_name, attr in combined_attrs.items():
+                m.attrs.setdefault(a_name, attr)
+            if parent_name and not m.parent:
+                m.parent = parent_name
+                m.parent_pkg = parent_pkg
+            if doc and not m.doc:
+                m.doc = doc
 
     print(
         "✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums)

@@ -2,6 +2,8 @@ import subprocess
 import shutil
 from generate_cgmes_project import generate_dataclasses
 
+#            ["ruff", "check", "generated", "--exit-zero"],
+
 
 def test_generated_code_with_pylint():
     """Run the generator and lint the result with pylint."""
@@ -9,6 +11,7 @@ def test_generated_code_with_pylint():
     try:
         result = subprocess.run(
             ["pylint", "--errors-only", "generated"],
+            
             capture_output=True,
             text=True,
         )
@@ -18,5 +21,6 @@ def test_generated_code_with_pylint():
             print(result.stderr)
         assert result.returncode == 0, "pylint found errors"
     finally:
-        shutil.rmtree("generated", ignore_errors=True)
+        #shutil.rmtree("generated", ignore_errors=True)
+        pass
 

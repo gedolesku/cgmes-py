@@ -164,7 +164,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Dict[str, ClassMeta]:
 
     walk(root, [])
 
-    for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']"):
+    for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
         ends = assoc.xpath("./uml:ownedEnd", namespaces=NSMAP)
         if len(ends) < 2:
             continue

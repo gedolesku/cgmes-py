@@ -115,7 +115,8 @@ EA XMI  ➜  +---->+  (reference models)  |
 * [ ] My code is typed and formatted with `black`; `pytest` passes.<br>
 * [ ] I updated or added tests relevant to my changes.<br>
 * [ ] I updated docs (`README.md`, `AGENTS.md`).<br>
-* [ ] `benchmarks.perf` runs within budget.
+* [ ] `benchmarks.perf` runs within budget.<br>
+* [ ] `semantic_validator.py` passes on the reference models.
 
 ---
 

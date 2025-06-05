@@ -133,3 +133,10 @@ The generic runtime can fall back to `iterparse` for true streaming, so RAM stay
 * JSON‑LD exporter for CIM graphs.
 
 Pull requests are welcome – follow the contribution tips in `AGENTS.md`!
+
+## 8  How to add a new CIM element in 3 steps
+
+1. Run `generate_cgmes_project.py` to regenerate models.
+2. Extend the generated dataclasses with the new element and its `xpath`.
+3. Add a test under `tests/` to validate round‑trip parsing.
+

@@ -349,8 +349,38 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         if not candidates:
             continue
         for child in class_by_id[lnk.start]:
-            parent = next((c for c in candidates if c.pkg_parts != child.pkg_parts or c.name != child.name), None)
+            # Prefer a dependency target in StateVariablesProfile when the child
+            # is in TopologyProfile. This mirrors the CGMES model where
+            # TopologyProfile classes extend StateVariablesProfile versions with
+            # the same GUID.
+            parent = None
+            if child.guid:
+                same_guid = [
+                    c
+                    for c in candidates
+                    if c.guid == child.guid and (c.pkg_parts != child.pkg_parts or c.name != child.name)
+                ]
+                if same_guid:
+                    if 'TopologyProfile' in '.'.join(child.pkg_parts):
+                        parent = next(
+                            (c for c in same_guid if 'StateVariablesProfile' in '.'.join(c.pkg_parts)),
+                            None,
+                        )
+                    if parent is None:
+                        parent = same_guid[0]
             if parent is None:
+                parent = next((c for c in candidates if c.pkg_parts != child.pkg_parts or c.name != child.name), None)
+            if parent is None:
+                continue
+            if (
+                lnk.kind == 'Dependency'
+                and child.guid
+                and parent.guid
+                and child.guid == parent.guid
+                and 'StateVariablesProfile' in '.'.join(child.pkg_parts)
+                and 'TopologyProfile' in '.'.join(parent.pkg_parts)
+            ):
+                # skip reverse inheritance from StateVariablesProfile back to TopologyProfile
                 continue
             if (
                 lnk.kind == 'Dependency'
@@ -359,7 +389,6 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 and child.guid == parent.guid
                 and parent.name in child.bases
             ):
-                # skip reverse inheritance when two classes share the same GUID
                 continue
             if parent.name not in child.bases:
                 child.bases.append(parent.name)

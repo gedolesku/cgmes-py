@@ -33,7 +33,6 @@ def py_imports(meta: ClassMeta) -> Tuple[List[str], str | None]:
     )
     if needs_typing:
         imps.add("from typing import Optional, List")
-    imps.add(f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject")
     parent_alias = meta.parent
     if meta.parent and meta.parent_pkg:
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)

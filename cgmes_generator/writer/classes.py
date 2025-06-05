@@ -41,8 +41,10 @@ def write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[s
             bases = []
             if parent_alias:
                 bases.append(parent_alias)
-            bases.append("CIMObject")
-            lines.append(f"class {meta.name}({', '.join(bases)}):")
+            if bases:
+                lines.append(f"class {meta.name}({', '.join(bases)}):")
+            else:
+                lines.append(f"class {meta.name}:")
         if meta.doc:
             lines.append(f"    \"\"\"{meta.doc}\"\"\"")
         ordered_attrs = sorted(

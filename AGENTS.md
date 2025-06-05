@@ -103,6 +103,11 @@ EA XMI  ➜  +---->+  (reference models)  |
 * Each public function ↔ one docstring with example.
 * Update **both** this handbook and `README.md` when behaviour changes.
 
+### 4.6  Commit Message Guidelines
+
+* Start the commit title with the relevant agent code (e.g. `DOC-401`).
+* Include the full pull request summary in the commit body so the intent is clear from `git log` alone.
+
 ---
 
 ## 5  Contributor Checklist (for humans & LLMs)

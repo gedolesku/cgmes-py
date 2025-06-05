@@ -3,11 +3,12 @@ import shutil
 from dataclasses import fields
 
 import subprocess
+import sys
 
 
 def setup_module(module):
     shutil.rmtree("generated", ignore_errors=True)
-    subprocess.check_call(["python", "-m", "cgmes_generator", "--rebuild"])
+    subprocess.check_call([sys.executable, "-m", "cgmes_generator", "--rebuild"])
 
 
 def test_topologicalnode_metadata():

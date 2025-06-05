@@ -3,7 +3,7 @@ from __future__ import annotations
 """Minimal runtime helpers for CGMES dataclasses."""
 
 from dataclasses import fields
-from typing import Any, ClassVar, Dict, Iterator, List, Tuple, Type, TypeVar
+from typing import Any, Dict, Iterator, List, Tuple, Type, TypeVar
 
 from lxml import etree
 
@@ -100,3 +100,26 @@ def parse_file(path: str, cls: Type[T]) -> Iterator[T]:
     for _event, elem in etree.iterparse(path, events=("end",), tag=tag):
         yield parse_dataclass(elem, cls)
         elem.clear()
+
+
+def parse_dataset(path: str, classes: List[Type[Any]]) -> Dict[Type[Any], List[Any]]:
+    """Parse *path* once and collect objects of ``classes``.
+
+    Example
+    -------
+    >>> data = parse_dataset("model.xml", [TopologicalNode, VoltageLevel])
+    >>> len(data[TopologicalNode])
+    10
+    """
+    qname_map = {f"{{{NS['cim']}}}{cls.__name__}": cls for cls in classes}
+    result: Dict[Type[Any], List[Any]] = {cls: [] for cls in classes}
+    tags = tuple(qname_map)
+    for _event, elem in etree.iterparse(path, events=("end",), tag=tags):
+        cls = qname_map[elem.tag]
+        result[cls].append(parse_dataclass(elem, cls))
+        elem.clear()
+    from . import validation
+
+    validation.validate(result, strict=True)
+    validation.resolve(result)
+    return result

@@ -10,6 +10,9 @@ TEMPLATES = {
     "IdentifiedObject": (
         Path(__file__).parent / "templates" / "IdentifiedObject.py.j2"
     ).read_text(encoding="utf-8"),
+    "TopologicalNode": (
+        Path(__file__).parent / "templates" / "TopologicalNode.py.j2"
+    ).read_text(encoding="utf-8"),
 }
 
 XMI_PATH = (
@@ -104,5 +107,8 @@ def rebuild(out_dir: Path = Path("generated/topology")) -> None:
             meta = _pick_class(classes, name, profile)
         except KeyError:
             continue
-        src = _gen_class(meta)
-        (out_dir / f"{name}.py").write_text(src, encoding="utf-8")
+        if name in TEMPLATES:
+            (out_dir / f"{name}.py").write_text(TEMPLATES[name], encoding="utf-8")
+        else:
+            src = _gen_class(meta)
+            (out_dir / f"{name}.py").write_text(src, encoding="utf-8")

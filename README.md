@@ -19,6 +19,15 @@ python examples/roundtrip.py              # ▶ demo: parse + write back
 pytest                                    # ▶ all tests incl. pylint
 ```
 
+```python
+from cgmes.runtime import parse_file
+from cgmes.generated.topology.topologicalnode import TopologicalNode
+
+for node in parse_file("models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml",
+                       TopologicalNode):
+    print(node.mRID, node.name, node.BaseVoltage_id)
+```
+
 *The generator and runtime are dependency‑light:* only `lxml` and the standard library. Large CGMES instance models (100 MB+) can be streamed with `iterparse` in constant memory.
 
 ---
@@ -71,6 +80,17 @@ The same \~30 lines serve every class in the hierarchy – no per‑class ✗M
 ### 4.3  Validation (optional)
 
 Add flags in `metadata`, e.g. `required=True`, `pattern=r"^#.+$"`. Pass `strict=True` to the parser to enable fail‑fast checks.
+
+### 4.4  Caching strategy
+
+```
++--------------+      +-------------+
+| dataclass -> | ---> | FieldSpec[] |
++--------------+      +------+------+ 
+                       |
+                       v
+                 [ class cache ]
+```
 
 ---
 

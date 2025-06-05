@@ -84,16 +84,19 @@ EA XMI  ➜  +---->+  (reference models)  |
 | Omit `xpath` ⇒ field is **RAM‑only** (refs, caches, computed) | Keeps XML clean while allowing enriched objects. |
 | Add `required=True` in `metadata` for multiplicity 1‥1        | Validated in strict mode.                        |
 | Use `pattern="^#.+$"` for `rdf:resource` IDs                  | Basic sanity guard.                              |
+| Set `cache=True` in `FieldSpec` for reused subtrees           | Avoids repeated XPath lookups.                   |
 
 ### 4.3  Validation Strategy
 
 * **Strict mode** is optional but enabled in CI – keep parse cost low in default mode.
 * ID dereference (`*_id` ➜ `*_ref`) happens in a post‑pass inside `runtime/validation.py`.
+* Custom checks can register via `validation.add_hook(fn)`.
 
 ### 4.4  Performance
 
 * Parser must reach **≥ 500 k objects/s** on the 130 k‑node sample grid (M1 Pro).
 * Use `iterparse` + `elem.clear()` for streaming; memory ≤ 400 MB on the 500 MB test file.
+* CI fails if `python -m benchmarks.perf` regresses >20 %.
 
 ### 4.5  Documentation
 
@@ -104,10 +107,10 @@ EA XMI  ➜  +---->+  (reference models)  |
 
 ## 5  Contributor Checklist (for humans & LLMs)
 
-* [ ] My code is typed, formatted, and passes `pytest`.<br>
+* [ ] My code is typed and formatted with `black`; `pytest` passes.<br>
 * [ ] I updated or added tests relevant to my changes.<br>
 * [ ] I updated docs (`README.md`, `AGENTS.md`).<br>
-* [ ] I ran `python -m benchmarks.perf` and stayed within budget.
+* [ ] `benchmarks.perf` runs within budget.
 
 ---
 

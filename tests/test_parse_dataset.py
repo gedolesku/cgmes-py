@@ -20,7 +20,9 @@ data_xml = (
 @dataclass(kw_only=True)
 class IdentifiedObject:
     mRID: str = field(metadata={"xpath": "@rdf:ID", "required": True})
-    name: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.name/text()"})
+    name: Optional[str] = field(
+        default=None, metadata={"xpath": "cim:IdentifiedObject.name/text()"}
+    )
 
 
 @dataclass(kw_only=True)

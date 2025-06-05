@@ -10,9 +10,6 @@ TEMPLATES = {
     "IdentifiedObject": (
         Path(__file__).parent / "templates" / "IdentifiedObject.py.j2"
     ).read_text(encoding="utf-8"),
-    "TopologicalNode": (
-        Path(__file__).parent / "templates" / "TopologicalNode.py.j2"
-    ).read_text(encoding="utf-8"),
 }
 
 XMI_PATH = (
@@ -65,22 +62,23 @@ def _gen_class(meta: ClassMeta) -> str:
     lines.append('    """Auto-generated — DO NOT EDIT BY HAND"""')
 
     for attr in meta.attrs.values():
-        xp_base = f"cim:{meta.name}.{attr.name}"
+        xp_base = attr.cim_path
         if attr.is_ref:
             lower = attr.multiplicity.split("..", 1)[0]
-            required = lower == "1"
-            id_type = "str" if required else "Optional[str]"
+            is_list = attr.type_.startswith("list[")
+            id_hint = "list[str]" if is_list else "str"
+            field_prefix = "default_factory=list" if is_list else "default=None"
             meta_parts = [f'"xpath": "{xp_base}/@rdf:resource"']
-            if required:
+            if lower == "1":
                 meta_parts.append('"required": True')
-            meta_parts.append('"pattern": "^#.+$"')
+            meta_parts.append('"pattern": r"^#.+$"')
             meta_str = "{" + ", ".join(meta_parts) + "}"
-            id_kwargs = f"metadata={meta_str}"
-            if not required:
-                id_kwargs = f"default=None, {id_kwargs}"
-            lines.append(f"    {attr.name}_id: {id_type} = field({id_kwargs})")
-            ref_default = " = None" if attr.type_.startswith("Optional[") else ""
-            lines.append(f"    {attr.name}_ref: {attr.type_}{ref_default}")
+            lines.append(
+                f"    {attr.name}_id: {id_hint} | None = field({field_prefix}, metadata={meta_str})"
+            )
+            lines.append(
+                f"    {attr.name}_ref: '{attr.type_.replace('Optional[', '').rstrip(']')}' | None = None"
+            )
         else:
             field_kwargs = f"metadata={{'xpath': '{xp_base}'}}"
             if attr.type_.startswith("Optional["):

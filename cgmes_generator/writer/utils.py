@@ -16,8 +16,8 @@ def _rel_mod(src: Tuple[str, ...], dst: Tuple[str, ...], name: str) -> str:
             break
         common += 1
     up = len(src) - common
-    dots = '.' * (up + 1)
-    rest = '.'.join(dst[common:] + (name,))
+    dots = "." * (up + 1)
+    rest = ".".join(dst[common:] + (name,))
     return f"{dots}{rest}"
 
 
@@ -36,13 +36,7 @@ def py_imports(meta: ClassMeta) -> Tuple[List[str], str | None]:
     parent_alias = meta.parent
     if meta.parent and meta.parent_pkg:
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)
-        alias = meta.parent
-        if meta.parent == meta.name and meta.parent_pkg != meta.pkg_parts:
-            alias = f"{meta.parent}_base"
-        imps.add(
-            f"from {path} import {meta.parent}" + (f" as {alias}" if alias != meta.parent else "")
-        )
-        parent_alias = alias
+        imps.add(f"from {path} import {meta.parent}")
     for a in meta.attrs.values():
         base = a.type_
         m = re.fullmatch(r"Optional\[(.*)\]", base)
@@ -55,4 +49,7 @@ def py_imports(meta: ClassMeta) -> Tuple[List[str], str | None]:
             if base != meta.name or a.ref_pkg != meta.pkg_parts:
                 path = _rel_mod(meta.pkg_parts, a.ref_pkg, base)
                 imps.add(f"from {path} import {base}")
-    return sorted(imps, key=lambda s: (0 if s.startswith("from __future__") else 1, s)), parent_alias
+    return (
+        sorted(imps, key=lambda s: (0 if s.startswith("from __future__") else 1, s)),
+        parent_alias,
+    )

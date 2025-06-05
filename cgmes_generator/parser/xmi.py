@@ -159,7 +159,8 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
                 c_doc.text if c_doc is not None else None,
                 None,
                 child.get(f"{{{XMI_NS}}}id"),
-                is_abstract=child.get("isAbstract") == "true",
+                is_abstract=child.get("isAbstract") == "true"
+                and cname not in ("IdentifiedObject", "TopologicalNode"),
             )
             key = tuple(pkg_path + [cname])
             target = classes.get(key)
@@ -298,6 +299,18 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
             if sv_meta and sv_meta.name == meta.name:
                 meta.parent = sv_meta.name
                 meta.parent_pkg = sv_meta.pkg_parts
+        if (
+            meta.name == "TopologicalNode"
+            and "StateVariablesProfile" in meta.pkg_parts
+            and not meta.parent
+        ):
+            meta.parent = "IdentifiedObject"
+            meta.parent_pkg = (
+                "EuropeanStandards",
+                "CommonGridModelExchangeStandard",
+                "EquipmentProfile",
+                "Core",
+            )
 
     print(
         "[OK] klase:",

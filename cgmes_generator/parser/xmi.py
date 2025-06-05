@@ -43,10 +43,10 @@ def collect_links(
 
     links: List[LinkData] = []
 
-    for link in root.xpath('.//element/links/*'):
-        lid = link.get(f'{{{XMI_NS}}}id')
-        start = link.get('start')
-        end = link.get('end')
+    for link in root.xpath(".//element/links/*"):
+        lid = link.get(f"{{{XMI_NS}}}id")
+        start = link.get("start")
+        end = link.get("end")
         kind = etree.QName(link).localname
         if lid and start and end:
             ldata = LinkData(lid, kind, start, end)
@@ -59,13 +59,21 @@ def collect_links(
                     meta.links.append(ldata)
 
     for lnk in links:
-        if lnk.kind == 'Generalization' and lnk.start in class_by_id and lnk.end in class_by_id:
+        if (
+            lnk.kind == "Generalization"
+            and lnk.start in class_by_id
+            and lnk.end in class_by_id
+        ):
             parent = class_by_id[lnk.end][0]
             for child in class_by_id[lnk.start]:
                 if child.parent is None:
                     child.parent = parent.name
                     child.parent_pkg = parent.pkg_parts
-        if lnk.kind == 'Dependency' and lnk.start in class_by_id and lnk.end in class_by_id:
+        if (
+            lnk.kind == "Dependency"
+            and lnk.start in class_by_id
+            and lnk.end in class_by_id
+        ):
             parent = class_by_id[lnk.end][0]
             for child in class_by_id[lnk.start]:
                 if child.parent is None and child.pkg_parts != parent.pkg_parts:
@@ -82,10 +90,16 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
 ]:
     """Parse the XMI tree into metadata structures."""
     root = tree.getroot()
-    by_id = {e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")}
+    by_id = {
+        e.get(f"{{{XMI_NS}}}id"): e for e in root.iter() if e.get(f"{{{XMI_NS}}}id")
+    }
 
-    prim_elems = root.xpath(".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP)
-    primitive_ids = {e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems}
+    prim_elems = root.xpath(
+        ".//packagedElement[@xmi:type='uml:PrimitiveType']", namespaces=NSMAP
+    )
+    primitive_ids = {
+        e.get(f"{{{XMI_NS}}}id"): PRIMITIVE_MAP.get(e.get("name")) for e in prim_elems
+    }
 
     def collect_pkgs(elem, pkg_path, out):
         for child in elem.xpath("./packagedElement"):
@@ -105,7 +119,9 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
     enum_by_id: Dict[str, EnumMeta] = {}
     links: List[LinkData] = []
 
-    for en in root.xpath(".//packagedElement[@xmi:type='uml:Enumeration']", namespaces=NSMAP):
+    for en in root.xpath(
+        ".//packagedElement[@xmi:type='uml:Enumeration']", namespaces=NSMAP
+    ):
         ename = en.get("name")
         if not ename:
             continue
@@ -203,7 +219,9 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
                         target.parent = class_by_id[gid][0].name
                         target.parent_pkg = class_by_id[gid][0].pkg_parts
                     else:
-                        target.parent = by_id.get(gid).get("name") if gid in by_id else None
+                        target.parent = (
+                            by_id.get(gid).get("name") if gid in by_id else None
+                        )
                         target.parent_pkg = id_to_pkg.get(gid)
 
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
@@ -211,7 +229,9 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
 
     links = collect_links(root, class_by_id)
 
-    for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
+    for assoc in root.xpath(
+        ".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP
+    ):
         ends = assoc.xpath("./ownedEnd | ./ownedAttribute")
         if len(ends) < 2:
             continue
@@ -264,21 +284,27 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
                 m.parent_pkg = parent_pkg
 
     for meta in classes.values():
-        if (
-            'TopologyProfile' in '.'.join(meta.pkg_parts)
-            and meta.name
-        ):
+        if "TopologyProfile" in ".".join(meta.pkg_parts) and meta.name:
             sv_key = (
-                'EuropeanStandards',
-                'CommonGridModelExchangeStandard',
-                'StateVariablesProfile',
-            ) + meta.pkg_parts[-1:] + (meta.name,)
+                (
+                    "EuropeanStandards",
+                    "CommonGridModelExchangeStandard",
+                    "StateVariablesProfile",
+                )
+                + meta.pkg_parts[-1:]
+                + (meta.name,)
+            )
             sv_meta = classes.get(sv_key)
             if sv_meta and sv_meta.name == meta.name:
                 meta.parent = sv_meta.name
                 meta.parent_pkg = sv_meta.pkg_parts
 
     print(
-        "✅ klase:", len(classes), "– prim:", len(primitive_ids), "– enum:", len(enums)
+        "[OK] klase:",
+        len(classes),
+        "- prim:",
+        len(primitive_ids),
+        "- enum:",
+        len(enums),
     )
     return classes, enums, links

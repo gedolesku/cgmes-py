@@ -299,38 +299,41 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         if lnk.kind == 'Dependency' and lnk.start in class_by_id and lnk.end in class_by_id:
             parent = class_by_id[lnk.end][0]
             for child in class_by_id[lnk.start]:
-                if (
-                    child.parent is None
-                    and child.name == parent.name
-                    and child.pkg_parts != parent.pkg_parts
-                ):
+                if child.parent is None and child.pkg_parts != parent.pkg_parts:
                     child.parent = parent.name
                     child.parent_pkg = parent.pkg_parts
 
     # associations
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
-        ends = assoc.xpath("./ownedEnd")
+        ends = assoc.xpath("./ownedEnd | ./ownedAttribute")
         if len(ends) < 2:
             continue
         for end in ends:
             owner_id = end.get("type")
-            target_id = next((e.get("type") for e in ends if e is not end and e.get("type")), None)
-            if owner_id in class_by_id and target_id in class_by_id:
-                target_meta = class_by_id[target_id][0]
-                lower, upper = _mult_from_elem(end)
-                for owner_meta in class_by_id[owner_id]:
-                    owner_meta.attrs.setdefault(
-                        end.get("name") or target_meta.name,
-                        Attribute(
+            if not owner_id:
+                continue
+            for other in ends:
+                if other is end:
+                    continue
+                target_id = other.get("type")
+                if not target_id:
+                    continue
+                if owner_id in class_by_id and target_id in class_by_id:
+                    target_meta = class_by_id[target_id][0]
+                    lower, upper = _mult_from_elem(end)
+                    for owner_meta in class_by_id[owner_id]:
+                        owner_meta.attrs.setdefault(
                             end.get("name") or target_meta.name,
-                            f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
-                            _ptype(target_meta.name, lower, upper),
-                            f"{lower}..{upper}" if lower != upper else lower,
-                            True,
-                            target_meta.pkg_parts,
-                            end.get(f"{{{XMI_NS}}}id"),
-                        ),
-                    )
+                            Attribute(
+                                end.get("name") or target_meta.name,
+                                f"cim:{owner_meta.name}.{end.get('name') or target_meta.name}",
+                                _ptype(target_meta.name, lower, upper),
+                                f"{lower}..{upper}" if lower != upper else lower,
+                                True,
+                                target_meta.pkg_parts,
+                                end.get(f"{{{XMI_NS}}}id"),
+                            ),
+                        )
 
     # merge attributes and parents across duplicate class definitions
     for metas in class_by_id.values():
@@ -484,7 +487,8 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
                 lines.append(
                     f"    {a.name}_ref: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
                 )
-                lines.append(f"    {a.name}_id: str = None")
+                if not a.type_.startswith("list["):
+                    lines.append(f"    {a.name}_id: str = None")
             else:
                 lines.append(
                     f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"

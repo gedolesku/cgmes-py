@@ -1,7 +1,6 @@
-from generated.topology.TopologicalNode import TopologicalNode
+from generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode import TopologicalNode
 from dataclasses import fields
-from generated.topology.IdentifiedObject import IdentifiedObject
-
+from generated.EuropeanStandards.CommonGridModelExchangeStandard.EquipmentProfile.Core.IdentifiedObject import IdentifiedObject
 
 def _meta(name):
     return next(f for f in fields(TopologicalNode) if f.name == name).metadata

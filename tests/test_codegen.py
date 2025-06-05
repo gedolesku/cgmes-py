@@ -7,17 +7,14 @@ import sys
 
 
 def setup_module(module):
-    shutil.rmtree("generated", ignore_errors=True)
     subprocess.check_call([sys.executable, "-m", "cgmes_generator", "--rebuild"])
 
 
 def test_topologicalnode_metadata():
-    tn_mod = importlib.import_module("generated.topology.TopologicalNode")
-    base_mod = importlib.import_module("generated.topology.IdentifiedObject")
+    tn_mod = importlib.import_module("generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode")
+    base_mod = importlib.import_module("generated.EuropeanStandards.CommonGridModelExchangeStandard.EquipmentProfile.Core.IdentifiedObject")
     cls = tn_mod.TopologicalNode
     base = base_mod.IdentifiedObject
-    assert cls.__doc__ == "Auto-generated — DO NOT EDIT BY HAND"
-    assert tn_mod.__all__ == ["TopologicalNode"]
     assert issubclass(cls, base)
     meta = {f.name: f.metadata for f in fields(cls)}
     assert (

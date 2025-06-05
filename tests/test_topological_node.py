@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from lxml import etree
 from runtime.base import parse_dataclass, to_element, parse_file
+from generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode import TopologicalNode
 
 data_xml = (
     '<cim:TopologicalNode xmlns:cim="http://iec.ch/TC57/2013/CIM-schema-cim#" '
@@ -10,16 +11,6 @@ data_xml = (
     "</cim:TopologicalNode>"
 )
 
-
-@dataclass(init=False)
-class TopologicalNode:
-    name: str | None = field(
-        default=None, metadata={"xpath": "cim:TopologicalNode.name/text()"}
-    )
-    BaseVoltage_id: str | None = field(
-        default=None,
-        metadata={"xpath": "cim:TopologicalNode.BaseVoltage/@rdf:resource"},
-    )
 
 
 def test_roundtrip(tmp_path):

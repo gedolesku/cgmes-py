@@ -26,6 +26,7 @@ import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+import keyword
 
 from lxml import etree
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
@@ -65,6 +66,7 @@ class Attribute:
     is_ref: bool = False
     ref_pkg: Optional[Tuple[str, ...]] = None
     uml_id: Optional[str] = None  # XMI id, for tracking links
+    target_id: Optional[str] = None  # referenced class XMI id
 
 
 @dataclass
@@ -131,6 +133,18 @@ def _mult_from_elem(elem: etree._Element) -> Tuple[str, str]:
     return lower, upper
 
 
+def _sanitize(name: str) -> str:
+    """Return *name* converted to a valid Python identifier."""
+    if not name:
+        name = "_"
+    name = re.sub(r"\W", "_", name.strip())
+    if not name or name[0].isdigit():
+        name = f"_{name}"
+    if keyword.iskeyword(name) or name in {"None", "True", "False"}:
+        name = f"_{name}"
+    return name
+
+
 def _ptype(base: str, lower: str, upper: str) -> str:
     if upper == "*" or (upper.isdigit() and int(upper) > 1):
         return f"list[{base}]"
@@ -171,6 +185,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
     enums: Dict[Tuple[str, ...], EnumMeta] = {}
     class_by_id: Dict[str, List[ClassMeta]] = {}
     enum_by_id: Dict[str, EnumMeta] = {}
+    attr_by_id: Dict[str, Tuple[ClassMeta, Attribute]] = {}
     links: List[LinkData] = []
 
     # collect all enumerations first so classes can reference them
@@ -194,7 +209,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         for child in elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
-                walk(child, pkg_path + [child.get("name")])
+                walk(child, pkg_path + [_sanitize(child.get("name"))])
                 continue
             if kind != "uml:Class":
                 continue
@@ -227,7 +242,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
 
             # ownedAttribute
             for prop in child.xpath("./ownedAttribute"):
-                a_name = prop.get("name")
+                a_name = _sanitize(prop.get("name"))
                 type_ref = prop.get("type")
                 if type_ref is None:
                     t_elem = prop.find("type")
@@ -247,7 +262,7 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_type = "str"
                     ref_pkg = None
                 is_ref = bool(prop.get("association"))
-                target.attrs[a_name] = Attribute(
+                attr = Attribute(
                     a_name,
                     f"cim:{cname}.{a_name}",
                     _ptype(base_type, lower, upper),
@@ -255,7 +270,11 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     is_ref,
                     ref_pkg,
                     prop.get(f"{{{XMI_NS}}}id"),
+                    type_ref,
                 )
+                target.attrs[a_name] = attr
+                if attr.uml_id:
+                    attr_by_id[attr.uml_id] = (target, attr)
 
             # generalization
             gen = child.find("generalization")
@@ -335,8 +354,49 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                             ),
                         )
 
-    # merge attributes and parents across duplicate class definitions
+    # merge attributes and parents across duplicate class definitions by XMI id
     for metas in class_by_id.values():
+        if len(metas) < 2:
+            continue
+        combined_attrs: Dict[str, Attribute] = {}
+        parent_name = None
+        parent_pkg = None
+        doc = None
+        for m in metas:
+            combined_attrs.update(m.attrs)
+            if m.parent and not parent_name:
+                parent_name = m.parent
+                parent_pkg = m.parent_pkg
+            if m.doc and not doc:
+                doc = m.doc
+        for m in metas:
+            for a_name, attr in combined_attrs.items():
+                m.attrs.setdefault(a_name, attr)
+            if parent_name and not m.parent:
+                m.parent = parent_name
+                m.parent_pkg = parent_pkg
+
+    # Ensure TopologyProfile classes inherit from matching StateVariablesProfile versions
+    for meta in classes.values():
+        if (
+            'TopologyProfile' in '.'.join(meta.pkg_parts)
+            and meta.name
+        ):
+            sv_key = (
+                'EuropeanStandards',
+                'CommonGridModelExchangeStandard',
+                'StateVariablesProfile',
+            ) + meta.pkg_parts[-1:] + (meta.name,)
+            sv_meta = classes.get(sv_key)
+            if sv_meta and sv_meta.name == meta.name:
+                meta.parent = sv_meta.name
+                meta.parent_pkg = sv_meta.pkg_parts
+
+    # merge classes that share the same name across packages
+    name_groups: Dict[str, List[ClassMeta]] = {}
+    for meta in classes.values():
+        name_groups.setdefault(meta.name, []).append(meta)
+    for metas in name_groups.values():
         if len(metas) < 2:
             continue
         combined_attrs: Dict[str, Attribute] = {}

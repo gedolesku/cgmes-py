@@ -342,30 +342,24 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
         if lnk.start not in class_by_id:
             continue
         if lnk.end in class_by_id:
-            parent = class_by_id[lnk.end][0]
+            candidates = class_by_id[lnk.end]
         else:
             guid = lnk.end.removeprefix('EAID_').replace('_', '-')
             candidates = [m for m in classes.values() if m.guid == guid]
-            parent = None
-            for cand in candidates:
-                if 'StateVariablesProfile' in cand.pkg_parts:
-                    parent = cand
-                    break
-            if parent is None and candidates:
-                parent = candidates[0]
-        if parent is None:
+        if not candidates:
             continue
         for child in class_by_id[lnk.start]:
+            parent = next((c for c in candidates if c.pkg_parts != child.pkg_parts or c.name != child.name), None)
+            if parent is None:
+                continue
             if (
                 lnk.kind == 'Dependency'
                 and child.guid
                 and parent.guid
                 and child.guid == parent.guid
-                and 'StateVariablesProfile' in child.pkg_parts
-                and 'StateVariablesProfile' not in parent.pkg_parts
+                and parent.name in child.bases
             ):
-                # ignore reverse dependency: the StateVariablesProfile class
-                # should not inherit from its counterparts in other packages
+                # skip reverse inheritance when two classes share the same GUID
                 continue
             if parent.name not in child.bases:
                 child.bases.append(parent.name)
@@ -518,10 +512,13 @@ def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enum
     for base, pkg in zip(meta.bases, meta.base_pkgs):
         if base == "CIMObject":
             continue
+        if pkg == meta.pkg_parts and base == meta.name:
+            # avoid self-import when dependency points to same class
+            continue
         alias = base
-        if base == meta.name:
+        if base == meta.name and pkg != meta.pkg_parts:
             alias = f"{base}_base"
-        if pkg:
+        if pkg and pkg != meta.pkg_parts:
             path = _rel_mod(meta.pkg_parts, pkg, base)
             if alias != base:
                 imps.add(f"from {path} import {base} as {alias}")

@@ -11,6 +11,10 @@
 * Multipliciteti se čitaju iz atributa `<lowerValue>` / `<upperValue>` bez
   prefiksa.
 * Dodati debug print‑ovi koje možeš isključiti `DEBUG = False`.
+
+Klase se spajaju po XMI identifikatoru i kompletnom putu paketa. Tako npr.
+`TopologicalNode` može prikupiti veze iz više profila pa generisane datoteke
+sadrže više atributa i roditelja nego što je prikazano u jednom paketu.
 """
 
 from __future__ import annotations
@@ -169,31 +173,34 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
     enum_by_id: Dict[str, EnumMeta] = {}
     links: List[LinkData] = []
 
+    # collect all enumerations first so classes can reference them
+    for en in root.xpath(".//packagedElement[@xmi:type='uml:Enumeration']", namespaces=NSMAP):
+        ename = en.get("name")
+        if not ename:
+            continue
+        pkg = id_to_pkg.get(en.get(f"{{{XMI_NS}}}id"), ())
+        e_doc = en.find("ownedComment/Body")
+        key = pkg + (ename,)
+        meta = EnumMeta(
+            ename,
+            [l.get("name") for l in en.xpath("./ownedLiteral")],
+            pkg,
+            e_doc.text if e_doc is not None else None,
+        )
+        enums[key] = meta
+        enum_by_id[en.get(f"{{{XMI_NS}}}id")] = meta
+
     def walk(elem, pkg_path: List[str]):
         for child in elem.xpath("./packagedElement"):
             kind = child.get(f"{{{XMI_NS}}}type")
             if kind == "uml:Package":
                 walk(child, pkg_path + [child.get("name")])
                 continue
-            if kind == "uml:Enumeration":
-                ename = child.get("name")
-                if DEBUG:
-                    print("🔍 Enum", ename)
-                e_doc = child.find("ownedComment/Body")
-                key = tuple(pkg_path + [ename])
-                meta = EnumMeta(
-                    ename,
-                    [l.get("name") for l in child.xpath("./ownedLiteral")],
-                    tuple(pkg_path),
-                    e_doc.text if e_doc is not None else None,
-                )
-                enums[key] = meta
-                enum_by_id[child.get(f"{{{XMI_NS}}}id")] = meta
-                id_to_pkg[child.get(f"{{{XMI_NS}}}id")] = tuple(pkg_path)
-                continue
             if kind != "uml:Class":
                 continue
             cname = child.get("name")
+            if not cname:
+                continue
             if DEBUG:
                 print("🔍 Klasa", cname)
                         # pokušaj docstringa
@@ -237,8 +244,8 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                     base_type = enum_by_id[type_ref].name
                     ref_pkg = enum_by_id[type_ref].pkg_parts
                 else:
-                    base_type = by_id.get(type_ref).get("name") if type_ref in by_id else "str"
-                    ref_pkg = id_to_pkg.get(type_ref)
+                    base_type = "str"
+                    ref_pkg = None
                 is_ref = bool(prop.get("association"))
                 target.attrs[a_name] = Attribute(
                     a_name,
@@ -384,30 +391,44 @@ def _rel_mod(src: Tuple[str, ...], dst: Tuple[str, ...], name: str) -> str:
     return f"{dots}{rest}"
 
 
-def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[str, ...], EnumMeta]) -> List[str]:
+def _py_imports(meta: ClassMeta, classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[str, ...], EnumMeta]) -> Tuple[List[str], str | None]:
     imps = {
         "from __future__ import annotations",
         "from dataclasses import dataclass, field",
         "from typing import Optional, List",
         f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject",
     }
+    parent_alias = meta.parent
     if meta.parent and meta.parent_pkg:
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)
-        imps.add(f"from {path} import {meta.parent}")
+        alias = meta.parent
+        if meta.parent == meta.name and meta.parent_pkg != meta.pkg_parts:
+            alias = f"{meta.parent}_base"
+        imps.add(
+            f"from {path} import {meta.parent}" + (f" as {alias}" if alias != meta.parent else "")
+        )
+        parent_alias = alias
     for a in meta.attrs.values():
-        base = re.sub(r"^Optional\[|\]$", "", a.type_)
-        base = re.sub(r"^list\[(.*)\]$", r"\1", base)
+        base = a.type_
+        m = re.fullmatch(r"Optional\[(.*)\]", base)
+        if m:
+            base = m.group(1)
+        m = re.fullmatch(r"list\[(.*)\]", base)
+        if m:
+            base = m.group(1)
         if a.ref_pkg:
             if base != meta.name or a.ref_pkg != meta.pkg_parts:
                 path = _rel_mod(meta.pkg_parts, a.ref_pkg, base)
                 imps.add(f"from {path} import {base}")
-    return sorted(imps, key=lambda s: (0 if s.startswith("from __future__") else 1, s))
+    return sorted(imps, key=lambda s: (0 if s.startswith("from __future__") else 1, s)), parent_alias
 
 
 def _write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
     """Write Enum classes for all UML enumerations."""
     cnt = 0
     for meta in enums.values():
+        if not meta.name.isidentifier():
+            continue
         pkg_dir = out_dir.joinpath(*meta.pkg_parts)
         pkg_dir.mkdir(parents=True, exist_ok=True)
         partial = out_dir
@@ -420,7 +441,7 @@ def _write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
             lines.append(f"    {lit} = '{lit}'")
         if not meta.literals:
             lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
         cnt += 1
     return cnt
 
@@ -432,6 +453,8 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
     """
     cnt = 0
     for meta in classes.values():
+        if not meta.name.isidentifier():
+            continue
         pkg_dir = out_dir.joinpath(*meta.pkg_parts)
         pkg_dir.mkdir(parents=True, exist_ok=True)
         # ensure __init__.py
@@ -440,9 +463,10 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
             partial /= part
             (partial / "__init__.py").touch(exist_ok=True)
 
-        lines = _py_imports(meta, classes, enums)
+        imports, parent_alias = _py_imports(meta, classes, enums)
+        lines = imports
         lines += ["", "@dataclass(init=False)"]
-        parent = meta.parent or "CIMObject"
+        parent = parent_alias or "CIMObject"
         lines.append(f"class {meta.name}({parent}):")
         if meta.doc:
             lines.append(f"    \"\"\"{meta.doc}\"\"\"")
@@ -467,7 +491,7 @@ def _write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[
                 )
         if not meta.attrs:
             lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines), encoding="utf-8")
+        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
         cnt += 1
     return cnt
 
@@ -545,7 +569,13 @@ def _add(s: URIRef, p: URIRef, v, g: Graph):
 
 def _cli():
     """Parse command line arguments and trigger dataclass generation."""
-    ap = argparse.ArgumentParser(description="Generate CGMES dataclasses from XMI")
+    ap = argparse.ArgumentParser(
+        description=(
+            "Generate CGMES dataclasses from XMI. Duplicate class definitions "
+            "(same XMI id or package path) are merged so attributes may come "
+            "from multiple packages."
+        )
+    )
     ap.add_argument("xmi")
     ap.add_argument("-o", "--output", required=True)
     args = ap.parse_args()

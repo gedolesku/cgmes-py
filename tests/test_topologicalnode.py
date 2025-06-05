@@ -5,7 +5,9 @@ import shutil
 
 def setup_module(module):
     shutil.rmtree("generated", ignore_errors=True)
-    generate_dataclasses("cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml", "generated")
+    generate_dataclasses(
+        "cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml", "generated"
+    )
 
 
 def test_topologicalnode_inheritance():

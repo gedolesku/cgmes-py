@@ -19,6 +19,22 @@ python examples/roundtrip.py              # ▶ demo: parse + write back
 pytest                                    # ▶ all tests incl. pylint
 ```
 
+```python
+from generate_cgmes_project import generate_dataclasses
+from runtime.base import parse_file
+from generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode import TopologicalNode
+
+generate_dataclasses(
+    "cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml",
+    "generated",
+)
+model = parse_file(
+    "cgmes-models/v24/SmallGrid/node-breaker/SmallGridTestConfiguration_BC_TP_v3.0.0.xml"
+)
+node = model.first(TopologicalNode)
+print(node.name, node.BaseVoltage_id)
+```
+
 *The generator and runtime are dependency‑light:* only `lxml` and the standard library. Large CGMES instance models (100 MB+) can be streamed with `iterparse` in constant memory.
 
 ---

@@ -22,12 +22,18 @@ def _rel_mod(src: Tuple[str, ...], dst: Tuple[str, ...], name: str) -> str:
 
 
 def py_imports(meta: ClassMeta) -> Tuple[List[str], str | None]:
-    imps = {
-        "from __future__ import annotations",
-        "from dataclasses import dataclass, field",
-        "from typing import Optional, List",
-        f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject",
-    }
+    imps = {"from __future__ import annotations"}
+    if meta.is_abstract:
+        imps.add("from typing import Protocol, runtime_checkable")
+    else:
+        imps.add("from dataclasses import dataclass, field")
+    needs_typing = any(
+        a.type_.startswith("Optional[") or a.type_.startswith("list[")
+        for a in meta.attrs.values()
+    )
+    if needs_typing:
+        imps.add("from typing import Optional, List")
+    imps.add(f"from {'.' * (len(meta.pkg_parts) + 1)}base import CIMObject")
     parent_alias = meta.parent
     if meta.parent and meta.parent_pkg:
         path = _rel_mod(meta.pkg_parts, meta.parent_pkg, meta.parent)

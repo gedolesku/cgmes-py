@@ -26,6 +26,8 @@ def write_enums(enums: Dict[Tuple[str, ...], EnumMeta], out_dir: Path) -> int:
             lines.append(f"    {lit} = '{lit}'")
         if not meta.literals:
             lines.append("    pass")
-        (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        (pkg_dir / f"{meta.name}.py").write_text(
+            "\n".join(lines) + "\n", encoding="utf-8"
+        )
         cnt += 1
     return cnt

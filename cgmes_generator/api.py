@@ -18,5 +18,5 @@ def generate_dataclasses(xmi: str | Path, output_dir: str | Path) -> int:
     (out_dir / "base.py").write_text(BASE_SRC, encoding="utf-8")
     n_enum = write_enums(enums, out_dir)
     n_cls = write_classes(classes, enums, out_dir)
-    print(f"✅ Generisano {n_enum} enumeracija i {n_cls} klasa.")
+    print(f"[OK] Generisano {n_enum} enumeracija i {n_cls} klasa.")
     return n_enum + n_cls

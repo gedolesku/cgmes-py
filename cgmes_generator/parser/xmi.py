@@ -31,6 +31,50 @@ PRIMITIVE_MAP = {
 CIM = Namespace("http://iec.ch/TC57/2013/CIM-schema-cim#")
 
 
+def collect_links(
+    root: etree._Element,
+    class_by_id: Dict[str, List[ClassMeta]],
+) -> List[LinkData]:
+    """Collect :class:`LinkData` objects and update ``ClassMeta.links``.
+
+    The function also sets ``parent`` relationships based on ``Generalization``
+    and ``Dependency`` links.
+    """
+
+    links: List[LinkData] = []
+
+    for link in root.xpath('.//element/links/*'):
+        lid = link.get(f'{{{XMI_NS}}}id')
+        start = link.get('start')
+        end = link.get('end')
+        kind = etree.QName(link).localname
+        if lid and start and end:
+            ldata = LinkData(lid, kind, start, end)
+            links.append(ldata)
+            if start in class_by_id:
+                for meta in class_by_id[start]:
+                    meta.links.append(ldata)
+            if end in class_by_id:
+                for meta in class_by_id[end]:
+                    meta.links.append(ldata)
+
+    for lnk in links:
+        if lnk.kind == 'Generalization' and lnk.start in class_by_id and lnk.end in class_by_id:
+            parent = class_by_id[lnk.end][0]
+            for child in class_by_id[lnk.start]:
+                if child.parent is None:
+                    child.parent = parent.name
+                    child.parent_pkg = parent.pkg_parts
+        if lnk.kind == 'Dependency' and lnk.start in class_by_id and lnk.end in class_by_id:
+            parent = class_by_id[lnk.end][0]
+            for child in class_by_id[lnk.start]:
+                if child.parent is None and child.pkg_parts != parent.pkg_parts:
+                    child.parent = parent.name
+                    child.parent_pkg = parent.pkg_parts
+
+    return links
+
+
 def parse_xmi(tree: etree._ElementTree) -> Tuple[
     Dict[Tuple[str, ...], ClassMeta],
     Dict[Tuple[str, ...], EnumMeta],
@@ -164,34 +208,7 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
         walk(model, [])
 
-    for link in root.xpath('.//element/links/*'):
-        lid = link.get(f'{{{XMI_NS}}}id')
-        start = link.get('start')
-        end = link.get('end')
-        kind = etree.QName(link).localname
-        if lid and start and end:
-            ldata = LinkData(lid, kind, start, end)
-            links.append(ldata)
-            if start in class_by_id:
-                for meta in class_by_id[start]:
-                    meta.links.append(ldata)
-            if end in class_by_id:
-                for meta in class_by_id[end]:
-                    meta.links.append(ldata)
-
-    for lnk in links:
-        if lnk.kind == 'Generalization' and lnk.start in class_by_id and lnk.end in class_by_id:
-            parent = class_by_id[lnk.end][0]
-            for child in class_by_id[lnk.start]:
-                if child.parent is None:
-                    child.parent = parent.name
-                    child.parent_pkg = parent.pkg_parts
-        if lnk.kind == 'Dependency' and lnk.start in class_by_id and lnk.end in class_by_id:
-            parent = class_by_id[lnk.end][0]
-            for child in class_by_id[lnk.start]:
-                if child.parent is None and child.pkg_parts != parent.pkg_parts:
-                    child.parent = parent.name
-                    child.parent_pkg = parent.pkg_parts
+    links = collect_links(root, class_by_id)
 
     for assoc in root.xpath(".//packagedElement[@xmi:type='uml:Association']", namespaces=NSMAP):
         ends = assoc.xpath("./ownedEnd | ./ownedAttribute")

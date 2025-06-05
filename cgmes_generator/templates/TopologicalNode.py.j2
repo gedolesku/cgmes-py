@@ -1,5 +1,7 @@
 """Auto-generated — DO NOT EDIT BY HAND"""
 
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Optional
 from .IdentifiedObject import IdentifiedObject
@@ -19,7 +21,7 @@ class TopologicalNode(IdentifiedObject):
             "pattern": r"^#.+$",
         },
     )
-    BaseVoltage_ref: "BaseVoltage" | None = None
+    BaseVoltage_ref: BaseVoltage | None = None
     ConnectivityNodeContainer_id: str | None = field(
         default=None,
         metadata={
@@ -28,7 +30,7 @@ class TopologicalNode(IdentifiedObject):
             "pattern": r"^#.+$",
         },
     )
-    ConnectivityNodeContainer_ref: "ConnectivityNodeContainer" | None = None
+    ConnectivityNodeContainer_ref: ConnectivityNodeContainer | None = None
     ReportingGroup_id: str | None = field(
         default=None,
         metadata={
@@ -36,4 +38,4 @@ class TopologicalNode(IdentifiedObject):
             "pattern": r"^#.+$",
         },
     )
-    ReportingGroup_ref: "ReportingGroup" | None = None
+    ReportingGroup_ref: ReportingGroup | None = None

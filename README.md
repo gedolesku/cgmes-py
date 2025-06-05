@@ -28,6 +28,15 @@ for node in parse_file("models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml",
     print(node.mRID, node.name, node.BaseVoltage_id)
 ```
 
+```python
+from cgmes.runtime import parse_dataset
+from cgmes.generated.topology.voltagelevel import VoltageLevel
+
+data = parse_dataset("models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml",
+                     [TopologicalNode, VoltageLevel])
+print(len(data[TopologicalNode]))
+```
+
 *The generator and runtime are dependency‑light:* only `lxml` and the standard library. Large CGMES instance models (100 MB+) can be streamed with `iterparse` in constant memory.
 
 ---

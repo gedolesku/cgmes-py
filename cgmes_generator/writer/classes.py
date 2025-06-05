@@ -24,9 +24,25 @@ def write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[s
 
         imports, parent_alias = py_imports(meta)
         lines = imports
-        lines += ["", "@dataclass(init=False)"]
-        parent = parent_alias or "CIMObject"
-        lines.append(f"class {meta.name}({parent}):")
+        parent = parent_alias
+        if meta.is_abstract:
+            parent_meta = None
+            if meta.parent and meta.parent_pkg:
+                parent_meta = classes.get(meta.parent_pkg + (meta.parent,))
+            if parent_meta and parent_meta.is_abstract and parent_alias:
+                bases = f"{parent_alias}, Protocol"
+            else:
+                bases = "Protocol"
+            lines += ["", "@runtime_checkable"]
+            lines.append(f"class {meta.name}({bases}):")
+            parent = None
+        else:
+            lines += ["", "@dataclass(init=False)"]
+            bases = []
+            if parent_alias:
+                bases.append(parent_alias)
+            bases.append("CIMObject")
+            lines.append(f"class {meta.name}({', '.join(bases)}):")
         if meta.doc:
             lines.append(f"    \"\"\"{meta.doc}\"\"\"")
         ordered_attrs = sorted(
@@ -34,21 +50,33 @@ def write_classes(classes: Dict[Tuple[str, ...], ClassMeta], enums: Dict[Tuple[s
             key=lambda a: 0 if not (a.type_.startswith("Optional[") or a.type_.startswith("list[")) else 1,
         )
         for a in ordered_attrs:
-            default = ""
-            if a.type_.startswith("Optional["):
-                default = " = None"
-            elif a.type_.startswith("list["):
-                default = " = field(default_factory=list)"
-            if a.is_ref:
-                lines.append(
-                    f"    {a.name}_ref: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
-                )
-                if not a.type_.startswith("list["):
-                    lines.append(f"    {a.name}_id: str = None")
+            if meta.is_abstract:
+                if a.is_ref:
+                    lines.append(
+                        f"    {a.name}_ref: {a.type_}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                    )
+                    if not a.type_.startswith("list["):
+                        lines.append(f"    {a.name}_id: str")
+                else:
+                    lines.append(
+                        f"    {a.name}: {a.type_}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                    )
             else:
-                lines.append(
-                    f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
-                )
+                default = ""
+                if a.type_.startswith("Optional["):
+                    default = " = None"
+                elif a.type_.startswith("list["):
+                    default = " = field(default_factory=list)"
+                if a.is_ref:
+                    lines.append(
+                        f"    {a.name}_ref: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                    )
+                    if not a.type_.startswith("list["):
+                        lines.append(f"    {a.name}_id: str = None")
+                else:
+                    lines.append(
+                        f"    {a.name}: {a.type_}{default}  # metadata: cim='{a.cim_path}', mult='{a.multiplicity}'"
+                    )
         if not meta.attrs:
             lines.append("    pass")
         (pkg_dir / f"{meta.name}.py").write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -31,6 +31,7 @@ class ClassMeta:
     parent_pkg: Optional[Tuple[str, ...]] = None
     uml_id: Optional[str] = None
     links: List["LinkData"] = field(default_factory=list)
+    is_abstract: bool = False
 
 
 @dataclass

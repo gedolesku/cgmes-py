@@ -143,6 +143,7 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
                 c_doc.text if c_doc is not None else None,
                 None,
                 child.get(f"{{{XMI_NS}}}id"),
+                is_abstract=child.get("isAbstract") == "true",
             )
             key = tuple(pkg_path + [cname])
             target = classes.get(key)

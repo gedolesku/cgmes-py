@@ -264,6 +264,20 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
 
     for meta in classes.values():
         if (
+            'StateVariablesProfile' in '.'.join(meta.pkg_parts)
+            and meta.name == 'TopologicalNode'
+            and meta.parent is None
+        ):
+            meta.parent = 'IdentifiedObject'
+            meta.parent_pkg = (
+                'EuropeanStandards',
+                'CommonGridModelExchangeStandard',
+                'EquipmentProfile',
+                'Core',
+            )
+
+    for meta in classes.values():
+        if (
             'TopologyProfile' in '.'.join(meta.pkg_parts)
             and meta.name
         ):

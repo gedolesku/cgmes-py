@@ -243,6 +243,15 @@ def _parse_xmi(tree: etree._ElementTree) -> Tuple[
                 elif type_ref in enum_by_id:
                     base_type = enum_by_id[type_ref].name
                     ref_pkg = enum_by_id[type_ref].pkg_parts
+                elif type_ref in by_id:
+                    elem = by_id[type_ref]
+                    kind = elem.get(f"{{{XMI_NS}}}type")
+                    if kind in ("uml:Class", "uml:Enumeration"):
+                        base_type = elem.get("name", "str")
+                        ref_pkg = id_to_pkg.get(type_ref)
+                    else:
+                        base_type = "str"
+                        ref_pkg = None
                 else:
                     base_type = "str"
                     ref_pkg = None

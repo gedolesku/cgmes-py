@@ -22,18 +22,3 @@ def test_generated_code_with_pylint():
         pass
         #shutil.rmtree("generated", ignore_errors=True)
 
-
-def test_topologicalnode_inheritance():
-    """Check TopologicalNode inheritance direction between profiles."""
-    # assumes generate_dataclasses has already populated the 'generated' package
-    import importlib
-
-    tp_mod = importlib.import_module(
-        "generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode"
-    )
-    sv_mod = importlib.import_module(
-        "generated.EuropeanStandards.CommonGridModelExchangeStandard.StateVariablesProfile.Topology.TopologicalNode"
-    )
-    assert issubclass(tp_mod.TopologicalNode, sv_mod.TopologicalNode)
-    assert not issubclass(sv_mod.TopologicalNode, tp_mod.TopologicalNode)
-

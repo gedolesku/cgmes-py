@@ -116,7 +116,8 @@ EA XMI  ➜  +---->+  (reference models)  |
 * [ ] I updated or added tests relevant to my changes.<br>
 * [ ] I updated docs (`README.md`, `AGENTS.md`).<br>
 * [ ] `benchmarks.perf` runs within budget.<br>
-* [ ] `semantic_validator.py` passes on the reference models.
+* [ ] `semantic_validator.py` passes on the reference models.<br>
+* [ ] Generator log ne sme sadržati non-ASCII karaktere.
 
 ---
 

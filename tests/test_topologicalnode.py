@@ -18,3 +18,14 @@ def test_topologicalnode_inheritance():
     )
     assert issubclass(tp_mod.TopologicalNode, sv_mod.TopologicalNode)
     assert not issubclass(sv_mod.TopologicalNode, tp_mod.TopologicalNode)
+
+
+def test_topologicalnode_identifiedobject_base():
+    """Ensure TopologicalNode derives from IdentifiedObject."""
+    tp_mod = importlib.import_module(
+        "generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode"
+    )
+    io_mod = importlib.import_module(
+        "generated.EuropeanStandards.CommonGridModelExchangeStandard.EquipmentProfile.Core.IdentifiedObject"
+    )
+    assert issubclass(tp_mod.TopologicalNode, io_mod.IdentifiedObject)

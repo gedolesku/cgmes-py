@@ -1,0 +1,14 @@
+"""Auto-generated — DO NOT EDIT BY HAND"""
+
+from dataclasses import dataclass, field
+from typing import Optional
+from .IdentifiedObject import IdentifiedObject
+
+__all__ = ["TopologicalNode"]
+
+@dataclass(kw_only=True)
+class TopologicalNode(IdentifiedObject):
+    """Auto-generated — DO NOT EDIT BY HAND"""
+    BaseVoltage_id: Optional[str] = field(default=None, metadata={"xpath": "cim:TopologicalNode.BaseVoltage/@rdf:resource"})
+    ConnectivityNodeContainer_id: str = field(metadata={"xpath": "cim:TopologicalNode.ConnectivityNodeContainer/@rdf:resource", "required": True, "pattern": "^#.+$"})
+    ReportingGroup_id: Optional[str] = field(default=None, metadata={"xpath": "cim:TopologicalNode.ReportingGroup/@rdf:resource"})

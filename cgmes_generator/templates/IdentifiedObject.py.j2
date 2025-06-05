@@ -1,15 +1,19 @@
 """Auto-generated — DO NOT EDIT BY HAND"""
 
 from dataclasses import dataclass, field
-from typing import Optional
 
 __all__ = ["IdentifiedObject"]
+
 
 @dataclass(kw_only=True)
 class IdentifiedObject:
     """Auto-generated — DO NOT EDIT BY HAND"""
-    mRID: str = field(metadata={"xpath": "@rdf:ID", "required": True})
-    name: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.name"})
-    description: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.description"})
-    energyIdentCodeEic: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.energyIdentCodeEic"})
-    shortName: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.shortName"})
+
+    mRID: str | None = field(
+        default=None,
+        metadata={"xpath": "@rdf:ID", "required": True},
+    )
+    name: str | None = field(
+        default=None,
+        metadata={"xpath": "cim:IdentifiedObject.name"},
+    )

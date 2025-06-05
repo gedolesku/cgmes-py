@@ -61,7 +61,7 @@ print(len(data[TopologicalNode]))
 ### 4.1  Field mapping by annotation
 
 ```python
-@dataclass
+@dataclass(kw_only=True)
 class TopologicalNode(IdentifiedObject):
     # XML: <cim:TopologicalNode.BaseVoltage rdf:resource="#BV1"/>
     BaseVoltage_id: str | None = field(

@@ -5,13 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
+            "name": "Python: Current File",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "justMyCode": true
         },
-
+        {
+            "name": "Python: Debug Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": ".venv/Scripts/pytest.exe",
+            "args": [
+                "-q"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
         {
             "name": "cgmes-example",
             "type": "debugpy",
@@ -27,7 +38,6 @@
             "program": "generate_cgmes_project.py",
             "console": "integratedTerminal",
             "args": "cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml --output generated"
-        },
-        
+        }
     ]
 }

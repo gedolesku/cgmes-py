@@ -1,10 +1,13 @@
 from pathlib import Path
 import importlib
 import shutil
+import subprocess
+import sys
+import os
+import tempfile
+import pathlib
 
-import cgmes.runtime
-from cgmes.runtime import parse_file
-from cgmes_generator import generate_dataclasses
+from cgmes.runtime import parse_file, to_element, parse_dataclass
 import runtime.base as rt_base
 
 TopologicalNode = None
@@ -15,10 +18,14 @@ XML_FILE = DATA_DIR / "SmallGridTestConfiguration_BC_TP_v3.0.0.xml"
 
 def setup_module(module):
     shutil.rmtree("generated", ignore_errors=True)
-    generate_dataclasses(
-        "cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml",
-        "generated",
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    subprocess.check_call(
+        [sys.executable, "-m", "cgmes_generator", "--rebuild"],
+        env=env,
+        cwd=pathlib.Path(__file__).parents[1],
     )
+    importlib.invalidate_caches()
     global TopologicalNode
     TopologicalNode = importlib.import_module(
         "generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode"
@@ -41,6 +48,6 @@ def test_parse_topological_nodes():
 
 def test_roundtrip_single():
     node = next(parse_file(XML_FILE, TopologicalNode))
-    new_elem = cgmes.runtime.to_element(node)
-    node2 = parse_file.__wrapped__(new_elem, TopologicalNode)
+    new_elem = to_element(node)
+    node2 = parse_dataclass(new_elem, TopologicalNode)
     assert node2.BaseVoltage_id == node.BaseVoltage_id

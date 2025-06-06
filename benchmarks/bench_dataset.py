@@ -1,7 +1,7 @@
 """Benchmark for parse_dataset helper."""
 
 from pathlib import Path
-from runtime.base import parse_dataset
+from cgmes.runtime import parse_dataset
 
 from dataclasses import dataclass, field
 from typing import Optional
@@ -14,7 +14,9 @@ class IdentifiedObject:
 
 @dataclass(kw_only=True)
 class Equipment(IdentifiedObject):
-    name: Optional[str] = field(default=None, metadata={"xpath": "cim:IdentifiedObject.name/text()"})
+    name: Optional[str] = field(
+        default=None, metadata={"xpath": "cim:IdentifiedObject.name/text()"}
+    )
 
 
 DATASET = (

@@ -1,18 +1,29 @@
 import importlib
 import shutil
 from dataclasses import fields
+import os
 
 import subprocess
 import sys
 
 
 def setup_module(module):
-    subprocess.check_call([sys.executable, "-m", "cgmes_generator", "--rebuild"])
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    subprocess.check_call(
+        [sys.executable, "-m", "cgmes_generator", "--rebuild"],
+        env=env,
+    )
+    importlib.invalidate_caches()
 
 
 def test_topologicalnode_metadata():
-    tn_mod = importlib.import_module("generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode")
-    base_mod = importlib.import_module("generated.EuropeanStandards.CommonGridModelExchangeStandard.EquipmentProfile.Core.IdentifiedObject")
+    tn_mod = importlib.import_module(
+        "generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode"
+    )
+    base_mod = importlib.import_module(
+        "generated.EuropeanStandards.CommonGridModelExchangeStandard.EquipmentProfile.Core.IdentifiedObject"
+    )
     cls = tn_mod.TopologicalNode
     base = base_mod.IdentifiedObject
     assert issubclass(cls, base)

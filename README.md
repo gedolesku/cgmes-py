@@ -17,6 +17,7 @@ pip install -r requirements2.txt          # lxml + pytest + pylint
 python generate_cgmes_project.py          # ▶ writes ./generated/
 python examples/roundtrip.py              # ▶ demo: parse + write back
 pytest                                    # ▶ all tests incl. pylint
+pytest -k smallgrid                       # ▶ integration test on sample model
 ```
 
 ```python

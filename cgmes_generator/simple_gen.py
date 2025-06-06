@@ -5,6 +5,7 @@ from typing import Dict, Iterable
 
 from .parser import load_xmi, parse_xmi
 from .meta import ClassMeta, Attribute
+from .api import generate_dataclasses
 
 TEMPLATES = {
     "IdentifiedObject": (
@@ -110,3 +111,27 @@ def rebuild(out_dir: Path = Path("generated/topology")) -> None:
         else:
             src = _gen_class(meta)
             (out_dir / f"{name}.py").write_text(src, encoding="utf-8")
+
+    eq_dir = Path("generated/equipment")
+    _rebuild_equipment(eq_dir, classes)
+
+    generate_dataclasses(XMI_PATH, Path("generated"))
+
+
+def _rebuild_equipment(out: Path, classes: Dict[tuple[str, ...], ClassMeta]) -> None:
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "__init__.py").touch()
+    (out / "IdentifiedObject.py").write_text(
+        TEMPLATES["IdentifiedObject"], encoding="utf-8"
+    )
+    targets = [
+        m
+        for m in classes.values()
+        if m.stereotype == "Equipment" or "EquipmentProfile" in ".".join(m.pkg_parts)
+    ]
+    for meta in sorted(targets, key=lambda m: m.name):
+        if meta.name in TEMPLATES:
+            (out / f"{meta.name}.py").write_text(TEMPLATES[meta.name], encoding="utf-8")
+        else:
+            src = _gen_class(meta)
+            (out / f"{meta.name}.py").write_text(src, encoding="utf-8")

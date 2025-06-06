@@ -1,25 +1,38 @@
-from dataclasses import dataclass, field
+import importlib
+import shutil
 from lxml import etree
+from generate_cgmes_project import generate_dataclasses
 from runtime.base import parse_dataclass, to_element, parse_file
-from generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode import TopologicalNode
+
+
+def setup_module(module):
+    shutil.rmtree("generated", ignore_errors=True)
+    generate_dataclasses(
+        "cgmes-models/v24/ENTSOE_CGMES_v2.4.15_7Aug2014.xml", "generated"
+    )
+    global TopologicalNode
+    TopologicalNode = importlib.import_module(
+        "generated.EuropeanStandards.CommonGridModelExchangeStandard.TopologyProfile.Topology.TopologicalNode"
+    ).TopologicalNode
+
 
 data_xml = (
-      """
-      <cim:TopologicalNode rdf:ID="_0471bd2a-c766-11e1-8775-005056c00008">
-    <cim:IdentifiedObject.name>HickryCk</cim:IdentifiedObject.name>
-    <cim:TopologicalNode.ConnectivityNodeContainer rdf:resource="#_047eb579-c766-11e1-8775-005056c00008" />
-    <cim:TopologicalNode.BaseVoltage rdf:resource="#_c63f79cc-7953-4ab6-9fa6-f8c729bf895b" />
-  </cim:TopologicalNode>
-  """
+    "<cim:TopologicalNode"
+    " xmlns:cim='http://iec.ch/TC57/2013/CIM-schema-cim#'"
+    " xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>"
+    "<cim:IdentifiedObject.name>HickryCk</cim:IdentifiedObject.name>"
+    "<cim:IdentifiedObject.mRID>_0471bd2a-c766-11e1-8775-005056c00008</cim:IdentifiedObject.mRID>"
+    "<cim:TopologicalNode.BaseVoltage rdf:resource='#_c63f79cc-7953-4ab6-9fa6-f8c729bf895b'/>"
+    "<cim:TopologicalNode.ConnectivityNodeContainer rdf:resource='#_047eb579-c766-11e1-8775-005056c00008'/>"
+    "</cim:TopologicalNode>"
 )
-
 
 
 def test_roundtrip(tmp_path):
     elem = etree.fromstring(data_xml)
     obj = parse_dataclass(elem, TopologicalNode)
     out_elem = to_element(obj)
-    
+
     print(f"e1={etree.tostring(out_elem)}\ne2={etree.tostring(elem)}")
     assert etree.tostring(out_elem) == etree.tostring(elem)
 

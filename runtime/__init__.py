@@ -7,6 +7,7 @@ from typing import Iterator, Type, TypeVar
 from lxml import etree
 
 from .base import parse_dataclass, parse_file as _parse_file, parse_dataset, to_element
+from .exporter import export_dataset
 from . import validation
 
 T = TypeVar("T")
@@ -32,4 +33,10 @@ def parse_file(source: str | Path | etree._Element, cls: Type[T]) -> Iterator[T]
 parse_file.__wrapped__ = _parse_element
 
 
-__all__ = ["parse_file", "parse_dataset", "to_element", "parse_dataclass"]
+__all__ = [
+    "parse_file",
+    "parse_dataset",
+    "to_element",
+    "parse_dataclass",
+    "export_dataset",
+]

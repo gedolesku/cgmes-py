@@ -132,3 +132,6 @@ EA XMI  ➜  +---->+  (reference models)  |
 ---
 
 *Srećan rad – neka objave prolaze na **prvi review**!*
+
+## gitignore
+ne uklanjaj generated/ iz gitignore.

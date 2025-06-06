@@ -228,6 +228,15 @@ def parse_xmi(tree: etree._ElementTree) -> Tuple[
     for model in root.xpath(".//uml:Model", namespaces=NSMAP):
         walk(model, [])
 
+    for el in root.xpath('.//element[@xmi:type="uml:Class"]', namespaces=NSMAP):
+        cid = el.get("xmi:idref")
+        props = el.find("properties")
+        if cid and props is not None:
+            stereo = props.get("stereotype")
+            if stereo and cid in class_by_id:
+                for meta in class_by_id[cid]:
+                    meta.stereotype = stereo
+
     links = collect_links(root, class_by_id)
 
     for assoc in root.xpath(

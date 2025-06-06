@@ -32,6 +32,7 @@ class ClassMeta:
     uml_id: Optional[str] = None
     links: List["LinkData"] = field(default_factory=list)
     is_abstract: bool = False
+    stereotype: Optional[str] = None
 
 
 @dataclass

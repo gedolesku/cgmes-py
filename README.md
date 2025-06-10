@@ -20,6 +20,8 @@ pytest                                    # ▶ all tests incl. pylint
 pytest -k smallgrid                       # ▶ integration test on sample model
 python -m cgmes.export cgmes-models/v24/SmallGrid/node-breaker out/
 # inspect out/*.xml in EA / GridCal
+pytest -k smallgrid_bundle_roundtrip
+# \u21d2 creates export/roundtrip/Equipment.xml, Topology.xml, …
 ```
 
 ```python

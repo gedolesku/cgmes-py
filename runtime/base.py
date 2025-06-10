@@ -1,12 +1,9 @@
 from __future__ import annotations
 
 """Minimal runtime helpers for CGMES dataclasses."""
-
 from dataclasses import fields
 from typing import Any, Dict, Iterator, List, Tuple, Type, TypeVar
-
 from lxml import etree
-
 
 NS = {
     "cim": "http://iec.ch/TC57/2013/CIM-schema-cim#",
@@ -15,8 +12,33 @@ NS = {
 
 T = TypeVar("T")
 
-
 _SPEC_CACHE: Dict[Type[Any], List[Tuple[str | None, str | None, str]]] = {}
+_ALL_CLASSES: List[Type[Any]] | None = None
+
+
+def _load_all_classes() -> List[Type[Any]]:
+    """Return all generated dataclasses lazily."""
+    global _ALL_CLASSES
+    if _ALL_CLASSES is not None:
+        return _ALL_CLASSES
+    from importlib import import_module
+    import pkgutil
+    from dataclasses import is_dataclass
+
+    try:
+        import generated
+    except ModuleNotFoundError:  # pragma: no cover - generator not run yet
+        _ALL_CLASSES = []
+        return _ALL_CLASSES
+
+    classes: List[Type[Any]] = []
+    for info in pkgutil.walk_packages(generated.__path__, generated.__name__ + "."):
+        mod = import_module(info.name)
+        for obj in vars(mod).values():
+            if isinstance(obj, type) and is_dataclass(obj):
+                classes.append(obj)
+    _ALL_CLASSES = classes
+    return classes
 
 
 def _spec(cls: Type[Any]) -> List[Tuple[str | None, str | None, str]]:
@@ -102,7 +124,9 @@ def parse_file(path: str, cls: Type[T]) -> Iterator[T]:
         elem.clear()
 
 
-def parse_dataset(path: str, classes: List[Type[Any]]) -> Dict[Type[Any], List[Any]]:
+def parse_dataset(
+    path: str, classes: List[Type[Any]] | None = None
+) -> Dict[Type[Any], List[Any]]:
     """Parse *path* once and collect objects of ``classes``.
 
     Example
@@ -111,6 +135,8 @@ def parse_dataset(path: str, classes: List[Type[Any]]) -> Dict[Type[Any], List[A
     >>> len(data[TopologicalNode])
     10
     """
+    if classes is None:
+        classes = _load_all_classes()
     qname_map = {f"{{{NS['cim']}}}{cls.__name__}": cls for cls in classes}
     result: Dict[Type[Any], List[Any]] = {cls: [] for cls in classes}
     tags = tuple(qname_map)

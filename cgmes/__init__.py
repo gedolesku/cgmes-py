@@ -19,7 +19,14 @@ from runtime.base import (
     parse_dataset,
     to_element,
 )
+from runtime.exporter import export_dataset
 
 parse_file = _parse_file
 
-__all__ = ["parse_file", "parse_dataset", "to_element", "parse_dataclass"]
+__all__ = [
+    "parse_file",
+    "parse_dataset",
+    "to_element",
+    "parse_dataclass",
+    "export_dataset",
+]

@@ -18,6 +18,8 @@ python generate_cgmes_project.py          # ▶ writes ./generated/
 python examples/roundtrip.py              # ▶ demo: parse + write back
 pytest                                    # ▶ all tests incl. pylint
 pytest -k smallgrid                       # ▶ integration test on sample model
+python -m cgmes.export cgmes-models/v24/SmallGrid/node-breaker out/
+# inspect out/*.xml in EA / GridCal
 ```
 
 ```python

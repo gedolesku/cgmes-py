@@ -17,7 +17,7 @@
             "type": "debugpy",
             "request": "launch",
             "program": ".venv/Scripts/pytest.exe",
-            "args": ["-k", "roundtrip"],
+            "args": ["-k", "full_bundle"],
             "console": "integratedTerminal",
             "justMyCode": true
         },
